@@ -24,7 +24,7 @@
 	<div id="container">
 		<?php echo validation_errors(); ?>
 		<div id="top">
-			<?php echo $this->lang->line('login_login'); ?>
+			<?php //echo $this->lang->line('login_login'); ?>
 		</div>
 		<div id="login_form">
 			<div id="welcome_message">
