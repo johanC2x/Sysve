@@ -450,7 +450,7 @@ $(document).ready(function(){
 /** END GARRISON ADDED **/
 
 	$('#item_form').bootstrapValidator({
-		container: '#messages',
+            container: '#messages',
 	    feedbackIcons: {
 	      valid: 'glyphicon glyphicon-ok',
 	      invalid: 'glyphicon glyphicon-remove',
@@ -472,55 +472,55 @@ $(document).ready(function(){
 	    			notEmpty: { message: "<?php echo $this->lang->line('items_supplier_required'); ?>"}
 	    		}
 	    	},
-			unit_price: {
-		        validators: {
-					notEmpty: { message: "<?php echo $this->lang->line('items_unit_price_required'); ?>"},
-					numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" }
-				}
-			},
-			cost_price:{
-				validators: {
-					notEmpty: { message: "<?php echo $this->lang->line('items_cost_price_required'); ?>"},
-					numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
-				}
-			},
-			tax_percent:{
-				validators: {
-					notEmpty: { message: "<?php echo $this->lang->line('items_tax_percent_required'); ?>"}
-				}
-			},
-			quantity:{
-				validators: {
-					notEmpty: { message: "<?php echo $this->lang->line('items_quantity_required'); ?>"},
-					integer: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
-				}
-			},
-			reorder_level:{
-				validators: {
-					notEmpty: { message: "<?php echo $this->lang->line('items_reorder_level_required'); ?>"}
-				}
-			}
+                unit_price: {
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('items_unit_price_required'); ?>"},
+                        numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" }
+                    }
+                },
+                cost_price:{
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('items_cost_price_required'); ?>"},
+                        numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
+                    }
+                },
+                tax_percent:{
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('items_tax_percent_required'); ?>"}
+                    }
+                },
+                quantity:{
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('items_quantity_required'); ?>"},
+                        integer: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
+                    }
+                },
+                reorder_level:{
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('items_reorder_level_required'); ?>"}
+                    }
+                }
 	    }
-	}).on('success.form.bv', function(e) {
+            }).on('success.form.bv', function(e) {
 		e.preventDefault();
 		$( "#submit" ).prop("disabled", false);
 		var msg = "";
 		$.ajax({
-			type:"POST",
-			url:$("#item_form").attr('action'),
-			data:$("#item_form").serialize(),
-			success:function(msg){
-				console.log(msg);
-				var kit = JSON.parse(msg);
-				if(kit.success == true){
-					msg = getMessageSuccess('Operación realizada con exito...');
-					$("#messages").html(msg);	
-					location.reload();				
-				}else{
-					msg = getMessageError('Se ha producido un error...');
-					$("#messages").html(msg);					
-				}
-			}
+                    type:"POST",
+                    url:$("#item_form").attr('action'),
+                    data:$("#item_form").serialize(),
+                    success:function(msg){
+                            console.log(msg);
+                            var kit = JSON.parse(msg);
+                            if(kit.success == true){
+                                    msg = getMessageSuccess('Operación realizada con exito...');
+                                    $("#messages").html(msg);	
+                                    location.reload();				
+                            }else{
+                                    msg = getMessageError('Se ha producido un error...');
+                                    $("#messages").html(msg);					
+                            }
+                    }
 		});
 	});
 	

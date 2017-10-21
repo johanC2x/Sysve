@@ -32,6 +32,11 @@ echo form_submit(array(
 	'class'=>'submit_button float_right')
 );
 ?>
+<div class='form-group'>
+    <div class='col-md-9 col-md-offset-3'>
+        <div id='messages'></div>
+    </div>
+</div>
 </fieldset>
 <?php 
 echo form_close();
@@ -39,35 +44,80 @@ echo form_close();
 <script type='text/javascript'>
 
 //validation and submit handling
-$(document).ready(function()
-{
-	$('#customer_form').validate({
-		submitHandler:function(form)
-		{
-			$(form).ajaxSubmit({
-			success:function(response)
-			{
-				tb_remove();
-				post_person_form_submit(response);
-			},
-			dataType:'json'
-		});
-
-		},
-		errorLabelContainer: "#error_message_box",
- 		wrapper: "li",
-		rules: 
-		{
-			first_name: "required",
-			last_name: "required",
-    		email: "email"
-   		},
-		messages: 
-		{
-     		first_name: "<?php echo $this->lang->line('common_first_name_required'); ?>",
-     		last_name: "<?php echo $this->lang->line('common_last_name_required'); ?>",
-     		email: "<?php echo $this->lang->line('common_email_invalid_format'); ?>"
-		}
+    $(document).ready(function(){
+        $('#customer_form').bootstrapValidator({
+            container: '#messages',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                first_name: {
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('common_first_name_required'); ?>"}
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('common_last_name_required'); ?>"}
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: { message: "<?php echo $this->lang->line('common_email_required'); ?>"},
+                        emailAddress: {message: '<?php echo $this->lang->line('common_email_invalid_format'); ?>'}
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            $( "#submit" ).prop("disabled", false);
+            var msg = "";
+            $.ajax({
+                type:"POST",
+                url:$("#customer_form").attr('action'),
+                data:$("#customer_form").serialize(),
+                success:function(msg){
+                    console.log(msg);
+                    var kit = JSON.parse(msg);
+                    if(kit.success == true){
+                        msg = getMessageSuccess('Operación realizada con exito...');
+                        $("#messages").html(msg);	
+                        location.reload();				
+                    }else{
+                        msg = getMessageError('Se ha producido un error...');
+                        $("#messages").html(msg);					
+                    }
+                }
+            });
 	});
+    });
+//	$('#customer_form').validate({
+//		submitHandler:function(form)
+//		{
+//			$(form).ajaxSubmit({
+//			success:function(response)
+//			{
+//				tb_remove();
+//				post_person_form_submit(response);
+//			},
+//			dataType:'json'
+//		});
+//
+//		},
+//		errorLabelContainer: "#error_message_box",
+// 		wrapper: "li",
+//		rules: {
+//                    first_name: "required",
+//                    last_name: "required",
+//                    email: "email"
+//   		},
+//		messages: {
+//                    first_name: "<?php //echo $this->lang->line('common_first_name_required'); ?>",
+//                    last_name: "<?php //echo $this->lang->line('common_last_name_required'); ?>",
+//                    email: "<?php //echo $this->lang->line('common_email_invalid_format'); ?>"
+//		}
+//	});
 });
 </script>

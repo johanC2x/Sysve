@@ -31,6 +31,7 @@ $lang['common_learn_about_project'] = 'para leer la información más reciente a
 $lang['common_searched_for'] = 'Buscaste';
 $lang['common_first_name_required'] = 'Nombre es un campo requerido';
 $lang['common_last_name_required'] = 'Apellidos es un campo requerido';
+$lang['common_email_required'] = 'E-mail es un campo requerido';
 $lang['common_email_invalid_format'] = 'El e-mail no está en el formato requerido';
 $lang['common_confirm_search'] = 'Has seleccionado una o más filas. Éstas no estarán seleccionadas después de tu búsqueda. ¿Seguro(a) que quieres hacer esta búsqueda?';
 $lang['common_no_persons_to_display'] = 'No hay gente que mostrar';
