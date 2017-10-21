@@ -46,6 +46,7 @@ class Customers extends Person_controller
 	*/
 	function view($customer_id=-1)
 	{
+                $this->output->cache(2);
 		$data['person_info']=$this->Customer->get_info($customer_id);
 		$this->load->view("customers/form",$data);
 	}
