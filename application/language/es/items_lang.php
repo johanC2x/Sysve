@@ -1,12 +1,12 @@
 <?php
-$lang['items_item_number'] = 'UPC/EAN/ISBN';
+$lang['items_item_number'] = 'Código de Producto'; //UPC/EAN/ISBN
 $lang['items_retrive_item_info'] = 'Obtener Info de Artículo';
 $lang['items_description'] = 'Descripción';
 $lang['items_amazon'] = 'Amazon';
 $lang['items_upc_database'] = 'Base de datos UPC';
 $lang['items_cannot_find_item'] = 'No puedo encontrar información acerca del artículo';
 $lang['items_info_provided_by'] = 'Info provista por';
-$lang['items_basic_information'] = 'Infomación del Artículo';
+$lang['items_basic_information'] = 'Línea de productos';
 $lang['items_number_information'] = 'Número del Artículo';
 $lang['items_new'] = 'Nuevo Artículo';
 $lang['items_update'] = 'Actualizar Artículo';
@@ -77,7 +77,7 @@ $lang['items_change_all_to_not_allow_allow_desc'] = 'Denegar Descripción Altern
 $lang['items_use_inventory_menu'] = 'Usar Menú de Inventario';
 $lang['items_manually_editing_of_quantity'] = 'Edición Manual de Cantidad';
 $lang['items_inventory'] = 'Inventario';
-$lang['items_location'] = 'Ubicación';
+$lang['items_location'] = 'Nombre de Almacén'; //Ubicación
 $lang['items_is_deleted'] = 'Eliminado';
 $lang['items_is_number'] = 'El valor ingresado debe de ser númerico';
 ?>

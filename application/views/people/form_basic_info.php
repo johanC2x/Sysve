@@ -95,10 +95,28 @@
 <div class="field_row clearfix">	
 <?php echo form_label($this->lang->line('common_zip').':', 'zip'); ?>
 	<div class='form_field'>
-	<?php echo form_input(array(
+	<?php 
+	/*
+		echo form_input(array(
 		'name'=>'zip',
 		'id'=>'zip',
-		'value'=>$person_info->zip));?>
+		'value'=>$person_info->zip));
+	*/
+	?>
+    <?php 
+    	$options = array(
+			'01' => 'Cercado',
+			'02' => 'Ancon',
+			'03' => 'Ate',
+			'04' => 'Barranco',
+			'05' => 'Breña',
+			'06' => 'Carabayllo',
+			'07' => 'Comas',
+			'08' => 'Chaclacayo',
+			'09' => 'Chorrillos'
+		);
+    ?>
+	<?php echo form_dropdown('zip', $options, $person_info->zip,'class="form-control" id="zip"'); ?>
 	</div>
 </div>
 

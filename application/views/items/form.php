@@ -42,7 +42,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	</div>
 </div>
 
-<div class="field_row clearfix">
+<div class="field_row clearfix" style="display: none;">
 <?php echo form_label($this->lang->line('items_supplier').':', 'supplier',array('class'=>'required wide')); ?>
 	<div class='form_field'>
 	<?php echo form_dropdown('supplier_id', $suppliers, $selected_supplier,'class="form-control"');?>
@@ -96,7 +96,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	</div>
 </div>
 
-<div class="field_row clearfix">
+<div class="field_row clearfix" style="display: none;">
 <?php echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2',array('class'=>'wide')); ?>
 	<div class='form-group'>
 	<?php echo form_input(array(
@@ -168,7 +168,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	</div>
 </div>
 
-<div class="field_row clearfix">
+<div class="field_row clearfix" style="display: none;">
 <?php echo form_label($this->lang->line('items_allow_alt_description').':', 'allow_alt_description',array('class'=>'wide')); ?>
 	<div class='form-group'>
 	<?php echo form_checkbox(array(
@@ -180,7 +180,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	</div>
 </div>
 
-<div class="field_row clearfix">
+<div class="field_row clearfix" style="display: none;">
 <?php echo form_label($this->lang->line('items_is_serialized').':', 'is_serialized',array('class'=>'wide')); ?>
 	<div class='form-group'>
 	<?php echo form_checkbox(array(
@@ -193,7 +193,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 </div>
 
 <!-- Parq 131215 Start -->
-<div class="field_row clearfix">
+<div class="field_row clearfix" style="display: none;">
 <?php echo form_label($this->lang->line('items_is_deleted').':', 'is_deleted',array('class'=>'wide')); ?>
 	<div class='form-group'>
 	<?php echo form_checkbox(array(

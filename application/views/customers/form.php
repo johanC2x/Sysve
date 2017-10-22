@@ -6,7 +6,7 @@ echo form_open('customers/save/'.$person_info->person_id,array('id'=>'customer_f
 <fieldset id="customer_basic_info">
 <legend><?php echo $this->lang->line("customers_basic_information"); ?></legend>
 <?php $this->load->view("people/form_basic_info"); ?>
-<div class="field_row clearfix">	
+<div class="field_row clearfix" style="display: none;">	
 <?php echo form_label($this->lang->line('customers_account_number').':', 'account_number'); ?>
 	<div class='form_field'>
 	<?php echo form_input(array(
@@ -92,32 +92,5 @@ echo form_close();
                 }
             });
 	});
-    });
-//	$('#customer_form').validate({
-//		submitHandler:function(form)
-//		{
-//			$(form).ajaxSubmit({
-//			success:function(response)
-//			{
-//				tb_remove();
-//				post_person_form_submit(response);
-//			},
-//			dataType:'json'
-//		});
-//
-//		},
-//		errorLabelContainer: "#error_message_box",
-// 		wrapper: "li",
-//		rules: {
-//                    first_name: "required",
-//                    last_name: "required",
-//                    email: "email"
-//   		},
-//		messages: {
-//                    first_name: "<?php //echo $this->lang->line('common_first_name_required'); ?>",
-//                    last_name: "<?php //echo $this->lang->line('common_last_name_required'); ?>",
-//                    email: "<?php //echo $this->lang->line('common_email_invalid_format'); ?>"
-//		}
-//	});
 });
 </script>
