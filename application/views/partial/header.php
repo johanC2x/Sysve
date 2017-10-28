@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<base href="<?php echo base_url();?>" />
-	<title>Sysve</title>
+	<title>YSUMMA</title>
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos.css" />
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos_print.css"  media="print"/>
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/bootstrap.css" />
@@ -43,12 +43,8 @@
 
 </head>
 <body>
-
-
-
-	
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
+		<div class="container-fluid"  style="height: 20px;">
 			<div class="navbar-header">
 				<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
 					<span class="sr-only">Toggle navigation</span>
@@ -56,19 +52,29 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand" style="color:red;"><b>Sysve</b></a>
+				<a href="#" class="navbar-brand" style="color:red;"><b>YSUMMA</b></a>
 			</div>
 			<div class="navbar-collapse collapse" id="navbar">
 				<ul class="nav navbar-nav">
+					<li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones<span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			          	<?php foreach($allowed_modules->result() as $module){ ?>
+			            	<li>
+			            		<a href="<?php echo site_url("$module->module_id");?>" ><?php echo $this->lang->line("module_".$module->module_id) ?></a>
+			            	</li>
+			            <?php } ?>
+			          </ul>
+			        </li>
 					<?php foreach($allowed_modules->result() as $module){ ?>
 					<li class="menu_item">
 						<!-- <a href="<?php //echo site_url("$module->module_id");?>"><img src="<?php //echo base_url().'images/menubar/'.$module->module_id.'.png';?>" border="0" alt="Menubar Image" /></a><br /> -->
-						<a href="<?php echo site_url("$module->module_id");?>" ><?php echo $this->lang->line("module_".$module->module_id) ?></a>
+						<a href="<?php ///echo site_url("$module->module_id");?>" ><?php //echo $this->lang->line("module_".$module->module_id) ?></a>
 					</li>
 					<?php } ?>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a><?php echo date('F d, Y h:i a') ?></a></li>
+					<li><a><?php //echo date('F d, Y h:i a') ?></a></li>
 					<li> <a> <?php echo $this->lang->line('common_welcome')." $user_info->first_name $user_info->last_name! | "; ?></a></li>
 					<li><?php echo anchor("home/logout",$this->lang->line("common_logout")); ?></li>
 				</ul>
@@ -77,4 +83,4 @@
 	</nav>
 	
 	<div id="content_area_wrapper" >
-		<div id="content_area" class="container .bs-item">
+		<div id="content_area" class="container .bs-item" >
