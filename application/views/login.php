@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<h1>Sistema de Ventas</h1>
+	<h1>YSUMMA</h1>
 	<div class="logo">
 	<img src="<?php echo base_url();?>images/ventas.png" alt="" />
 	</div>
