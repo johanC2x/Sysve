@@ -10,14 +10,16 @@ if (isset($error_message)){
 		<div id="company_address"><?php echo nl2br($this->config->item('address')); ?></div>
 		<div id="company_phone"><?php echo $this->config->item('phone'); ?></div>
 		<div id="company_phone"><?php echo $this->config->item('ruc'); ?></div>
-		<div id="sale_receipt"><?php echo $receipt_title; ?></div>
+		<div id="sale_receipt"><?php echo $sale_id; ?></div>
 		<div id="sale_time"><?php echo $transaction_time ?></div>
 	</div>
 	<div id="receipt_general_info">
 		<?php if(isset($customer)){ ?>
 			<div id="customer"><?php echo $this->lang->line('customers_customer').": ".$customer; ?></div>
 		<?php } ?>
-		<div id="sale_id"><?php echo $this->lang->line('sales_id').": ".$sale_id; ?></div>
+		<div id="sale_id" style="display: none;" >
+			<?php echo $this->lang->line('sales_id').": ".$sale_id; ?>
+		</div>
 		<div id="employee"><?php echo $this->lang->line('employees_employee').": ".$employee; ?></div>
 	</div>
 	<table id="receipt_items">
@@ -36,7 +38,9 @@ if (isset($error_message)){
 			<td><?php echo to_currency($item['price']); ?></td>
 			<td style='text-align:center;'><?php echo $item['quantity']; ?></td>
 			<td style='text-align:center;'><?php echo $item['discount']; ?></td>
-			<td style='text-align:right;'><?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?></td>
+			<td style='text-align:right;'>
+				<?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?>
+			</td>
 		</tr>
 	    <tr>
 		    <td colspan="2" align="center"><?php echo $item['description']; ?></td>
@@ -60,6 +64,7 @@ if (isset($error_message)){
 		</tr>
 		-->
 	<?php //}; ?>
+		<?php if($igv > 0){ ?>
 		<tr>
 			<td colspan="4" style='text-align:right;'>
 				IGV(18%):
@@ -68,6 +73,7 @@ if (isset($error_message)){
 				<?php echo to_currency($igv); ?> 
 			</td>
 		</tr>
+		<?php } ?>
 		<tr>
 			<td colspan="4" style='text-align:right;'>
 				<?php echo $this->lang->line('sales_total'); ?>:

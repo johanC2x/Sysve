@@ -188,9 +188,12 @@ class Sales extends Secure_area{
 		$data['igv']=$this->input->post("igv");
 		$data['taxes']=$this->sale_lib->get_taxes();
 		$data['total']=$this->sale_lib->get_total() + $igv;
+		$doc = "";
 		if($igv > 0){
+			$doc = "FAC - ";
 			$data['receipt_title'] = "FACTURA DE VENTA";
 		}else{
+			$doc = "BOL - ";
 			$data['receipt_title'] = "RECIBO DE VENTA";
 		}
 		//$data['receipt_title']= $this->lang->line('sales_receipt');
@@ -209,7 +212,7 @@ class Sales extends Secure_area{
 		}
 
 		//SAVE sale to database
-		$data['sale_id']='POS '.$this->Sale->save($data['cart'], $customer_id,$employee_id,$comment,$data['payments']);
+		$data['sale_id']=$doc.$this->Sale->save($data['cart'], $customer_id,$employee_id,$comment,$data['payments']);
 		if ($data['sale_id'] == 'POS -1') {
 			$data['error_message'] = $this->lang->line('sales_transaction_failed');
 		} else {

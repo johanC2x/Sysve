@@ -10,7 +10,9 @@
 						<div class="panel panel-default col-md-10" >
 							<div class="panel-header"> 
 								<center>
+									<a href="<?php echo site_url("$module->module_id");?>">
 									<img src="<?php echo base_url().'images/menubar/'.$module->module_id.'.png';?>" style="margin: 0 auto;width: 150px;" border="0" alt="Menubar Image" class="img-rounded"> 
+									</a>
 								</center>  
 							</div>
     						<div class="panel-body">

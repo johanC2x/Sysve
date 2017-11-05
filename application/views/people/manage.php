@@ -69,9 +69,6 @@ function post_person_form_submit(response)
 				array('class'=>'thickbox none btn btn-primary','title'=>'Import Items from Excel'));
 			?>	
 		<?php } ?>
-		<button type="button" class="thickbox none btn btn-primary" data-toggle="modal" data-target="#myModal">
-			Nuevo Empleado
-		</button>
 	</div>
 </div>
 <?php echo $this->pagination->create_links();?>
