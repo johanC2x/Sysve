@@ -1,92 +1,149 @@
 <?php $this->load->view("partial/header"); ?>
-
-
 <div id="register_wrapper">
 </div>
-
-
-
 <div class="row">
 	<div class="col-xs-6">
 	<div class="content-form">
-		<?php echo form_open("sales/change_mode",array('id'=>'mode_form')); ?>	<span><?php echo $this->lang->line('sales_mode') ?></span>	<?php echo form_dropdown('mode',$modes,$mode,'onchange="$(\'#mode_form\').submit();"'); ?></form>
-		<?php echo form_open("sales/add",array('id'=>'add_item_form')); ?><label id="item_label" for="item">	Nombre del Producto	</label><?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40','class'=>'input-xxlarge'));?></form>
+		<?php echo form_open("sales/change_mode",array('id'=>'mode_form')); ?>
+			<span><?php echo $this->lang->line('sales_mode') ?></span>	
+			<?php echo form_dropdown('mode',$modes,$mode,'onchange="$(\'#mode_form\').submit();"'); ?>
+		</form>
+		<?php echo form_open("sales/add_item_by_number",array('id'=>'add_item_number_form')); ?>
+			<label id="item_label" for="item_number">Código de Producto</label>
+			<?php 
+				echo form_input(array(
+						'name'=>'item_number',
+						'id'=>'item_number',
+						'size'=>'20',
+						'class'=>'input-xxlarge'
+					));
+			?>
+		</form>
+		<?php echo form_open("sales/add",array('id'=>'add_item_form')); ?>
+			<label id="item_label" for="item">Nombre de Producto</label>
+			<?php 
+				echo form_input(array(
+						'name'=>'item',
+						'id'=>'item',
+						'size'=>'20',
+						'class'=>'input-xxlarge'
+					));
+			?>
+		</form>
 	</div>
 	</div>
 	<div class="col-xs-6">
 		<div class="content-btn">
 			<?php 
-			echo anchor("sales/suspended/width:425","<div class='btn btn-primary'><span style='font-size:73%;'>".$this->lang->line('sales_suspended_sales')."</span></div>",array('class'=>'thickbox none','title'=>$this->lang->line('sales_suspended_sales')));
-			echo anchor("customers/view/-1/width:350","<div class='btn btn-primary'><span>".$this->lang->line('sales_new_customer')."</span></div>",array('class'=>'thickbox none','title'=>$this->lang->line('sales_new_customer')));
-			echo anchor("items/view/-1/width:360","<div class='btn btn-primary'><span>".$this->lang->line('sales_new_item')."</span></div>",array('class'=>'thickbox none','title'=>$this->lang->line('sales_new_item')));
+			echo anchor("sales/suspended/width:425","<div class='btn btn-primary'><span style='font-size:73%;'>".$this->lang->line('sales_suspended_sales')."</span></div>",
+				array(
+					'class'=>'thickbox none',
+					'title'=>$this->lang->line('sales_suspended_sales')
+				));
+			echo anchor("customers/view/-1/width:350","<div class='btn btn-primary'><span>".$this->lang->line('sales_new_customer')."</span></div>",
+				array(
+					'class'=>'thickbox none',
+					'title'=>$this->lang->line('sales_new_customer')
+				));
+			echo anchor("items/view/-1/width:360","<div class='btn btn-primary'><span>".$this->lang->line('sales_new_item')."</span></div>",
+				array(
+					'class'=>'thickbox none',
+					'title'=>$this->lang->line('sales_new_item')
+				));
 			?>
 		</div>
 	</div>
 </div>
-
-
-
 
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-lg-8">
 		<table class="table table-bordered">
 			<tbody>
 				<tr class="well">
-					<td><?php echo $this->lang->line('common_delete'); ?></td>
-					<td><?php echo $this->lang->line('sales_item_name'); ?></td>
-					<td><?php echo $this->lang->line('sales_price'); ?></td>
-					<td><?php echo $this->lang->line('sales_quantity'); ?></td>
-					<td><?php echo $this->lang->line('sales_total'); ?></td>
-					<td><?php echo $this->lang->line('sales_edit'); ?></td>
+					<td>
+					<center>
+						<?php echo $this->lang->line('sales_item'); ?>
+					</center>
+					</td>
+					<td>
+					<center>
+						<?php echo $this->lang->line('sales_price'); ?>
+					</center>
+					</td>
+					<td>
+					<center>
+						<?php echo $this->lang->line('sales_quantity'); ?>
+					</center>		
+					</td>
+					<td>
+					<center>
+						<?php echo $this->lang->line('sales_total'); ?>
+					</center>
+					</td>
+					<td colspan="2">
+					<center>
+						<?php echo $this->lang->line('common_option_action'); ?>
+					</center>
+					</td>
 				</tr>
-				<?php
-				if(count($cart)==0)
-				{
-					?>
-					<tr><td colspan='8'>
-						<div class='warning_message' style='padding:7px;'><?php echo $this->lang->line('sales_no_items_in_cart'); ?></div>
-					</tr></tr>
-					<?php
-				}
-				else
-				{
-					foreach(array_reverse($cart, true) as $line=>$item)
-					{
+				<?php if(count($cart)==0){ ?>
+					<tr>
+						<td colspan='8'>
+							<div class='warning_message' style='padding:7px;'>
+								<?php echo $this->lang->line('sales_no_items_in_cart'); ?>
+							</div>
+						</td>
+					</tr>
+				<?php } else {
+					foreach(array_reverse($cart, true) as $line=>$item){
 						$cur_item_info = $this->Item->get_info($item['item_id']);
 						echo form_open("sales/edit_item/$line");
-						?>
+				?>
 						<tr>
-							<td><?php echo anchor("sales/delete_item/$line",'['.$this->lang->line('common_delete').']');?></td>
-							<td ><?php echo $item['name']; ?><br /> [<?php echo $cur_item_info->quantity; ?> in stock]</td>
-							<?php if ($items_module_allowed)
-							{
-								?>
-								<td><?php echo form_input(array('name'=>'price','value'=>$item['price'],'size'=>'6'));?></td>
-								<?php
-							}
-							else
-							{
-								?>
-								<td><?php echo $item['price']; ?></td>
-								<?php echo form_hidden('price',$item['price']); ?>
-								<?php
-							}
-							?>
 							<td>
-								<?php
-								if($item['is_serialized']==1)
-								{
-									echo $item['quantity'];
-									echo form_hidden('quantity',$item['quantity']);
-								}
-								else
-								{
-									echo form_input(array('name'=>'quantity','value'=>$item['quantity'],'size'=>'2'));
-								}
+								<?php echo $item['name']; ?><br/> 
+								<span style="font-size: 10px;" >
+									[<?php echo number_format($cur_item_info->quantity); ?> en stock]
+								</span>
+							</td>
+							<?php if($items_module_allowed){ ?> 
+							<td>
+								<?php 
+									echo form_input(array('name'=>'price','value'=>$item['price'],'size'=>'6'));
 								?>
 							</td>
-							<td><?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?></td>
-							<td><?php echo form_submit("edit_item", $this->lang->line('sales_edit_item'));?></td>
+							<?php }else{ ?>
+							<td>
+								<?php echo $item['price']; ?>
+							</td>
+							<?php echo form_hidden('price',$item['price']); ?>
+							<?php } ?>
+							<td>
+								<?php if($item['is_serialized']==1) {
+										echo $item['quantity'];
+										echo form_hidden('quantity',$item['quantity']);
+									}else{
+										echo form_input(array(
+											'name'=>'quantity',
+											'value'=>$item['quantity'],
+											'size'=>'2'
+										));
+								} ?>
+							</td>
+							<td>
+								<?php echo to_currency($item['price']*$item['quantity']-$item['price']*$item['quantity']*$item['discount']/100); ?>
+							</td>
+							<td>
+								<?php echo form_submit("edit_item", 
+										$this->lang->line('common_edit'));
+								?>
+							</td>
+							<td>
+								<?php 
+									echo form_submit("sales/delete_item/$line",
+										$this->lang->line('common_delete'));
+								?>
+							</td>
 						</tr>
 					</form>
 					<?php
@@ -103,59 +160,79 @@
 			<tr>
 				<td>
 					<div id="overall_sale">
-						<?php
-						if(isset($customer))
-						{
+						<?php if(isset($customer)){
 							echo $this->lang->line("sales_customer").': <b>'.$customer. '</b><br />';
 							echo anchor("sales/remove_customer",'['.$this->lang->line('common_remove').' '.$this->lang->line('customers_customer').']');
-						}
-						else
-						{
+						}else{
 							echo form_open("sales/select_customer",array('id'=>'select_customer_form')); ?>
-							<label id="customer_label" for="customer"><?php echo $this->lang->line('sales_select_customer'); ?></label>
-							<?php echo form_input(array('name'=>'customer','id'=>'customer','size'=>'30','value'=>$this->lang->line('sales_start_typing_customer_name')));?>
+							<label id="customer_label" for="customer">
+								<?php echo $this->lang->line('sales_select_customer'); ?>
+							</label>
+							<?php echo form_input(array(
+										'name'=>'customer',
+										'id'=>'customer',
+										'size'=>'30',
+										'value'=>$this->lang->line('sales_start_typing_customer_name')
+									));
+							?>
 						</form>
-
-						<?php
-					}
-					?>
+						<?php } ?>
 					<div id='sale_details'>
-						<div class="float_left" style="width:55%;"><?php echo $this->lang->line('sales_sub_total'); ?>:</div>
-						<div class="float_left" style="width:45%;font-weight:bold;"><?php echo to_currency($subtotal); ?></div>
+						<div class="float_left" style="width:55%;">
+							<?php echo $this->lang->line('sales_sub_total'); ?>:
+						</div>
+						<div id="content_subtotal" class="float_left" style="width:45%;font-weight:bold;">
+							<?php echo number_format($subtotal,2); ?>
+						</div>
+						<div class="float_left" style='width:55%;'>
+							IGV(18%):
+						</div>
+						<div id="content_igv" class="float_left" style="width:45%;font-weight:bold;">
+							<?php echo number_format(0.00,2); ?>
+						</div>
 						<?php foreach($taxes as $name=>$value) { ?>
-						<div class="float_left" style='width:55%;'><?php echo $name; ?>:</div>
-						<div class="float_left" style="width:45%;font-weight:bold;"><?php echo to_currency($value); ?></div>
+							<div class="float_left" style='width:55%;display: none;'>
+								<?php echo $name; ?>:
+							</div>
+							<div class="float_left" style="width:45%;font-weight:bold;display: none;">
+								<?php echo floatval($value); ?>
+							</div>
 						<?php }; ?>
-						<div class="float_left" style='width:55%;'><?php echo $this->lang->line('sales_total'); ?>:</div>
-						<div class="float_left" style="width:45%;font-weight:bold;"><?php echo to_currency($total); ?></div>
+						<div class="float_left" style='width:55%;'>
+							<?php echo $this->lang->line('sales_total'); ?>:
+						</div>
+						<div id="content_total" class="float_left" style="width:45%;font-weight:bold;">
+							<?php echo number_format($total,2); ?>
+						</div>
 					</div>
 					<?php if(count($cart) > 0){ ?>
 					<div id="Cancel_sale">
-						<?php echo form_open("sales/cancel_sale",array('id'=>'cancel_sale_form')); ?><div class='btn btn-primary' id='cancel_sale_button' style='margin-top:5px;'><span><?php echo $this->lang->line('sales_cancel_sale'); ?></span></div></form>
+						<?php echo form_open("sales/cancel_sale",array('id'=>'cancel_sale_form')); ?>
+						<div class='btn btn-primary' id='cancel_sale_button' style='margin-top:5px;'>
+							<span><?php echo $this->lang->line('sales_cancel_sale'); ?></span>
+						</div>
+						</form>
 					</div>
 
 					<div class="clearfix" style="margin-bottom:1px;">&nbsp;</div>
 					<?php if(count($payments) > 0){ ?>
 					<div id="finish_sale">
 						<?php echo form_open("sales/complete",array('id'=>'finish_sale_form')); ?>
-						<label id="comment_label" for="comment"><?php echo $this->lang->line('common_comments'); ?>:</label>
+						<label id="comment_label" for="comment">
+							<?php echo $this->lang->line('common_comments'); ?>:
+						</label>
 						<?php echo form_textarea(array('name'=>'comment', 'id' => 'comment', 'value'=>$comment,'rows'=>'4','cols'=>'23'));?>
 						<br /><br />
-
-						<?php
-
-						if(!empty($customer_email))
-						{
+						<input id="igv" name="igv" type="hidden" />
+						<?php if(!empty($customer_email)){
 							echo $this->lang->line('sales_email_receipt'). ': '. form_checkbox(array(
-								'name'        => 'email_receipt',
-								'id'          => 'email_receipt',
-								'value'       => '1',
-								'checked'     => (boolean)$email_receipt,
+									'name'        => 'email_receipt',
+									'id'          => 'email_receipt',
+									'value'       => '1',
+									'checked'     => (boolean)$email_receipt,
 								)).'<br />('.$customer_email.')<br />';
 						}
-
-						if ($payments_cover_total)
-						{
+						if ($payments_cover_total){
 							echo "<div class='btn btn-primary' id='finish_sale_button' style='float:left;margin-top:5px;'><span>".$this->lang->line('sales_complete_sale')."</span></div>";
 						}
 						echo "<div class='btn btn-primary' id='suspend_sale_button' style='float:right;margin-top:5px;'><span>".$this->lang->line('sales_suspend_sale')."</span></div>";
@@ -168,24 +245,54 @@
 
 			<table width="100%">
 				<tr>
-					<td style="width:55%; "><div class="float_left"><?php echo $this->lang->line('sales_payments_total').':';?></div></td>
-					<td style="width:45%; text-align:right;"><div class="float_left" style="text-align:right;font-weight:bold;"><?php echo to_currency($payments_total); ?></div></td>
+					<td style="width:55%; ">
+						<div class="float_left">
+							<?php echo $this->lang->line('sales_payments_total').':';?>
+						</div>
+					</td>
+					<td style="width:45%; text-align:right;">
+						<div id="content_pago" class="float_left" style="text-align:right;font-weight:bold;">
+							<?php echo number_format($payments_total,2); ?>
+						</div>
+					</td>
 				</tr>
-				<tr>
+				<tr style="display: none;" >
 					<td style="width:55%; "><div class="float_left" ><?php echo $this->lang->line('sales_amount_due').':';?></div></td>
-					<td style="width:45%; text-align:right; "><div class="float_left" style="text-align:right;font-weight:bold;"><?php echo to_currency($amount_due); ?></div></td>
+					<td style="width:45%; text-align:right; ">
+						<div id="content_deuda" class="float_left" style="text-align:right;font-weight:bold;"><?php echo number_format($amount_due,2); ?>
+						</div>
+					</td>
 				</tr>
 			</table>
 
 			<div id="Payment_Types" >
-				<?php echo form_open("sales/add_payment",array('id'=>'add_payment_form')); ?>
+				<?php 
+					echo form_open("sales/add_payment",array('id'=>'add_payment_form')); 
+				?>
 				<table width="100%">
 					<tr>
-						<td><?php echo $this->lang->line('sales_payment').':   ';?>	</td>					
-						<td><?php echo form_dropdown( 'payment_type', $payment_options, array(), 'id="payment_types"' ); ?>	</td>
+						<td>
+							<?php echo $this->lang->line('sales_payment').':';?>	
+						</td>					
+						<td>
+							<?php echo form_dropdown( 'payment_type', $payment_options, array(), 'id="payment_types" class="form-control"' ); 
+							?>	
+						</td>
 					</tr>
 					<tr>
-						<td><span id="amount_tendered_label"><?php echo $this->lang->line( 'sales_amount_tendered' ).': '; ?></span></td>
+						<td>
+							<?php echo $this->lang->line('sales_document').':';?>	
+						</td>					
+						<td>
+							<?php echo form_dropdown( 'payment_document', $payment_document, array(), 'id="payment_documents" class="form-control"' ); ?>	
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span id="amount_tendered_label">
+								<?= $this->lang->line( 'sales_amount_tendered' ).': '; ?>
+							</span>
+						</td>
 						<td><?php echo form_input( array( 'name'=>'amount_tendered', 'id'=>'amount_tendered', 'value'=>to_currency_no_money($amount_due), 'size'=>'10' ) );?></td>
 					</tr>
 				</table>
@@ -275,16 +382,20 @@ if (isset($success))
 			selectFirst: false,
 			delay:10,
 			formatItem: function(row) {
+				console.log(row);
 				return row[1];
 			}
 		});
 
-		$("#item").result(function(event, data, formatted)
-		{
+		$("#item_number").keyup(function(){
+			$("#add_item_number_form").submit();
+		});
+		
+		$("#item").result(function(event, data, formatted){
 			$("#add_item_form").submit();
 		});
-
-		$('#item').focus();
+	
+		$('#item_number').focus();
 
 		$('#item').blur(function()
 		{
@@ -352,12 +463,24 @@ if (isset($success))
 			}
 		});
 
-		$("#add_payment_button").click(function()
-		{
+		$("#add_payment_button").click(function(){
 			$('#add_payment_form').submit();
 		});
 
-		$("#payment_types").change(checkPaymentTypeGiftcard).ready(checkPaymentTypeGiftcard)
+		$("#payment_types").change(checkPaymentTypeGiftcard).ready(checkPaymentTypeGiftcard);
+
+		if($("#payment_documents").val() === "Factura"){
+			getTypeDocument();
+		}
+
+		if($("#content_pago").text() === "0.00"){
+			alert("0");
+		}
+
+		$("#payment_documents").change(function(){
+			getTypeDocument();
+		});
+
 	});
 
 function post_item_form_submit(response)
@@ -389,6 +512,25 @@ function checkPaymentTypeGiftcard()
 	else
 	{
 		$("#amount_tendered_label").html("<?php echo $this->lang->line('sales_amount_tendered'); ?>");
+	}
+}
+
+function getTypeDocument(){
+	var subtotal = parseFloat($("#content_subtotal").text());
+	var total = parseFloat($("#content_total").text());
+	if($("#payment_documents").val() !== "Boleta"){
+		var montoPago = subtotal + (subtotal * 0.18);
+		$("#content_igv").text((subtotal * 0.18).toFixed(2));
+		$("#content_total").text(montoPago.toFixed(2));
+		$("#content_deuda").text(montoPago.toFixed(2));
+		$("#amount_tendered").val(montoPago.toFixed(2));
+		$("#igv").val((subtotal * 0.18).toFixed(2));
+	}else{
+		$("#content_igv").text(parseFloat(0).toFixed(2));
+		$("#content_total").text(subtotal.toFixed(2));
+		$("#content_deuda").text(subtotal.toFixed(2));
+		$("#amount_tendered").val(subtotal.toFixed(2));
+		$("#igv").val(parseFloat(0).toFixed(2));
 	}
 }
 

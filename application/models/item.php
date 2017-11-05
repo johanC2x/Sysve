@@ -110,19 +110,26 @@ class Item extends CI_Model
 	/*
 	Get an item id given an item number
 	*/
-	function get_item_id($item_number)
-	{
+	function get_item_id($item_number){
 		$this->db->from('items');
 		$this->db->where('item_number',$item_number);
 		$this->db->where('deleted',0); // Parq 131226
 
 		$query = $this->db->get();
-
-		if($query->num_rows()==1)
-		{
+		echo $this->db->last_query();exit();
+		if($query->num_rows()==1){
 			return $query->row()->item_id;
 		}
+		return false;
+	}
 
+	function get_item_number($item_number){
+		$this->db->from('items');
+		$this->db->where('item_number',$item_number);
+		$query = $this->db->get();
+		if($query->num_rows()==1){
+			return $query->row()->item_id;
+		}
 		return false;
 	}
 
@@ -140,18 +147,14 @@ class Item extends CI_Model
 	/*
 	Inserts or updates a item
 	*/
-	function save(&$item_data,$item_id=false)
-	{
-		if (!$item_id or !$this->exists($item_id))
-		{
-			if($this->db->insert('items',$item_data))
-			{
+	function save(&$item_data,$item_id=false){
+		if (!$item_id or !$this->exists($item_id)){
+			if($this->db->insert('items',$item_data)){
 				$item_data['item_id']=$this->db->insert_id();
 				return true;
 			}
 			return false;
 		}
-
 		$this->db->where('item_id', $item_id);
 		return $this->db->update('items',$item_data);
 	}
@@ -265,43 +268,50 @@ class Item extends CI_Model
 
 	}
 
-	function get_item_search_suggestions($search,$limit=25)
-	{
+	function get_item_search_suggestions_by_number($search,$limit=25){
 		$suggestions = array();
-
-		$this->db->from('items');
-		$this->db->where('deleted',0);
-		$this->db->like('name', $search);
-		$this->db->order_by("name", "asc");
-		$by_name = $this->db->get();
-		foreach($by_name->result() as $row)
-		{
-			$suggestions[]=$row->item_id.'|'.$row->name;
-		}
-
 		$this->db->from('items');
 		$this->db->where('deleted',0);
 		$this->db->like('item_number', $search);
 		$this->db->order_by("item_number", "asc");
 		$by_item_number = $this->db->get();
-		foreach($by_item_number->result() as $row)
-		{
+		foreach($by_item_number->result() as $row){
 			$suggestions[]=$row->item_id.'|'.$row->item_number;
 		}
-/** GARRISON ADDED 4/21/2013 **/
-	//Search by description
+		if(count($suggestions > $limit)){
+			$suggestions = array_slice($suggestions, 0,$limit);
+		}
+		return $suggestions;
+	}
+
+	function get_item_search_suggestions($search,$limit=25){
+		$suggestions = array();
+		$this->db->from('items');
+		$this->db->where('deleted',0);
+		$this->db->like('name', $search);
+		$this->db->order_by("name", "asc");
+		$by_name = $this->db->get();
+		foreach($by_name->result() as $row){
+			$suggestions[]=$row->item_id.'|'.$row->name;
+		}
+		$this->db->from('items');
+		$this->db->where('deleted',0);
+		$this->db->like('item_number', $search);
+		$this->db->order_by("item_number", "asc");
+		$by_item_number = $this->db->get();
+		foreach($by_item_number->result() as $row){
+			$suggestions[]=$row->item_id.'|'.$row->item_number;
+		}
+
 		$this->db->from('items');
 		$this->db->where('deleted',0);
 		$this->db->like('description', $search);
 		$this->db->order_by("description", "asc");
 		$by_description = $this->db->get();
-		foreach($by_description->result() as $row)
-		{
+		foreach($by_description->result() as $row){
 			$suggestions[]=$row->item_id.'|'.$row->name;
 		}
-/** END GARRISON ADDED **/	
-		/** GARRISON ADDED 4/22/2013 **/		
-	//Search by custom fields
+
 		$this->db->from('items');
 		$this->db->where('deleted',0);
 		$this->db->like('custom1', $search);
@@ -316,15 +326,11 @@ class Item extends CI_Model
 		$this->db->or_like('custom10', $search);
 		$this->db->order_by("name", "asc");
 		$by_description = $this->db->get();
-		foreach($by_description->result() as $row)
-		{
+		foreach($by_description->result() as $row){
 			$suggestions[]=$row->item_id.'|'.$row->name;
 		}
-		/** END GARRISON ADDED **/
 		
-		//only return $limit suggestions
-		if(count($suggestions > $limit))
-		{
+		if(count($suggestions > $limit)){
 			$suggestions = array_slice($suggestions, 0,$limit);
 		}
 		return $suggestions;

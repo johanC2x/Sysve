@@ -255,9 +255,79 @@ class Items extends Secure_area implements iData_controller
 		$this->load->view("items/form_bulk", $data);
 	}
 
-	function save($item_id=-1)
-	{
+	function save($item_id=-1){
 		
+		$item_data = array(
+			'name'=>$this->input->post('name'),
+			'description'=>$this->input->post('description'),
+			'category'=>$this->input->post('category'),
+			'supplier_id'=>$this->input->post('supplier_id')=='' ? null:$this->input->post('supplier_id'),
+			'item_number'=>$this->input->post('item_number')=='' ? null:$this->input->post('item_number'),
+			'cost_price'=>$this->input->post('cost_price'),
+			'unit_price'=>$this->input->post('unit_price'),
+			'quantity'=>$this->input->post('quantity'),
+			'reorder_level'=>$this->input->post('reorder_level'),
+			'location'=>$this->input->post('location'),
+			'allow_alt_description'=>$this->input->post('allow_alt_description'),
+			'is_serialized'=>$this->input->post('is_serialized'),
+			'deleted'=>$this->input->post('is_deleted'),   
+
+			'custom1'=>$this->input->post('custom1'),	 		
+			'custom2'=>$this->input->post('custom2'), 
+			'custom3'=>$this->input->post('custom3'), 
+			'custom4'=>$this->input->post('custom4'), 
+			'custom5'=>$this->input->post('custom5'), 
+			'custom6'=>$this->input->post('custom6'),
+			'custom7'=>$this->input->post('custom7'),
+			'custom8'=>$this->input->post('custom8'),
+			'custom9'=>$this->input->post('custom9'),
+			'custom10'=>$this->input->post('custom10')
+		);
+		
+		$employee_id=$this->Employee->get_logged_in_employee_info()->person_id;
+		$cur_item_info = $this->Item->get_info($item_id);
+
+		if($this->Item->save($item_data,$item_id)){			
+			if($item_id==-1){
+				echo json_encode(array(
+						'success'=>true,
+						'message'=>$this->lang->line('items_successful_adding').' '.$item_data['name'],
+						'item_id'=>$item_data['item_id']
+					));
+				$item_id = $item_data['item_id'];
+			}else {
+				echo json_encode(array(
+						'success'=>true,
+						'message'=>$this->lang->line('items_successful_updating').' '.$item_data['name'],
+						'item_id'=>$item_id
+					));
+			}
+			$inv_data = array(
+							'trans_date'=>date('Y-m-d H:i:s'),
+							'trans_items'=>$item_id,
+							'trans_user'=>$employee_id,
+							'trans_comment'=>$this->lang->line('items_manually_editing_of_quantity'),
+							'trans_inventory'=>$cur_item_info ? $this->input->post('quantity') - $cur_item_info->quantity : $this->input->post('quantity')
+						);
+			$this->Inventory->insert($inv_data);
+			$items_taxes_data = array();
+			$tax_names = $this->input->post('tax_names');
+			$tax_percents = $this->input->post('tax_percents');
+			for($k=0;$k<count($tax_percents);$k++){
+				if (is_numeric($tax_percents[$k])){
+					$items_taxes_data[] = array('name'=>$tax_names[$k], 'percent'=>$tax_percents[$k] );
+				}
+			}
+			$this->Item_taxes->save($items_taxes_data, $item_id);
+		}else{
+			echo json_encode(array(
+					'success'=>false,
+					'message'=>$this->lang->line('items_error_adding_updating').' '.$item_data['name'],
+					'item_id'=>-1
+				));
+		}
+
+		/*
 		if($this->input->post('name') != ""
 			and $this->input->post('description') != ""
 			and $this->input->post('category') != ""
@@ -266,76 +336,13 @@ class Items extends Secure_area implements iData_controller
 			and $this->input->post('supplier_id') != ""
 			and $this->input->post('quantity') != ""
 			and $this->input->post('reorder_level') != ""){
-
-		$item_data = array(
-		'name'=>$this->input->post('name'),
-		'description'=>$this->input->post('description'),
-		'category'=>$this->input->post('category'),
-		'supplier_id'=>$this->input->post('supplier_id')=='' ? null:$this->input->post('supplier_id'),
-		'item_number'=>$this->input->post('item_number')=='' ? null:$this->input->post('item_number'),
-		'cost_price'=>$this->input->post('cost_price'),
-		'unit_price'=>$this->input->post('unit_price'),
-		'quantity'=>$this->input->post('quantity'),
-		'reorder_level'=>$this->input->post('reorder_level'),
-		'location'=>$this->input->post('location'),
-		'allow_alt_description'=>$this->input->post('allow_alt_description'),
-		'is_serialized'=>$this->input->post('is_serialized'),
-		'deleted'=>$this->input->post('is_deleted'),  /** Parq 131215 **/
-
-		'custom1'=>$this->input->post('custom1'),	/**GARRISON ADDED 4/21/2013**/			
-		'custom2'=>$this->input->post('custom2'),/**GARRISON ADDED 4/21/2013**/
-		'custom3'=>$this->input->post('custom3'),/**GARRISON ADDED 4/21/2013**/
-		'custom4'=>$this->input->post('custom4'),/**GARRISON ADDED 4/21/2013**/
-		'custom5'=>$this->input->post('custom5'),/**GARRISON ADDED 4/21/2013**/
-		'custom6'=>$this->input->post('custom6'),/**GARRISON ADDED 4/21/2013**/
-		'custom7'=>$this->input->post('custom7'),/**GARRISON ADDED 4/21/2013**/
-		'custom8'=>$this->input->post('custom8'),/**GARRISON ADDED 4/21/2013**/
-		'custom9'=>$this->input->post('custom9'),/**GARRISON ADDED 4/21/2013**/
-		'custom10'=>$this->input->post('custom10')/**GARRISON ADDED 4/21/2013**/
-		);
-		
-		$employee_id=$this->Employee->get_logged_in_employee_info()->person_id;
-		$cur_item_info = $this->Item->get_info($item_id);
-
-
-		if($this->Item->save($item_data,$item_id)){			
-			if($item_id==-1){
-				echo json_encode(array('success'=>true,'message'=>$this->lang->line('items_successful_adding').' '.
-				$item_data['name'],'item_id'=>$item_data['item_id']));
-				$item_id = $item_data['item_id'];
-			}
-			else {
-				echo json_encode(array('success'=>true,'message'=>$this->lang->line('items_successful_updating').' '.
-				$item_data['name'],'item_id'=>$item_id));
-			}
-			
-			$inv_data = array
-			(
-				'trans_date'=>date('Y-m-d H:i:s'),
-				'trans_items'=>$item_id,
-				'trans_user'=>$employee_id,
-				'trans_comment'=>$this->lang->line('items_manually_editing_of_quantity'),
-				'trans_inventory'=>$cur_item_info ? $this->input->post('quantity') - $cur_item_info->quantity : $this->input->post('quantity')
-			);
-			$this->Inventory->insert($inv_data);
-			$items_taxes_data = array();
-			$tax_names = $this->input->post('tax_names');
-			$tax_percents = $this->input->post('tax_percents');
-			for($k=0;$k<count($tax_percents);$k++){
-				if (is_numeric($tax_percents[$k]))
-				{
-					$items_taxes_data[] = array('name'=>$tax_names[$k], 'percent'=>$tax_percents[$k] );
-				}
-			}
-			$this->Item_taxes->save($items_taxes_data, $item_id);
 		}else{
-			echo json_encode(array('success'=>false,'message'=>$this->lang->line('items_error_adding_updating').' '.
-			$item_data['name'],'item_id'=>-1));
+			echo json_encode(array(
+					'success'=> false,
+					'message'=> "Existen campos requeridos"
+				));
 		}
-		}else{
-			echo json_encode(array('success'=>false,'message'=>$this->lang->line('No se deben agregar campos vacios')));
-		}
-		
+		*/
 	}
 	
 	//Ramel Inventory Tracking

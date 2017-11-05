@@ -38,11 +38,23 @@ class Employee extends Person
 	/*
 	Gets information about a particular employee
 	*/
+	function get_info_username($user_name){
+		$this->db->from('employees');	
+		$this->db->join('people', 'people.person_id = employees.person_id');
+		$this->db->where('employees.username',$user_name);
+		$this->db->where('employees.deleted <> 1');
+		$query = $this->db->get();
+		//echo $this->db->last_query();exit();
+		return $query->row();
+	}
+
+
 	function get_info($employee_id)
 	{
 		$this->db->from('employees');	
 		$this->db->join('people', 'people.person_id = employees.person_id');
 		$this->db->where('employees.person_id',$employee_id);
+		$this->db->where('employees.deleted <> 1');
 		$query = $this->db->get();
 		
 		if($query->num_rows()==1)
@@ -95,9 +107,7 @@ class Employee extends Person
 			{
 				$employee_data['person_id'] = $employee_id = $person_data['person_id'];
 				$success = $this->db->insert('employees',$employee_data);
-			}
-			else
-			{
+			}else{
 				$this->db->where('person_id', $employee_id);
 				$success = $this->db->update('employees',$employee_data);		
 			}

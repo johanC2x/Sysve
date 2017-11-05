@@ -17,7 +17,9 @@
     							<a href="<?php echo site_url("$module->module_id");?>">
     								<center>
     									<b>
-    										<?php echo strtoupper($this->lang->line("module_".$module->module_id));  ?> 
+    									<?php 
+    										echo strtoupper($this->lang->line("module_".$module->module_id));  
+    									?> 
     									</b> 
     								</center>
 								</a>

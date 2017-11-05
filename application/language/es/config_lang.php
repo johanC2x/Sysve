@@ -1,6 +1,7 @@
 <?php
 $lang['config_info'] = 'Información del Comercio';
 $lang['config_company'] = 'Nombre del Comercio';
+$lang['config_ruc'] = 'Ruc del Comercio';
 $lang['config_address'] = 'Dirección del Comercio';
 $lang['config_phone'] = 'Teléfono del Comercio';
 $lang['config_website'] = 'Sitio Web';

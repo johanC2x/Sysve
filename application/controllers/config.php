@@ -1,23 +1,20 @@
 <?php
 require_once ("secure_area.php");
-class Config extends Secure_area 
-{
-	function __construct()
-	{
+class Config extends Secure_area {
+	function __construct(){
 		parent::__construct('config');
 	}
 	
-	function index()
-	{
+	function index(){
 		$this->load->view("config");
 	}
 		
-	function save()
-	{
+	function save(){
 		$batch_save_data=array(
 		'company'=>$this->input->post('company'),
 		'address'=>$this->input->post('address'),
 		'phone'=>$this->input->post('phone'),
+		'ruc'=>$this->input->post('ruc'),
 		'email'=>$this->input->post('email'),
 		'fax'=>$this->input->post('fax'),
 		'website'=>$this->input->post('website'),
@@ -42,10 +39,11 @@ class Config extends Secure_area
 		'custom9_name'=>$this->input->post('custom9_name'),/**GARRISON ADDED 4/20/2013**/
 		'custom10_name'=>$this->input->post('custom10_name')/**GARRISON ADDED 4/20/2013**/
 		);
-		
-		if( $this->Appconfig->batch_save( $batch_save_data ) )
-		{
-			echo json_encode(array('success'=>true,'message'=>$this->lang->line('config_saved_successfully')));
+		if( $this->Appconfig->batch_save( $batch_save_data )){
+			echo json_encode(array(
+				'success'=>true,
+				'message'=>$this->lang->line('config_saved_successfully')
+			));
 		}
 	}
 }

@@ -1,11 +1,11 @@
 <?php
 require_once ("secure_area.php");
-class Sales extends Secure_area
-{
-	function __construct()
-	{
+class Sales extends Secure_area{
+
+	function __construct(){
 		parent::__construct('sales');
 		$this->load->library('sale_lib');
+		$this->load->model("item");
 	}
 
 	function index()
@@ -13,10 +13,12 @@ class Sales extends Secure_area
 		$this->_reload();
 	}
 
-	function item_search()
-	{
-		$suggestions = $this->Item->get_item_search_suggestions($this->input->post('q'),$this->input->post('limit'));
-		$suggestions = array_merge($suggestions, $this->Item_kit->get_item_kit_search_suggestions($this->input->post('q'),$this->input->post('limit')));
+	function item_search(){
+		$suggestions = $this->Item->get_item_search_suggestions(
+							$this->input->post('q'),
+							$this->input->post('limit')
+						);
+		$suggestions = array_merge($suggestions,$this->Item_kit->get_item_kit_search_suggestions($this->input->post('q'),$this->input->post('limit')));
 		echo implode("\n",$suggestions);
 	}
 
@@ -51,52 +53,40 @@ class Sales extends Secure_area
 	}
 
 	//Alain Multiple Payments
-	function add_payment()
-	{		
+	function add_payment(){		
 		$data = array();
 		$this->form_validation->set_rules( 'amount_tendered', 'lang:sales_amount_tendered', 'numeric' );
-		
-		if ( $this->form_validation->run() == FALSE )
-		{
-			if ( $this->input->post( 'payment_type' ) == $this->lang->line( 'sales_gift_card' ) )
+		if ($this->form_validation->run() == FALSE ){
+			if ($this->input->post('payment_type') == $this->lang->line('sales_gift_card')){
 				$data['error']=$this->lang->line('sales_must_enter_numeric_giftcard');
-			else
+			}else{
 				$data['error']=$this->lang->line('sales_must_enter_numeric');
-				
- 			$this->_reload( $data );
+			}
+ 			$this->_reload($data);
  			return;
 		}
 		
-		$payment_type = $this->input->post( 'payment_type' );
-		if ( $payment_type == $this->lang->line( 'sales_giftcard' ) )
-		{
+		$payment_type = $this->input->post('payment_type');
+		if ($payment_type == $this->lang->line('sales_giftcard')){
 			$payments = $this->sale_lib->get_payments();
-			$payment_type = $this->input->post( 'payment_type' ) . ':' . $payment_amount = $this->input->post( 'amount_tendered' );
-			$current_payments_with_giftcard = isset( $payments[$payment_type] ) ? $payments[$payment_type]['payment_amount'] : 0;
-			$cur_giftcard_value = $this->Giftcard->get_giftcard_value( $this->input->post( 'amount_tendered' ) ) - $current_payments_with_giftcard;
-			
-			if ( $cur_giftcard_value <= 0 )
-			{
-				$data['error'] = 'Giftcard balance is ' . to_currency( $this->Giftcard->get_giftcard_value( $this->input->post( 'amount_tendered' ) ) ) . ' !';
+			$payment_type = $this->input->post('payment_type').':'.$payment_amount = $this->input->post( 'amount_tendered' );
+			$current_payments_with_giftcard = isset($payments[$payment_type]) ? $payments[$payment_type]['payment_amount'] : 0;
+			$cur_giftcard_value = $this->Giftcard->get_giftcard_value($this->input->post('amount_tendered')) - $current_payments_with_giftcard;
+			if($cur_giftcard_value <= 0){
+				$data['error'] = 'Giftcard balance is '.to_currency($this->Giftcard->get_giftcard_value($this->input->post('amount_tendered'))).' !';
 				$this->_reload( $data );
 				return;
 			}
-
-			$new_giftcard_value = $this->Giftcard->get_giftcard_value( $this->input->post( 'amount_tendered' ) ) - $this->sale_lib->get_amount_due( );
-			$new_giftcard_value = ( $new_giftcard_value >= 0 ) ? $new_giftcard_value : 0;
-			$data['warning'] = 'Giftcard ' . $this->input->post( 'amount_tendered' ) . ' balance is ' . to_currency( $new_giftcard_value ) . ' !';
+			$new_giftcard_value = $this->Giftcard->get_giftcard_value($this->input->post('amount_tendered'))-$this->sale_lib->get_amount_due();
+			$new_giftcard_value = ($new_giftcard_value >= 0) ? $new_giftcard_value : 0;
+			$data['warning'] = 'Giftcard '.$this->input->post('amount_tendered') . ' balance is ' . to_currency( $new_giftcard_value ) . ' !';
 			$payment_amount = min( $this->sale_lib->get_amount_due( ), $this->Giftcard->get_giftcard_value( $this->input->post( 'amount_tendered' ) ) );
-		}
-		else
-		{
+		}else{
 			$payment_amount = $this->input->post( 'amount_tendered' );
 		}
-		
-		if( !$this->sale_lib->add_payment( $payment_type, $payment_amount ) )
-		{
+		if(!$this->sale_lib->add_payment($payment_type,$payment_amount)){
 			$data['error']='Unable to Add Payment! Please try again!';
 		}
-		
 		$this->_reload($data);
 	}
 
@@ -107,35 +97,48 @@ class Sales extends Secure_area
 		$this->_reload();
 	}
 
-	function add()
-	{
+	function add(){
 		$data=array();
 		$mode = $this->sale_lib->get_mode();
 		$item_id_or_number_or_item_kit_or_receipt = $this->input->post("item");
 		$quantity = $mode=="sale" ? 1:-1;
-
-		if($this->sale_lib->is_valid_receipt($item_id_or_number_or_item_kit_or_receipt) && $mode=='return')
-		{
+		if($this->sale_lib->is_valid_receipt($item_id_or_number_or_item_kit_or_receipt) 
+			&& $mode=='return'){
 			$this->sale_lib->return_entire_sale($item_id_or_number_or_item_kit_or_receipt);
-		}
-		elseif($this->sale_lib->is_valid_item_kit($item_id_or_number_or_item_kit_or_receipt))
-		{
+		}elseif($this->sale_lib->is_valid_item_kit($item_id_or_number_or_item_kit_or_receipt)){
 			$this->sale_lib->add_item_kit($item_id_or_number_or_item_kit_or_receipt);
-		}
-		elseif(!$this->sale_lib->add_item($item_id_or_number_or_item_kit_or_receipt,$quantity))
-		{
+		}elseif(!$this->sale_lib->add_item($item_id_or_number_or_item_kit_or_receipt,$quantity)){
 			$data['error']=$this->lang->line('sales_unable_to_add_item');
 		}
-		
-		if($this->sale_lib->out_of_stock($item_id_or_number_or_item_kit_or_receipt))
-		{
+		if($this->sale_lib->out_of_stock($item_id_or_number_or_item_kit_or_receipt)){
 			$data['warning'] = $this->lang->line('sales_quantity_less_than_zero');
 		}
 		$this->_reload($data);
 	}
 
-	function edit_item($line)
-	{
+	function add_item_by_number(){
+		$data=array();
+		$mode = $this->sale_lib->get_mode();
+		$item_id = $this->item->get_item_number($this->input->post("item_number"));
+		$item_id_or_number_or_item_kit_or_receipt = $item_id;
+		$quantity = $mode=="sale" ? 1:-1;
+		if(!empty($item_id)){
+			if($this->sale_lib->is_valid_receipt($item_id_or_number_or_item_kit_or_receipt) 
+				&& $mode=='return'){
+				$this->sale_lib->return_entire_sale($item_id_or_number_or_item_kit_or_receipt);
+			}elseif($this->sale_lib->is_valid_item_kit($item_id_or_number_or_item_kit_or_receipt)){
+				$this->sale_lib->add_item_kit($item_id_or_number_or_item_kit_or_receipt);
+			}elseif(!$this->sale_lib->add_item($item_id_or_number_or_item_kit_or_receipt,$quantity)){
+				$data['error']=$this->lang->line('sales_unable_to_add_item');
+			}
+			if($this->sale_lib->out_of_stock($item_id_or_number_or_item_kit_or_receipt)){
+				$data['warning'] = $this->lang->line('sales_quantity_less_than_zero');
+			}
+		}
+		$this->_reload($data);
+	}
+
+	function edit_item($line){
 		$data= array();
 
 		$this->form_validation->set_rules('price', 'lang:items_price', 'required|numeric');
@@ -178,38 +181,39 @@ class Sales extends Secure_area
 		$this->_reload();
 	}
 
-	function complete()
-	{
-		$data['cart']=$this->sale_lib->get_cart();
+	function complete(){
+		$igv = $this->input->post("igv");
+		$data['cart']=$this->sale_lib->get_cart(); 
 		$data['subtotal']=$this->sale_lib->get_subtotal();
+		$data['igv']=$this->input->post("igv");
 		$data['taxes']=$this->sale_lib->get_taxes();
-		$data['total']=$this->sale_lib->get_total();
-		$data['receipt_title']=$this->lang->line('sales_receipt');
+		$data['total']=$this->sale_lib->get_total() + $igv;
+		if($igv > 0){
+			$data['receipt_title'] = "FACTURA DE VENTA";
+		}else{
+			$data['receipt_title'] = "RECIBO DE VENTA";
+		}
+		//$data['receipt_title']= $this->lang->line('sales_receipt');
 		$data['transaction_time']= date('m/d/Y h:i:s a');
 		$customer_id=$this->sale_lib->get_customer();
 		$employee_id=$this->Employee->get_logged_in_employee_info()->person_id;
 		$comment = $this->sale_lib->get_comment();
 		$emp_info=$this->Employee->get_info($employee_id);
 		$data['payments']=$this->sale_lib->get_payments();
-		$data['amount_change']=to_currency($this->sale_lib->get_amount_due() * -1);
+		$data['amount_change']=to_currency(($this->sale_lib->get_amount_due() * -1)); 
 		$data['employee']=$emp_info->first_name.' '.$emp_info->last_name;
 
-		if($customer_id!=-1)
-		{
+		if($customer_id!=-1) {
 			$cust_info=$this->Customer->get_info($customer_id);
 			$data['customer']=$cust_info->first_name.' '.$cust_info->last_name;
 		}
 
 		//SAVE sale to database
 		$data['sale_id']='POS '.$this->Sale->save($data['cart'], $customer_id,$employee_id,$comment,$data['payments']);
-		if ($data['sale_id'] == 'POS -1')
-		{
+		if ($data['sale_id'] == 'POS -1') {
 			$data['error_message'] = $this->lang->line('sales_transaction_failed');
-		}
-		else
-		{
-			if ($this->sale_lib->get_email_receipt() && !empty($cust_info->email))
-			{
+		} else {
+			if ($this->sale_lib->get_email_receipt() && !empty($cust_info->email)) {
 				$this->load->library('email');
 				$config['mailtype'] = 'html';				
 				$this->email->initialize($config);
@@ -235,7 +239,7 @@ class Sales extends Secure_area
 		$data['subtotal']=$this->sale_lib->get_subtotal();
 		$data['taxes']=$this->sale_lib->get_taxes();
 		$data['total']=$this->sale_lib->get_total();
-		$data['receipt_title']=$this->lang->line('sales_receipt');
+		$data['receipt_title']= $this->lang->line('sales_receipt');
 		$data['transaction_time']= date('m/d/Y h:i:s a', strtotime($sale_info['sale_time']));
 		$customer_id=$this->sale_lib->get_customer();
 		$emp_info=$this->Employee->get_info($sale_info['employee_id']);
@@ -342,7 +346,10 @@ class Sales extends Secure_area
 	{
 		$person_info = $this->Employee->get_logged_in_employee_info();
 		$data['cart']=$this->sale_lib->get_cart();
-		$data['modes']=array('sale'=>$this->lang->line('sales_sale'),'return'=>$this->lang->line('sales_return'));
+		$data['modes']=array(
+			'sale'=>$this->lang->line('sales_sale'),
+			'return'=>$this->lang->line('sales_return')
+		);
 		$data['mode']=$this->sale_lib->get_mode();
 		$data['subtotal']=$this->sale_lib->get_subtotal();
 		$data['taxes']=$this->sale_lib->get_taxes();
@@ -360,7 +367,10 @@ class Sales extends Secure_area
 			$this->lang->line('sales_debit') => $this->lang->line('sales_debit'),
 			$this->lang->line('sales_credit') => $this->lang->line('sales_credit')
 		);
-
+		$data['payment_document']=array(
+			$this->lang->line('sales_bol') => $this->lang->line('sales_bol'),
+			$this->lang->line('sales_fac') => $this->lang->line('sales_fac')
+		);
 		$customer_id=$this->sale_lib->get_customer();
 		if($customer_id!=-1)
 		{

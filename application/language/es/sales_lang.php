@@ -5,6 +5,7 @@ $lang['sales_register'] = 'Registro de Ventas';
 $lang['sales_mode'] = 'Modo';
 $lang['sales_new_item'] = 'Artículo Nuevo';
 $lang['sales_item_name'] = 'Nombre del Artículo';
+$lang['sales_item'] = 'Producto';
 $lang['sales_item_number'] = 'UPC/EAN/ISBN';
 $lang['sales_new_customer'] = 'Cliente Nuevo';
 $lang['sales_customer'] = 'cliente';
@@ -83,4 +84,9 @@ $lang['sales_amount_due'] = 'Debe';
 $lang['sales_payment_type'] = "Tipo";
 $lang['sales_payment_amount'] = "Cantidad";
 $lang['sales_basic_information'] = "información sobre las entradas";
+
+$lang['sales_bol'] = 'Boleta';
+$lang['sales_fac'] = 'Factura';
+$lang['sales_document'] = 'Tipo de Recibo';
+
 ?>

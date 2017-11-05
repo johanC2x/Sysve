@@ -18,7 +18,16 @@ echo form_open('config/save/',array('id'=>'config_form'));
 		'value'=>$this->config->item('company')));?>
 	</div>
 </div>
-
+<div class="field_row clearfix">	
+<?php echo form_label($this->lang->line('config_ruc').':', 'ruc',
+			array('class'=>'wide required')); ?>
+	<div class='form_field'>
+	<?php echo form_input(array(
+		'name'=>'ruc',
+		'id'=>'ruc',
+		'value'=>$this->config->item('ruc')));?>
+	</div>
+</div>
 <div class="field_row clearfix">	
 <?php echo form_label($this->lang->line('config_address').':', 'address',array('class'=>'wide required')); ?>
 	<div class='form_field'>

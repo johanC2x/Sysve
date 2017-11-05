@@ -65,98 +65,109 @@ foreach($all_modules->result() as $module)
 ?>
 </ul>
 <?php
-echo form_submit(array(
-	'name'=>'submit',
-	'id'=>'submit',
-	'value'=>$this->lang->line('common_submit'),
-	'class'=>'submit_button float_right')
-);
-
+	echo form_submit(array(
+		'name'=>'submit',
+		'id'=>'submit',
+		'value'=>$this->lang->line('common_submit'),
+		'class'=>'submit_button float_right')
+	);
 ?>
+<div class='form-group'>
+    <div class='col-md-9 col-md-offset-3'>
+        <div id='messages'></div>
+    </div>
+</div>
 </fieldset>
 <?php 
 echo form_close();
 ?>
+
 <script type='text/javascript'>
 
 //validation and submit handling
-$(document).ready(function()
-{
-	$('#employee_form').validate({
-		submitHandler:function(form)
-		{
-			$(form).ajaxSubmit({
-			success:function(response)
-			{
-				console.log(response);
-				tb_remove();
-				post_person_form_submit(response);
-			},
-			dataType:'json'
-		});
+$(document).ready(function(){
 
-		},
-		errorLabelContainer: "#error_message_box",
- 		wrapper: "li",
-		rules: 
-		{
-			first_name: "required",
-			last_name: "required",
-			username:
-			{
-				required:true,
-				minlength: 5
-			},
-			
-			password:
-			{
-				<?php
-				if($person_info->person_id == "")
-				{
-				?>
-				required:true,
-				<?php
-				}
-				?>
-				minlength: 8
-			},	
-			repeat_password:
-			{
- 				equalTo: "#password"
-			},
-    		email: "email"
-   		},
-		messages: 
-		{
-     		first_name: "<?php echo $this->lang->line('common_first_name_required'); ?>",
-     		last_name: "<?php echo $this->lang->line('common_last_name_required'); ?>",
-     		username:
-     		{
-     			required: "<?php echo $this->lang->line('employees_username_required'); ?>",
-     			minlength: "<?php echo $this->lang->line('employees_username_minlength'); ?>"
-     		},
-     		
-			password:
-			{
-				<?php
-				if($person_info->person_id == "")
-				{
-				?>
-				required:"<?php echo $this->lang->line('employees_password_required'); ?>",
-				<?php
-				}
-				?>
-				minlength: "<?php echo $this->lang->line('employees_password_minlength'); ?>"
-			},
-			repeat_password:
-			{
-				equalTo: "<?php echo $this->lang->line('employees_password_must_match'); ?>"
-     		},
-     		email: "<?php echo $this->lang->line('common_email_invalid_format'); ?>"
-		}
+	$('#employee_form').bootstrapValidator({
+		container: '#messages',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            first_name: {
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('common_first_name_required'); ?>"
+                	}
+                }
+            },
+            last_name: {
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('common_last_name_required'); ?>"
+                	}
+                }
+            },
+            username: {
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('employees_username_required'); ?>"
+                	}
+                }
+            },
+            password:{
+            	 validators: {
+                    notEmpty: {
+                        message: '<?php 
+                        	echo $this->lang->line('employees_password_required'); 
+                        ?>'
+                    }
+                }
+            },
+            repeat_password:{
+            	validators: {
+                    notEmpty: {
+                        message: '<?php 
+                        	echo $this->lang->line('employees_password_required'); 
+                        ?>'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: '<?php echo $this->lang->line('employees_password_must_match'); ?>'
+                    }
+                }
+            },
+            email:{
+            	validators: {
+                    notEmpty: {
+                        message: '<?php echo $this->lang->line('common_email_invalid_format'); ?>'
+                    },
+                     emailAddress: {
+                        message: '<?php echo $this->lang->line('common_email_invalid_format'); ?>'
+                    }
+                }
+            }
+        }
+	}).on('success.form.bv', function(e) {
+        e.preventDefault();
+        $( "#submit" ).prop("disabled", false);
+        var msg = "";
+        $.ajax({
+            type:"POST",
+            url:$("#employee_form").attr('action'),
+            data:$("#employee_form").serialize(),
+            success:function(response){
+                var employees = JSON.parse(response);
+                if(employees.success == true){
+                    msg = getMessageSuccess('Operación realizada con exito...');
+                    $("#messages").html(msg);	
+                    location.reload();				
+                }else{
+                	if(employees.message !== ""){
+                		 msg = getMessageError(employees.message);
+                    	$("#messages").html(msg);
+                	}					
+                }
+            }
+        });
 	});
-
-
-
 });
 </script>

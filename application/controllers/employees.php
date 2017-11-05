@@ -53,57 +53,75 @@ class Employees extends Person_controller
 	/*
 	Inserts/updates an employee
 	*/
-	function save($employee_id=-1)
-	{
+	function save($employee_id=-1) {
 		if($this->input->post('first_name') != ""
 		   and $this->input->post('last_name') != ""
 		   and $this->input->post('email') != ""
 	       and $this->input->post('phone_number') != "" ){
-			$person_data = array(
-							'first_name'=>$this->input->post('first_name'),
-							'last_name'=>$this->input->post('last_name'),
-							'email'=>$this->input->post('email'),
-							'phone_number'=>$this->input->post('phone_number'),
-							'address_1'=>$this->input->post('address_1'),
-							'address_2'=>$this->input->post('address_2'),
-							'city'=>$this->input->post('city'),
-							'state'=>$this->input->post('state'),
-							'zip'=>$this->input->post('zip'),
-							'country'=>$this->input->post('country'),
-							'comments'=>$this->input->post('comments')
-							);
-
+		$person_data = array(
+			'first_name'=>$this->input->post('first_name'),
+			'last_name'=>$this->input->post('last_name'),
+			'email'=>$this->input->post('email'),
+			'phone_number'=>$this->input->post('phone_number'),
+			'address_1'=>$this->input->post('address_1'),
+			'address_2'=>$this->input->post('address_2'),
+			'city'=>$this->input->post('city'),
+			'state'=>$this->input->post('state'),
+			'zip'=>$this->input->post('zip'),
+			'country'=>$this->input->post('country'),
+			'comments'=>$this->input->post('comments')
+		);
 		$permission_data = $this->input->post("permissions")!=false ? $this->input->post("permissions"):array();
 		
-		//Password has been changed OR first time password set
 		if($this->input->post('password')!=''){
 			$employee_data=array(
-			'username'=>$this->input->post('username'),
-			'password'=>md5($this->input->post('password'))
+				'username'=>$this->input->post('username'),
+				'password'=>md5($this->input->post('password'))
 			);
-		}
-		else{
+		}else{
 			$employee_data=array('username'=>$this->input->post('username'));
 		}
-		if($this->Employee->save($person_data,$employee_data,$permission_data,$employee_id)){
-			//New employee
-			if($employee_id==-1){
-				echo json_encode(array('success'=>true,'message'=>$this->lang->line('employees_successful_adding').' '.
-				$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$employee_data['person_id']));
+		
+		if($employee_id !== -1){
+			$username = $this->input->post('username');
+			$objEmployee = $this->Employee->get_info_username($username);
+			if(sizeof($objEmployee) > 0){
+				echo json_encode(array(
+					'success'=>false,
+					'message'=> 'El usuario ingresado actualmente existe'
+				));
+			}else{
+				if($this->Employee->save($person_data,$employee_data,$permission_data,$employee_id)){
+					if($employee_id==-1){
+						echo json_encode(array('success'=>true,'message'=>$this->lang->line('employees_successful_adding').' '.
+						$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$employee_data['person_id']));
+					}else{
+						echo json_encode(array('success'=>true,'message'=>$this->lang->line('employees_successful_updating').' '.
+						$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$employee_id));
+					}
+				}else{	
+					echo json_encode(array('success'=>false,'message'=>$this->lang->line('employees_error_adding_updating').' '.
+					$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>-1));
+				}
 			}
-			else{
-				echo json_encode(array('success'=>true,'message'=>$this->lang->line('employees_successful_updating').' '.
-				$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$employee_id));
+		}else{
+			if($this->Employee->save($person_data,$employee_data,$permission_data,$employee_id)){
+				if($employee_id==-1){
+					echo json_encode(array('success'=>true,'message'=>$this->lang->line('employees_successful_adding').' '.
+					$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$employee_data['person_id']));
+				}else{
+					echo json_encode(array('success'=>true,'message'=>$this->lang->line('employees_successful_updating').' '.
+					$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$employee_id));
+				}
+			}else{	
+				echo json_encode(array('success'=>false,'message'=>$this->lang->line('employees_error_adding_updating').' '.
+				$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>-1));
 			}
-		}
-		else{	
-			echo json_encode(array('success'=>false,'message'=>$this->lang->line('employees_error_adding_updating').' '.
-			$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>-1));
 		}
 	}else{
 		echo json_encode(array('success'=>false,'message'=>$this->lang->line('No se deben ingresar campos vacios Email / Nombre / Apellidos / Numero de Telefono')));
 	}
-	redirect('/employees/index','index'); 
+	//redirect('/employees/index','index'); 
 }
 	
 	/*

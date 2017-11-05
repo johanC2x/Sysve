@@ -57,7 +57,7 @@
 			<div class="navbar-collapse collapse" id="navbar">
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones<span class="caret"></span></a>
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Módulos<span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			          	<?php foreach($allowed_modules->result() as $module){ ?>
 			            	<li>

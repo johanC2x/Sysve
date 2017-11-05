@@ -74,71 +74,81 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	);?>
 	</div>
 </div>
-
+<!--
 <div class="field_row clearfix">
-<?php echo form_label($this->lang->line('items_tax_1').':', 'tax_percent_1',array('class'=>'wide')); ?>
+<?php //echo form_label($this->lang->line('items_tax_1').':', 'tax_percent_1',array('class'=>'wide')); ?>
 	<div class='form-group'>
-	<?php echo form_input(array(
+	<?php /*echo form_input(array(
 		'name'=>'tax_names[]',
 		'id'=>'tax_name_1',
 		'size'=>'8',
 		'value'=> isset($item_tax_info[0]['name']) ? $item_tax_info[0]['name'] : $this->config->item('default_tax_1_name'))
-	);?>
+	);*/?>
 	</div>
 	<div class='form-group'>
-	<?php echo form_input(array(
+	<?php /*echo form_input(array(
 		'name'=>'tax_percents[]',
 		'id'=>'tax_percent_name_1',
 		'size'=>'3',
 		'value'=> isset($item_tax_info[0]['percent']) ? $item_tax_info[0]['percent'] : $default_tax_1_rate)
-	);?>
+	);*/?>
 	%
 	</div>
 </div>
-
+-->
+<!--
 <div class="field_row clearfix" style="display: none;">
-<?php echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2',array('class'=>'wide')); ?>
+<?php //echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2',array('class'=>'wide')); ?>
 	<div class='form-group'>
-	<?php echo form_input(array(
-		'name'=>'tax_names[]',
-		'id'=>'tax_name_2',
-		'size'=>'8',
-		'value'=> isset($item_tax_info[1]['name']) ? $item_tax_info[1]['name'] : $this->config->item('default_tax_2_name'))
-	);?>
+	<?php 
+		/*
+		echo form_input(array(
+			'name'=>'tax_names[]',
+			'id'=>'tax_name_2',
+			'size'=>'8',
+			'value'=> isset($item_tax_info[1]['name']) ? $item_tax_info[1]['name'] : $this->config->item('default_tax_2_name'))
+		);
+		*/
+	?>
 	</div>
 	<div class='form-group'>
-	<?php echo form_input(array(
-		'name'=>'tax_percents[]',
-		'id'=>'tax_percent_name_2',
-		'size'=>'3',
-		'value'=> isset($item_tax_info[1]['percent']) ? $item_tax_info[1]['percent'] : $default_tax_2_rate)
-	);?>
+	<?php 
+		/*
+		echo form_input(array(
+			'name'=>'tax_percents[]',
+			'id'=>'tax_percent_name_2',
+			'size'=>'3',
+			'value'=> isset($item_tax_info[1]['percent']) ? $item_tax_info[1]['percent'] : $default_tax_2_rate)
+		);*/
+	?>
 	%
 	</div>
 </div>
-
-
+-->
 <div class="field_row clearfix">
 <?php echo form_label($this->lang->line('items_quantity').':', 'quantity',array('class'=>'required wide')); ?>
 	<div class='form-group'>
-	<?php echo form_input(array(
-		'name'=>'quantity',
-		'id'=>'quantity',
-		'class'=>'form-control',
-		'value'=>$item_info->quantity)
-	);?>
+	<?php 
+		echo form_input(array(
+				'name'=>'quantity',
+				'id'=>'quantity',
+				'class'=>'form-control',
+				'value'=> number_format((!empty($item_info->quantity) ? $item_info->quantity : 0))
+			));
+	?>
 	</div>
 </div>
 
 <div class="field_row clearfix">
-<?php echo form_label($this->lang->line('items_reorder_level').':', 'reorder_level',array('class'=>'required wide')); ?>
+	<?php echo form_label($this->lang->line('items_reorder_level').':', 'reorder_level',array('class'=>'required wide')); ?>
 	<div class='form-group'>
-	<?php echo form_input(array(
-		'name'=>'reorder_level',
-		'id'=>'reorder_level',
-		'class'=>'form-control',
-		'value'=>$item_info->reorder_level)
-	);?>
+		<?php echo form_input(array(
+				'name'=>'reorder_level',
+				'id'=>'reorder_level',
+				'class'=>'form-control',
+				'value'=> number_format((!empty($item_info->reorder_level) ? $item_info->reorder_level : 0)) 
+			));
+		?>
 	</div>
 </div>
 
@@ -450,7 +460,7 @@ $(document).ready(function(){
 /** END GARRISON ADDED **/
 
 	$('#item_form').bootstrapValidator({
-            container: '#messages',
+        container: '#messages',
 	    feedbackIcons: {
 	      valid: 'glyphicon glyphicon-ok',
 	      invalid: 'glyphicon glyphicon-remove',
@@ -472,55 +482,55 @@ $(document).ready(function(){
 	    			notEmpty: { message: "<?php echo $this->lang->line('items_supplier_required'); ?>"}
 	    		}
 	    	},
-                unit_price: {
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('items_unit_price_required'); ?>"},
-                        numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" }
-                    }
-                },
-                cost_price:{
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('items_cost_price_required'); ?>"},
-                        numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
-                    }
-                },
-                tax_percent:{
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('items_tax_percent_required'); ?>"}
-                    }
-                },
-                quantity:{
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('items_quantity_required'); ?>"},
-                        integer: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
-                    }
-                },
-                reorder_level:{
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('items_reorder_level_required'); ?>"}
-                    }
+            unit_price: {
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('items_unit_price_required'); ?>"},
+                    numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" }
                 }
+            },
+            cost_price:{
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('items_cost_price_required'); ?>"},
+                    numeric: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
+                }
+            },
+            tax_percent:{
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('items_tax_percent_required'); ?>"}
+                }
+            },
+            quantity:{
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('items_quantity_required'); ?>"},
+                    integer: { message: "<?php echo $this->lang->line('items_is_number'); ?>" } 
+                }
+            },
+            reorder_level:{
+                validators: {
+                    notEmpty: { message: "<?php echo $this->lang->line('items_reorder_level_required'); ?>"}
+                }
+            }
 	    }
-            }).on('success.form.bv', function(e) {
+    }).on('success.form.bv', function(e) {
 		e.preventDefault();
 		$( "#submit" ).prop("disabled", false);
 		var msg = "";
 		$.ajax({
-                    type:"POST",
-                    url:$("#item_form").attr('action'),
-                    data:$("#item_form").serialize(),
-                    success:function(msg){
-                            console.log(msg);
-                            var kit = JSON.parse(msg);
-                            if(kit.success == true){
-                                    msg = getMessageSuccess('Operación realizada con exito...');
-                                    $("#messages").html(msg);	
-                                    location.reload();				
-                            }else{
-                                    msg = getMessageError('Se ha producido un error...');
-                                    $("#messages").html(msg);					
-                            }
-                    }
+            type:"POST",
+            url:$("#item_form").attr('action'),
+            data:$("#item_form").serialize(),
+            success:function(msg){
+                console.log(msg);
+                var kit = JSON.parse(msg);
+                if(kit.success == true){
+                    msg = getMessageSuccess('Operación realizada con exito...');
+                    $("#messages").html(msg);	
+                    location.reload();				
+                }else{
+                    msg = getMessageError('Se ha producido un error...');
+                    $("#messages").html(msg);					
+                }
+            }
 		});
 	});
 	
