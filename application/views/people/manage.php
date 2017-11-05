@@ -91,5 +91,4 @@ function post_person_form_submit(response)
 	<?php echo $manage_table; ?>
 </div>
 <div id="feedback_bar"></div>
-<?php $this->load->view("partial/modal"); ?>
 <?php $this->load->view("partial/footer"); ?>
