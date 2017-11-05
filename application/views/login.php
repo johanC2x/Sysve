@@ -6,7 +6,8 @@
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/login.css" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>Sysve</title>
-	<script src="<?php echo base_url();?>js/jquery-1.2.6.min.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="<?php echo base_url();?>js/jquery-1.9.1.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="<?php echo base_url();?>js/bootstrap.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function()
 		{
@@ -18,7 +19,9 @@
 
 	<h1>YSUMMA</h1>
 	<div class="logo">
-	<img src="<?php echo base_url();?>images/ventas.png" alt="" />
+	<!--
+	<img src="<?php //echo base_url();?>images/ventas.png" alt="" />
+	-->
 	</div>
 	<?php echo form_open('login') ?>
 	<div id="container">
@@ -51,7 +54,50 @@
 							'class'=>'btn btn-lg btn-primary btn-block')); ?>
 						</div>
 					</div>
+					<a style="cursor: pointer;" data-toggle="modal" 
+						data-target="#modal_registrate" >
+						Registrate
+					</a>
 				</div>
 				<?php echo form_close(); ?>
+
+		  <!-- Modal -->
+		  <div class="modal fade" id="modal_registrate" role="dialog">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Registrate</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form role="form" >
+		          	<div class="form-group">
+		          		<label class="form_field_label" >Nombres</label> 
+		          		<input type="text" name="name" id="name" class="form-control">	
+		          	</div>
+		          	<div class="form-group">
+		          		<label>Apellidos</label>
+		          		<input type="text" name="lastname" id="lastname" class="form-control">
+		          	</div>
+		          	<div class="form-group">
+		          		<label>Email</label>
+		          		<input type="text" name="email" id="email" class="form-control">
+		          	</div>
+		          </form>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">
+		          	Close
+		          </button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
+  
+
+
+
+
 			</body>
 			</html>
