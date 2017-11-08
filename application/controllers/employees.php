@@ -82,7 +82,7 @@ class Employees extends Person_controller
 			$employee_data=array('username'=>$this->input->post('username'));
 		}
 		
-		if($employee_id !== -1){
+		if($employee_id === -1){
 			$username = $this->input->post('username');
 			$objEmployee = $this->Employee->get_info_username($username);
 			if(sizeof($objEmployee) > 0){

@@ -56,19 +56,19 @@ class Customers extends Person_controller
 	*/
 	function save($customer_id=-1){
 		$person_data = array(
-				'first_name'=>$this->input->post('first_name'),
-				'last_name'=>$this->input->post('last_name'),
-				'email'=>$this->input->post('email'),
-				'phone_number'=>$this->input->post('phone_number'),
-				'address_1'=>$this->input->post('address_1'),
-				'address_2'=>$this->input->post('address_2'),
-				'city'=>$this->input->post('city'),
-				'state'=>$this->input->post('state'),
-				'zip'=>$this->input->post('zip'),
-				'country'=>$this->input->post('country'),
-				'comments'=>$this->input->post('comments'),
-				'person_id'=>$this->input->post('person_id')
-			);
+			'first_name'=>$this->input->post('first_name'),
+			'last_name'=>$this->input->post('last_name'),
+			'email'=>$this->input->post('email'),
+			'phone_number'=>$this->input->post('phone_number'),
+			'address_1'=>$this->input->post('address_1'),
+			'address_2'=>$this->input->post('address_2'),
+			'city'=>$this->input->post('city'),
+			'state'=>$this->input->post('state'),
+			'zip'=>$this->input->post('zip'),
+			'country'=>$this->input->post('country'),
+			'comments'=>$this->input->post('comments'),
+			'person_id'=>$this->input->post('person_id')
+		);
 		$customer_data=array(
 			'account_number'=>$this->input->post('account_number')=='' ? null:$this->input->post('account_number'),
 			'taxable'=>$this->input->post('taxable')=='' ? 0:1,
