@@ -1,0 +1,23 @@
+<?php
+
+class Property extends CI_Model {
+
+	function getListParent(){
+		$this->db->from('property');
+		$this->db->where('property.parent_id',0);
+		$query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
+	}
+
+	function getListByParent($parent_id = null){
+		$this->db->from('property');
+		$this->db->where('property.parent_id',$parent_id);
+		$query = $this->db->get();
+        $data = $query->result_array();
+        return $data;
+	}
+
+}
+
+?>

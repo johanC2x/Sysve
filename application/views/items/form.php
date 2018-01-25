@@ -178,6 +178,25 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	</div>
 </div>
 
+<div class="field_row clearfix" >
+	<?php if(sizeof($propertys) > 0){ ?>
+		<?php foreach($propertys as $prop){ ?>
+			<?php if($prop["type"] === "select"){ ?>
+				<label class="wide"><?=$prop["name"];?></label>
+				<select id="cbo_property_<?=$prop["id"];?>" class="form-control" onchange="getPropertyItems(<?=$prop["id"];?>,'<?=$prop["type"];?>')">
+					<option>Seleccionar</option>
+					<?php if(sizeof($prop["children"]) > 0){ ?>
+						<?php foreach($prop["children"] as $child){ ?>
+							<option value="<?=$child["id"];?>"><?=$child["name"];?></option>
+						<?php } ?>
+					<?php } ?>
+				</select>
+			<?php } ?>
+		<?php } ?>
+		<input type="hidden" id="data_items" name="data_items"/>
+	<?php } ?>
+</div>
+
 <div class="field_row clearfix" style="display: none;">
 <?php echo form_label($this->lang->line('items_allow_alt_description').':', 'allow_alt_description',array('class'=>'wide')); ?>
 	<div class='form-group'>
@@ -533,7 +552,35 @@ $(document).ready(function(){
             }
 		});
 	});
-	
+
+    <?php if(!empty($item_info->data_items) && isset($item_info->data_items)){ ?>
+    	setProperties(JSON.parse('<?= $item_info->data_items; ?>'));
+    <?php } ?>
 });
+
+function getPropertyItems(idObj,typeObj){
+	var childrens = [];
+	var children = {};
+	if(typeObj === "select"){
+		children.idObj = "cbo_property_"+idObj; 
+		children.id = $("#cbo_property_"+idObj+" option:selected").val();
+		children.name = $("#cbo_property_"+idObj+" option:selected").text();
+		children.type = typeObj;
+		children.parent = idObj;
+		childrens.push(children);
+		localStorage.setItem("childrens", JSON.stringify(childrens));
+	}
+	$("#data_items").val(localStorage.getItem("childrens"));
+}
+
+function setProperties(properties){
+	if(properties.length > 0){
+		for(var i=0;i < properties.length;i++){
+			if(properties[i].type === "select"){
+				$("#"+properties[i].idObj).val(properties[i].id);
+			}
+		}
+	}
+}
 
 </script>

@@ -6,10 +6,12 @@ class Items extends Secure_area implements iData_controller
 	function __construct()
 	{
 		parent::__construct('items');
+		$this->load->model("property");
 	}
 
 	function index()
 	{
+		$parent_property = $this->property->getListParent();
 		$config['base_url'] = site_url('/items/index');
 		$config['total_rows'] = $this->Item->count_all();
 		$config['per_page'] = '20';
@@ -190,11 +192,32 @@ class Items extends Secure_area implements iData_controller
 
 	function view($item_id=-1)
 	{
+		/*========================== LIST FOR PROPERTY =====================*/
+		$propertys = []; 
+		$parent_property = $this->property->getListParent();
+		if(sizeof($parent_property) > 0){
+			foreach ($parent_property as $key_parent => $value_parent) {
+				$children_property = $this->property->getListByParent($value_parent["id"]);
+				$propertys[$key_parent]["id"] = $value_parent["id"];
+				$propertys[$key_parent]["name"] = $value_parent["name"];
+				$propertys[$key_parent]["type"] = $value_parent["type"];
+				if(sizeof($children_property) > 0){
+					$propertys_children = []; 
+					foreach ($children_property as $key_children => $value_children) {
+						$propertys_children[] = array(
+							"id" => $value_children["id"],
+							"name" => $value_children["name"],
+						); 
+					}
+					$propertys[$key_parent]["children"] = $propertys_children;
+				}
+			}
+		}
+		/* =============================================================== */
 		$data['item_info']=$this->Item->get_info($item_id);
 		$data['item_tax_info']=$this->Item_taxes->get_info($item_id);
 		$suppliers = array('' => $this->lang->line('items_none'));
-		foreach($this->Supplier->get_all()->result_array() as $row)
-		{
+		foreach($this->Supplier->get_all()->result_array() as $row){
 			$suppliers[$row['person_id']] = $row['company_name'] .' ('.$row['first_name'] .' '. $row['last_name'].')';
 		}
 
@@ -202,6 +225,7 @@ class Items extends Secure_area implements iData_controller
 		$data['selected_supplier'] = $this->Item->get_info($item_id)->supplier_id;
 		$data['default_tax_1_rate']=($item_id==-1) ? $this->Appconfig->get('default_tax_1_rate') : '';
 		$data['default_tax_2_rate']=($item_id==-1) ? $this->Appconfig->get('default_tax_2_rate') : '';
+		$data['propertys'] = $propertys;
 		$this->load->view("items/form",$data);
 	}
 	
@@ -256,7 +280,7 @@ class Items extends Secure_area implements iData_controller
 	}
 
 	function save($item_id=-1){
-		
+
 		$item_data = array(
 			'name'=>$this->input->post('name'),
 			'description'=>$this->input->post('description'),
@@ -281,7 +305,9 @@ class Items extends Secure_area implements iData_controller
 			'custom7'=>$this->input->post('custom7'),
 			'custom8'=>$this->input->post('custom8'),
 			'custom9'=>$this->input->post('custom9'),
-			'custom10'=>$this->input->post('custom10')
+			'custom10'=>$this->input->post('custom10'),
+
+			'data_items'=>$this->input->post('data_items'),
 		);
 		
 		$employee_id=$this->Employee->get_logged_in_employee_info()->person_id;
