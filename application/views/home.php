@@ -20,7 +20,8 @@
     								<center>
     									<b>
     									<?php 
-    										echo strtoupper($this->lang->line("module_".$module->module_id));  
+    										//echo strtoupper($this->lang->line("module_".$module->module_id));  
+    										echo strtoupper($module->name);
     									?> 
     									</b> 
     								</center>

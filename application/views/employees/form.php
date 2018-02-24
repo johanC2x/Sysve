@@ -51,18 +51,19 @@ $password_label_attributes = $person_info->person_id == "" ? array('class'=>'req
 <p><?php echo $this->lang->line("employees_permission_desc"); ?></p>
 
 <ul id="permission_list">
-<?php
-foreach($all_modules->result() as $module)
-{
-?>
+<?php foreach($all_modules->result() as $module){ ?>
 <li>	
-<?php echo form_checkbox("permissions[]",$module->module_id,$this->Employee->has_permission($module->module_id,$person_info->person_id)); ?>
-<span class="medium"><?php echo $this->lang->line('module_'.$module->module_id);?>:</span>
-<span class="small"><?php echo $this->lang->line('module_'.$module->module_id.'_desc');?></span>
+    <?php echo form_checkbox("permissions[]",$module->module_id,$this->Employee->has_permission($module->module_id,$person_info->person_id)); ?>
+    <span class="medium">
+        <?php //echo $this->lang->line('module_'.$module->module_id);?>
+        <?php echo $module->name; ?>
+        :</span>
+        <span class="small">
+            <?php //echo $this->lang->line('module_'.$module->module_id.'_desc');?>
+            <?php echo $module->decription; ?>
+        </span>
 </li>
-<?php
-}
-?>
+<?php } ?>
 </ul>
 <?php
 	echo form_submit(array(

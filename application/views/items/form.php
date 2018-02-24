@@ -74,57 +74,61 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 	);?>
 	</div>
 </div>
-<!--
+
 <div class="field_row clearfix">
-<?php //echo form_label($this->lang->line('items_tax_1').':', 'tax_percent_1',array('class'=>'wide')); ?>
+	<?php echo form_label($this->lang->line('items_tax_1').':', 'tax_percent_1',array('class'=>'wide')); ?>
 	<div class='form-group'>
-	<?php /*echo form_input(array(
-		'name'=>'tax_names[]',
-		'id'=>'tax_name_1',
-		'size'=>'8',
-		'value'=> isset($item_tax_info[0]['name']) ? $item_tax_info[0]['name'] : $this->config->item('default_tax_1_name'))
-	);*/?>
+	<?php 
+		echo form_input(array(
+			'name'=>'tax_names[]',
+			'id'=>'tax_name_1',
+			'size'=>'8',
+			'value'=> isset($item_tax_info[0]['name']) ? $item_tax_info[0]['name'] : $this->config->item('default_tax_1_name'))
+		);
+	?>
 	</div>
 	<div class='form-group'>
-	<?php /*echo form_input(array(
-		'name'=>'tax_percents[]',
-		'id'=>'tax_percent_name_1',
-		'size'=>'3',
-		'value'=> isset($item_tax_info[0]['percent']) ? $item_tax_info[0]['percent'] : $default_tax_1_rate)
-	);*/?>
+	<?php 
+		echo form_input(array(
+			'name'=>'tax_percents[]',
+			'id'=>'tax_percent_name_1',
+			'size'=>'3',
+			'value'=> isset($item_tax_info[0]['percent']) ? $item_tax_info[0]['percent'] : $default_tax_1_rate)
+		);
+	?>
 	%
 	</div>
 </div>
--->
-<!--
+
 <div class="field_row clearfix" style="display: none;">
-<?php //echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2',array('class'=>'wide')); ?>
+<?php echo form_label($this->lang->line('items_tax_2').':', 'tax_percent_2',array('class'=>'wide')); ?>
 	<div class='form-group'>
 	<?php 
-		/*
+		
 		echo form_input(array(
 			'name'=>'tax_names[]',
 			'id'=>'tax_name_2',
 			'size'=>'8',
 			'value'=> isset($item_tax_info[1]['name']) ? $item_tax_info[1]['name'] : $this->config->item('default_tax_2_name'))
 		);
-		*/
+		
 	?>
 	</div>
 	<div class='form-group'>
 	<?php 
-		/*
+		
 		echo form_input(array(
 			'name'=>'tax_percents[]',
 			'id'=>'tax_percent_name_2',
 			'size'=>'3',
 			'value'=> isset($item_tax_info[1]['percent']) ? $item_tax_info[1]['percent'] : $default_tax_2_rate)
-		);*/
+		);
+
 	?>
 	%
 	</div>
 </div>
--->
+
 <div class="field_row clearfix">
 <?php echo form_label($this->lang->line('items_quantity').':', 'quantity',array('class'=>'required wide')); ?>
 	<div class='form-group'>

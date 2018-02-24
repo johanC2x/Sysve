@@ -61,7 +61,10 @@
 			          <ul class="dropdown-menu">
 			          	<?php foreach($allowed_modules->result() as $module){ ?>
 			            	<li>
-			            		<a href="<?php echo site_url("$module->module_id");?>" ><?php echo $this->lang->line("module_".$module->module_id) ?></a>
+			            		<a href="<?php echo site_url("$module->module_id");?>" >
+			            			<?php //echo $this->lang->line("module_".$module->module_id) ?>
+			            			<?php echo $module->name; ?>
+			            		</a>
 			            	</li>
 			            <?php } ?>
 			          </ul>
