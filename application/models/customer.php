@@ -82,29 +82,40 @@ class Customer extends Person
 	/*
 	Inserts or updates a customer
 	*/
-	function save(&$person_data, &$customer_data,$customer_id=false)
-	{
-		$success=false;
+	function save(&$person_data, &$customer_data,$customer_id=false){		
+		$success = false;
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
-		
-		if(parent::save($person_data,$customer_id))
-		{
-			if (!$customer_id or !$this->exists($customer_id))
-			{
-				$customer_data['person_id'] = $person_data['person_id'];
-				$success = $this->db->insert('customers',$customer_data);				
+		$customer_obj =  $this->get_info($person_data['person_id']);
+		if($customer_id){
+			if(parent::save($person_data,$customer_id)){
+				if (!$customer_id or !$this->exists($customer_id)){
+					$customer_data['person_id'] = $person_data['person_id'];
+					$success = $this->db->insert('customers',$customer_data);				
+				}else{
+					$this->db->where('person_id', $customer_id);
+					$success = $this->db->update('customers',$customer_data);
+				}
 			}
-			else
-			{
-				$this->db->where('person_id', $customer_id);
-				$success = $this->db->update('customers',$customer_data);
+			$this->db->trans_complete();		
+			return $success;
+		}else{
+			if(empty($customer_obj->person_id)){
+				if(parent::save($person_data,$customer_id)){
+					if (!$customer_id or !$this->exists($customer_id)){
+						$customer_data['person_id'] = $person_data['person_id'];
+						$success = $this->db->insert('customers',$customer_data);				
+					}else{
+						$this->db->where('person_id', $customer_id);
+						$success = $this->db->update('customers',$customer_data);
+					}
+				}
+				$this->db->trans_complete();		
+				return $success;
+			}else{
+				return $customer_obj;
 			}
-			
 		}
-		
-		$this->db->trans_complete();		
-		return $success;
 	}
 	
 	/*

@@ -6,6 +6,7 @@ $lang['customers_confirm_delete'] = '¿Estás seguro(a) de que quieres borrar a 
 $lang['customers_none_selected'] = 'No has selccionado clientes para ser borrados';
 $lang['customers_error_adding_updating'] = 'Error agregando/actualizando cliente';
 $lang['customers_successful_adding'] = 'Has agregado satisfactoriamente el cliente';
+$lang['customers_exists'] = 'El cliente ingresado actualmente existe';
 $lang['customers_successful_updating'] = 'No se ha podido agregar el cliente';
 $lang['customers_successful_deleted'] = 'Has borrado satisfactoriamente a';
 $lang['customers_one_or_multiple'] = 'cliente(s)';

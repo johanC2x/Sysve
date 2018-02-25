@@ -5,6 +5,7 @@ class Customers extends Person_controller
 	function __construct()
 	{
 		parent::__construct('customers');
+		$this->load->model("property");
 	}
 	
 	function index() 
@@ -44,10 +45,29 @@ class Customers extends Person_controller
 	/*
 	Loads the customer edit form
 	*/
-	function view($customer_id=-1)
-	{
-                $this->output->cache(2);
+	function view($customer_id=-1){
+		$this->output->cache(2);
+		$parent_property = $this->property->getListParentModule();
+		if(sizeof($parent_property) > 0){
+			foreach ($parent_property as $key_parent => $value_parent) {
+				$children_property = $this->property->getListByParent($value_parent["id"]);
+				$propertys[$key_parent]["id"] = $value_parent["id"];
+				$propertys[$key_parent]["name"] = $value_parent["name"];
+				$propertys[$key_parent]["type"] = $value_parent["type"];
+				if(sizeof($children_property) > 0){
+					$propertys_children = []; 
+					foreach ($children_property as $key_children => $value_children) {
+						$propertys_children[] = array(
+							"id" => $value_children["id"],
+							"name" => $value_children["name"],
+						); 
+					}
+					$propertys[$key_parent]["children"] = $propertys_children;
+				}
+			}
+		}
 		$data['person_info']=$this->Customer->get_info($customer_id);
+		$data['propertys'] = $propertys;
 		$this->load->view("customers/form",$data);
 	}
 	
@@ -67,23 +87,43 @@ class Customers extends Person_controller
 			'zip'=>$this->input->post('zip'),
 			'country'=>$this->input->post('country'),
 			'comments'=>$this->input->post('comments'),
-			'person_id'=>$this->input->post('person_id')
+			'person_id'=>$this->input->post('person_id'),
+			'birthdate'=>$this->input->post('birthdate')
 		);
 		$customer_data=array(
 			'account_number'=>$this->input->post('account_number')=='' ? null:$this->input->post('account_number'),
 			'taxable'=>$this->input->post('taxable')=='' ? 0:1,
+			'data'=>$this->input->post('data')
 		);
-		if($this->Customer->save($person_data,$customer_data,$customer_id)){
-			if($customer_id==-1){
-				echo json_encode(array('success'=>true,'message'=>$this->lang->line('customers_successful_adding').' '.
-					$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$customer_data['person_id']));
-			}else{
-				echo json_encode(array('success'=>true,'message'=>$this->lang->line('customers_successful_updating').' '.
-					$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>$customer_id));
+
+		$response = $this->Customer->save($person_data,$customer_data,$customer_id);
+		if(isset($response->person_id) && !empty($response->person_id)){
+			echo json_encode(array(
+					'success'=>false,
+					'message'=>$this->lang->line('customers_exists'),
+				));
+		}else{
+			if($response){
+				if($customer_id==-1){
+					echo json_encode(array(
+							'success'=>true,
+							'message'=>$this->lang->line('customers_successful_adding').' '.$person_data['first_name'].' '.$person_data['last_name'],
+							'person_id'=>$person_data['person_id']
+						));
+				}else{
+					echo json_encode(array(
+							'success'=>true,
+							'message'=>$this->lang->line('customers_successful_updating').' '.$person_data['first_name'].' '.$person_data['last_name'],
+							'person_id'=>$customer_id
+						));
+				}
+			}else{	
+				echo json_encode(array(
+						'success'=>false,
+						'message'=>$this->lang->line('customers_error_adding_updating').' '.$person_data['first_name'].' '.$person_data['last_name'],
+						'person_id'=>-1
+					));
 			}
-		}else{	
-			echo json_encode(array('success'=>false,'message'=>$this->lang->line('customers_error_adding_updating').' '.
-			$person_data['first_name'].' '.$person_data['last_name'],'person_id'=>-1));
 		}
 	}
 	
@@ -191,7 +231,7 @@ class Customers extends Person_controller
 	*/
 	function get_form_width()
 	{			
-		return 350;
+		return 450;
 	}
 }
 ?>

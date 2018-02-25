@@ -30,6 +30,7 @@ $lang['common_website'] = 'sitio';
 $lang['common_fields_required_message'] = 'Los campos en rojo son requeridos';
 $lang['common_learn_about_project'] = 'para leer la información más reciente acerca del proyecto';
 $lang['common_searched_for'] = 'Buscaste';
+$lang['common_document_required'] = 'DNI es un campo requerido';
 $lang['common_first_name_required'] = 'Nombre es un campo requerido';
 $lang['common_last_name_required'] = 'Apellidos es un campo requerido';
 $lang['common_email_required'] = 'E-mail es un campo requerido';

@@ -7,7 +7,7 @@ echo form_open('items/save/'.$item_info->item_id,array('id'=>'item_form'));
 <legend><?php echo $this->lang->line("items_basic_information"); ?></legend>
 
 <div class="field_row clearfix">
-<?php echo form_label($this->lang->line('items_item_number').':', 'name',array('class'=>'wide')); ?>
+<?php echo form_label($this->lang->line('items_item_number').':', 'name',array('class'=>'wide required')); ?>
 	<div class='form-group'>
 	<?php echo form_input(array(
 		'name'=>'item_number',
