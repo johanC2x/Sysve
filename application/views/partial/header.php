@@ -9,6 +9,10 @@
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos_print.css"  media="print"/>
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/bootstrap.css" />
 
+	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/menu.css" />
+	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/responsive-leyouts.css" />
+	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/style.css" />
+
 	<script>BASE_URL = '<?php echo site_url(); ?>';</script>
 
 	<script src="<?php echo base_url();?>js/jquery-1.9.1.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
