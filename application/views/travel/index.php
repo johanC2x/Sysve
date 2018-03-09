@@ -1,7 +1,6 @@
 <?php $this->load->view("partial/header"); ?>
 
 <script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
-
 <div id="title_bar">
 	<div id="title" class="float_left">
 		Módulo de Viajes
@@ -12,19 +11,25 @@
 	<h4><u>Datos del Viaje</u></h4>
 </div>
 <div id="table_action_header">
-	<form class="form-inline" action="/action_page.php">
-	  <div class="form-group">
-	    <label for="email">Ingresar Cliente:</label>
-	    <input type="email" class="form-control" id="name" style="width: 600px;"/>
-	  </div>
-	  <button type="submit" class="btn btn-primary">Buscar Cliente</button>
-	  	<a href="javascript:void(0);" class="btn btn-primary" title="">
-			Nuevo Viaje
-		</a>
-		<a href="javascript:void(0);" class="btn btn-primary" title="">
-			Nuevo Cliente
-		</a>
-	</form>
+	<?php 
+		echo form_open('travel/suggest',array('id'=>'form_travel_search','class' => 'form-inline'));
+	?>
+	<div class="form-group">
+		<label for="search_value">Ingresar Cliente:</label>
+		<input type="text" class="form-control" id="search_value" onkeyup="travel.suggest(this);" style="width: 600px;"
+			   list="list_travel_search" autocomplete="off"/>
+		<datalist id="list_travel_search"></datalist>
+	</div>
+	<button type="submit" class="btn btn-primary">Buscar Cliente</button>
+	<a href="javascript:void(0);" class="btn btn-primary" title="">
+		Nuevo Viaje
+	</a>
+	<a href="javascript:void(0);" class="btn btn-primary" title="">
+		Nuevo Cliente
+	</a>
+	<?php 
+		echo form_close();
+	 ?>
 </div>
 <div id="table_holder">
 	<table class="table table-hover table-bordered" >
@@ -252,5 +257,15 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search_value").on('input', function () {
+		   var val = $('#search_value').val();
+		   var current = $('#list_travel_search').find('option[value="'+val+'"]').data('id');
+		   console.log(current);
+		});
+	});
+</script>
 
 <?php $this->load->view("partial/footer"); ?>

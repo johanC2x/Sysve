@@ -137,6 +137,27 @@ class Customer extends Person
  	}
  	
  	/*
+	GET CUSTOMER BY SEARCH
+ 	*/
+ 	function get_search_customer($search,$limit=25){
+ 		$suggestions = array();
+		$this->db->from('customers');
+		$this->db->join('people','customers.person_id=people.person_id');	
+		$this->db->where("(first_name LIKE '%".$this->db->escape_like_str($search)."%' or 
+		last_name LIKE '%".$this->db->escape_like_str($search)."%' or 
+		CONCAT(`first_name`,' ',`last_name`) LIKE '%".$this->db->escape_like_str($search)."%') and deleted=0");
+		$this->db->order_by("last_name", "asc");		
+		$by_name = $this->db->get();
+		foreach($by_name->result() as $row){
+			$suggestions[] = array(
+				"person_id" => $row->person_id,
+				"name" => $row->first_name.' '.$row->last_name
+			);
+		}
+		return $suggestions;
+ 	}
+
+ 	/*
 	Get search suggestions to find customers
 	*/
 	function get_search_suggestions($search,$limit=25)

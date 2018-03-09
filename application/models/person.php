@@ -53,6 +53,25 @@ class Person extends CI_Model
 			return $person_obj;
 		}
 	}
+
+	function get_info_by_name($key){
+		$this->db->from('people');
+	    // $this->db->where("first_name = 'manufacturer'");
+	    $this->db->like('first_name',$key);
+	    $query = $this->db->get();
+	   
+		//create object with empty properties.
+		$fields = $this->db->list_fields('people');
+		$data = [];
+		
+		foreach ($query->result() as $k => $person)
+		{
+			$data[] = $person;
+		}
+		
+		return $data;
+		
+	}
 	
 	/*
 	Get people with specific ids
