@@ -32,7 +32,7 @@
 	 ?>
 </div>
 <div id="table_holder">
-	<table class="table table-hover table-bordered" >
+	<table id="table_customer_travel" class="table table-hover table-bordered" >
 		<thead>
 			<tr>
 				<th class="col-md-1"></th>
@@ -263,7 +263,32 @@
 		$("#search_value").on('input', function () {
 		   var val = $('#search_value').val();
 		   var current = $('#list_travel_search').find('option[value="'+val+'"]').data('id');
-		   console.log(current);
+		   if(current !== null){
+		   	$.ajax({
+		   		type:"POST",
+		   		data:{
+		   			"person_id" : current
+		   		},
+		   		url:"<?php echo base_url();?>"+"index.php/travel/info",
+		   		success:function(response){
+		   			var data = JSON.parse(response);
+		   			if(data.success){
+		   				var html = "";
+		   				html += "<tr>";
+		   					html += `<td><a id="row_open_1" href="javascript:void(0);" title="Agregar Detalles" onclick="travel.changeRow(1);">
+										<i class="fa fa-angle-right"></i>
+									</a></td>`;
+		   					html += "<td>"+ data.data.person_id +"</td>";
+		   					html += "<td>"+ data.data.first_name + " " + data.data.last_name +"</td>";
+		   					html += "<td></td>";
+		   					html += "<td></td>";
+		   					html += "<td></td>";
+		   				html += "</tr>";
+		   				$("#table_customer_travel tbody").append(html);
+		   			}
+		   		}
+		   	});
+		   }
 		});
 	});
 </script>

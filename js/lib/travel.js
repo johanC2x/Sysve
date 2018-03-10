@@ -23,12 +23,9 @@ var travel = function () {
                     'key' : value
                 },
                 success: function(response){
-                    console.log(response);
                     var data = JSON.parse(response);
-                    console.log(data);
                     if(data.success){
                         $("#list_travel_search").empty();
-                        console.log(data);
                         for (var i = 0; i < data.data.length; i++) {
                             var opt = $("<option></option>").attr("value", data.data[i].value).attr("data-id",data.data[i].person_id);
                             $("#list_travel_search").append(opt);

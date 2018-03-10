@@ -37,6 +37,18 @@ class Travel extends Secure_area {
 		echo json_encode($response);
 	}
 
+	function info(){
+		$response = [];
+		$customer = $this->customer->get_info($this->input->post('person_id'));
+		if(!empty($customer)){
+			$response['success'] = true;
+			$response['data'] = $customer;
+		}else{
+			$response['success'] = false;
+		}
+		echo json_encode($response);
+	}
+
 }
 
 ?>

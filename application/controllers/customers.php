@@ -70,7 +70,7 @@ class Customers extends Person_controller
 		$data['propertys'] = $propertys;
 		$this->load->view("customers/form",$data);
 	}
-	
+
 	/*
 	Inserts/updates a customer
 	*/
