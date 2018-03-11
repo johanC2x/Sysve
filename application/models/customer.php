@@ -273,5 +273,11 @@ class Customer extends Person
 		return $this->db->get();	
 	}
 
+	function updateCustomerData($customer_id,$data_customer){
+		$this->db->where_in('person_id',$customer_id);
+		return $this->db->update('customers', array('data_customer' => $data_customer));
+ 	}
+ 	
+
 }
 ?>

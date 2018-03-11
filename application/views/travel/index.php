@@ -1,4 +1,5 @@
 <?php $this->load->view("partial/header"); ?>
+<script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div id="title_bar">
 	<div id="title" class="float_left">
 		Módulo de Viajes
@@ -18,12 +19,11 @@
 			   list="list_travel_search" autocomplete="off"/>
 		<datalist id="list_travel_search"></datalist>
 	</div>
-	<button type="submit" class="btn btn-primary">Buscar Cliente</button>
-	<a href="javascript:void(0);" class="btn btn-primary" title="">
-		Nuevo Viaje
-	</a>
-	<a href="javascript:void(0);" class="btn btn-primary" title="" data-toggle="modal" data-target="#myModal">
+	<a href="#" class="btn btn-primary" title="" data-toggle="modal" data-target="#myModal">
 		Nuevo Cliente
+	</a>
+	<a href="#" class="btn btn-primary" title="" data-toggle="modal" data-target="#modal_travel">
+		Registrar Viaje
 	</a>
 	<?php 
 		echo form_close();
@@ -43,161 +43,12 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>
-					<center>
-						<a id="row_open_1" href="javascript:void(0);" title="Agregar Detalles" 
-						   onclick="travel.changeRow(1);">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</center>
-				</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>
-					<center>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								<span class="caret"></span>
-								<span class="sr-only">Toggle Dropdown</span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0);">Remover</a></li>
-								<li><a href="javascript:void(0);">Agregar Comisiones</a></li>
-								<li><a href="javascript:void(0);">Agregar Vuelos</a></li>
-							</ul>
-						</div>
-					</center>
-				</td>
-			</tr>
-			<tr id="row_travel_1" style="display: none;"> 
 				<td colspan="6">
-					<div class="row">
-						<div class="col-md-12">
-							<form role="form">
-								<fieldset>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="col-md-3">
-												<div class="form-group">
-													<label>Ventana</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-3">
-												<div class="form-group">
-													<label>Pasillo</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-2">
-												<div class="form-group">
-													<label>Millaje</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-2">
-												<div class="form-group">
-													<label>Visa</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-2">
-												<div class="form-group">
-													<label>Vacuna</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-										</div>
-									</div>
-									<button type="button" class="btn btn-primary" > Guardar </button>
-									<button type="button" class="btn btn-primary" > Limpiar </button>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
 					<center>
-						<a id="row_open_2" href="javascript:void(0);" title="Agregar Detalles" 
-						   onclick="travel.changeRow(2);">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</center>
-				</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>
-					<center>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								<span class="caret"></span>
-								<span class="sr-only">Toggle Dropdown</span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0);">Remover</a></li>
-								<li><a href="javascript:void(0);">Agregar Comisiones</a></li>
-								<li><a href="javascript:void(0);">Agregar Vuelos</a></li>
-							</ul>
-						</div>
+						No se registraron datos.
 					</center>
 				</td>
 			</tr>
-			<tr id="row_travel_2" style="display: none;"> 
-				<td colspan="6">
-					<div class="row">
-						<div class="col-md-12">
-							<form role="form">
-								<fieldset>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="col-md-3">
-												<div class="form-group">
-													<label>Ventana</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-3">
-												<div class="form-group">
-													<label>Pasillo</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-2">
-												<div class="form-group">
-													<label>Millaje</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-2">
-												<div class="form-group">
-													<label>Visa</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-											<div class="col-md-2">
-												<div class="form-group">
-													<label>Vacuna</label>
-													<input type="text" name="" value="" placeholder="" class="form-control">
-												</div>		
-											</div>
-										</div>
-									</div>
-									<button type="button" class="btn btn-primary" > Guardar </button>
-									<button type="button" class="btn btn-primary" > Limpiar </button>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</td>
-			</tr>
-
 		</tbody>
 	</table>
 </div>
@@ -258,36 +109,63 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		travel.current_url = '<?php echo base_url();?>';
+		//OBTENER CLIENTE POR FILTRO
 		$("#search_value").on('input', function () {
-		   var val = $('#search_value').val();
-		   var current = $('#list_travel_search').find('option[value="'+val+'"]').data('id');
-		   if(current !== null){
-		   	$.ajax({
-		   		type:"POST",
-		   		data:{
-		   			"person_id" : current
-		   		},
-		   		url:"<?php echo base_url();?>"+"index.php/travel/info",
-		   		success:function(response){
-		   			var data = JSON.parse(response);
-		   			if(data.success){
-		   				var html = "";
-		   				html += "<tr>";
-		   					html += `<td><a id="row_open_1" href="javascript:void(0);" title="Agregar Detalles" onclick="travel.changeRow(1);">
-										<i class="fa fa-angle-right"></i>
-									</a></td>`;
-		   					html += "<td>"+ data.data.person_id +"</td>";
-		   					html += "<td>"+ data.data.first_name + " " + data.data.last_name +"</td>";
-		   					html += "<td></td>";
-		   					html += "<td></td>";
-		   					html += "<td></td>";
-		   				html += "</tr>";
-		   				$("#table_customer_travel tbody").append(html);
-		   			}
-		   		}
-		   	});
-		   }
+		   travel.setCustomerFilter();
 		});
+
+		//VALIDANDO FORMULARIO DE VUELOS
+		$('#form_travel_register').bootstrapValidator({
+            //container: '#messages',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                code_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo código es requerido."}
+                    }
+                },
+                name_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo nombre es requerido."}
+                    }
+                },
+                destiny_origin_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo desde es requerido."}
+                    }
+                },
+                destiny_end_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo hasta es requerido."}
+                    }
+                },
+                date_init_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo salida es requerido."}
+                    }
+                },
+                date_end_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo llegada es requerido."}
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:$("#form_travel_register").attr('action'),
+                data:$("#form_travel_register").serialize(),
+                success:function(response){
+                	console.log(response);
+                }
+            });
+	   });
 	});
 </script>
 <?php $this->load->view("travel/modal"); ?>
