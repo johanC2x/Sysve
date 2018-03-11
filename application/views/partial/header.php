@@ -7,13 +7,18 @@
 	<title>YSUMMA</title>
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos.css" />
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos_print.css"  media="print"/>
-	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/bootstrap.css" />
-	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/bootstrap.css" />
+<!--
+	<link rel="stylesheet" rev="stylesheet" href="<?php //echo base_url();?>css/bootstrap.css" />
+	<link rel="stylesheet" rev="stylesheet" href="<?php //echo base_url();?>css/bootstrap.css" />
+-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
 	<script>BASE_URL = '<?php echo site_url(); ?>';</script>
-
-	<script src="<?php echo base_url();?>js/jquery-1.9.1.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+<!--
+	<script src="<?php //echo base_url();?>js/jquery-1.9.1.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="<?php echo base_url();?>js/jquery-migrate-1.1.0.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 	<script src="<?php echo base_url();?>js/jquery.color.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 	<script src="<?php echo base_url();?>js/jquery.metadata.js" type="text/javascript" language="javascript" charset="UTF-8"></script>

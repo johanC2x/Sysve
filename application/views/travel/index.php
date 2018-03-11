@@ -1,6 +1,4 @@
 <?php $this->load->view("partial/header"); ?>
-
-<script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div id="title_bar">
 	<div id="title" class="float_left">
 		Módulo de Viajes
@@ -24,7 +22,7 @@
 	<a href="javascript:void(0);" class="btn btn-primary" title="">
 		Nuevo Viaje
 	</a>
-	<a href="javascript:void(0);" class="btn btn-primary" title="">
+	<a href="javascript:void(0);" class="btn btn-primary" title="" data-toggle="modal" data-target="#myModal">
 		Nuevo Cliente
 	</a>
 	<?php 
@@ -292,5 +290,5 @@
 		});
 	});
 </script>
-
+<?php $this->load->view("travel/modal"); ?>
 <?php $this->load->view("partial/footer"); ?>
