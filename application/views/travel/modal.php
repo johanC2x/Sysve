@@ -71,7 +71,7 @@
 </div>
 
 <!-- MODAL DE REGISTRO DE VIAJES -->
-<div id="modal_travel" class="modal fade" role="dialog">
+<div id="modal_travel" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -129,38 +129,44 @@
                 </div>
               </div>
             </div>
-          <fieldset>
-            <legend>Registrar Comisiones</legend>
             <div class="row">
               <div class="col-md-12">
-                <?php if(sizeof($property) > 0){ ?>
-                <?php foreach ($property as $key => $value) {?>
-                  <div class="col-md-2">
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label>Ventana</label>
+                      <input type="text" id="window_travel_detail" name="window_travel_detail" placeholder="" class="form-control">
+                  </div>     
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
-                      <label><?=$value["name"];?></label>
-                      <input type="number" id="input_property_<?=$value["id"];?>" name="input_property_<?=$value["id"];?>" class="form-control" value="0"/>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
+                        <label>Pasillo</label>
+                        <input type="text" id="pas_travel_detail" name="pas_travel_detail" placeholder="" class="form-control">
+                    </div>      
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
-                      <label>FEE</label>
-                      <input type="number" id="fee_property_<?=$value["id"];?>" name="fee_property_<?=$value["id"];?>" class="form-control" value="0"/>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Operador</label>
-                      <select id="cbo_property_<?=$value["id"];?>" name="cbo_property_<?=$value["id"];?>" class="form-control">
-                        <option>Seleccionar</option>
-                        
-                      </select>
-                    </div>
-                  </div>
-                <?php } ?>
-              <?php } ?>
+                        <label>Millaje</label>
+                        <input type="text" id="mill_travel_detail" name="mill_travel_detail" placeholder="" class="form-control">
+                    </div>      
+                </div>
               </div>
             </div>
-          </fieldset>
+            <div class="row">
+              <div class="col-md-12">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Visa</label>
+                        <input type="text" id="visa_travel_detail" name="visa_travel_detail" placeholder="" class="form-control">
+                    </div>      
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Vacuna</label>
+                        <input type="text" id="vacuna_travel_detail" name="vacuna_travel_detail" placeholder="" class="form-control">
+                    </div>      
+                </div>
+              </div>
+            </div>
           <button type="submit" class="btn btn-primary" >Guardar</button>
         <?php echo form_close();?>
       </div>

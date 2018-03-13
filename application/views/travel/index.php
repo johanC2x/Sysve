@@ -6,9 +6,6 @@
 	</div>
 </div>
 
-<div id="table_holder">
-	<h4><u>Datos del Viaje</u></h4>
-</div>
 <div id="table_action_header">
 	<?php 
 		echo form_open('travel/suggest',array('id'=>'form_travel_search','class' => 'form-inline'));
@@ -53,57 +50,73 @@
 	</table>
 </div>
 <div id="table_holder">
-	<h4><u>Datos del Pago</u></h4>
 	<form role="form">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Tipo de Pago</label>
-						<select id="cbo_tipo_tarjeta" class="form-control" >
-							<option>Efectivo</option>
-							<option>Tarjeta</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Total Cobrado</label>
-						<input type="text" name="" value="" placeholder="" class="form-control"/>
-					</div>
-					
-					<!-- SE MUESTRA SI EL TIPO DE PAGO ES POR TARJETA -->
-					<div class="form-group con_card">
-						<label>Número de Tarjeta</label>
-						<input type="text" name="" value="" placeholder="" class="form-control"/>
-					</div>
-					<div class="form-group con_card">
-						<label>Fecha de Expiración</label>
-						<input type="date" id="date_5" name="date_5" class="date form-control" data-name="Fecha Expiración" data-type="date"/>
-					</div>
-					<div class="form-group con_card">
-						<label>CVV</label>
-						<input type="text" name="" value="" placeholder="" class="form-control"/>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Tipo de Documento</label>
-						<select id="cbo_tipo_tarjeta" class="form-control" >
-							<option>Boleta</option>
-							<option>Factura</option>
-							<option>Documento de Cobranza</option>
-							<option>Nota de Crédito</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Tipo de Pago</label>
-						<select id="cbo_tipo_tarjeta" class="form-control" >
-							<option>Crédito</option>
-							<option>Cuotas</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
+        <fieldset>
+            <legend>Registro de Pagos</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <?php if(sizeof($property) > 0){ ?>
+                            <?php foreach ($property as $key => $value) {?>
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label><?=$value["name"];?></label>
+                                  <input type="number" id="input_property_<?=$value["id"];?>" name="input_property_<?=$value["id"];?>" class="form-control" value="0"/>
+                                </div>
+                              </div>
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label>FEE</label>
+                                  <input type="number" id="fee_property_<?=$value["id"];?>" name="fee_property_<?=$value["id"];?>" class="form-control" value="0"/>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Operador</label>
+                                  <select id="cbo_property_<?=$value["id"];?>" name="cbo_property_<?=$value["id"];?>" class="form-control">
+                                    <option>Seleccionar</option>
+                                  </select>
+                                </div>
+                              </div>
+                            <?php } ?>
+                          <?php } ?>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Tipo de Documento</label>
+                            <select id="cbo_type_document" name="cbo_type_document" class="form-control" >
+                                <option>Boleta</option>
+                                <option>Factura</option>
+                                <option>Documento de Cobranza</option>
+                                <option>Nota de Crédito</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Modo de Pago</label>
+                            <select id="cbo_mode_payment" name="cbo_mode_payment" class="form-control" >
+                                <option>Efectivo</option>
+                                <option>Tarjeta</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Pago</label>
+                            <select id="cbo_type_payment" name="cbo_type_payment" class="form-control" >
+                                <option>Crédito</option>
+                                <option>Cuotas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Total Cobrado</label>
+                            <input id="ammount" name="ammount" type="number" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
 	</form>
 </div>
 

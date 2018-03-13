@@ -149,7 +149,7 @@ var travel = function () {
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="javascript:void(0);" onclick="travel.removeCustomer(`+ idObj +`,`+ index +`)" >Remover</a></li>
-                            <li><a href="javascript:void(0);">Agregar Vuelos</a></li>
+                            <li><a href="javascript:void(0);" onclick="travel.openModalCustomer(`+ idObj +`)">Viajes</a></li>
                         </ul>
                     </div>
                 </center>`;
@@ -193,6 +193,10 @@ var travel = function () {
     self.removeCustomer = function(idObj,index){
         self.list_customer.splice(index,1);
         self.populateTable();
+    };
+
+    self.openModalCustomer = function(idObj){
+        $("#modal_travel").modal("show");
     };
 
     self.search = function(obj){
