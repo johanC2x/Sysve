@@ -19,7 +19,7 @@
 			   list="list_travel_search" autocomplete="off"/>
 		<datalist id="list_travel_search"></datalist>
 	</div>
-	<a href="#" class="btn btn-primary" title="" data-toggle="modal" data-target="#myModal">
+	<a href="#" class="btn btn-primary" title="" data-toggle="modal" data-target="#modal_customer">
 		Nuevo Cliente
 	</a>
 	<a href="#" class="btn btn-primary" title="" data-toggle="modal" data-target="#modal_travel">
@@ -114,6 +114,75 @@
 		$("#search_value").on('input', function () {
 		   travel.setCustomerFilter();
 		});
+
+		//VALIDANDO FORMULARIO DE CLIENTES
+		$('#form_customer_register').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                person_id: {
+                    validators: {
+                        notEmpty: { message: "El campo documento es requerido."}
+                    }
+                },
+                first_name: {
+                    validators: {
+                        notEmpty: { message: "El campo nombres es requerido."}
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: { message: "El campo apellidos es requerido."}
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: { message: "El campo email es requerido."}
+                    }
+                },
+                phone_number: {
+                    validators: {
+                        notEmpty: { message: "El campo teléfono es requerido."}
+                    }
+                },
+                address_1: {
+                    validators: {
+                        notEmpty: { message: "El campo dirección es requerido."}
+                    }
+                },
+                passport: {
+                    validators: {
+                        notEmpty: { message: "El campo pasaporte es requerido."}
+                    }
+                },
+                date_expire: {
+                    validators: {
+                        notEmpty: { message: "El campo fecha de expiración es requerido."}
+                    }
+                },
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            var data = {};
+            data.passport = $("#passport").val();
+            data.date_expire = $("#date_expire").val();
+            $("#data_customer").val(JSON.stringify(data));
+            $.ajax({
+                type:"POST",
+                url:$("#form_customer_register").attr('action'),
+                data:$("#form_customer_register").serialize(),
+                success:function(response){
+                	console.log(response);
+                	var data = JSON.parse(response);
+                	if(data.success){
+                		getMessages("messages",data.message,'success');
+                	}
+                }
+            });
+	   	});
 
 		//VALIDANDO FORMULARIO DE VUELOS
 		$('#form_travel_register').bootstrapValidator({

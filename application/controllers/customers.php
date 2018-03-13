@@ -75,6 +75,7 @@ class Customers extends Person_controller
 	Inserts/updates a customer
 	*/
 	function save($customer_id=-1){
+		$data["customer_info"] = json_decode($this->input->post('data_customer'));
 		$person_data = array(
 			'first_name'=>$this->input->post('first_name'),
 			'last_name'=>$this->input->post('last_name'),
@@ -93,7 +94,8 @@ class Customers extends Person_controller
 		$customer_data=array(
 			'account_number'=>$this->input->post('account_number')=='' ? null:$this->input->post('account_number'),
 			'taxable'=>$this->input->post('taxable')=='' ? 0:1,
-			'data'=>$this->input->post('data')
+			'data'=>$this->input->post('data'),
+			'data_customer' => json_encode($data)
 		);
 
 		$response = $this->Customer->save($person_data,$customer_data,$customer_id);

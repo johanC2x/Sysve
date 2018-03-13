@@ -87,8 +87,8 @@ class Person extends CI_Model
 	/*
 	Inserts or updates a person
 	*/
-	function save(&$person_data,$person_id=false)
-	{		
+	function save(&$person_data,$person_id =false)
+	{
 		if (!$person_id or !$this->exists($person_id))
 		{
 			if ($this->db->insert('people',$person_data))

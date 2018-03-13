@@ -45,17 +45,20 @@ var travel = function () {
                 html = "";
                 var options = self.getOption(self.list_customer[i].person_id,i);
                 var data_customer = (travel.list_customer[i].data_customer !== null) ? JSON.parse(travel.list_customer[i].data_customer):"";
-                var window_travel_detail = "";
+                var window_travel_detail = "",passport = "",date_expire = "";
                 var pas_travel_detail = "";
                 var mill_travel_detail = "";
                 var visa_travel_detail = "";
                 var vacuna_travel_detail  = "";
                 if(data_customer !== ""){
-                    window_travel_detail = data_customer.travel_detail.window_travel_detail;
-                    pas_travel_detail = data_customer.travel_detail.pas_travel_detail;
-                    mill_travel_detail = data_customer.travel_detail.mill_travel_detail;
-                    visa_travel_detail = data_customer.travel_detail.visa_travel_detail;
-                    vacuna_travel_detail = data_customer.travel_detail.vacuna_travel_detail;
+                    window_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.window_travel_detail : "";
+                    pas_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.pas_travel_detail : "";
+                    mill_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.mill_travel_detail : ""; 
+                    visa_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.visa_travel_detail : "";
+                    vacuna_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.vacuna_travel_detail : "";
+
+                    passport = (data_customer.hasOwnProperty('customer_info')) ? data_customer.customer_info.passport : "";
+                    date_expire = (data_customer.hasOwnProperty('customer_info')) ? data_customer.customer_info.date_expire : "";
                 }
                 html += "<tr>";
                     html += `<td>
@@ -68,8 +71,8 @@ var travel = function () {
                             </td>`;
                     html += "<td>"+ self.list_customer[i].person_id +"</td>";
                     html += "<td>"+ self.list_customer[i].first_name + " " + self.list_customer[i].last_name +"</td>";
-                    html += "<td></td>";
-                    html += "<td></td>";
+                    html += "<td>"+ passport +"</td>";
+                    html += "<td>"+ date_expire +"</td>";
                     html += "<td>" + options + "</td>";
                 html += "</tr>";
                 html += `<tr id="row_travel_` + self.list_customer[i].person_id + `" style="display: none;"> 
