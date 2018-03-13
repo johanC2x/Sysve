@@ -8,12 +8,30 @@
       <div class="modal-body">
         <?php echo form_open('customers/save',array('id'=>'form_customer_register')); ?>
           <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="person_id">Nro. Documento:</label>
-                <input type="text" id="person_id" name="person_id" class="form-control" maxlength="8" />
-              </div>    
-            </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="tipo_documento">Tipo de Documento:</label>
+                  <select id="tipo_documento" name="tipo_documento" class="form-control">
+                    <option>Seleccionar</option>
+                    <option value="DNI">DNI</option>
+                    <option value="CE">CE</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                  </select>
+                </div> 
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="person_id">Nro. Documento:</label>
+                  <input type="text" id="person_id" name="person_id" class="form-control" maxlength="8" />
+                </div> 
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="date_expire">Fecha de Expiración:</label>
+                  <input type="date" id="date_expire" name="date_expire" class="form-control"/>
+                </div>
+              </div>  
+            
             <div class="col-md-12">
               <div class="form-group">
                 <label for="first_name">Nombres:</label>
@@ -39,19 +57,13 @@
               </div>
             </div>
 
-            <div class="col-md-6">
+           <!--  <div class="col-md-6">
               <div class="form-group">
                 <label for="passport">Pasaporte:</label>
                 <input type="text" id="passport" name="passport" class="form-control"/>
                 <input type="hidden" id="data_customer" name="data_customer"/>
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="date_expire">Fecha de Expiración:</label>
-                <input type="date" id="date_expire" name="date_expire" class="form-control"/>
-              </div>
-            </div>
+            </div> -->
 
             <div class="col-md-12">
               <label for="address_1">Dirección:</label>
@@ -80,6 +92,38 @@
       </div>
       <div class="modal-body">
         <?php echo form_open('travel/registerTravel',array('id'=>'form_travel_register'));?>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Ruc:</label>
+                    <input type="datetime-local" id="ruc_travel" name="ruc_travel" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Razón Social:</label>
+                    <input type="datetime-local" id="razon_social_travel" name="razon_social_travel" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Dirección Fiscal:</label>
+                    <input type="datetime-local" id="direccion_fiscal_travel" name="direccion_fiscal_travel" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Aerolínea:</label>
+                    <input type="datetime-local" id="aerolinea_travel" name="direccion_fiscal_travel" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="col-md-6">

@@ -2,7 +2,7 @@
 <script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div id="title_bar">
 	<div id="title" class="float_left">
-		Módulo de Viajesa
+		Módulo de Viajes
 	</div>
 </div>
 
@@ -52,7 +52,7 @@
 <div id="table_holder">
 	<form role="form">
         <fieldset>
-            <legend>Registro de Pagos</legend>
+            <legend>Comission/FEE</legend>
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-8">
@@ -82,10 +82,25 @@
                               </div>
                             <?php } ?>
                           <?php } ?>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Tipo de Documento</label>
+                                <select id="cbo_type_document" name="cbo_type_document" class="form-control" >
+                                    <option>Boleta</option>
+                                    <option>Factura</option>
+                                    <option>Documento de Cobranza</option>
+                                    <option>Nota de Crédito</option>
+                                </select>
+                            </div>
+                          </div>
+                          
                           </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+
+
+
+                    <!-- <div class="col-md-4">
                         <div class="form-group">
                             <label>Tipo de Documento</label>
                             <select id="cbo_type_document" name="cbo_type_document" class="form-control" >
@@ -113,6 +128,84 @@
                             <label>Total Cobrado</label>
                             <input id="ammount" name="ammount" type="number" class="form-control" />
                         </div>
+                    </div>
+                </div> -->
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Método de Pago</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                    <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Modo de Pago</label>
+                                <select id="cbo_mode_payment" name="cbo_mode_payment" class="form-control" >
+                                    <option>Efectivo</option>
+                                    <option>Tarjeta</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Tipo de Pago</label>
+                            <select id="cbo_type_payment" name="cbo_type_payment" class="form-control" >
+                                <option>Crédito</option>
+                                <option>Cuotas</option>
+                            </select>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Total Cobrado</label>
+                                <input id="ammount" name="ammount" type="number" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Número de Tarjeta</label>
+                                <input id="nro_tarjeta" name="nro_tarjeta" type="text" class="form-control" />
+                            </div>
+                          </div>
+                          
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Titular de Tarjeta</label>
+                                <input id="titular_tarjeta" name="titular_tarjeta" type="text" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Fecha de exp</label>
+                                <input id="fecha_exp" name="fecha_exp" type="date" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>CVV</label>
+                                <input id="cvv" name="cvv" type="text" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="form-group">
+                              <label>Nombre de la persona que está pagando</label>
+                                <input id="cvv" name="cvv" type="text" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Número de cuotas</label>
+                                <input id="nro_cuotas" name="nro_cuotas" type="text" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Cronograma de pagos</label>
+                                <input id="nro_cuotas" name="nro_cuotas" type="text" class="form-control" />
+                            </div>
+                          </div>
+                          </div>
                     </div>
                 </div>
             </div>
