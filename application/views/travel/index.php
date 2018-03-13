@@ -2,12 +2,12 @@
 <script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div id="title_bar">
 	<div id="title" class="float_left">
-		Módulo de Viajes
+		Módulo de Viajesa
 	</div>
 </div>
 
 <div id="table_action_header">
-	<?php 
+	<?php
 		echo form_open('travel/suggest',array('id'=>'form_travel_search','class' => 'form-inline'));
 	?>
 	<div class="form-group">
@@ -22,7 +22,7 @@
 	<a href="#" class="btn btn-primary" title="" data-toggle="modal" data-target="#modal_travel">
 		Registrar Viaje
 	</a>
-	<?php 
+	<?php
 		echo form_close();
 	 ?>
 </div>
