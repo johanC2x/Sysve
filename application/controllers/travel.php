@@ -13,8 +13,13 @@ class Travel extends Secure_area {
 
 	function index(){
 		$data["property"] = $this->property->getListPropertyModule("travel");
-		$this->load->view('travel/index',$data);
+		$this->load->view('travel/new',$data);
 	}
+
+	/*function new(){
+		$data["property"] = $this->property->getListPropertyModule("travel");
+		$this->load->view('travel/new',$data);
+	}*/
 
 	function search(){
 		$this->load->model('TravelModel');
