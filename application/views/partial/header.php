@@ -59,7 +59,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand" style="color:red;"><b>YSUMMA</b></a>
+				<a href="#" class="navbar-brand" style="color:#51c0cf;"><b>YSUMMA</b></a>
 			</div>
 			<div class="navbar-collapse collapse" id="navbar">
 				<ul class="nav navbar-nav">
