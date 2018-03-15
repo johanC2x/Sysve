@@ -16,6 +16,11 @@ class Travel extends Secure_area {
 		$this->load->view('travel/new',$data);
 	}
 
+	function render(){
+		$data["property"] = $this->property->getListPropertyModule("travel");
+		$this->load->view('travel/index',$data);
+	}
+
 	/*function new(){
 		$data["property"] = $this->property->getListPropertyModule("travel");
 		$this->load->view('travel/new',$data);
