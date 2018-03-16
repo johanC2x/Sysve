@@ -97,18 +97,18 @@
 					<legend>Registro de Comisiones</legend>
 					<div class="form-group">
 						<label for="type_travel">Tipo de Comisión</label>
-						<select class="form-control">
+						<select id="cbo_comision_payment" name="cbo_comision_payment" class="form-control">
 							<option value="">Seleccionar</option>
-							<option value="1">Ticket</option>
-							<option value="2">Hotel</option>
-							<option value="3">Auto</option>
-							<option value="4">Seguro</option>
+							<?php foreach ($operator as $key => $value) {?>
+								<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
+							<?php } ?>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="type_travel">Código</label>
-						<input type="text" id="" name="" class="form-control" value="0"/>
+						<label for="type_travel">Monto</label>
+						<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0"/>
 					</div>
+					<!--
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="type_travel">Comisión</label>
@@ -130,9 +130,10 @@
 					<div class="form-group">
 							<label for="type_travel">Incentivo</label>
 							<input type="text" id="" name="" class="form-control" value="0"/>
-						</div>	
+						</div>
+					-->
 				</fieldset>
-				<button type="button" class="btn btn-primary" >Agregar Comisión</button>
+				<button id="btn_save_com" type="button" class="btn btn-primary" >Agregar Comisión</button>
 			<?php echo form_close(); ?>
 		</div>
 		<div class="col-md-8">
@@ -168,9 +169,15 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		$("#search_value").on('input', function () {
 		   travel.setCustomerFilter();
 		});
+
+		$("#btn_save_com").click(function(){
+			travel.addComision();
+		});
+
 	});
 </script>
 <?php $this->load->view("partial/footer"); ?>

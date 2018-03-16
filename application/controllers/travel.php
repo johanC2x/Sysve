@@ -9,10 +9,12 @@ class Travel extends Secure_area {
 		$this->load->model("property");
 		$this->load->model("customer");
 		$this->load->model("travelmodel");
+		$this->load->model("code");
 	}
 
 	function index(){
 		$data["property"] = $this->property->getListPropertyModule("travel");
+		$data["operator"] = $this->code->listByCode("travel_operator");
 		$this->load->view('travel/new',$data);
 	}
 

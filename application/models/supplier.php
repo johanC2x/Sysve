@@ -82,7 +82,7 @@ class Supplier extends Person
 	/*
 	Inserts or updates a suppliers
 	*/
-	function save(&$person_data, &$supplier_data,$supplier_id=false)
+	function save($person_data,$supplier_data,$supplier_id=false)
 	{
 		$success=false;
 		//Run these queries as a transaction, we want to make sure we do all or nothing

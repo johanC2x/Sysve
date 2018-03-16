@@ -2,7 +2,8 @@ var travel = function () {
 
     var self = {
         current_url : "",
-        list_customer : []
+        list_customer : [],
+        list_comision : []
     };
 
     self.changeRow = function(idObj){
@@ -184,6 +185,40 @@ var travel = function () {
         $('.table.table-hover.table-bordered').append(row);
         $('#result').html('');
     }
+
+        self.addComision = function(){
+        var data = {};
+        data.key = $("#cbo_comision_payment option:selected").attr("data-key");
+        data.name = $("#cbo_comision_payment option:selected").text();
+        data.ammount = $("#amount_travel").val();
+        self.list_comision.push(data);
+        self.makeTableComision();
+    };
+
+    self.makeTableComision = function(){
+        var html = '';
+        $("#table_customer_travel tbody").empty();
+        if(self.list_comision.length === 0){
+            html = `<tr>
+                        <td colspan="5">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }else{
+            for (var i = 0; i < self.list_comision.length; i++) {
+                html += "<tr>";
+                    html += "<td>"+ self.list_comision[i].name +"</td>";
+                    html += "<td>"+ self.list_comision[i].ammount +"</td>";
+                    html += "<td></td>";
+                    html += "<td></td>";
+                    html += "<td></td>";
+                html += "</tr>";   
+            }
+        }
+        $("#table_customer_travel tbody").append(html);
+    };
 
 	return self;
 }(jQuery);
