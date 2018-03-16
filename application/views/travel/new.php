@@ -6,6 +6,7 @@
 	</div>
 </div>
 -->
+<script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-4">
@@ -16,7 +17,12 @@
 						<input type="text" class="form-control" id="search_value" onkeyup="travel.suggest(this);"list="list_travel_search"  autocomplete="off" placeholder="Buscar Cliente" />
 						<datalist id="list_travel_search"></datalist>
 					</div>
-					<button type="button" class="btn btn-primary">Nuevo Cliente</button>
+					<?php 
+					    $controller_name = 'customers';
+					    echo anchor("$controller_name/view/-1/width:450",
+					        "".$this->lang->line($controller_name.'_new')."",
+					        array('class'=>'thickbox none btn btn-primary','title'=>$this->lang->line($controller_name.'_new')));
+				    ?>
 				</fieldset>
 			<?php echo form_close(); ?>
 			<br/>

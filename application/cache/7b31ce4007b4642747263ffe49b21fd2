@@ -1,0 +1,245 @@
+1521234709TS---><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<base href="http://localhost/Sysve/" />
+	<title>YSUMMA</title>
+	<link rel="stylesheet" rev="stylesheet" href="http://localhost/Sysve/css/ospos.css" />
+	<link rel="stylesheet" rev="stylesheet" href="http://localhost/Sysve/css/ospos_print.css"  media="print"/>
+<!--
+	<link rel="stylesheet" rev="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" rev="stylesheet" href="css/bootstrap.css" />
+-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+	<script>BASE_URL = 'http://localhost/Sysve/index.php';</script>
+<!--
+	<script src="js/jquery-1.9.1.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="http://localhost/Sysve/js/jquery-migrate-1.1.0.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.color.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.metadata.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.form.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.tablesorter.min.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.ajax_queue.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.bgiframe.min.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/jquery.autocomplete.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<!--
+	<script src="http://localhost/Sysve/js/jquery.validate.min.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	-->
+	<script src="http://localhost/Sysve/js/jquery.jkey-1.1.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/bootstrap.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/thickbox.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/common.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/manage_tables.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/swfobject.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/date.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	<script src="http://localhost/Sysve/js/datepicker.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+	
+	<script src='http://localhost/Sysve//js/bootstrapValidator.min.js'></script>
+	<script src='http://localhost/Sysve//js/es_ES.min.js'></script>
+	<script src='http://localhost/Sysve//js/lib/utils.js'></script>
+	
+	<style type="text/css">
+		html {
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid"  style="height: 20px;">
+			<div class="navbar-header">
+				<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand" style="color:#51c0cf;"><b>YSUMMA</b></a>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Módulos<span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			          				            	<li>
+			            		<a href="http://localhost/Sysve/index.php/customers" >
+			            						            			Clientes			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/items" >
+			            						            			Artículos			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/item_kits" >
+			            						            			Kits de Artículos			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/suppliers" >
+			            						            			Proveedores			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/reports" >
+			            						            			Reportes			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/receivings" >
+			            						            			Compras			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/sales" >
+			            						            			Ventas			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/employees" >
+			            						            			Empleados			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/config" >
+			            						            			Configuración			            		</a>
+			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/travel" >
+			            						            			Viajes			            		</a>
+			            	</li>
+			            			          </ul>
+			        </li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
+									</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a></a></li>
+					<li> <a> Bienvenido(a) Julio Cesar Llavilla! | </a></li>
+					<li><a href="http://localhost/Sysve/index.php/home/logout">Salir</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div><!--/.container-fluid -->
+	</nav>
+	
+	<div id="content_area_wrapper" >
+		<div id="content_area" class="container .bs-item" ><script type="text/javascript">
+$(document).ready(function() 
+{ 
+    init_table_sorting();
+    enable_select_all();
+    enable_row_selection();
+    enable_search('http://localhost/Sysve/index.php/customers/suggest','Has seleccionado una o más filas. Éstas no estarán seleccionadas después de tu búsqueda. ¿Seguro(a) que quieres hacer esta búsqueda?');
+    enable_email('http://localhost/Sysve/index.php/customers/mailto');
+    enable_delete('¿Estás seguro(a) de que quieres borrar a los clientes seleccionados?','No has selccionado clientes para ser borrados');
+}); 
+
+function init_table_sorting()
+{
+	//Only init if there is more than one row
+	if($('.tablesorter tbody tr').length >1)
+	{
+		$("#sortable_table").tablesorter(
+		{ 
+			sortList: [[1,0]], 
+			headers: 
+			{ 
+				0: { sorter: false}, 
+				5: { sorter: false} 
+			} 
+
+		}); 
+	}
+}
+
+function post_person_form_submit(response)
+{
+	if(!response.success)
+	{
+		set_feedback(response.message,'error_message',true);	
+	}
+	else
+	{
+		//This is an update, just update one row
+		if(jQuery.inArray(response.person_id,get_visible_checkbox_ids()) != -1)
+		{
+			update_row(response.person_id,'http://localhost/Sysve/index.php/customers/get_row');
+			set_feedback(response.message,'success_message',false);	
+			
+		}
+		else //refresh entire table
+		{
+			do_search(true,function()
+			{
+				//highlight new row
+				hightlight_row(response.person_id);
+				set_feedback(response.message,'success_message',false);		
+			});
+		}
+	}
+}
+</script>
+
+<div id="title_bar">
+	<div id="title" class="float_left">Lista de Clientes</div>
+	<div id="new_button">
+		<a href="http://localhost/Sysve/index.php/customers/view/-1/width:450" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>					<a href="http://localhost/Sysve/index.php/customers/excel_import/width:450" class="thickbox none btn btn-primary" title="Import Items from Excel">Excel Import</a>	
+			</div>
+</div>
+<div id="table_action_header">
+	<ul>
+		<li class="float_left"><a href="http://localhost/Sysve/index.php/customers/delete" id="delete" class="btn btn-primary">Borrar</a></li>
+		<li class="float_left"><a href="#" id="email" class="btn btn-primary">E-Mail</a></li>
+		<li class="float_right">
+		<img src='http://localhost/Sysve/images/spinner_small.gif' alt='spinner' id='spinner' />
+		<form action="http://localhost/Sysve/index.php/customers/search" method="post" accept-charset="utf-8" id="search_form">		<input type="text" name ='search' id='search'/>
+		</form>
+		</li>
+	</ul>
+</div>
+<div id="table_holder">
+	<table class="table table-bordered" id="sortable_table"><thead><tr class="well"><th><center> <INPUT TYPE="CHECKBOX" ID="SELECT_ALL" /> </center></th><th><center> APELLIDOS </center></th><th><center> NOMBRE </center></th><th><center> E-MAIL </center></th><th><center> NRO. TEL. </center></th><th><center> ACCIONES </center></th></tr></thead><tbody><tr><td><input type='checkbox' id='person_54555657' value='54555657'/></td><td>asaassa</td><td>asasssaas</td><td><a href="mailto:pelotero_tz89@hotmail.com">pelotero_tz89@hotmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/54555657/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_48227019' value='48227019'/></td><td>Cañari Huamani</td><td>Johan Antonio</td><td><a href="mailto:johanc.cca@gmail.com">johanc.cca@gmail.com</a></td><td></td><td><center><a href="http://localhost/Sysve/index.php/customers/view/48227019/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_71479309' value='71479309'/></td><td>collao aguilar</td><td>piero alexander</td><td><a href="mailto:piero1693@gmail.com">piero1693@gmail.com</a></td><td>4363322</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/71479309/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_87654321' value='87654321'/></td><td>ESPINOZA HUAMANI</td><td>JOEL YENER</td><td><a href="mailto:canari_343@hotmail.com">canari_343@hotmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/87654321/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_23242526' value='23242526'/></td><td>HUAMANI CHOQUE</td><td>ROSA</td><td><a href="mailto:rosa@gmail.com">rosa@gmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/23242526/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_48227020' value='48227020'/></td><td>REYES REYES</td><td>JUAN CARLOS</td><td><a href="mailto:pelotero_tz89@hotmail.com">pelotero_tz89@hotmail.com</a></td><td></td><td><center><a href="http://localhost/Sysve/index.php/customers/view/48227020/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_33343536' value='33343536'/></td><td>SALDARRIAGA</td><td>CARLOS</td><td><a href="mailto:carlos@gmail.com">carlos@gmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/33343536/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_48227010' value='48227010'/></td><td>sddsdads</td><td>aadsasddas</td><td><a href="mailto:johan2x_69@hotmail.com">johan2x_69@hotmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/48227010/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_44454647' value='44454647'/></td><td>UCHIHA UCHIHA</td><td>SASUKE </td><td><a href="mailto:sasuke@gmail.com">sasuke@gmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/44454647/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr><tr><td><input type='checkbox' id='person_2147483647' value='2147483647'/></td><td>Uzumaki</td><td>Naruto</td><td><a href="mailto:naruto@gmail.com">naruto@gmail.com</a></td><td>1234567</td><td><center><a href="http://localhost/Sysve/index.php/customers/view/2147483647/width:450" class="thickbox" title="Actualizar Cliente">Editar</a></center></td></tr></tbody></table></div>
+<div id="feedback_bar"></div>
+</div>
+</div>
+<div id="footer"> 
+	<a href="http://www.webdesignjc.com">Web Design JC</a>
+</div>
+</body>
+</html>
