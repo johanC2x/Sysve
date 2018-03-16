@@ -28,6 +28,7 @@ var travel = function () {
             url: travel.current_url + "index.php/travel/info",
             success:function(response){
                 var data = JSON.parse(response);
+                console.log(data);
                 if(data.success){
                     self.list_customer.push(data.data);
                     self.populateTable();
@@ -42,89 +43,9 @@ var travel = function () {
         if(self.list_customer.length > 0){
             $("#table_customer_travel tbody").empty();
             for (var i = 0; i < self.list_customer.length; i++) {
-                html = "";
-                var options = self.getOption(self.list_customer[i].person_id,i);
-                var data_customer = (travel.list_customer[i].data_customer !== null) ? JSON.parse(travel.list_customer[i].data_customer):"";
-                var window_travel_detail = "",passport = "",date_expire = "";
-                var pas_travel_detail = "";
-                var mill_travel_detail = "";
-                var visa_travel_detail = "";
-                var vacuna_travel_detail  = "";
-                if(data_customer !== ""){
-                    window_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.window_travel_detail : "";
-                    pas_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.pas_travel_detail : "";
-                    mill_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.mill_travel_detail : ""; 
-                    visa_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.visa_travel_detail : "";
-                    vacuna_travel_detail = (data_customer.hasOwnProperty('travel_detail')) ? data_customer.travel_detail.vacuna_travel_detail : "";
-
-                    passport = (data_customer.hasOwnProperty('customer_info')) ? data_customer.customer_info.passport : "";
-                    date_expire = (data_customer.hasOwnProperty('customer_info')) ? data_customer.customer_info.date_expire : "";
-                }
-                html += "<tr>";
-                    html += `<td>
-                                <center>
-                                    <a id="row_open_` + self.list_customer[i].person_id + `" href="javascript:void(0);" 
-                                        title="Agregar Detalles" onclick="travel.changeRow(` + self.list_customer[i].person_id + `);">
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </center>
-                            </td>`;
-                    html += "<td>"+ self.list_customer[i].person_id +"</td>";
-                    html += "<td>"+ self.list_customer[i].first_name + " " + self.list_customer[i].last_name +"</td>";
-                    html += "<td>"+ passport +"</td>";
-                    html += "<td>"+ date_expire +"</td>";
-                    html += "<td>" + options + "</td>";
-                html += "</tr>";
-                html += `<tr id="row_travel_` + self.list_customer[i].person_id + `" style="display: none;"> 
-                            <td colspan="6">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form id="frm_travel_customer_detail_` + self.list_customer[i].person_id + `" role="form">
-                                            <fieldset>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label>Ventana</label>
-                                                                <input type="text" id="window_travel_detail" name="window_travel_detail" 
-                                                                       value="`+ window_travel_detail +`" 
-                                                                       placeholder="" class="form-control">
-                                                            </div>      
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label>Pasillo</label>
-                                                                <input type="text" id="pas_travel_detail" name="pas_travel_detail" value="` + pas_travel_detail + `" placeholder="" class="form-control">
-                                                            </div>      
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label>Millaje</label>
-                                                                <input type="text" id="mill_travel_detail" name="mill_travel_detail" value="` + mill_travel_detail + `" placeholder="" class="form-control">
-                                                            </div>      
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label>Visa</label>
-                                                                <input type="text" id="visa_travel_detail" name="visa_travel_detail" value="` + visa_travel_detail + `" placeholder="" class="form-control">
-                                                            </div>      
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label>Vacuna</label>
-                                                                <input type="text" id="vacuna_travel_detail" name="vacuna_travel_detail" value="` + vacuna_travel_detail + `" placeholder="" class="form-control">
-                                                            </div>      
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-primary" onclick="travel.saveDetailTravel(` + self.list_customer[i].person_id + `);"> Guardar </button>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>`;
-                $("#table_customer_travel tbody").append(html);
+                $('#customer_document').val(self.list_customer[i].person_id);
+                $('#customer_name').val(self.list_customer[i].first_name + " " + self.list_customer[i].last_name);
+                $('#customer_address').text(self.list_customer[i].address_1);
             }
         }else{
             $("#table_customer_travel tbody").empty();

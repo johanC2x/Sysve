@@ -151,7 +151,8 @@ class Customer extends Person
 		foreach($by_name->result() as $row){
 			$suggestions[] = array(
 				"person_id" => $row->person_id,
-				"name" => $row->first_name.' '.$row->last_name
+				"name" => $row->first_name.' '.$row->last_name,
+				"address" => $row->address_1
 			);
 		}
 		return $suggestions;

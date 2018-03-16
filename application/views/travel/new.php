@@ -14,7 +14,8 @@
 				<fieldset>
 					<legend>Datos del Cliente</legend>
 					<div class="form-group">
-						<input type="text" class="form-control" id="search_value" onkeyup="travel.suggest(this);"list="list_travel_search"  autocomplete="off" placeholder="Buscar Cliente" />
+						<input type="text" class="form-control" id="search_value" 
+						onkeyup="travel.suggest(this);" list="list_travel_search"  autocomplete="off" placeholder="Buscar Cliente" />
 						<datalist id="list_travel_search"></datalist>
 					</div>
 					<?php 
@@ -165,4 +166,11 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search_value").on('input', function () {
+		   travel.setCustomerFilter();
+		});
+	});
+</script>
 <?php $this->load->view("partial/footer"); ?>

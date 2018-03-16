@@ -42,6 +42,7 @@ class Travel extends Secure_area {
 				$response["data"][$key] = array(
 					"person_id" => $value["person_id"],
 					"value" => $value["name"],
+					"address" => $value["address"],
 				);
 			}
 		}else{
