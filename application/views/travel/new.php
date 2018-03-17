@@ -44,14 +44,14 @@
 			<br/>
 			<form id="form_customer_data" role="form">
 				<div class="form-group">
-					<input type="text" id="customer_document" name="customer_document" class="form-control" placeholder="Ruc / Nro. Documento"/>
+					<input type="text" id="customer_document" name="customer_document" class="form-control" placeholder="Ruc / Nro. Documento" disabled="true" />
 					<input type="hidden" id="customer_id" name="customer_id" />
 				</div>
 				<div class="form-group">
-					<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="Cliente / Razón Social"/>
+					<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="Cliente / Razón Social" disabled="true"/>
 				</div>
 				<div class="form-group">
-					<textarea id="customer_address" name="customer_address" class="form-control" placeholder="Dirección" ></textarea>
+					<textarea id="customer_address" name="customer_address" class="form-control" placeholder="Dirección" disabled="true"></textarea>
 				</div>
 			</form>
 		</div>
@@ -85,9 +85,9 @@
 		                    <input type="text" name="destiny_origin_travel" id="destiny_origin_travel" class="form-control" />
 		                </div>
 		                <div class="form-group">
-		                    <label>Salida:</label>
-		                    <input type="datetime-local" id="date_init_travel" name="date_init_travel" class="form-control"/>
-	                  	</div>
+		                    <label for="">Hasta:</label>
+		                    <input type="text" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
+		                </div>
 	                  	<div class="form-group">
 	                  		<br/>
 	                  		<div class="checkbox">
@@ -96,11 +96,11 @@
 	                  	</div>
 					</div>
 					<div class="col-md-4">
-						<div class="form-group">
-		                    <label for="">Hasta:</label>
-		                    <input type="text" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
-		                </div>
 		                <div class="form-group">
+		                    <label>Salida:</label>
+		                    <input type="datetime-local" id="date_init_travel" name="date_init_travel" class="form-control"/>
+	                  	</div>
+	                  	<div class="form-group">
 		                    <label>Llegada:</label>
 		                    <input type="datetime-local" id="date_end_travel" name="date_end_travel" class="form-control"/>
 		                </div>
@@ -128,7 +128,7 @@
 					</div>
 					<div class="form-group">
 						<label for="type_travel">Monto</label>
-						<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0"/>
+						<input type="number" id="amount_travel" name="amount_travel" class="form-control"/>
 					</div>
 					<!--
 					<div class="col-md-6">
@@ -165,11 +165,15 @@
 					<table id="table_customer_travel" class="table table-hover table-bordered" >
 						<thead>
 							<tr>
-								<th class="col-md-3"><center>Código</center></th>
-								<th class="col-md-3"><center>Comisión</center></th>
+								<th class="col-md-1"><center>Nro.</center></th>
+								<th class="col-md-4"><center>Comisión</center></th>
+								<th class="col-md-2"><center>Monto</center></th>
+								<th class="col-md-1"><center>Acción</center></th>
+								<!--
 								<th class="col-md-3"><center>Porcentaje</center></th>
 								<th class="col-md-3"><center>Operador</center></th>
 								<th class="col-md-3"><center>Incentivo</center></th>
+								-->
 							</tr>
 						</thead>
 						<tbody>
@@ -182,26 +186,98 @@
 							</tr>
 						</tbody>
 					</table>
-					<button type="button" class="btn btn-primary" onclick="travel.registerTravel()">Guardar Viaje</button>
+					<button type="button" class="btn btn-primary btn_save_travel">
+						Guardar Viaje
+					</button>
+					<!--
 					<button type="button" class="btn btn-primary" >Nuevo Viaje</button>
+					-->
 				</fieldset>
 			</form>
 		</div>
 	</div>
 </div>
+<!-- MODAL DE CONFIRMACIÓN -->
+
+<div id="modal_success" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+			<div class="modal-header">
+				<center>
+					<h3 class="modal-title messages_modal">Operación Correcta</h3>
+					<br/>
+					<button type="button" class="btn btn-primary btn_success" data-dismiss="modal">Aceptar</button>
+				</center>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ====================== -->
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		travel.setTravelCode();
 		$("#search_value").on('input', function () {
 		   travel.setCustomerFilter();
 		});
-
 		$("#btn_save_com").click(function(){
 			travel.addComision();
 		});
-
-		travel.setTravelCode();
-
+		$(".btn_success").click(function(){
+			location.reload();
+		});
+		$('.btn_save_travel').on("click", function () {
+            var validator = $('#form_travel_save').data('bootstrapValidator');
+			validator.validate();
+			return validator.isValid();
+        });
+		ValidateForm();
 	});
+
+	function ValidateForm() {
+		$('#form_travel_save').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                code_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo código es requerido."}
+                    }
+                },
+                name_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo nombre es requerido."}
+                    }
+                },
+                destiny_origin_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo desde es requerido."}
+                    }
+                },
+                destiny_end_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo hasta es requerido."}
+                    }
+                },
+                date_init_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo salida es requerido."}
+                    }
+                },
+                date_end_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo llegada es requerido."}
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            travel.registerTravel();
+	   });
+	}
+
 </script>
 <?php $this->load->view("partial/footer"); ?>

@@ -91,38 +91,40 @@ var travel = function () {
     };
 
     self.registerTravel = function(){
-        form_travel_save = $('#form_travel_save').serializeArray();
-
-        // for (var i = 0; i <= form_travel_save.length; i++) {
-        //     data[form_travel_save[i].name] = form_travel_save[i].value;
-        // }
-        //me llego altamente hacerlo bonito
+        //ID DEL CLIENTE
         customer_document = $('#customer_document').val();
+        //DATOS DEL VIAJE
         code_travel = $('#code_travel').val();
         name_travel = $('#name_travel').val();
+        //DESTINOS DE VIAJE
         destiny_origin_travel = $('#destiny_origin_travel').val();
         destiny_end_travel = $('#destiny_end_travel').val();
-        date_init_travel = $('#date_init_travel').val();
+        //FECHAS DE SALIDA
+        date_init_travel = $("#date_init_travel").val();
+        date_end_travel = $("#date_end_travel").val();
+        //TIPO DE VIAJE
         type_travel = $('#type_travel').val();
-        
         data = { 
             'data': travel.list_comision, 
             'customer_document': customer_document,
             'code_travel': code_travel,
             'name_travel': name_travel,
             'destiny_origin_travel': destiny_origin_travel,
+            'destiny_end_travel': destiny_end_travel,
             'date_init': date_init_travel,
-            'date_end': destiny_end_travel,
+            'date_end': date_end_travel,
             'type_travel': type_travel
         };
-        console.log(data);
         $.ajax({
             url: travel.current_url + "index.php/travel/registerTravel/",
             type: "POST",
             data: data,
             success: function(response){
-                console.log(response);
-                location.reload();
+                var data = JSON.parse(response);
+                if(!data.success){
+                    $(".messages_modal").text("Ha ocurrido un error");
+                }
+                $("#modal_success").modal("show");
             }
         })
     };
@@ -191,9 +193,6 @@ var travel = function () {
     };
 
     self.fillTable = function(obj){
-        console.log(obj.getAttribute('fullname'));
-        console.log(obj.getAttribute('dni'));
-
         var row = '';
         row += '<tr>';
         row += '<td>';
@@ -247,12 +246,17 @@ var travel = function () {
         }else{
             for (var i = 0; i < self.list_comision.length; i++) {
                 html += "<tr>";
-                    html += "<td>"+ self.list_comision[i].name +"</td>";
-                    html += "<td>"+ self.list_comision[i].ammount +"</td>";
-                    html += "<td></td>";
-                    html += "<td></td>";
-                    html += "<td></td>";
-                html += "</tr>";   
+                    html += "<td><center>"+ (i+1) +"</center></td>";
+                    html += "<td><center>"+ self.list_comision[i].name +"</center></td>";
+                    html += "<td style='text-align: right;'>"+ self.list_comision[i].ammount +"</td>";
+                    html += `<td>
+                                <center>
+                                    <a href='javascript:void(0);' title='Eliminar' onclick='travel.removeComision(`+ i +`)' >
+                                        <i class='fa fa-trash-alt'></i>
+                                    </a>
+                                </center>
+                            </td>`;
+                html += "</tr>"; 
             }
         }
         $("#table_customer_travel tbody").append(html);
@@ -266,6 +270,11 @@ var travel = function () {
                 $('#code_travel').attr('readonly', true);
             }
         })
+    };
+
+    self.removeComision = function(obj){
+        self.list_comision.splice(obj,1);
+        self.makeTableComision();
     };
 
 	return self;
