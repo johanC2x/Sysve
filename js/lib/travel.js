@@ -111,7 +111,7 @@ var travel = function () {
             'code_travel': code_travel,
             'name_travel': name_travel,
             'destiny_origin_travel': destiny_origin_travel,
-            'date_init': |,
+            'date_init': date_init_travel,
             'date_end': destiny_end_travel,
             'type_travel': type_travel
         };
@@ -256,6 +256,16 @@ var travel = function () {
             }
         }
         $("#table_customer_travel tbody").append(html);
+    };
+
+    self.setTravelCode = function(){
+        $.ajax({
+            url: travel.current_url + "index.php/travel/getTravelCode/",
+            success: function(response){
+                $('#code_travel').val(response);
+                $('#code_travel').attr('readonly', true);
+            }
+        })
     };
 
 	return self;

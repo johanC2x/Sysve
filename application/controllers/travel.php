@@ -122,6 +122,11 @@ class Travel extends Secure_area {
 		}
 	}
 
+	function getTravelCode(){
+		$code = $this->travelmodel->getTravelCode();
+		echo 'TRAVEL'.$code->id;
+	}
+
 }
 
 ?>

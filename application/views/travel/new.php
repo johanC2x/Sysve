@@ -200,6 +200,8 @@
 			travel.addComision();
 		});
 
+		travel.setTravelCode();
+
 	});
 </script>
 <?php $this->load->view("partial/footer"); ?>

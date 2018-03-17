@@ -23,4 +23,11 @@ class TravelModel extends CI_Model
 		}
 	}
 
+	function getTravelCode(){
+		$this->db->select_max('id');
+		$data = $this->db->from('travel');
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 }
