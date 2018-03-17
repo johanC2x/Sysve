@@ -44,6 +44,7 @@ var travel = function () {
         if(self.list_customer.length > 0){
             $("#table_customer_travel tbody").empty();
             for (var i = 0; i < self.list_customer.length; i++) {
+                $('#customer_id').val(self.list_customer[i].person_id);
                 $('#customer_document').val(self.list_customer[i].person_id);
                 $('#customer_name').val(self.list_customer[i].first_name + " " + self.list_customer[i].last_name);
                 $('#customer_address').text(self.list_customer[i].address_1);
@@ -87,6 +88,43 @@ var travel = function () {
                 console.log(response);
             }
         });
+    };
+
+    self.registerTravel = function(){
+        form_travel_save = $('#form_travel_save').serializeArray();
+
+        // for (var i = 0; i <= form_travel_save.length; i++) {
+        //     data[form_travel_save[i].name] = form_travel_save[i].value;
+        // }
+        //me llego altamente hacerlo bonito
+        customer_document = $('#customer_document').val();
+        code_travel = $('#code_travel').val();
+        name_travel = $('#name_travel').val();
+        destiny_origin_travel = $('#destiny_origin_travel').val();
+        destiny_end_travel = $('#destiny_end_travel').val();
+        date_init_travel = $('#date_init_travel').val();
+        type_travel = $('#type_travel').val();
+        
+        data = { 
+            'data': travel.list_comision, 
+            'customer_document': customer_document,
+            'code_travel': code_travel,
+            'name_travel': name_travel,
+            'destiny_origin_travel': destiny_origin_travel,
+            'date_init': |,
+            'date_end': destiny_end_travel,
+            'type_travel': type_travel
+        };
+        console.log(data);
+        $.ajax({
+            url: travel.current_url + "index.php/travel/registerTravel/",
+            type: "POST",
+            data: data,
+            success: function(response){
+                console.log(response);
+                location.reload();
+            }
+        })
     };
 
     self.suggest = function(obj){

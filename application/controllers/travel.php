@@ -67,21 +67,33 @@ class Travel extends Secure_area {
 
 	function registerTravel(){
 		$response = [];
+		//armando JSON
+		$data_travel = $this->input->post('data');
+		// var_dump($data_travel);die();
+		
+
 		$travel_data = array(
 			'code'=>$this->input->post('code_travel'),
 			'name'=>$this->input->post('name_travel'),
 			'destiny_origin'=>$this->input->post('destiny_origin_travel'),
 			'destiny_end'=>$this->input->post('destiny_end_travel'),
-			'date_init'=>$this->input->post('date_init_travel'),
-			'date_end'=>$this->input->post('date_end_travel')
+			'date_init'=>$this->input->post('date_init'),
+			'date_end'=>$this->input->post('date_end'),
+			'type_travel'=>$this->input->post('type_travel'),
 		);
 		$res_travel = $this->travelmodel->saveTravel($travel_data);
 		if($res_travel["success"]){
-			$travel_customer_data = array(
-				'customer_id' => $this->input->post('customer_id'),
-				'travel_id' => $res_travel["travel"]
-			);
-			$res_cus_travel = $this->travelmodel->saveTravelCustomer($travel_customer_data);
+			for ($i=0; $i < count($data_travel); $i++) { 
+				# code...
+				$data = $data_travel[$i];
+				$travel_customer_data = array(
+					'customer_id' => $this->input->post('customer_document'),
+					'travel_id' => $res_travel["travel"],
+					'data' => json_encode($data)
+				);
+				$res_cus_travel = $this->travelmodel->saveTravelCustomer($travel_customer_data);
+			}
+			
 			if($res_cus_travel["success"]){
 				return ["success" => true];
 			}else{

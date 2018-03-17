@@ -45,6 +45,7 @@
 			<form id="form_customer_data" role="form">
 				<div class="form-group">
 					<input type="text" id="customer_document" name="customer_document" class="form-control" placeholder="Ruc / Nro. Documento"/>
+					<input type="hidden" id="customer_id" name="customer_id" />
 				</div>
 				<div class="form-group">
 					<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="Cliente / Razón Social"/>
@@ -181,7 +182,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<button type="button" class="btn btn-primary" >Guardar Viaje</button>
+					<button type="button" class="btn btn-primary" onclick="travel.registerTravel()">Guardar Viaje</button>
 					<button type="button" class="btn btn-primary" >Nuevo Viaje</button>
 				</fieldset>
 			</form>
