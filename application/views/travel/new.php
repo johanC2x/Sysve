@@ -121,7 +121,7 @@
 						<label for="type_travel">Tipo de Comisión</label>
 						<select id="cbo_comision_payment" name="cbo_comision_payment" class="form-control">
 							<option value="">Seleccionar</option>
-							<?php foreach ($operator as $key => $value) {?>
+							<?php foreach ($property as $key => $value) {?>
 								<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
 							<?php } ?>
 						</select>
@@ -130,31 +130,9 @@
 						<label for="type_travel">Monto</label>
 						<input type="number" id="amount_travel" name="amount_travel" class="form-control"/>
 					</div>
-					<!--
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="type_travel">Comisión</label>
-							<input type="text" id="" name="" class="form-control" value="0"/>
-						</div>	
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="type_travel">Porcentaje</label>
-							<input type="text" id="" name="" class="form-control" value="0"/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="type_travel">Tipo de Operador</label>
-						<select class="form-control">
-							<option value="">Seleccionar</option>
-						</select>
-					</div>
-					<div class="form-group">
-							<label for="type_travel">Incentivo</label>
-							<input type="text" id="" name="" class="form-control" value="0"/>
-						</div>
-					-->
 				</fieldset>
+				<div class="alert alert-danger alert-dismissible error_comision">
+				</div>
 				<button id="btn_save_com" type="button" class="btn btn-primary" >Agregar Comisión</button>
 			<?php echo form_close(); ?>
 		</div>
@@ -168,12 +146,7 @@
 								<th class="col-md-1"><center>Nro.</center></th>
 								<th class="col-md-4"><center>Comisión</center></th>
 								<th class="col-md-2"><center>Monto</center></th>
-								<th class="col-md-1"><center>Acción</center></th>
-								<!--
-								<th class="col-md-3"><center>Porcentaje</center></th>
-								<th class="col-md-3"><center>Operador</center></th>
-								<th class="col-md-3"><center>Incentivo</center></th>
-								-->
+								<th colspan="2" class="col-md-1"><center>Acción</center></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -213,9 +186,66 @@
 	</div>
 </div>
 
+<div id="modal_detail_comision" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title messages_modal">Detalles de Servicio</h3>
+			</div>
+			<div class="modal-body">
+				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="comision_code">Código</label>
+								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
+								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="comision_amount">Comisión</label>
+								<input type="text" id="comision_amount" name="comision_amount" class="form-control" value="0"/>
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="comision_percentage">Porcentaje</label>
+								<input type="text" id="comision_percentage" name="comision_percentage" class="form-control" value="0"/>
+							</div>		
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="comision_type_operator">Tipo de Operador</label>
+								<select id="comision_type_operator" name="comision_type_operator" class="form-control">
+									<option value="">Seleccionar</option>
+									<?php foreach ($operator as $key => $value) {?>
+										<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="comision_incentive">Incentivo</label>
+								<input type="number" id="comision_incentive" name="comision_incentive" class="form-control" value="0"/>
+							</div>
+						</div>
+					</div>
+					<button class="btn btn-primary btn_update_comision" type="button">
+						Guardar
+					</button>
+				<?php echo form_close(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- ====================== -->
 <script type="text/javascript">
 	$(document).ready(function(){
+		$(".error_comision").hide();
 		travel.setTravelCode();
 		$("#search_value").on('input', function () {
 		   travel.setCustomerFilter();
@@ -231,53 +261,14 @@
 			validator.validate();
 			return validator.isValid();
         });
-		ValidateForm();
+		$('.btn_update_comision').on("click", function () {
+            var validator = $('#form_travel_comision_update').data('bootstrapValidator');
+			validator.validate();
+			return validator.isValid();
+        });
+		travel.validateFormTravel();
+		travel.validateFormUpdateComision();
 	});
-
-	function ValidateForm() {
-		$('#form_travel_save').bootstrapValidator({
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                code_travel: {
-                    validators: {
-                        notEmpty: { message: "El campo código es requerido."}
-                    }
-                },
-                name_travel: {
-                    validators: {
-                        notEmpty: { message: "El campo nombre es requerido."}
-                    }
-                },
-                destiny_origin_travel: {
-                    validators: {
-                        notEmpty: { message: "El campo desde es requerido."}
-                    }
-                },
-                destiny_end_travel: {
-                    validators: {
-                        notEmpty: { message: "El campo hasta es requerido."}
-                    }
-                },
-                date_init_travel: {
-                    validators: {
-                        notEmpty: { message: "El campo salida es requerido."}
-                    }
-                },
-                date_end_travel: {
-                    validators: {
-                        notEmpty: { message: "El campo llegada es requerido."}
-                    }
-                }
-            }
-        }).on('success.form.bv', function(e) {
-            e.preventDefault();
-            travel.registerTravel();
-	   });
-	}
 
 </script>
 <?php $this->load->view("partial/footer"); ?>

@@ -139,3 +139,9 @@ body{background: #51c0cf !important;}
 #config_wrapper .field_row.checbox input{width: auto;}
 .content-form,
 .content-btn{text-align: right;padding: 5px;}
+.hidden{
+	display: none;
+}
+.block{
+	display: block;
+}

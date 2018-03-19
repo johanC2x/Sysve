@@ -228,8 +228,14 @@ var travel = function () {
         data.key = $("#cbo_comision_payment option:selected").attr("data-key");
         data.name = $("#cbo_comision_payment option:selected").text();
         data.ammount = $("#amount_travel").val();
-        self.list_comision.push(data);
-        self.makeTableComision();
+        if(parseInt(data.ammount) === 0){
+            $(".error_comision").text("El monto no puede ser cero");
+            $(".error_comision").show().delay(1000).fadeOut();
+        }else{
+            $(".error_comision").hide();
+            self.list_comision.push(data);
+            self.makeTableComision();
+        }
     };
 
     self.makeTableComision = function(){
@@ -256,10 +262,28 @@ var travel = function () {
                                     </a>
                                 </center>
                             </td>`;
-                html += "</tr>"; 
+                    html += `<td>
+                                <center>
+                                    <a href='javascript:void(0);' title='Agregar Detalle' onclick='travel.openComisionDetail(`+ i +`)' >
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </center>
+                            </td>`;
+                html += "</tr>";
             }
         }
         $("#table_customer_travel tbody").append(html);
+    };
+
+    self.showRow = function(row){
+        $("#row_" + row).removeClass("hidden");
+        $("#row_" + row).addClass("block");
+    };
+
+    self.openComisionDetail = function(row){
+        document.getElementById("form_travel_comision_update").reset();
+        $("#comision_obj_id").val(row);
+        $("#modal_detail_comision").modal("show");
     };
 
     self.setTravelCode = function(){
@@ -275,6 +299,99 @@ var travel = function () {
     self.removeComision = function(obj){
         self.list_comision.splice(obj,1);
         self.makeTableComision();
+    };
+
+    self.validateFormTravel = function(){
+        $('#form_travel_save').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                code_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo código es requerido."}
+                    }
+                },
+                name_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo nombre es requerido."}
+                    }
+                },
+                destiny_origin_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo desde es requerido."}
+                    }
+                },
+                destiny_end_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo hasta es requerido."}
+                    }
+                },
+                date_init_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo salida es requerido."}
+                    }
+                },
+                date_end_travel: {
+                    validators: {
+                        notEmpty: { message: "El campo llegada es requerido."}
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            travel.registerTravel();
+       });
+    };
+
+    self.validateFormUpdateComision = function(){
+        $('#form_travel_comision_update').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                comision_code: {
+                    validators: {
+                        notEmpty: { message: "El campo código es requerido."}
+                    }
+                },
+                comision_amount: {
+                    validators: {
+                        notEmpty: { message: "El campo comisión es requerido."}
+                    }
+                },
+                comision_percentage: {
+                    validators: {
+                        notEmpty: { message: "El campo porcentaje es requerido."}
+                    }
+                },
+                comision_type_operator: {
+                    validators: {
+                        notEmpty: { message: "El campo tipo de operador es requerido."}
+                    }
+                },
+                comision_incentive: {
+                    validators: {
+                        notEmpty: { message: "El campo incentivo es requerido."}
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            var idObj = parseInt($("#comision_obj_id").val());
+            var current = self.list_comision[idObj];
+            current.comision_code = $("#comision_code").val();
+            current.comision_amount = $("#comision_amount").val();
+            current.comision_percentage = $("#comision_percentage").val();
+            current.comision_type_operator = $("#comision_type_operator").val();
+            current.comision_incentive = $("#comision_incentive").val();
+            self.list_comision[idObj] = current;
+            /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
+       });
     };
 
 	return self;
