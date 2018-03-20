@@ -39,6 +39,26 @@ var travel = function () {
        }
     };
 
+    self.getSolicitud = function(){
+       var key = $('#code_travel_search').val();
+       if(key !== null){
+        $.ajax({
+            type:"POST",
+            data:{
+                "key" : key
+            },
+            url: travel.current_url + "index.php/travel/solicitud",
+            success:function(response){
+                var data = JSON.parse(response);
+                console.log(response);
+                if(data.success){
+
+                }
+            }
+        });
+       }
+    };
+
     self.populateTable = function(){
         var html = "";
         if(self.list_customer.length > 0){
@@ -223,12 +243,18 @@ var travel = function () {
         $('#result').html('');
     }
 
-        self.addComision = function(){
+        self.addComision = function(val = null){
         var data = {};
         data.key = $("#cbo_comision_payment option:selected").attr("data-key");
         data.name = $("#cbo_comision_payment option:selected").text();
         data.ammount = $("#amount_travel").val();
-        if(parseInt(data.ammount) === 0){
+
+        if(val = 'fee'){
+            data.key = 'fee';
+            data.name = 'FEE';
+            data.ammount = 0;
+        }
+        if(parseInt(data.ammount) === 0 && data.name != 'FEE'){
             $(".error_comision").text("El monto no puede ser cero");
             $(".error_comision").show().delay(1000).fadeOut();
         }else{
@@ -254,7 +280,12 @@ var travel = function () {
                 html += "<tr>";
                     html += "<td><center>"+ (i+1) +"</center></td>";
                     html += "<td><center>"+ self.list_comision[i].name +"</center></td>";
-                    html += "<td style='text-align: right;'>"+ self.list_comision[i].ammount +"</td>";
+                    if(self.list_comision[i].name != 'FEE'){
+                        html += "<td style='text-align: right;'>"+ self.list_comision[i].ammount +"</td>";    
+                    }else{
+                        html += "<td style='text-align: right;'>"+ '<input type="text" name="amount" size="8">' +"</td>";    
+                    }
+                    
                     html += `<td>
                                 <center>
                                     <a href='javascript:void(0);' title='Eliminar' onclick='travel.removeComision(`+ i +`)' >

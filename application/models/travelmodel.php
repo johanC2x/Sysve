@@ -30,4 +30,10 @@ class TravelModel extends CI_Model
 		return $query->row();
 	}
 
+	function get_solicitud($key){
+		$this->db->like('code',$key);
+		$data = $this->db->from('travel');
+		return $this->db->get();
+	}
+
 }
