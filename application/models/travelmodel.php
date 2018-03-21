@@ -32,8 +32,12 @@ class TravelModel extends CI_Model
 
 	function get_solicitud($key){
 		$this->db->like('code',$key);
-		$data = $this->db->from('travel');
-		return $this->db->get();
+		$this->db->from('travel');
+		$this->db->join('customer_travel','travel.id=customer_travel.travel_id');
+		$this->db->join('customers','customer_travel.customer_id=customers.person_id');
+		$this->db->join('people','customers.person_id=people.person_id');	
+		$query =  $this->db->get();
+		return $query->row();
 	}
 
 }

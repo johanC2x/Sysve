@@ -13,9 +13,9 @@
 			<?php echo form_open('travel/suggest',array('id'=>'form_travel_search','class' => 'form-inline')); ?>
 				<fieldset>
 					<div class="form-group">
-						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código" onkeyup="travel.getSolicitud(this)"/>
+						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código"/>
 					</div>
-					<button type="button" class="btn btn-primary">Buscar Solicitud</button>
+					<button type="button" class="btn btn-primary" onclick="travel.getSolicitud()">Buscar Solicitud</button>
 				</fieldset>
 			<?php echo form_close(); ?>
 		</div>

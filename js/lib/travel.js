@@ -51,9 +51,12 @@ var travel = function () {
             success:function(response){
                 var data = JSON.parse(response);
                 console.log(response);
-                if(data.success){
-
-                }
+                data = JSON.parse(response);
+                $('#name_travel').val(data.name);
+                $('#destiny_origin_travel').val(data.destiny_origin);
+                $('#destiny_end_travel').val(data.destiny_end);
+                $('#name_travel').val(data.name);
+                $('#name_travel').val(data.name);
             }
         });
        }

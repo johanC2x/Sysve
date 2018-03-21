@@ -120,20 +120,7 @@ class Travel extends Secure_area {
 	function solicitud(){
 		$response = [];
 		$suggestions = $this->travelmodel->get_solicitud($this->input->post('key'),20);
-		if(sizeof($suggestions) > 0){
-			$response["success"] = true;
-			foreach ($suggestions as $key => $value) {
-				var_dump($value->name);
-				$response["data"][$key] = array(
-					"name" => $value->name,
-					"destiny_origin" => $value["destiny_origin"],
-					"destiny_end" => $value["destiny_end"],
-				);
-			}
-		}else{
-			$response["success"] = false;
-		}
-		echo json_encode($response);
+		echo json_encode($suggestions);
 	}
 
 }
