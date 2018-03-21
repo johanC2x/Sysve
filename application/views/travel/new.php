@@ -86,12 +86,12 @@
 		                </div>
 		                <div class="form-group">
 		                    <label for="">Hasta:</label>
-		                    <input type="text" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
+		                    <input type="datetime-local" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
 		                </div>
 	                  	<div class="form-group">
 	                  		<br/>
 	                  		<div class="checkbox">
-							  <label><input type="checkbox" value="">¿Pagado?</label>
+							  <label><input id="pagado" type="checkbox" value="" onclick="travel.getConfiguration()">¿Pagado?</label>
 							</div>
 	                  	</div>
 					</div>

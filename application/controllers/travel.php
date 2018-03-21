@@ -117,6 +117,11 @@ class Travel extends Secure_area {
 		echo 'TRAVEL'.$code->id;
 	}
 
+	function getConfig(){
+		$config = $this->travelmodel->getConfiguration();
+		echo json_encode($config);
+	}
+
 }
 
 ?>

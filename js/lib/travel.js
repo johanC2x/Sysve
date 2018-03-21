@@ -394,5 +394,26 @@ var travel = function () {
        });
     };
 
+    self.getConfiguration = function(){
+        $('#pagado').toggle(function(){
+            console.log($('#pagado').is(':checked'));
+            if($('#pagado').is(':checked')){
+                $.ajax({
+                    url: travel.current_url + "index.php/travel/getConfig",
+                    type: "POST",
+                    dataType: 'JSON',
+                    success: function(response){
+                        console.log(response);
+                        $('#customer_document').val(response[0].value);
+                        $('#customer_name').val(response[1].value);
+                        $('#customer_address').text(response[2].value);
+
+                    }
+                });
+            }
+
+        })
+    };
+
 	return self;
 }(jQuery);
