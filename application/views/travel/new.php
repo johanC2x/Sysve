@@ -91,7 +91,7 @@
 	                  	<div class="form-group">
 	                  		<br/>
 	                  		<div class="checkbox">
-							  <label><input type="checkbox" value="">¿Pagado?</label>
+							  <label><input id="pagado" type="checkbox" value="" onclick="travel.getConfiguration()">¿Pagado?</label>
 							</div>
 	                  	</div>
 					</div>

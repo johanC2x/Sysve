@@ -52,11 +52,12 @@ var travel = function () {
                 var data = JSON.parse(response);
                 console.log(response);
                 data = JSON.parse(response);
-                $('#name_travel').val(data.name);
                 $('#destiny_origin_travel').val(data.destiny_origin);
                 $('#destiny_end_travel').val(data.destiny_end);
                 $('#name_travel').val(data.name);
-                $('#name_travel').val(data.name);
+                $('#customer_document').val(data.customer_id);
+                $('#customer_name').val(data.first_name + ' ' + data.last_name);
+                $('#customer_address').text(data.address_1);
             }
         });
        }
@@ -426,6 +427,26 @@ var travel = function () {
             self.list_comision[idObj] = current;
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
+    };
+
+    self.getConfiguration = function(){
+        $('#pagado').toggle(function(){
+            console.log($('#pagado').is(':checked'));
+            if($('#pagado').is(':checked')){
+                $.ajax({
+                    url: travel.current_url + "index.php/travel/getConfig",
+                    type: "POST",
+                    dataType: 'JSON',
+                    success: function(response){
+                        console.log(response);
+                        $('#customer_document').val(response[0].value);
+                        $('#customer_name').val(response[1].value);
+                        $('#customer_address').text(response[2].value);
+                    }
+                });
+            }
+
+        })
     };
 
 	return self;

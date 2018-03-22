@@ -40,4 +40,21 @@ class TravelModel extends CI_Model
 		return $query->row();
 	}
 
+	function getConfiguration(){
+		$data = $this->db->from('app_config');
+		$keys = array('address','company', 'ruc');
+		$this->db->where_in('key',$keys);
+		$query = $this->db->get();
+		// var_dump($query);
+		$resultado = [];
+		foreach($query->result() as $row){
+			$resultado[] = array(
+				"key" => $row->key,
+				"value" => $row->value
+			);
+		}
+
+		return $resultado;
+	}
+
 }
