@@ -33,11 +33,16 @@
 						onkeyup="travel.suggest(this);" list="list_travel_search"  autocomplete="off" placeholder="Buscar Cliente" />
 						<datalist id="list_travel_search"></datalist>
 					</div>
+					<button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
+						Nuevo Cliente
+					</button>
 					<?php 
+						/*
 					    $controller_name = 'customers';
 					    echo anchor("$controller_name/view/-1/width:450",
 					        "".$this->lang->line($controller_name.'_new')."",
 					        array('class'=>'thickbox none btn btn-primary','title'=>$this->lang->line($controller_name.'_new')));
+					    */
 				    ?>
 				</fieldset>
 			<?php echo form_close(); ?>
@@ -241,7 +246,7 @@
 		</div>
 	</div>
 </div>
-
+<?php $this->load->view("travel/modal"); ?>
 <!-- ====================== -->
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -267,7 +272,8 @@
 			return validator.isValid();
         });
 
-		travel.addComision('fee');
+		travel.saveCustomer();
+		//travel.addComision('fee');
 		travel.validateFormTravel();
 		travel.validateFormUpdateComision();
 	});

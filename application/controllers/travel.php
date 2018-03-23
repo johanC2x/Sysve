@@ -14,6 +14,7 @@ class Travel extends Secure_area {
 
 	function index(){
 		$data["property"] = $this->property->getListPropertyModule("travel");
+		$data["property_customer"] = $this->property->getListPropertyModule("customer");
 		$data["operator"] = $this->code->listByCode("travel_operator");
 		$this->load->view('travel/new',$data);
 	}

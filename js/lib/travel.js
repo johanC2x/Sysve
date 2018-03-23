@@ -253,7 +253,7 @@ var travel = function () {
         data.name = $("#cbo_comision_payment option:selected").text();
         data.ammount = $("#amount_travel").val();
 
-        if(val = 'fee'){
+        if(val === 'fee'){
             data.key = 'fee';
             data.name = 'FEE';
             data.ammount = 0;
@@ -447,6 +447,81 @@ var travel = function () {
             }
 
         })
+    };
+
+    self.openModalCustomer = function(){
+        document.getElementById("form_customer_register").reset();
+        $("#modal_customer").modal("show");
+    };
+
+    self.saveCustomer = function(){
+        $('#form_customer_register').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                person_id: {
+                    validators: {
+                        notEmpty: { message: "El campo documento es requerido."}
+                    }
+                },
+                first_name: {
+                    validators: {
+                        notEmpty: { message: "El campo nombres es requerido."}
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: { message: "El campo apellidos es requerido."}
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: { message: "El campo email es requerido."}
+                    }
+                },
+                phone_number: {
+                    validators: {
+                        notEmpty: { message: "El campo teléfono es requerido."}
+                    }
+                },
+                address_1: {
+                    validators: {
+                        notEmpty: { message: "El campo dirección es requerido."}
+                    }
+                },
+                passport: {
+                    validators: {
+                        notEmpty: { message: "El campo pasaporte es requerido."}
+                    }
+                },
+                date_expire: {
+                    validators: {
+                        notEmpty: { message: "El campo fecha de expiración es requerido."}
+                    }
+                },
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            var data = {};
+            data.passport = $("#passport").val();
+            data.date_expire = $("#date_expire").val();
+            $("#data_customer").val(JSON.stringify(data));
+            $.ajax({
+                type:"POST",
+                url:$("#form_customer_register").attr('action'),
+                data:$("#form_customer_register").serialize(),
+                success:function(response){
+                    console.log(response);
+                    var data = JSON.parse(response);
+                    if(data.success){
+                        getMessages("messages",data.message,'success');
+                    }
+                }
+            });
+        });
     };
 
 	return self;
