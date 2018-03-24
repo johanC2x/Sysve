@@ -44,20 +44,24 @@ var travel = function () {
        if(key !== null){
         $.ajax({
             type:"POST",
-            data:{
-                "key" : key
-            },
-            url: travel.current_url + "index.php/travel/solicitud",
+            data:$("#form_travel_code_search").serialize(),
+            url: $("#form_travel_code_search").attr("action"),
             success:function(response){
                 var data = JSON.parse(response);
-                console.log(response);
-                data = JSON.parse(response);
+                var data_travel = JSON.parse(data.data);
                 $('#destiny_origin_travel').val(data.destiny_origin);
                 $('#destiny_end_travel').val(data.destiny_end);
                 $('#name_travel').val(data.name);
                 $('#customer_document').val(data.customer_id);
                 $('#customer_name').val(data.first_name + ' ' + data.last_name);
                 $('#customer_address').text(data.address_1);
+                document.getElementById("date_init_travel").value = data.date_init.replace(" ","T");
+                document.getElementById("date_end_travel").value = data.date_end.replace(" ","T");
+                self.list_comision = [];
+                if(data_travel.hasOwnProperty("comisiones")){
+                    self.list_comision = data_travel.comisiones;
+                    self.makeTableComision();
+                }
             }
         });
        }
@@ -284,7 +288,7 @@ var travel = function () {
                 html += "<tr>";
                     html += "<td><center>"+ (i+1) +"</center></td>";
                     html += "<td><center>"+ self.list_comision[i].name +"</center></td>";
-                    if(self.list_comision[i].name != 'FEE'){
+                    if(self.list_comision[i].name !== 'FEE'){
                         html += "<td style='text-align: right;'>"+ self.list_comision[i].ammount +"</td>";    
                     }else{
                         html += "<td style='text-align: right;'>"+ '<input type="text" name="amount" size="8">' +"</td>";    

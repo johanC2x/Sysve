@@ -24,6 +24,10 @@ class Travel extends Secure_area {
 		$this->load->view('travel/index',$data);
 	}
 
+	function payment(){
+		$this->load->view('travel/payment');
+	}
+
 	/*function new(){
 		$data["property"] = $this->property->getListPropertyModule("travel");
 		$this->load->view('travel/new',$data);
@@ -34,6 +38,19 @@ class Travel extends Secure_area {
 		$key = $this->input->post('key');
 		$data = $this->TravelModel->get_customer_info($key);
 		echo json_encode($data);
+	}
+
+	function searchTravel(){
+		$code_travel = $this->input->post('code_travel') ;
+		$document_travel = $this->input->post('document_travel');
+		$customer_travel = $this->input->post('customer_travel');
+		$array_search = array(
+			"code_travel" => $code_travel,
+			"document_travel" => $document_travel,
+			"customer_travel" => $customer_travel
+		);
+		$response = $this->travelmodel->get_solicitud($array_search);
+		echo json_encode($response);
 	}
 
 	function suggest(){

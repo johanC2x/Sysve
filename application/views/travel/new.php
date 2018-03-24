@@ -1,19 +1,12 @@
 <?php $this->load->view("partial/header"); ?>
-<!--
-<div id="title_bar">
-	<div id="title" class="float_left">
-		Módulo de Viajes
-	</div>
-</div>
--->
 <script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-6">
-			<?php echo form_open('travel/suggest',array('id'=>'form_travel_search','class' => 'form-inline')); ?>
+			<?php echo form_open('travel/searchTravel',array('id'=>'form_travel_code_search','class' => 'form-inline')); ?>
 				<fieldset>
 					<div class="form-group">
-						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código"/>
+						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código" name="code_travel" />
 					</div>
 					<button type="button" class="btn btn-primary" onclick="travel.getSolicitud()">Buscar Solicitud</button>
 				</fieldset>
@@ -84,7 +77,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 		                    <label for="">Desde:</label>
 		                    <input type="text" name="destiny_origin_travel" id="destiny_origin_travel" class="form-control" />
@@ -100,7 +93,7 @@
 							</div>
 	                  	</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 		                <div class="form-group">
 		                    <label>Salida:</label>
 		                    <input type="datetime-local" id="date_init_travel" name="date_init_travel" class="form-control"/>
