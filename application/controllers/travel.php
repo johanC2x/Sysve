@@ -25,7 +25,9 @@ class Travel extends Secure_area {
 	}
 
 	function payment(){
-		$this->load->view('travel/payment');
+		$data["type_dscto_payment"] = $this->code->listByCode("payment_dscto_type");
+		$data["payment_type"] = $this->code->listByCode("payment_type");
+		$this->load->view('travel/payment',$data);
 	}
 
 	/*function new(){
@@ -144,6 +146,12 @@ class Travel extends Secure_area {
 	function getConfig(){
 		$config = $this->travelmodel->getConfiguration();
 		echo json_encode($config);
+	}
+
+	function savePayment(){
+		echo "<pre/>";
+		print_r($this->input->post());
+		exit();
 	}
 
 }

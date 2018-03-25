@@ -1,0 +1,16 @@
+.last {
+	margin-right: 0 !important;
+	clear: right;
+}
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+.left {
+	text-align: left;
+}
+.negrita {
+	font-weight:bold;
+}
