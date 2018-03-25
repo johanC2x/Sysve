@@ -546,7 +546,7 @@ CREATE TABLE `ospos_payment` (
   `dscto_type_id` int(11) NOT NULL,
   `payment_type_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -945,8 +945,8 @@ CREATE TABLE `ospos_travel` (
   `destiny_origin` varchar(400) NOT NULL,
   `destiny_end` varchar(400) NOT NULL,
   `date_init` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `date_end` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_end` timestamp NOT NULL,
+  `created_at` timestamp NULL, 
   `type_travel` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabla para el registro de tablas';

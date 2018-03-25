@@ -26,9 +26,10 @@
 						onkeyup="travel.suggest(this);" list="list_travel_search"  autocomplete="off" placeholder="Buscar Cliente" />
 						<datalist id="list_travel_search"></datalist>
 					</div>
-					<button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
+					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
-					</button>
+					</button> -->
+					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:450" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					<?php 
 						/*
 					    $controller_name = 'customers';
@@ -196,15 +197,15 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="comision_code">Código</label>
+								<label for="comision_code">Ticket/Nro de reserva</label>
 								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
 								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="comision_amount">Comisión</label>
-								<input type="text" id="comision_amount" name="comision_amount" class="form-control" value="0"/>
+								<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
+  								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
 							</div>		
 						</div>
 						<div class="col-md-6">
@@ -224,11 +225,15 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="form-group">
-								<label for="comision_incentive">Incentivo</label>
-								<input type="number" id="comision_incentive" name="comision_incentive" class="form-control" value="0"/>
+								<label for="comision_incentive">Incentivos de Turifax</label>
+								<input type="number" id="incentivos_turifax" name="comision_incentive" class="form-control" value="0"/>
 							</div>
+						</div>
+						<div class="col-md-6">
+								<label for="comision_incentive">Incentivos de otro operador</label>
+								<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
 						</div>
 					</div>
 					<button class="btn btn-primary btn_update_comision" type="button">

@@ -82,14 +82,15 @@ class Customers extends Person_controller
 			'email'=>$this->input->post('email'),
 			'phone_number'=>$this->input->post('phone_number'),
 			'address_1'=>$this->input->post('address_1'),
-			'address_2'=>$this->input->post('address_2'),
-			'city'=>$this->input->post('city'),
-			'state'=>$this->input->post('state'),
-			'zip'=>$this->input->post('zip'),
-			'country'=>$this->input->post('country'),
+			'birthdate'=>$this->input->post('birthdate'),
+			'birthplace'=>$this->input->post('birthplace'),
+			'nationality'=>$this->input->post('nationality'),
+			// 'country'=>$this->input->post('country'),
 			'comments'=>$this->input->post('comments'),
 			'person_id'=>$this->input->post('person_id'),
-			'birthdate'=>$this->input->post('birthdate')
+			'type_person_id'=>$this->input->post('type_person_id'),
+			'has_passport'=>$this->input->post('has_passport'),
+			'num_passport'=>$this->input->post('num_passport')
 		);
 		$customer_data=array(
 			'account_number'=>$this->input->post('account_number')=='' ? null:$this->input->post('account_number'),

@@ -424,10 +424,11 @@ var travel = function () {
             var idObj = parseInt($("#comision_obj_id").val());
             var current = self.list_comision[idObj];
             current.comision_code = $("#comision_code").val();
-            current.comision_amount = $("#comision_amount").val();
+            current.comision_fee = $("#comision_fee").val();
             current.comision_percentage = $("#comision_percentage").val();
             current.comision_type_operator = $("#comision_type_operator").val();
-            current.comision_incentive = $("#comision_incentive").val();
+            current.comision_incentive_turifax = $("#incentivos_turifax").val();
+            current.comision_incentive_otros = $("#incentivos_otros").val();
             self.list_comision[idObj] = current;
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
