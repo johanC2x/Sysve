@@ -3,24 +3,29 @@
 <!-- FORM FOR SEARCH ORDER -->
 <div class="row">
 	<div class="col-md-12">
-		<?php echo form_open('travel/searchTravel',array('id'=>'form_travel_code_search','class' => 'form-inline')); ?>
-			<fieldset>
-				<div class="form-group">
-					<input type="text" class="form-control" id="code_travel" name="code_travel" placeholder="Ingresar Código" size="15" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" id="document_travel" name="document_travel" placeholder="Ingresar documento" size="20" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" id="customer_travel" name="customer_travel" placeholder="Ingresar Cliente" size="40" />
-				</div>
-				<button type="button" class="btn btn-primary" onclick="payment.filterPayment()">Buscar</button>
-				<button type="button" class="btn btn-primary" onclick="payment.openModalPay()">Agregar Pago</button>
-			</fieldset>
-		<?php echo form_close(); ?>
+
+		<div class="panel panel-primary">
+		    <div class="panel-heading">Filtros de Viajes</div>
+		    <div class="panel-body">
+			<?php echo form_open('travel/searchTravel',array('id'=>'form_travel_code_search','class' => 'form-inline')); ?>
+				<fieldset>
+					<div class="form-group">
+						<input type="text" class="form-control" id="code_travel" name="code_travel" placeholder="Ingresar Código" size="15" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="document_travel" name="document_travel" placeholder="Ingresar documento" size="20" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="customer_travel" name="customer_travel" placeholder="Ingresar Cliente" size="40" />
+					</div>
+					<button type="button" class="btn btn-primary" onclick="payment.filterPayment()">Buscar</button>
+					<button type="button" class="btn btn-primary" onclick="payment.openModalPay()">Agregar Pago</button>
+				</fieldset>
+			<?php echo form_close(); ?>	
+		    </div>
+		</div>
 	</div>
 </div>
-<br/><br/>
 <div class="row">
 	<div class="col-md-12">
 		<table id="table_payment" class="table table-hover table-bordered" >
@@ -147,6 +152,21 @@
 	</div>
 </div>
 
+<div id="modal_success" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+			<div class="modal-header">
+				<center>
+					<h3 class="modal-title messages_modal">Operación Correcta</h3>
+					<br/>
+					<button type="button" class="btn btn-primary btn_success" onclick="location.reload();" >Aceptar</button>
+					<!-- data-dismiss="modal" -->
+				</center>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#payment_type_id").change(function() {
@@ -159,7 +179,12 @@
 				url: $("#form_save_payment").attr("action"),
 				data: $("#form_save_payment").serialize(),
 				success:function(response){
-					console.log(response);
+					var data = JSON.parse(response);
+					if(data.success){
+						$("#modal_success").modal("show");
+					}else{
+						$(".messages_modal").text("Ha ocurrido un error");
+					}
 				}
 			});
 		});
