@@ -210,7 +210,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="comision_percentage">Porcentaje</label>
+								<label for="comision_percentage">Monto</label>
 								<input type="text" id="comision_percentage" name="comision_percentage" class="form-control" value="0"/>
 							</div>		
 						</div>

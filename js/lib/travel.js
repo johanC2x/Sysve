@@ -323,6 +323,17 @@ var travel = function () {
         document.getElementById("form_travel_comision_update").reset();
         $("#comision_obj_id").val(row);
         $("#modal_detail_comision").modal("show");
+        data = travel.list_comision[row];
+        console.log(data);
+        
+        ////rellanar campos
+        $('#comision_code').val(data.comision_code);
+        $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
+        $('#comision_percentage').val(data.comision_percentage);
+        $('#incentivos_turifax').val(data.comision_incentive_turifax);
+        $('#incentivos_otros').val(data.comision_incentive_otros);
+        $('#comision_code').val(data.comision_code);
+        $('#comision_type_operator').val(data.comision_type_operator);
     };
 
     self.setTravelCode = function(){
@@ -424,12 +435,13 @@ var travel = function () {
             var idObj = parseInt($("#comision_obj_id").val());
             var current = self.list_comision[idObj];
             current.comision_code = $("#comision_code").val();
-            current.comision_fee = $("#comision_fee").val();
+            current.comision_fee = $("#comision_fee:checked").val();
             current.comision_percentage = $("#comision_percentage").val();
             current.comision_type_operator = $("#comision_type_operator").val();
             current.comision_incentive_turifax = $("#incentivos_turifax").val();
             current.comision_incentive_otros = $("#incentivos_otros").val();
             self.list_comision[idObj] = current;
+            $('.close').trigger('click')
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
     };
