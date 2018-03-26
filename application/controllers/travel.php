@@ -10,6 +10,9 @@ class Travel extends Secure_area {
 		$this->load->model("customer");
 		$this->load->model("travelmodel");
 		$this->load->model("code");
+		$this->load->model("payment");
+		$this->load->model("payment_detail");
+		$this->load->model("customer_travel");
 	}
 
 	function index(){
@@ -101,7 +104,8 @@ class Travel extends Secure_area {
 			$travel_customer_data = array(
 				'customer_id' => $this->input->post('customer_document'),
 				'travel_id' => $res_travel["travel"],
-				'data' => json_encode($data_travel)
+				'data' => json_encode($data_travel),
+				'type_state_travel_id' => 2
 			);
 			$res_cus_travel = $this->travelmodel->saveTravelCustomer($travel_customer_data);
 			if($res_cus_travel["success"]){
@@ -149,9 +153,42 @@ class Travel extends Secure_area {
 	}
 
 	function savePayment(){
-		echo "<pre/>";
-		print_r($this->input->post());
-		exit();
+		//DATA FOR PAYMENT
+		$dscto_type_id = $this->input->post("dscto_type_id");
+	    $dscto = $this->input->post("dscto");
+	    $payment_type_id = $this->input->post("payment_type_id");
+	    $total = $this->input->post("total");
+	    $payment_data = array(
+	    	"total" => $total,
+	    	"subtotal" => $total,
+	    	"dscto" => $dscto,
+	    	"dscto_type_id" => (!empty($dscto_type_id)) ? $dscto_type_id : 0,
+	    	"payment_type_id" => $payment_type_id,
+	    	"igv" => 0,
+	    	"created_by" => $this->session->userdata["person_id"]
+ 	    );
+	    $payment = $this->payment->save($payment_data);
+
+	    //DATA FOR PAYMENT_DETAIL
+	    $travels = explode(",", $this->input->post("travels"));
+	    if(sizeof($travels) > 0 && !empty($payment)){
+	    	foreach ($travels as $key => $value) {
+	    		if(!empty($value)){
+	    			$payment_detail_data = array(
+	    				"travel_id" => $value,
+	    				"payment_id" => $payment["payment"]
+	    			);
+	    			$payment_detail = $this->payment_detail->save($payment_detail_data);
+	    			$customer_travel_data = array(
+	    				"type_state_travel_id" => 3
+	    			);
+	    			$customer_travel = $this->customer_travel->update($customer_travel_data,$value);
+	    		}
+	    	}
+	    	echo json_encode(["success" => true]);
+	    }else{
+	    	echo json_encode(["success" => false]);
+	    }
 	}
 
 }

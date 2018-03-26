@@ -75,7 +75,7 @@ var payment = function () {
 				var customer = self.list_payment[i].first_name + " " + self.list_payment[i].last_name;
 				if(self.list_payment[i].hasOwnProperty("data") && self.list_payment[i].hasOwnProperty("check") && self.list_payment[i].check){
 					var data_travel = JSON.parse(self.list_payment[i].data);
-					travels += self.list_payment[i].id + ',';
+					travels += self.list_payment[i].travel_id + ',';
 					if(data_travel.comisiones.length > 0 && data_travel.hasOwnProperty("comisiones")){
 						for (var j = 0; j < data_travel.comisiones.length; j++) {
 							total += parseFloat(data_travel.comisiones[j].ammount);
