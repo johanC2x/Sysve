@@ -216,6 +216,24 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
+								<label for="acumula_millas">Acumula millas?</label>
+								<input type="checkbox" id="acumula_millas" name="acumula_millas" value="1">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="tipo_tarjeta_milla">Tipo Tarjeta</label>
+								<input type="text" id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control" value="0"/>
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="nro_tarjeta_milla">Nro de tarjeta</label>
+								<input type="text" id="nro_tarjeta_milla" name="nro_tarjeta_milla" class="form-control" value="0"/>
+							</div>		
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
 								<label for="comision_type_operator">Tipo de Operador</label>
 								<select id="comision_type_operator" name="comision_type_operator" class="form-control">
 									<option value="">Seleccionar</option>

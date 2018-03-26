@@ -330,6 +330,9 @@ var travel = function () {
         $('#comision_code').val(data.comision_code);
         $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
         $('#comision_percentage').val(data.comision_percentage);
+        $('#acumula_millas').val(data.acumula_millas);
+        $('#tipo_tarjeta_milla').val(data.tipo_tarjeta_milla);
+        $('#nro_tarjeta_milla').val(data.nro_tarjeta_milla);
         $('#incentivos_turifax').val(data.comision_incentive_turifax);
         $('#incentivos_otros').val(data.comision_incentive_otros);
         $('#comision_code').val(data.comision_code);
@@ -437,6 +440,9 @@ var travel = function () {
             current.comision_code = $("#comision_code").val();
             current.comision_fee = $("#comision_fee:checked").val();
             current.comision_percentage = $("#comision_percentage").val();
+            current.acumula_millas = $("#acumula_millas").val();
+            current.tipo_tarjeta_milla = $("#tipo_tarjeta_milla").val();
+            current.nro_tarjeta_milla = $("#nro_tarjeta_milla").val();
             current.comision_type_operator = $("#comision_type_operator").val();
             current.comision_incentive_turifax = $("#incentivos_turifax").val();
             current.comision_incentive_otros = $("#incentivos_otros").val();
