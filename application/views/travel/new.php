@@ -85,7 +85,7 @@
 		                </div>
 		                <div class="form-group">
 		                    <label for="">Hasta:</label>
-		                    <input type="datetime-local" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
+		                    <input type="text" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
 		                </div>
 	                  	<div class="form-group">
 	                  		<br/>
