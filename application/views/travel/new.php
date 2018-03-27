@@ -143,7 +143,7 @@
 						<thead>
 							<tr>
 								<th class="col-md-1"><center>Nro.</center></th>
-								<th class="col-md-4"><center>Comisión</center></th>
+								<th class="col-md-4"><center>Servicios</center></th>
 								<th class="col-md-2"><center>Monto</center></th>
 								<th colspan="2" class="col-md-1"><center>Acción</center></th>
 							</tr>

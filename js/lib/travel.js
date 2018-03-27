@@ -190,12 +190,12 @@ var travel = function () {
 
 
                     $('#code_travel').val(data.code);
-                    $('#name_travel').val(data.name);
-                    $('#destiny_origin_travel').val(data.destiny_origin);
-                    $('#destiny_end_travel').val(data.destiny_end);
-                    $('#date_init_travel').val(data.date_init.replace(' ','T').replace(':00', ''));
-                    $('#date_end_travel').val(data.date_end.replace(' ','T').replace(':00', ''));
-                    $('#type_travel').val(data.type_travel);
+                    // $('#name_travel').val(data.name);
+                    // $('#destiny_origin_travel').val(data.destiny_origin);
+                    // $('#destiny_end_travel').val(data.destiny_end);
+                    // $('#date_init_travel').val(data.date_init.replace(' ','T').replace(':00', ''));
+                    // $('#date_end_travel').val(data.date_end.replace(' ','T').replace(':00', ''));
+                    // $('#type_travel').val(data.type_travel);
 
                     self.list_comision = self.last_list_comision;
                     self.makeTableComision();
@@ -374,8 +374,10 @@ var travel = function () {
         data = travel.list_comision[row];
         
         ////rellanar campos
+        monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
+        monto_detalle = data.monto_detalle || monto_tabla;
         $('#comision_code').val(data.comision_code);
-        $('#monto_detalle').val(data.monto_detalle);
+        $('#monto_detalle').val(monto_detalle);
         $('#fee_servicio').val(data.fee_servicio);
         $('#nombre_ruc').val(data.nombre_ruc);
         $('#dni_ruc').val(data.dni_ruc);
