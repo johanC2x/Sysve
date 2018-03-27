@@ -3,7 +3,9 @@ var travel = function () {
     var self = {
         current_url : "",
         list_customer : [],
-        list_comision : []
+        list_comision : [],
+        last_travel : '',
+        last_list_comision: []
     };
 
     self.changeRow = function(idObj){
@@ -152,10 +154,56 @@ var travel = function () {
                 if(!data.success){
                     $(".messages_modal").text("Ha ocurrido un error");
                 }
-                $("#modal_success").modal("show");
+                // $("#modal_success").modal("show");
+                travel.showLastRegisterTravel(data.travel);
+                $('#showLastTravel').show();
             }
         })
     };
+
+    self.showLastRegisterTravel = function(travel){
+        self.last_travel = travel;
+        self.last_list_comision = self.list_comision;
+        self.list_comision = [];
+        $('input').val('');
+        $('input[type="datetime-local"').val('');
+        self.makeTableComision();
+        self.setTravelCode();
+    };
+
+    self.showLastTravel = function(){
+        if(self.last_travel != ''){
+            $.ajax({
+                url: travel.current_url + "index.php/travel/getLastTravelInfo/",
+                type: "POST",
+                data: { 
+                    'travel_id' : self.last_travel
+                },
+                success: function(response){
+                    console.log(response);
+                    ///////////////////
+                    var data = JSON.parse(response);
+                    ////info cliente
+                    $('#customer_document').val(data.person_id);
+                    $('#customer_name').val(data.first_name + ' ' + data.last_name);
+                    $('#customer_address').val(data.customer_address);
+
+
+                    $('#code_travel').val(data.code);
+                    $('#name_travel').val(data.name);
+                    $('#destiny_origin_travel').val(data.destiny_origin);
+                    $('#destiny_end_travel').val(data.destiny_end);
+                    $('#date_init_travel').val(data.date_init.replace(' ','T').replace(':00', ''));
+                    $('#date_end_travel').val(data.date_end.replace(' ','T').replace(':00', ''));
+                    $('#type_travel').val(data.type_travel);
+
+                    self.list_comision = self.last_list_comision;
+                    self.makeTableComision();
+                }
+            })  
+        }
+        
+    }
 
     self.suggest = function(obj){
         var value = obj.value || '';
@@ -324,10 +372,15 @@ var travel = function () {
         $("#comision_obj_id").val(row);
         $("#modal_detail_comision").modal("show");
         data = travel.list_comision[row];
-        console.log(data);
         
         ////rellanar campos
         $('#comision_code').val(data.comision_code);
+        $('#monto_detalle').val(data.monto_detalle);
+        $('#fee_servicio').val(data.fee_servicio);
+        $('#nombre_ruc').val(data.nombre_ruc);
+        $('#dni_ruc').val(data.dni_ruc);
+        $('#direccion_fiscal').val(data.direccion_fiscal);
+        $('#tipo_doc').val(data.tipo_doc);
         $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
         $('#comision_percentage').val(data.comision_percentage);
         $('#acumula_millas').val(data.acumula_millas);
@@ -344,7 +397,7 @@ var travel = function () {
             url: travel.current_url + "index.php/travel/getTravelCode/",
             success: function(response){
                 $('#code_travel').val(response);
-                $('#code_travel').attr('readonly', true);
+                $('#code_travel').attr('disabled', true);
             }
         })
     };
@@ -438,6 +491,12 @@ var travel = function () {
             var idObj = parseInt($("#comision_obj_id").val());
             var current = self.list_comision[idObj];
             current.comision_code = $("#comision_code").val();
+            current.monto_detalle = $("#monto_detalle").val();
+            current.fee_servicio = $("#fee_servicio").val();
+            current.nombre_ruc = $("#nombre_ruc").val();
+            current.dni_ruc = $("#dni_ruc").val();
+            current.direccion_fiscal = $("#direccion_fiscal").val();
+            current.tipo_doc = $("#tipo_doc").val();
             current.comision_fee = $("#comision_fee:checked").val();
             current.comision_percentage = $("#comision_percentage").val();
             current.acumula_millas = $("#acumula_millas").val();
@@ -447,7 +506,9 @@ var travel = function () {
             current.comision_incentive_turifax = $("#incentivos_turifax").val();
             current.comision_incentive_otros = $("#incentivos_otros").val();
             self.list_comision[idObj] = current;
-            $('.close').trigger('click')
+            $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text($("#monto_detalle").val());
+
+            $('.close').trigger('click');
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
     };

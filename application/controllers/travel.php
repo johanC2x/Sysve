@@ -109,7 +109,7 @@ class Travel extends Secure_area {
 			);
 			$res_cus_travel = $this->travelmodel->saveTravelCustomer($travel_customer_data);
 			if($res_cus_travel["success"]){
-				echo json_encode(["success" => true]);
+				echo json_encode(["success" => true, "travel" => $res_travel["travel"]]);
 			}else{
 				echo json_decode(["success" => false]);
 			}
@@ -139,6 +139,12 @@ class Travel extends Secure_area {
 	function getTravelCode(){
 		$code = $this->travelmodel->getTravelCode();
 		echo 'TRAVEL'.$code->id;
+	}
+
+	function getLastTravelInfo(){
+		$travel_id = $this->input->post('travel_id');
+		$data = $this->travelmodel->getLastTravelInfo($travel_id);
+		echo json_encode($data);
 	}
 
 	function solicitud(){

@@ -166,6 +166,9 @@
 					-->
 				</fieldset>
 			</form>
+			<br>
+			<br>
+			<button class="btn btn-primary" id="showLastTravel" onclick="travel.showLastTravel();">mostrar ultimo viaje</button>
 		</div>
 	</div>
 </div>
@@ -195,6 +198,46 @@
 			<div class="modal-body">
 				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
 					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="monto_detalle">Monto de Servicio</label>
+								<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="fee_servicio">Fee del servicio</label>
+								<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="nombre_ruc">Nombre/Razón Social</label>
+								<input type="text" id="nombre_ruc" name="nombre_ruc" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="dni_ruc">DNI/RUC</label>
+								<input type="text" id="dni_ruc" name="dni_ruc" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="direccion_fiscal">Direccion</label>
+								<input type="text" id="direccion_fiscal" name="direccion_fiscal" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="tipo_doc">Tipo documento</label>
+								<select id="tipo_doc" name="tipo_doc" class="form-control">
+									<option value="FACTURA">FACTURA</option>
+									<option value="BOLETA ">BOLETA </option>
+									<option value="TICKET">TICKET</option>
+								</select>
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="comision_code">Ticket/Nro de reserva</label>
@@ -223,7 +266,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="tipo_tarjeta_milla">Tipo Tarjeta</label>
-								<input type="text" id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control" value="0"/>
+								<select id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control">
+									<option value="VISA">VISA</option>
+									<option value="MASTERCARD">MASTERCARD</option>
+									<option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
+									<option value="DINNERS">DINNERS</option>
+									<option value="SAFETY PAY">SAFETY PAY</option>
+								</select>
 							</div>		
 						</div>
 						<div class="col-md-6">
@@ -287,6 +336,8 @@
 			validator.validate();
 			return validator.isValid();
         });
+
+		$('#showLastTravel').hide();
 
 		travel.saveCustomer();
 		//travel.addComision('fee');
