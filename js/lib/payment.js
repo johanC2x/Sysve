@@ -6,10 +6,11 @@ var payment = function () {
 	self.changeTypePay = function(){
 		var key = $( "#payment_type_id option:selected" ).attr("data-key");
 		if(key === "cuotas"){
-			$("#cuotas").prop("disabled",false);
-		}else{
-			$("#cuotas").val("");
-			$("#cuotas").prop("disabled",true);
+			$(".cuotas").show();
+			$(".tarjeta").hide();
+		}else if(key === "tarjeta"){
+			$(".cuotas").hide();
+			$(".tarjeta").show();
 		}
 	};
 
@@ -71,43 +72,43 @@ var payment = function () {
 		var travels = '';
 		$("#table_payment_detail tbody").empty();
 		if(self.list_payment.length > 0){
+			var customer = self.list_payment[0].first_name + " " + self.list_payment[0].last_name;
+			html += `<tr>
+						<td colspan="3">
+							<form role="form">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" disabled="true"
+												value="`+ self.list_payment[0].code +`">
+										</div>			
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" disabled="true"
+												value="`+ self.list_payment[0].name +`">
+										</div>			
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" class="form-control" disabled="true"
+												value="`+ customer +`">
+										</div>	
+									</div>
+								</div>
+							</form>
+						</td>
+					</tr>`;
 			for (var i = 0; i < self.list_payment.length; i++) {
-				var customer = self.list_payment[i].first_name + " " + self.list_payment[i].last_name;
 				if(self.list_payment[i].hasOwnProperty("data") && self.list_payment[i].hasOwnProperty("check") && self.list_payment[i].check){
 					var data_travel = JSON.parse(self.list_payment[i].data);
 					travels += self.list_payment[i].travel_id + ',';
 					if(data_travel.comisiones.length > 0 && data_travel.hasOwnProperty("comisiones")){
 						for (var j = 0; j < data_travel.comisiones.length; j++) {
 							total += parseFloat(data_travel.comisiones[j].ammount);
-							html = `<tr>
-										<td colspan="3">
-											<form role="form">
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<input type="text" class="form-control" disabled="true"
-																value="`+ self.list_payment[i].code +`">
-														</div>			
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<input type="text" class="form-control" disabled="true"
-																value="`+ self.list_payment[i].name +`">
-														</div>			
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<input type="text" class="form-control" disabled="true"
-																value="`+ customer +`">
-														</div>	
-													</div>
-												</div>
-											</form>
-										</td>
-									</tr>
-									<tr>
+							html += `<tr>
 										<td></td>
 										<td><center>`+ data_travel.comisiones[j].name +`</center></td>
 										<td style="text-align:right;">`+ parseFloat(data_travel.comisiones[j].ammount).toFixed(2) +`</td>
