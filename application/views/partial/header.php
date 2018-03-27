@@ -7,6 +7,8 @@
 	<title>YSUMMA</title>
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos.css" />
 	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos_print.css"  media="print"/>
+	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/ospos_print.css"  media="print"/>
+	<link rel="stylesheet" rev="stylesheet" href="<?php echo base_url();?>css/app.css"  media="print"/>
 <!--
 	<link rel="stylesheet" rev="stylesheet" href="<?php //echo base_url();?>css/bootstrap.css" />
 	<link rel="stylesheet" rev="stylesheet" href="<?php //echo base_url();?>css/bootstrap.css" />
@@ -40,6 +42,7 @@
 	<script src="<?php echo base_url();?>js/datepicker.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 	
 	<script src='<?php echo base_url();?>/js/bootstrapValidator.min.js'></script>
+	<script src='<?php echo base_url();?>/js/moment.js'></script>
 	<script src='<?php echo base_url();?>/js/es_ES.min.js'></script>
 	<script src='<?php echo base_url();?>/js/lib/utils.js'></script>
 	

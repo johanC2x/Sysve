@@ -1,21 +1,14 @@
 <?php $this->load->view("partial/header"); ?>
-<!--
-<div id="title_bar">
-	<div id="title" class="float_left">
-		Módulo de Viajes
-	</div>
-</div>
--->
 <script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-6">
-			<?php echo form_open('travel/suggest',array('id'=>'form_travel_search','class' => 'form-inline')); ?>
+			<?php echo form_open('travel/searchTravel',array('id'=>'form_travel_code_search','class' => 'form-inline')); ?>
 				<fieldset>
 					<div class="form-group">
-						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código" />
+						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código" name="code_travel" />
 					</div>
-					<button type="button" class="btn btn-primary">Buscar Solicitud</button>
+					<button type="button" class="btn btn-primary" onclick="travel.getSolicitud()">Buscar Solicitud</button>
 				</fieldset>
 			<?php echo form_close(); ?>
 		</div>
@@ -33,11 +26,17 @@
 						onkeyup="travel.suggest(this);" list="list_travel_search"  autocomplete="off" placeholder="Buscar Cliente" />
 						<datalist id="list_travel_search"></datalist>
 					</div>
+					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
+						Nuevo Cliente
+					</button> -->
+					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:450" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					<?php 
+						/*
 					    $controller_name = 'customers';
 					    echo anchor("$controller_name/view/-1/width:450",
 					        "".$this->lang->line($controller_name.'_new')."",
 					        array('class'=>'thickbox none btn btn-primary','title'=>$this->lang->line($controller_name.'_new')));
+					    */
 				    ?>
 				</fieldset>
 			<?php echo form_close(); ?>
@@ -79,7 +78,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 		                    <label for="">Desde:</label>
 		                    <input type="text" name="destiny_origin_travel" id="destiny_origin_travel" class="form-control" />
@@ -95,7 +94,7 @@
 							</div>
 	                  	</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 		                <div class="form-group">
 		                    <label>Salida:</label>
 		                    <input type="datetime-local" id="date_init_travel" name="date_init_travel" class="form-control"/>
@@ -167,6 +166,9 @@
 					-->
 				</fieldset>
 			</form>
+			<br>
+			<br>
+			<button class="btn btn-primary" id="showLastTravel" onclick="travel.showLastTravel();">mostrar ultimo viaje</button>
 		</div>
 	</div>
 </div>
@@ -196,23 +198,87 @@
 			<div class="modal-body">
 				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
 					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="monto_detalle">Monto de Servicio</label>
+								<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="fee_servicio">Fee del servicio</label>
+								<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="nombre_ruc">Nombre/Razón Social</label>
+								<input type="text" id="nombre_ruc" name="nombre_ruc" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="dni_ruc">DNI/RUC</label>
+								<input type="text" id="dni_ruc" name="dni_ruc" class="form-control"> 
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="direccion_fiscal">Direccion</label>
+								<input type="text" id="direccion_fiscal" name="direccion_fiscal" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="tipo_doc">Tipo documento</label>
+								<select id="tipo_doc" name="tipo_doc" class="form-control">
+									<option value="FACTURA">FACTURA</option>
+									<option value="BOLETA ">BOLETA </option>
+									<option value="TICKET">TICKET</option>
+								</select>
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="comision_code">Código</label>
+								<label for="comision_code">Ticket/Nro de reserva</label>
 								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
 								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="comision_amount">Comisión</label>
-								<input type="text" id="comision_amount" name="comision_amount" class="form-control" value="0"/>
+								<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
+  								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
 							</div>		
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="comision_percentage">Porcentaje</label>
+								<label for="comision_percentage">Monto</label>
 								<input type="text" id="comision_percentage" name="comision_percentage" class="form-control" value="0"/>
+							</div>		
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="acumula_millas">Acumula millas?</label>
+								<input type="checkbox" id="acumula_millas" name="acumula_millas" value="1">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="tipo_tarjeta_milla">Tipo Tarjeta</label>
+								<select id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control">
+									<option value="VISA">VISA</option>
+									<option value="MASTERCARD">MASTERCARD</option>
+									<option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
+									<option value="DINNERS">DINNERS</option>
+									<option value="SAFETY PAY">SAFETY PAY</option>
+								</select>
+							</div>		
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="nro_tarjeta_milla">Nro de tarjeta</label>
+								<input type="text" id="nro_tarjeta_milla" name="nro_tarjeta_milla" class="form-control" value="0"/>
 							</div>		
 						</div>
 						<div class="col-md-12">
@@ -226,11 +292,15 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="form-group">
-								<label for="comision_incentive">Incentivo</label>
-								<input type="number" id="comision_incentive" name="comision_incentive" class="form-control" value="0"/>
+								<label for="comision_incentive">Incentivos de Turifax</label>
+								<input type="number" id="incentivos_turifax" name="comision_incentive" class="form-control" value="0"/>
 							</div>
+						</div>
+						<div class="col-md-6">
+								<label for="comision_incentive">Incentivos de otro operador</label>
+								<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
 						</div>
 					</div>
 					<button class="btn btn-primary btn_update_comision" type="button">
@@ -241,7 +311,7 @@
 		</div>
 	</div>
 </div>
-
+<?php $this->load->view("travel/modal"); ?>
 <!-- ====================== -->
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -266,6 +336,11 @@
 			validator.validate();
 			return validator.isValid();
         });
+
+		$('#showLastTravel').hide();
+
+		travel.saveCustomer();
+		//travel.addComision('fee');
 		travel.validateFormTravel();
 		travel.validateFormUpdateComision();
 	});

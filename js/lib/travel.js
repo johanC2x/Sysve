@@ -3,7 +3,9 @@ var travel = function () {
     var self = {
         current_url : "",
         list_customer : [],
-        list_comision : []
+        list_comision : [],
+        last_travel : '',
+        last_list_comision: []
     };
 
     self.changeRow = function(idObj){
@@ -33,6 +35,34 @@ var travel = function () {
                 if(data.success){
                     self.list_customer.push(data.data);
                     self.populateTable();
+                }
+            }
+        });
+       }
+    };
+
+    self.getSolicitud = function(){
+       var key = $('#code_travel_search').val();
+       if(key !== null){
+        $.ajax({
+            type:"POST",
+            data:$("#form_travel_code_search").serialize(),
+            url: $("#form_travel_code_search").attr("action"),
+            success:function(response){
+                var data = JSON.parse(response);
+                var data_travel = JSON.parse(data.data);
+                $('#destiny_origin_travel').val(data.destiny_origin);
+                $('#destiny_end_travel').val(data.destiny_end);
+                $('#name_travel').val(data.name);
+                $('#customer_document').val(data.customer_id);
+                $('#customer_name').val(data.first_name + ' ' + data.last_name);
+                $('#customer_address').text(data.address_1);
+                document.getElementById("date_init_travel").value = data.date_init.replace(" ","T");
+                document.getElementById("date_end_travel").value = data.date_end.replace(" ","T");
+                self.list_comision = [];
+                if(data_travel.hasOwnProperty("comisiones")){
+                    self.list_comision = data_travel.comisiones;
+                    self.makeTableComision();
                 }
             }
         });
@@ -124,10 +154,56 @@ var travel = function () {
                 if(!data.success){
                     $(".messages_modal").text("Ha ocurrido un error");
                 }
-                $("#modal_success").modal("show");
+                // $("#modal_success").modal("show");
+                travel.showLastRegisterTravel(data.travel);
+                $('#showLastTravel').show();
             }
         })
     };
+
+    self.showLastRegisterTravel = function(travel){
+        self.last_travel = travel;
+        self.last_list_comision = self.list_comision;
+        self.list_comision = [];
+        $('input').val('');
+        $('input[type="datetime-local"').val('');
+        self.makeTableComision();
+        self.setTravelCode();
+    };
+
+    self.showLastTravel = function(){
+        if(self.last_travel != ''){
+            $.ajax({
+                url: travel.current_url + "index.php/travel/getLastTravelInfo/",
+                type: "POST",
+                data: { 
+                    'travel_id' : self.last_travel
+                },
+                success: function(response){
+                    console.log(response);
+                    ///////////////////
+                    var data = JSON.parse(response);
+                    ////info cliente
+                    $('#customer_document').val(data.person_id);
+                    $('#customer_name').val(data.first_name + ' ' + data.last_name);
+                    $('#customer_address').val(data.customer_address);
+
+
+                    $('#code_travel').val(data.code);
+                    $('#name_travel').val(data.name);
+                    $('#destiny_origin_travel').val(data.destiny_origin);
+                    $('#destiny_end_travel').val(data.destiny_end);
+                    $('#date_init_travel').val(data.date_init.replace(' ','T').replace(':00', ''));
+                    $('#date_end_travel').val(data.date_end.replace(' ','T').replace(':00', ''));
+                    $('#type_travel').val(data.type_travel);
+
+                    self.list_comision = self.last_list_comision;
+                    self.makeTableComision();
+                }
+            })  
+        }
+        
+    }
 
     self.suggest = function(obj){
         var value = obj.value || '';
@@ -223,12 +299,18 @@ var travel = function () {
         $('#result').html('');
     }
 
-        self.addComision = function(){
+        self.addComision = function(val = null){
         var data = {};
         data.key = $("#cbo_comision_payment option:selected").attr("data-key");
         data.name = $("#cbo_comision_payment option:selected").text();
         data.ammount = $("#amount_travel").val();
-        if(parseInt(data.ammount) === 0){
+
+        if(val === 'fee'){
+            data.key = 'fee';
+            data.name = 'FEE';
+            data.ammount = 0;
+        }
+        if(parseInt(data.ammount) === 0 && data.name != 'FEE'){
             $(".error_comision").text("El monto no puede ser cero");
             $(".error_comision").show().delay(1000).fadeOut();
         }else{
@@ -254,7 +336,12 @@ var travel = function () {
                 html += "<tr>";
                     html += "<td><center>"+ (i+1) +"</center></td>";
                     html += "<td><center>"+ self.list_comision[i].name +"</center></td>";
-                    html += "<td style='text-align: right;'>"+ self.list_comision[i].ammount +"</td>";
+                    if(self.list_comision[i].name !== 'FEE'){
+                        html += "<td style='text-align: right;'>"+ self.list_comision[i].ammount +"</td>";    
+                    }else{
+                        html += "<td style='text-align: right;'>"+ '<input type="text" name="amount" size="8">' +"</td>";    
+                    }
+                    
                     html += `<td>
                                 <center>
                                     <a href='javascript:void(0);' title='Eliminar' onclick='travel.removeComision(`+ i +`)' >
@@ -284,6 +371,25 @@ var travel = function () {
         document.getElementById("form_travel_comision_update").reset();
         $("#comision_obj_id").val(row);
         $("#modal_detail_comision").modal("show");
+        data = travel.list_comision[row];
+        
+        ////rellanar campos
+        $('#comision_code').val(data.comision_code);
+        $('#monto_detalle').val(data.monto_detalle);
+        $('#fee_servicio').val(data.fee_servicio);
+        $('#nombre_ruc').val(data.nombre_ruc);
+        $('#dni_ruc').val(data.dni_ruc);
+        $('#direccion_fiscal').val(data.direccion_fiscal);
+        $('#tipo_doc').val(data.tipo_doc);
+        $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
+        $('#comision_percentage').val(data.comision_percentage);
+        $('#acumula_millas').val(data.acumula_millas);
+        $('#tipo_tarjeta_milla').val(data.tipo_tarjeta_milla);
+        $('#nro_tarjeta_milla').val(data.nro_tarjeta_milla);
+        $('#incentivos_turifax').val(data.comision_incentive_turifax);
+        $('#incentivos_otros').val(data.comision_incentive_otros);
+        $('#comision_code').val(data.comision_code);
+        $('#comision_type_operator').val(data.comision_type_operator);
     };
 
     self.setTravelCode = function(){
@@ -291,7 +397,7 @@ var travel = function () {
             url: travel.current_url + "index.php/travel/getTravelCode/",
             success: function(response){
                 $('#code_travel').val(response);
-                $('#code_travel').attr('readonly', true);
+                $('#code_travel').attr('disabled', true);
             }
         })
     };
@@ -385,11 +491,24 @@ var travel = function () {
             var idObj = parseInt($("#comision_obj_id").val());
             var current = self.list_comision[idObj];
             current.comision_code = $("#comision_code").val();
-            current.comision_amount = $("#comision_amount").val();
+            current.monto_detalle = $("#monto_detalle").val();
+            current.fee_servicio = $("#fee_servicio").val();
+            current.nombre_ruc = $("#nombre_ruc").val();
+            current.dni_ruc = $("#dni_ruc").val();
+            current.direccion_fiscal = $("#direccion_fiscal").val();
+            current.tipo_doc = $("#tipo_doc").val();
+            current.comision_fee = $("#comision_fee:checked").val();
             current.comision_percentage = $("#comision_percentage").val();
+            current.acumula_millas = $("#acumula_millas").val();
+            current.tipo_tarjeta_milla = $("#tipo_tarjeta_milla").val();
+            current.nro_tarjeta_milla = $("#nro_tarjeta_milla").val();
             current.comision_type_operator = $("#comision_type_operator").val();
-            current.comision_incentive = $("#comision_incentive").val();
+            current.comision_incentive_turifax = $("#incentivos_turifax").val();
+            current.comision_incentive_otros = $("#incentivos_otros").val();
             self.list_comision[idObj] = current;
+            $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text($("#monto_detalle").val());
+
+            $('.close').trigger('click');
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
     };
@@ -407,12 +526,87 @@ var travel = function () {
                         $('#customer_document').val(response[0].value);
                         $('#customer_name').val(response[1].value);
                         $('#customer_address').text(response[2].value);
-
                     }
                 });
             }
 
         })
+    };
+
+
+    self.openModalCustomer = function(){
+        document.getElementById("form_customer_register").reset();
+        $("#modal_customer").modal("show");
+    };
+
+    self.saveCustomer = function(){
+        $('#form_customer_register').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                person_id: {
+                    validators: {
+                        notEmpty: { message: "El campo documento es requerido."}
+                    }
+                },
+                first_name: {
+                    validators: {
+                        notEmpty: { message: "El campo nombres es requerido."}
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: { message: "El campo apellidos es requerido."}
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: { message: "El campo email es requerido."}
+                    }
+                },
+                phone_number: {
+                    validators: {
+                        notEmpty: { message: "El campo teléfono es requerido."}
+                    }
+                },
+                address_1: {
+                    validators: {
+                        notEmpty: { message: "El campo dirección es requerido."}
+                    }
+                },
+                passport: {
+                    validators: {
+                        notEmpty: { message: "El campo pasaporte es requerido."}
+                    }
+                },
+                date_expire: {
+                    validators: {
+                        notEmpty: { message: "El campo fecha de expiración es requerido."}
+                    }
+                },
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            var data = {};
+            data.passport = $("#passport").val();
+            data.date_expire = $("#date_expire").val();
+            $("#data_customer").val(JSON.stringify(data));
+            $.ajax({
+                type:"POST",
+                url:$("#form_customer_register").attr('action'),
+                data:$("#form_customer_register").serialize(),
+                success:function(response){
+                    console.log(response);
+                    var data = JSON.parse(response);
+                    if(data.success){
+                        getMessages("messages",data.message,'success');
+                    }
+                }
+            });
+        });
     };
 
 	return self;

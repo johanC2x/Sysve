@@ -1,3 +1,5 @@
+<?php $propertys = isset($property_customer) ? $property_customer : [];?>
+
 <?php if(sizeof($propertys) > 0 && !empty($propertys)){ ?>
 	<div id="content_properties">
 	<?php foreach ($propertys as $key => $value) { ?>

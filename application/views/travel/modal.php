@@ -27,7 +27,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="date_expire">Fecha de Expiración:</label>
+                  <label for="date_expire">Fecha de Nacimiento:</label>
                   <input type="date" id="date_expire" name="date_expire" class="form-control"/>
                 </div>
               </div>  
@@ -64,11 +64,14 @@
                 <input type="hidden" id="data_customer" name="data_customer"/>
               </div>
             </div> -->
-
+            <hr/>
             <div class="col-md-12">
               <label for="address_1">Dirección:</label>
               <textarea id="address_1" name="address_1" class="form-control">
               </textarea>
+            </div>
+            <div class="col-md-12">
+              <?php $this->load->view("property/form_basic",$property_customer); ?>
             </div>
             <div id="messages" class="col-md-12" style="display: none;" ></div>
           </div>
