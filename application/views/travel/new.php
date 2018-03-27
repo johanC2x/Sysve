@@ -103,6 +103,10 @@
 		                    <label>Llegada:</label>
 		                    <input type="datetime-local" id="date_end_travel" name="date_end_travel" class="form-control"/>
 		                </div>
+		                <div class="form-group">
+		                    <label>Total:</label>
+		                    <input type="text" id="total_servicios" name="total_servicios" class="form-control" disabled="true" />
+		                </div>
 					</div>
 				</div>
 			</fieldset>

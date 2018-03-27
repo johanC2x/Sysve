@@ -317,7 +317,16 @@ var travel = function () {
             $(".error_comision").hide();
             self.list_comision.push(data);
             self.makeTableComision();
+            self.calcularComisiones();
         }
+    };
+
+    self.calcularComisiones = function(){
+        var suma = 0.00;
+        for (var i = 0; i < self.list_comision.length; i++) {
+            suma += parseFloat(self.list_comision[i].ammount);
+        }
+        $('#total_servicios').val(suma);
     };
 
     self.makeTableComision = function(){
@@ -407,6 +416,7 @@ var travel = function () {
     self.removeComision = function(obj){
         self.list_comision.splice(obj,1);
         self.makeTableComision();
+        self.calcularComisiones();
     };
 
     self.validateFormTravel = function(){
