@@ -113,7 +113,7 @@
 											   value="0.00" />
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="form-group">
 										<label for="comision_code">Tipo de Pago.</label>
 										<select id="payment_type_id" name="payment_type_id" class="form-control">
@@ -128,10 +128,28 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6 cuotas">
+								<div class="col-md-4 cuotas">
 									<div class="form-group">
-										<label for="comision_code">Cuotas</label>
-										<input type="text" id="cuotas" name="cuotas" class="form-control" disabled="true" />
+										<label for="cuotas">Cuotas</label>
+										<input type="text" id="cuotas" name="cuotas" class="form-control" />
+									</div>
+								</div>
+								<div class="col-md-4 cuotas">
+									<div class="form-group">
+										<label for="monto_cuotas">Monto de Cuota</label>
+										<input type="text" id="monto_cuotas" name="monto_cuotas" class="form-control" />
+									</div>
+								</div>
+								<div class="col-md-4 cuotas">
+									<div class="form-group">
+										<label for="monto_cuotas">Amortización</label>
+										<input type="text" id="amort_cuotas" name="amort_cuotas" class="form-control" />
+									</div>
+								</div>
+								<div class="col-md-12 tarjeta">
+									<div class="form-group">
+										<label class="checkbox-inline"><input type="checkbox" id="ck_visa" name="ck_visa" value="mastercard">Visa</label>
+										<label class="checkbox-inline"><input type="checkbox" id="ck_masc" name="ck_masc" value="visa">MasterCard</label>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -169,6 +187,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$(".cuotas").hide();
+		$(".tarjeta").hide();
 		$("#payment_type_id").change(function() {
 			payment.changeTypePay();
 		});
