@@ -1,16 +1,23 @@
 var payment = function () {
 	var self = {
-		list_payment : []
+		list_payment : [],
+		data_payment : {
+			cuotas : []
+		}
 	};
 
 	self.changeTypePay = function(){
 		var key = $( "#payment_type_id option:selected" ).attr("data-key");
+		$(".card").prop("checked",false);
 		if(key === "cuotas"){
 			$(".cuotas").show();
 			$(".tarjeta").hide();
 		}else if(key === "tarjeta"){
 			$(".cuotas").hide();
 			$(".tarjeta").show();
+		}else{
+			$(".cuotas").hide();
+			$(".tarjeta").hide();
 		}
 	};
 
@@ -74,7 +81,7 @@ var payment = function () {
 		if(self.list_payment.length > 0){
 			var customer = self.list_payment[0].first_name + " " + self.list_payment[0].last_name;
 			html += `<tr>
-						<td colspan="3">
+						<td colspan="4">
 							<form role="form">
 								<div class="row">
 									<div class="col-md-6">
@@ -108,10 +115,19 @@ var payment = function () {
 					if(data_travel.comisiones.length > 0 && data_travel.hasOwnProperty("comisiones")){
 						for (var j = 0; j < data_travel.comisiones.length; j++) {
 							total += parseFloat(data_travel.comisiones[j].ammount);
+							var code = 'SIN CODIGO';
+							var tipo_doc = 'S/D';
+							if(data_travel.comisiones[j].comision_code !== '' && data_travel.comisiones[j].comision_code !== undefined){
+								code = data_travel.comisiones[j].comision_code;
+							}
+							if(data_travel.comisiones[j].tipo_doc !== '' && data_travel.comisiones[j].tipo_doc !== undefined){
+								tipo_doc = data_travel.comisiones[j].tipo_doc;
+							}
 							html += `<tr>
-										<td></td>
+										<td><center>`+ code +`</center></td>
 										<td><center>`+ data_travel.comisiones[j].name +`</center></td>
 										<td style="text-align:right;">`+ parseFloat(data_travel.comisiones[j].ammount).toFixed(2) +`</td>
+										<td><center>`+ tipo_doc +`</center></td>
 									</tr>`;
 						}
 					}
@@ -130,6 +146,65 @@ var payment = function () {
 		$("#total").val(total.toFixed(2));
 		$("#travels").val(travels);
 		$("#table_payment_detail tbody").append(html);
+	};
+
+	self.savePayment = function(){
+		$('#form_save_payment').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                dscto_type_id: {
+                    validators: {
+                        notEmpty: { message: "El campo tipo de descuento es requerido."}
+                    }
+                },
+                dscto: {
+                    validators: {
+                        notEmpty: { message: "El campo descuento es requerido."}
+                    }
+                },
+                payment_type_id: {
+                	validators: {
+                        notEmpty: { message: "El campo tipo de pago es requerido."}
+                    }
+                },
+                total:{
+                	validators: {
+                        notEmpty: { message: "El campo total es requerido."}
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            e.preventDefault();
+            if($("#payment_type_id option:selected").attr("data-key") === 'cuotas'){
+            	if($("#cuotas").val() > 0){
+            		var cuota = $("#cuotas").val();
+            		for (var i = 0; i < cuota; i++) {
+            			var fechas_cuota = {};
+            			fechas_cuota.desde = $("#cuota_desde_"+i).val();
+            			fechas_cuota.hasta = $("#cuota_hasta_"+i).val();
+            			self.data_payment.cuotas.push(fechas_cuota);
+            		}
+            	}
+            }
+            $("#data").val(JSON.stringify(self.data_payment));
+            $.ajax({
+				type: 'POST',
+				url: $("#form_save_payment").attr("action"),
+				data: $("#form_save_payment").serialize(),
+				success:function(response){
+					var data = JSON.parse(response);
+					if(data.success){
+						$("#modal_success").modal("show");
+					}else{
+						$(".messages_modal").text("Ha ocurrido un error");
+					}
+				}
+			});
+        });
 	};
 
 	return self;

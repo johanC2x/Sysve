@@ -65,14 +65,15 @@
 						<table id="table_payment_detail" class="table table-hover table-bordered">
 							<thead>
 								<tr>
-									<th><center>Código</center></th>
-									<th><center>Comisión</center></th>
-									<th><center>Monto</center></th>
+									<th class="col-md-3"><center>Código</center></th>
+									<th class="col-md-4"><center>Comisión</center></th>
+									<th class="col-md-4"><center>Monto</center></th>
+									<th class="col-md-2"><center>Comprobante</center></th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
-									<td style="text-align:right;" colspan="2"><b>TOTAL</b></td>
+									<td style="text-align:right;" colspan="3"><b>TOTAL</b></td>
 									<td style="text-align:right;font-weight:bold;" class="total_pay"><b>0.00</b></td>
 								</tr>
 							</tfoot>
@@ -104,13 +105,14 @@
 											<?php } ?>
 										</select>
 										<input type="hidden" id="travels" name="travels">
+										<input type="hidden" id="data" name="data">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="comision_code">Dsto.</label>
 										<input type="number" id="dscto" name="dscto" class="form-control"
-											   value="0.00" />
+											   value="0.00" step="any"/>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -146,15 +148,20 @@
 										<input type="text" id="amort_cuotas" name="amort_cuotas" class="form-control" />
 									</div>
 								</div>
-								<div class="col-md-12 tarjeta">
+
+								<!-- CAMPOS PARA CUOTA -->
+								<div id="content_cuota"></div>
+								<!-- /CAMPOS PARA CUOTA -->
+
+								<div class="col-md-12 tarjeta"> 
 									<div class="form-group">
-										<label class="checkbox-inline"><input type="checkbox" id="ck_visa" name="ck_visa" value="mastercard">Visa</label>
-										<label class="checkbox-inline"><input type="checkbox" id="ck_masc" name="ck_masc" value="visa">MasterCard</label>
+										<label class="checkbox-inline"><input class="card" type="checkbox" id="ck_visa" name="ck_visa" value="visa">Visa</label>
+										<label class="checkbox-inline"><input class="card" type="checkbox" id="ck_masc" name="ck_masc" value="mastercard">MasterCard</label>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="comision_code">Monto</label>
+										<label for="total">Monto</label>
 										<input type="text" id="total" name="total" class="form-control"/>
 									</div>
 								</div>
@@ -193,20 +200,10 @@
 			payment.changeTypePay();
 		});
 		
-		$(".btn_save_pay").click(function() {
-			$.ajax({
-				type: 'POST',
-				url: $("#form_save_payment").attr("action"),
-				data: $("#form_save_payment").serialize(),
-				success:function(response){
-					var data = JSON.parse(response);
-					if(data.success){
-						$("#modal_success").modal("show");
-					}else{
-						$(".messages_modal").text("Ha ocurrido un error");
-					}
-				}
-			});
+		$(".btn_save_pay").on("click", function () {
+			var validator = $('#form_save_payment').data('bootstrapValidator');
+			validator.validate();
+			return validator.isValid();
 		});
 
 		$("#dscto").change(function(){
@@ -223,6 +220,50 @@
 				}
 			}
 		});
+
+		$(".card").change(function(){
+			if($(this).val() === "mastercard"){
+				$("#ck_visa").prop("checked",false);
+				$("#ck_masc").prop("checked",true);
+			}else if($(this).val() === "visa"){
+				$("#ck_visa").prop("checked",true);
+				$("#ck_masc").prop("checked",false);
+			}
+			payment.data_payment.type = 'card';
+			payment.data_payment.card = $(this).val();
+		});
+
+		$("#cuotas").change(function(){
+			var cuota = $(this).val();
+			if($(this).val() > 0){
+				var template = '';
+				for (var i = 0; i < cuota; i++) {
+					template += `<div class="col-md-6">
+										<div class="form-group">
+											<label for="monto_cuotas"><b>Cuota `+ (i+1) +`</b> Desde</label>
+											<input type="date" id="cuota_desde_`+ i +`" name="cuota_desde_`+ i +`" class="form-control" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="monto_cuotas">Hasta</label>
+											<input type="date" id="cuota_hasta_`+ i +`" name="cuota_hasta_`+ i +`" class="form-control" />
+										</div>
+									</div>`;
+				}
+				payment.data_payment.type = 'cuotas';
+				$("#content_cuota").html(template);
+			}
+		});
+
+		$("#monto_cuotas").change(function(){
+			if($(this).val() > 0 && parseFloat($("#total").val()) > parseFloat($(this).val())){
+				var total = parseFloat($("#total").val()) - parseFloat($(this).val());
+				$("#total").val(total);
+			}
+		});
+
+		payment.savePayment();
 	});
 </script>
 <?php $this->load->view("partial/footer"); ?>
