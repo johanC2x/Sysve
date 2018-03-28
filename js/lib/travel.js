@@ -49,7 +49,6 @@ var travel = function () {
             data:$("#form_travel_code_search").serialize(),
             url: $("#form_travel_code_search").attr("action"),
             success:function(response){
-                console.log(response);
                 // var data = JSON.parse(response);
                 var data = JSON.parse(response);
                 $('#destiny_origin_travel').val(data.destiny_origin);
