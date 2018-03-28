@@ -49,8 +49,9 @@ var travel = function () {
             data:$("#form_travel_code_search").serialize(),
             url: $("#form_travel_code_search").attr("action"),
             success:function(response){
+                console.log(response);
+                // var data = JSON.parse(response);
                 var data = JSON.parse(response);
-                var data_travel = JSON.parse(data.data);
                 $('#destiny_origin_travel').val(data.destiny_origin);
                 $('#destiny_end_travel').val(data.destiny_end);
                 $('#name_travel').val(data.name);
@@ -385,12 +386,16 @@ var travel = function () {
         ////rellanar campos
         monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
         monto_detalle = data.monto_detalle || monto_tabla;
+        nombre_ruc = data.nombre_ruc || $('#customer_name').val();
+        dni_ruc = data.dni_ruc || $('#customer_document').val();
+        direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
+
         $('#comision_code').val(data.comision_code);
         $('#monto_detalle').val(monto_detalle);
         $('#fee_servicio').val(data.fee_servicio);
-        $('#nombre_ruc').val(data.nombre_ruc);
-        $('#dni_ruc').val(data.dni_ruc);
-        $('#direccion_fiscal').val(data.direccion_fiscal);
+        $('#nombre_ruc').val(nombre_ruc);
+        $('#dni_ruc').val(dni_ruc);
+        $('#direccion_fiscal').val(direccion_fiscal);
         $('#tipo_doc').val(data.tipo_doc);
         $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
         $('#comision_percentage').val(data.comision_percentage);
