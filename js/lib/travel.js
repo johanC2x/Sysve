@@ -310,15 +310,15 @@ var travel = function () {
             data.name = 'FEE';
             data.ammount = 0;
         }
-        if(parseInt(data.ammount) === 0 && data.name != 'FEE'){
-            $(".error_comision").text("El monto no puede ser cero");
-            $(".error_comision").show().delay(1000).fadeOut();
-        }else{
+        // if(parseInt(data.ammount) === 0){
+        //     $(".error_comision").text("El monto no puede ser cero");
+        //     $(".error_comision").show().delay(1000).fadeOut();
+        // }else{
             $(".error_comision").hide();
             self.list_comision.push(data);
             self.makeTableComision();
             self.calcularComisiones();
-        }
+        // }
     };
 
     self.calcularComisiones = function(){

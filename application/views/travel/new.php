@@ -132,7 +132,7 @@
 					</div>
 					<div class="form-group">
 						<label for="type_travel">Monto</label>
-						<input type="number" id="amount_travel" name="amount_travel" class="form-control"/>
+						<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
 					</div>
 				</fieldset>
 				<div class="alert alert-danger alert-dismissible error_comision">
