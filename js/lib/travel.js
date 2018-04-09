@@ -365,6 +365,13 @@ var travel = function () {
                                     </a>
                                 </center>
                             </td>`;
+                    html += `<td>
+                                <center>
+                                    <a href='javascript:void(0);' title='Agregar Detalle 2' onclick='travel.openComisionSubDetail(`+ i +`)' >
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </center>
+                            </td>`;
                 html += "</tr>";
             }
         }
@@ -382,19 +389,10 @@ var travel = function () {
         $("#modal_detail_comision").modal("show");
         data = travel.list_comision[row];
         
-        ////rellanar campos
-        monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
-        monto_detalle = data.monto_detalle || monto_tabla;
-        nombre_ruc = data.nombre_ruc || $('#customer_name').val();
-        dni_ruc = data.dni_ruc || $('#customer_document').val();
-        direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
+       
 
         $('#comision_code').val(data.comision_code);
-        $('#monto_detalle').val(monto_detalle);
-        $('#fee_servicio').val(data.fee_servicio);
-        $('#nombre_ruc').val(nombre_ruc);
-        $('#dni_ruc').val(dni_ruc);
-        $('#direccion_fiscal').val(direccion_fiscal);
+        
         $('#tipo_doc').val(data.tipo_doc);
         $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
         $('#comision_percentage').val(data.comision_percentage);
@@ -406,6 +404,27 @@ var travel = function () {
         $('#comision_code').val(data.comision_code);
         $('#comision_type_operator').val(data.comision_type_operator);
     };
+
+    self.openComisionSubDetail = function(row){
+        document.getElementById("form_subdetail").reset();
+        $("#comision_obj_id").val(row);
+        $("#modal_subdetail").modal("show");
+        data = travel.list_comision[row];
+
+         ////rellanar campos
+        monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
+        monto_detalle = data.monto_detalle || monto_tabla;
+        nombre_ruc = data.nombre_ruc || $('#customer_name').val();
+        dni_ruc = data.dni_ruc || $('#customer_document').val();
+        direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
+
+        $('#monto_detalle').val(monto_detalle);
+        $('#fee_servicio').val(data.fee_servicio);
+        $('#nombre_ruc').val(nombre_ruc);
+        $('#dni_ruc').val(dni_ruc);
+        $('#direccion_fiscal').val(direccion_fiscal);
+
+    }
 
     self.setTravelCode = function(){
         $.ajax({
@@ -469,7 +488,7 @@ var travel = function () {
     };
 
     self.validateFormUpdateComision = function(){
-        $('#form_travel_comision_update').bootstrapValidator({
+        $('#form_travel_comision_update, #form_subdetail').bootstrapValidator({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
@@ -522,11 +541,25 @@ var travel = function () {
             current.comision_incentive_turifax = $("#incentivos_turifax").val();
             current.comision_incentive_otros = $("#incentivos_otros").val();
             self.list_comision[idObj] = current;
-            $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text($("#monto_detalle").val());
-
+            if($("#monto_detalle").val() != ''){
+                $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text($("#monto_detalle").val());
+            }
             $('.close').trigger('click');
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
+    };
+
+    self.calcularPorcentaje = function(){
+        cobro_total = parseInt($('#cobro_total').val()) || 0;
+        monto_detalle = parseInt($('#monto_detalle').val()) || 0;
+        if(cobro_total > 100){
+            $('#cobro_total').val(0);
+            $('#porcentaje_cobro').val(0);
+            return false;
+        }
+        calculo = cobro_total*monto_detalle/100;
+        console.log(calculo);
+        $('#porcentaje_cobro').val(calculo);
     };
 
     self.getConfiguration = function(){
