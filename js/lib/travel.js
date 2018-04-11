@@ -366,13 +366,6 @@ var travel = function () {
                                     </a>
                                 </center>
                             </td>`;
-                    html += `<td>
-                                <center>
-                                    <a href='javascript:void(0);' title='Agregar Detalle 2' onclick='travel.openComisionSubDetail(`+ i +`)' >
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                </center>
-                            </td>`;
                 html += "</tr>";
             }
         }
@@ -390,7 +383,18 @@ var travel = function () {
         $("#modal_detail_comision").modal("show");
         data = travel.list_comision[row];
         
-       
+        monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
+        monto_detalle = data.monto_detalle || monto_tabla;
+        nombre_ruc = data.nombre_ruc || $('#customer_name').val();
+        dni_ruc = data.dni_ruc || $('#customer_document').val();
+        direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
+
+        $('#monto_detalle').val(monto_detalle);
+        $('#fee_servicio').val(data.fee_servicio);
+        $('#porcentaje_cobro').val(data.porcentaje_cobro);
+        $('#nombre_ruc').val(nombre_ruc);
+        $('#dni_ruc').val(dni_ruc);
+        $('#direccion_fiscal').val(direccion_fiscal);
 
         $('#comision_code').val(data.comision_code);
         
@@ -413,17 +417,7 @@ var travel = function () {
         data = travel.list_comision[row];
 
          ////rellanar campos
-        monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
-        monto_detalle = data.monto_detalle || monto_tabla;
-        nombre_ruc = data.nombre_ruc || $('#customer_name').val();
-        dni_ruc = data.dni_ruc || $('#customer_document').val();
-        direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
-
-        $('#monto_detalle').val(monto_detalle);
-        $('#fee_servicio').val(data.fee_servicio);
-        $('#nombre_ruc').val(nombre_ruc);
-        $('#dni_ruc').val(dni_ruc);
-        $('#direccion_fiscal').val(direccion_fiscal);
+        
 
     }
 
@@ -529,6 +523,7 @@ var travel = function () {
             current.comision_code = $("#comision_code").val();
             current.monto_detalle = $("#monto_detalle").val();
             current.fee_servicio = $("#fee_servicio").val();
+            current.porcentaje_cobro = $("#porcentaje_cobro").val();
             current.nombre_ruc = $("#nombre_ruc").val();
             current.dni_ruc = $("#dni_ruc").val();
             current.direccion_fiscal = $("#direccion_fiscal").val();
@@ -543,7 +538,8 @@ var travel = function () {
             current.comision_incentive_otros = $("#incentivos_otros").val();
             self.list_comision[idObj] = current;
             if($("#monto_detalle").val() != ''){
-                $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text($("#monto_detalle").val());
+                monto_tabla = parseFloat($("#monto_detalle").val()) + parseFloat($('#fee_servicio').val());
+                $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text(monto_tabla);
             }
             $('.close').trigger('click');
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
@@ -551,16 +547,16 @@ var travel = function () {
     };
 
     self.calcularPorcentaje = function(){
-        cobro_total = parseInt($('#cobro_total').val()) || 0;
+        porcentaje_cobro = parseInt($('#porcentaje_cobro').val()) || 0;
         monto_detalle = parseInt($('#monto_detalle').val()) || 0;
-        if(cobro_total > 100){
+        if(porcentaje_cobro > 100){
             $('#cobro_total').val(0);
             $('#porcentaje_cobro').val(0);
             return false;
         }
-        calculo = cobro_total*monto_detalle/100;
+        calculo = porcentaje_cobro*monto_detalle/100;
         console.log(calculo);
-        $('#porcentaje_cobro').val(calculo);
+        $('#cobro_total').val(calculo);
     };
 
     self.getConfiguration = function(){
@@ -658,6 +654,17 @@ var travel = function () {
             });
         });
     };
+
+    self.showInfo = function(){
+        value = $('#type_travel').val();
+        console.log(value);
+        if(value == 'Re-emisión'){
+            $('#info').html('<strong>Info!</strong> Los boletos de Re-emisión necesitan información de Penalidad y Fee de Penalidad.');
+            $("#info").fadeTo(2000, 500).slideUp(500, function(){
+                $("#info").slideUp(500);
+            }); 
+        }
+    }
 
 	return self;
 }(jQuery);
