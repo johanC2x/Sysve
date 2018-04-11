@@ -50,17 +50,18 @@ var travel = function () {
             url: $("#form_travel_code_search").attr("action"),
             success:function(response){
                 // var data = JSON.parse(response);
-                var data = JSON.parse(response);
+                var data = JSON.parse(response)[0];
+                console.log(data);
                 $('#destiny_origin_travel').val(data.destiny_origin);
                 $('#destiny_end_travel').val(data.destiny_end);
                 $('#name_travel').val(data.name);
                 $('#customer_document').val(data.customer_id);
                 $('#customer_name').val(data.first_name + ' ' + data.last_name);
                 $('#customer_address').text(data.address_1);
-                document.getElementById("date_init_travel").value = data.date_init.replace(" ","T");
-                document.getElementById("date_end_travel").value = data.date_end.replace(" ","T");
+                // document.getElementById("date_init_travel").value = data.date_init.replace(" ","T");
+                // document.getElementById("date_end_travel").value = data.date_end.replace(" ","T");
                 self.list_comision = [];
-                if(data_travel.hasOwnProperty("comisiones")){
+                if(data.hasOwnProperty("comisiones")){
                     self.list_comision = data_travel.comisiones;
                     self.makeTableComision();
                 }
