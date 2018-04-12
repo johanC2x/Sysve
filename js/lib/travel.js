@@ -659,10 +659,15 @@ var travel = function () {
         value = $('#type_travel').val();
         console.log(value);
         if(value == 'Re-emisión'){
+            $('#div_feepenalidad').show(500);
+            $('#div_penalidad').show(500);
             $('#info').html('<strong>Info!</strong> Los boletos de Re-emisión necesitan información de Penalidad y Fee de Penalidad.');
             $("#info").fadeTo(2000, 500).slideUp(500, function(){
                 $("#info").slideUp(500);
             }); 
+        }else{
+            $('#div_feepenalidad').hide(500);
+            $('#div_penalidad').hide(500);
         }
     }
 

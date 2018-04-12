@@ -103,6 +103,10 @@
 								<option value="3">Compra Asiento</option>
 							</select>
 						</div>
+						<div class="form-group" id="div_penalidad" style="display:none">
+		                    <label for="">Penalidad</label>
+		                    <input type="text" name="penalidad" id="penalidad" class="form-control"/>
+		                </div>
 					</div>
 					<div class="col-md-5">
 		                <div class="form-group">
@@ -119,6 +123,10 @@
 							  <label><input id="pagado" type="checkbox" value="" onclick="travel.getConfiguration()">¿Pagado?</label>
 							</div>
 	                  	</div>
+	                  	<div class="form-group" id="div_feepenalidad">
+		                    <label>Fee Penalidad:</label>
+		                    <input type="datetime-local" id="fee_penalidad" name="fee_penalidad" class="form-control"/>
+		                </div>
 					</div>
 				</div>
 			</fieldset>
@@ -400,6 +408,9 @@
 		$('form input').on('keypress', function(e) {
 		    return e.which !== 13;
 		});
+
+		$('#div_penalidad').hide();
+		$('#div_feepenalidad').hide();
 
 		travel.saveCustomer();
 		//travel.addComision('fee');
