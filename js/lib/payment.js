@@ -3,7 +3,13 @@ var payment = function () {
 		list_payment : [],
 		data_payment : {
 			cuotas : []
-		}
+		},
+		list_cuotas : [
+			{
+				amount : 0,
+				payment : false
+			}
+		]
 	};
 
 	self.changeTypePay = function(){
@@ -12,6 +18,7 @@ var payment = function () {
 		if(key === "cuotas"){
 			$(".cuotas").show();
 			$(".tarjeta").hide();
+			self.makeCuota();
 		}else if(key === "tarjeta"){
 			$(".cuotas").hide();
 			$(".tarjeta").show();
@@ -19,6 +26,52 @@ var payment = function () {
 			$(".cuotas").hide();
 			$(".tarjeta").hide();
 		}
+	};
+
+	self.makeCuota = function(){
+		var html = '';
+		if(self.list_cuotas.length > 0){
+			$("#table_payment_cuota tbody").empty();
+			for (var i = 0; i < self.list_cuotas.length; i++) {
+				var check = (self.list_cuotas[i].payment) ? "checked":"";
+				html += `<tr>
+	                        <td>
+	                        	<div class="form-group">
+									<input type="number" id="amount_`+i+`" name="amount_`+i+`" class="form-control" placeholder="Monto" 
+								 		onchange="payment.changeInputCuota(`+i+`);"/>
+								</div>
+	                        </td>
+	                        <td>
+	                        	<div class="form-group">
+									<center>
+										<input class="card" type="checkbox" id="payment_`+i+`" name="payment_`+i+`" `+ check +` onchange="payment.changeInputCuota(`+i+`);">
+									</center>
+								</div>
+	                        </td>
+	                        <td>
+	                        	<center>
+									<button class="btn btn-primary" type="button" onclick="payment.addPayCuota()" >Agregar +</button>
+	                        	</center>
+	                        </td>
+	                    </tr>`;
+			}
+			$("#table_payment_cuota tbody").append(html);
+		}
+	};
+
+	self.changeInputCuota = function(obj){
+		var data = {};
+		data.amount = $("#amount_"+obj).val();
+		data.payment = $("#payment_"+obj).prop("checked");
+		self.list_cuotas[obj] = data;
+	};
+
+	self.addPayCuota = function(){
+		var data = {};
+		data.amount = 0;
+		data.payment = false;
+		self.list_cuotas.push(data);
+		self.makeCuota();
 	};
 
 	self.filterPayment = function(){

@@ -130,23 +130,42 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-md-4 cuotas">
-									<div class="form-group">
-										<label for="cuotas">Cuotas</label>
-										<input type="text" id="cuotas" name="cuotas" class="form-control" />
-									</div>
+								<div class="col-md-12">
+									<table id="table_payment_cuota" class="table table-hover table-bordered">
+										<thead>
+											<tr>
+												<th class="col-md-3"><center>Monto</center></th>
+												<th class="col-md-1"><center>¿Pagado?</center></th>
+												<th class="col-md-2"><center>Acción</center></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td colspan="3">
+													<center>
+														No se registraron datos.
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-								<div class="col-md-4 cuotas">
-									<div class="form-group">
-										<label for="monto_cuotas">Monto de Cuota</label>
-										<input type="text" id="monto_cuotas" name="monto_cuotas" class="form-control" />
+								<div id="content_cuotas">
+									<!--
+									<div class="col-md-4 cuotas">
+										<div class="form-group">
+											<input type="text" id="cuotas" name="cuotas" class="form-control" placeholder="Monto" />
+										</div>
 									</div>
-								</div>
-								<div class="col-md-4 cuotas">
-									<div class="form-group">
-										<label for="monto_cuotas">Amortización</label>
-										<input type="text" id="amort_cuotas" name="amort_cuotas" class="form-control" />
+									<div class="col-md-4 cuotas">
+										<div class="form-group">
+											<label class="checkbox-inline"><input class="card" type="checkbox" id="ck_cuota" name="ck_cuota" value="mastercard">¿Pagado?</label>
+										</div>
 									</div>
+									<div class="col-md-4 cuotas">
+										<button class="btn btn-primary" type="button" >+</button>
+									</div>
+									-->
 								</div>
 
 								<!-- CAMPOS PARA CUOTA -->
@@ -233,6 +252,7 @@
 			payment.data_payment.card = $(this).val();
 		});
 
+		/*
 		$("#cuotas").change(function(){
 			var cuota = $(this).val();
 			if($(this).val() > 0){
@@ -255,6 +275,7 @@
 				$("#content_cuota").html(template);
 			}
 		});
+		*/
 
 		$("#monto_cuotas").change(function(){
 			if($(this).val() > 0 && parseFloat($("#total").val()) > parseFloat($(this).val())){
