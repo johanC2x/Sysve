@@ -37,7 +37,7 @@
 					<th class="col-md-2"><center>Viaje</center></th>
 					<th class="col-md-2"><center>Origen</center></th>
 					<th class="col-md-2"><center>Destino</center></th>
-					<th class="col-md-1"><center>Acción</center></th>
+					<th class="col-md-1" colspan="2"><center>Acción</center></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -96,6 +96,7 @@
 										<label for="comision_code">Tipo de Dscto.</label>
 										<select id="dscto_type_id" name="dscto_type_id" class="form-control">
 											<option value="">Seleccionar</option>
+											<option value="0">Ninguno</option>
 											<?php if(sizeof($type_dscto_payment) > 0){ ?>
 												<?php foreach($type_dscto_payment as $key => $value) { ?>
 													<option value="<?= $value["id"]; ?>">

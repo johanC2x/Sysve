@@ -1,5 +1,6 @@
 var payment = function () {
 	var self = {
+		current_url : "",
 		list_payment : [],
 		data_payment : {
 			cuotas : []
@@ -38,7 +39,7 @@ var payment = function () {
 	                        <td>
 	                        	<div class="form-group">
 									<input type="number" id="amount_`+i+`" name="amount_`+i+`" class="form-control" placeholder="Monto" 
-								 		onchange="payment.changeInputCuota(`+i+`);"/>
+								 		onchange="payment.changeInputCuota(`+i+`);" value="`+ self.list_cuotas[i].amount +`"/>
 								</div>
 	                        </td>
 	                        <td>
@@ -100,7 +101,21 @@ var payment = function () {
 	                html += "<td><center>"+ self.list_payment[i].name +"</center></td>";
 	                html += "<td><center>"+ self.list_payment[i].destiny_origin +"</center></td>";
 	                html += "<td><center>"+ self.list_payment[i].destiny_end +"</center></td>";
-	                html += "<td></td>";
+	                html += `<td>
+								<a href="javascript:void(0);" title="Ver" 
+								   onclick="payment.openModalPayent( `+ self.list_payment[i].id +`,`+ i +` )" >
+									<center>
+										<i class="fa fa-eye"></i>
+									</center>
+								</a>
+							</td>
+							<td>
+								<a href="javascript:void(0);" title="Anular" onclick="payment.openModalPay()">
+									<center>
+										<i class="fa fa-trash"></i>
+									</center>
+								</a>
+	                		 </td>`;
 	            html += "</tr>";
             }
 		}else{
@@ -117,12 +132,39 @@ var payment = function () {
 
 	self.addCkPay = function(idObj,index){
 		var current = self.list_payment[index];
+		console.log(current);
+		if(current.code !== ""){
+			self.getPayment(current.code);
+		}
 		current.check = $("#ck_pay_"+idObj).prop("checked");
 		self.list_payment[index] = current;
 	};
 
+	self.getPayment = function(code){
+		 $.ajax({
+            type:"POST",
+            data:{
+                "code" : code
+            },
+            url: self.current_url + "index.php/travel/getByCode",
+            success:function(response){
+            	console.log(response);
+            	return false;
+            	var data = JSON.parse(response);
+            	var data_pay = JSON.parse(data.data_payment);
+            	console.log(data_pay);
+            }
+        });
+	};
+
 	self.openModalPay = function(){
 		$("#modal_add_pay").modal("show");
+		self.makeTablePay();
+	};
+
+	self.openModalPayent = function(idObj,index){
+		$("#modal_add_pay").modal("show");
+		self.addCkPay(idObj,index);
 		self.makeTablePay();
 	};
 
@@ -233,15 +275,18 @@ var payment = function () {
         }).on('success.form.bv', function(e) {
             e.preventDefault();
             if($("#payment_type_id option:selected").attr("data-key") === 'cuotas'){
+            	self.data_payment.cuotas = self.list_cuotas;
+            	/*
             	if($("#cuotas").val() > 0){
             		var cuota = $("#cuotas").val();
             		for (var i = 0; i < cuota; i++) {
             			var fechas_cuota = {};
             			fechas_cuota.desde = $("#cuota_desde_"+i).val();
             			fechas_cuota.hasta = $("#cuota_hasta_"+i).val();
-            			self.data_payment.cuotas.push(fechas_cuota);
+            			
             		}
             	}
+            	*/
             }
             $("#data").val(JSON.stringify(self.data_payment));
             $.ajax({
@@ -249,6 +294,9 @@ var payment = function () {
 				url: $("#form_save_payment").attr("action"),
 				data: $("#form_save_payment").serialize(),
 				success:function(response){
+					console.log(response);
+					return false;
+
 					var data = JSON.parse(response);
 					if(data.success){
 						$("#modal_success").modal("show");

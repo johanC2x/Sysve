@@ -165,14 +165,18 @@ class Travel extends Secure_area {
 		$dscto_type_id = $this->input->post("dscto_type_id");
 	    $dscto = $this->input->post("dscto");
 	    $payment_type_id = $this->input->post("payment_type_id");
+	    $data_payment = $this->input->post("data");
 	    $total = $this->input->post("total");
+	    $payment_state_id = ($payment_type_id === "24") ? 0:1;
 	    $payment_data = array(
 	    	"total" => $total,
 	    	"subtotal" => $total,
 	    	"dscto" => $dscto,
 	    	"dscto_type_id" => (!empty($dscto_type_id)) ? $dscto_type_id : 0,
 	    	"payment_type_id" => $payment_type_id,
+	    	"payment_state_id" => $payment_state_id,
 	    	"igv" => 0,
+	    	"data_payment" => $data_payment,
 	    	"created_by" => $this->session->userdata["person_id"]
  	    );
 	    $payment = $this->payment->save($payment_data);
@@ -187,10 +191,12 @@ class Travel extends Secure_area {
 	    				"payment_id" => $payment["payment"]
 	    			);
 	    			$payment_detail = $this->payment_detail->save($payment_detail_data);
-	    			$customer_travel_data = array(
-	    				"type_state_travel_id" => 3
-	    			);
-	    			$customer_travel = $this->customer_travel->update($customer_travel_data,$value);
+	    			if($payment_state_id === 1){
+	    				$customer_travel_data = array(
+		    				"type_state_travel_id" => 3
+		    			);
+		    			$customer_travel = $this->customer_travel->update($customer_travel_data,$value);
+	    			}
 	    		}
 	    	}
 	    	echo json_encode(["success" => true]);
@@ -199,6 +205,17 @@ class Travel extends Secure_area {
 	    }
 	}
 
+
+	function getByCode(){
+		$code = $this->input->post("code");
+		$data = $this->payment->getByCode($code);
+		if(!empty($data)){
+			$data_pay = json_encode(json_decode($data->data_payment));
+			echo json_encode(["success" => true,"data" => $data]);
+		}else{
+			echo json_encode(["success" => false]);
+		}
+	}
 
 }
 
