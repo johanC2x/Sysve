@@ -217,6 +217,16 @@ class Travel extends Secure_area {
 		}
 	}
 
+	function getPayByCode(){
+		$code = $this->input->post("code");
+		$data = $this->payment->getByCode($code);
+		if(!empty($data)){
+			echo $data->data_payment;
+		}else{
+			echo null;
+		}
+	}
+
 }
 
 ?>

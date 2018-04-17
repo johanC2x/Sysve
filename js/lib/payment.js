@@ -131,10 +131,10 @@ var payment = function () {
 	};
 
 	self.addCkPay = function(idObj,index){
-		var current = self.list_payment[index];
-		console.log(current);
+		var current = self.list_payment[index];		
 		if(current.code !== ""){
 			self.getPayment(current.code);
+			self.getPaymentData(current.code);
 		}
 		current.check = $("#ck_pay_"+idObj).prop("checked");
 		self.list_payment[index] = current;
@@ -148,14 +148,38 @@ var payment = function () {
             },
             url: self.current_url + "index.php/travel/getByCode",
             success:function(response){
-            	console.log(response);
-            	return false;
             	var data = JSON.parse(response);
-            	var data_pay = JSON.parse(data.data_payment);
-            	console.log(data_pay);
+            	if(data.success){
+            		$("#payment_type_id").val(data.data.payment_type_id);
+            		$("#dscto").val(data.data.dscto);
+            		$("#dscto_type_id").val(data.data.dscto_type_id);
+            		$("#total").val(data.data.total);
+            	}
             }
         });
 	};
+
+	self.getPaymentData = function(code){
+		 $.ajax({
+            type:"POST",
+            data:{
+                "code" : code
+            },
+            url: self.current_url + "index.php/travel/getPayByCode",
+            success:function(response){
+            	if(response){
+            		var data = JSON.parse(response);
+            		if(Object.keys(data).length !== 0){
+            			self.list_cuotas = [];
+            			self.list_cuotas = data.cuotas;
+            			self.makeCuota();
+            		}
+            	}
+            }
+        });
+	};
+
+
 
 	self.openModalPay = function(){
 		$("#modal_add_pay").modal("show");
