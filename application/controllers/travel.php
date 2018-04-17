@@ -199,6 +199,13 @@ class Travel extends Secure_area {
 	    }
 	}
 
+	function anular(){
+		$viaje = $this->input->post('id');
+		$this->load->model('TravelModel');
+		$this->travelmodel->anular($viaje);
+		return '0';
+	}
+
 
 }
 

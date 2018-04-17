@@ -48,6 +48,7 @@ class TravelModel extends CI_Model
 	function get_solicitud($array_search){
 		$this->db->select('travel.*,customer_travel.*,people.*');
 		$this->db->where('customer_travel.type_state_travel_id',2);
+		$this->db->where('travel.status',1);
 		if(isset($array_search["code_travel"]) && !empty($array_search["code_travel"])){
 			$this->db->like('code',$array_search["code_travel"]);
 		}
@@ -82,6 +83,12 @@ class TravelModel extends CI_Model
 		}
 
 		return $resultado;
+	}
+
+	function anular($id){
+		$this->db->set('status', '0');
+		$this->db->where('id', $id);
+		return $this->db->update('travel'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
 	}
 
 }
