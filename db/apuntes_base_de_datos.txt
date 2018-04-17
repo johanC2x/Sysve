@@ -1,0 +1,2 @@
+-INSERT INTO `ospos_permissions` VALUES ('cobrar', '1');
+-agregar campo `status` int(11) DEFAULT '1' a ospos_travel

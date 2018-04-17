@@ -84,4 +84,10 @@ class TravelModel extends CI_Model
 		return $resultado;
 	}
 
+	function anular($id){
+		$this->db->set('status', '0');
+		$this->db->where('id', $id);
+		return $this->db->update('travel'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
+	}
+
 }
