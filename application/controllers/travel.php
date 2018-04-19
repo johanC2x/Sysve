@@ -167,7 +167,9 @@ class Travel extends Secure_area {
 	    $payment_type_id = $this->input->post("payment_type_id");
 	    $data_payment = $this->input->post("data");
 	    $total = $this->input->post("total");
-	    $payment_state_id = ($payment_type_id === "24") ? 0:1;
+	    //$payment_state_id = ($payment_type_id === "24") ? 0:1;
+	    $state_pay = $this->input->post("state_pay");
+	    $payment_state_id = ($state_pay === "false") ? 0:1;
 	    $payment_data = array(
 	    	"total" => $total,
 	    	"subtotal" => $total,

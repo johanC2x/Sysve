@@ -10,7 +10,9 @@ var payment = function () {
 				amount : 0,
 				payment : false
 			}
-		]
+		],
+		state_pay : true,
+		current : {}
 	};
 
 	self.changeTypePay = function(){
@@ -19,13 +21,15 @@ var payment = function () {
 		if(key === "cuotas"){
 			$(".cuotas").show();
 			$(".tarjeta").hide();
-			self.makeCuota();
+			$("#table_payment_cuota").show();
 		}else if(key === "tarjeta"){
 			$(".cuotas").hide();
 			$(".tarjeta").show();
+			$("#table_payment_cuota").hide();
 		}else{
 			$(".cuotas").hide();
 			$(".tarjeta").hide();
+			$("#table_payment_cuota").hide();
 		}
 	};
 
@@ -131,13 +135,13 @@ var payment = function () {
 	};
 
 	self.addCkPay = function(idObj,index){
-		var current = self.list_payment[index];		
-		if(current.code !== ""){
-			self.getPayment(current.code);
-			self.getPaymentData(current.code);
+		self.current = self.list_payment[index];		
+		if(self.current.code !== ""){
+			self.getPayment(self.current.code);
+			self.getPaymentData(self.current.code);
 		}
-		current.check = $("#ck_pay_"+idObj).prop("checked");
-		self.list_payment[index] = current;
+		self.current.check = $("#ck_pay_"+idObj).prop("checked");
+		self.list_payment[index] = self.current;
 	};
 
 	self.getPayment = function(code){
@@ -170,6 +174,13 @@ var payment = function () {
             	if(response){
             		var data = JSON.parse(response);
             		if(Object.keys(data).length !== 0){
+            			if(data.hasOwnProperty("cuotas_type")){
+            				$(".cuotas").show();
+            				$("#cuotas").val(data.cuotas_type.cuotas);
+            				$("#cbo_type_cuotas").val(data.cuotas_type.type);
+            			}else{
+            				$(".cuotas").hide();
+            			}
             			self.list_cuotas = [];
             			self.list_cuotas = data.cuotas;
             			self.makeCuota();
@@ -183,6 +194,8 @@ var payment = function () {
 
 	self.openModalPay = function(){
 		$("#modal_add_pay").modal("show");
+		$("#table_payment_cuota").hide();
+		self.changeTypePay();
 		self.makeTablePay();
 	};
 
@@ -298,29 +311,23 @@ var payment = function () {
             }
         }).on('success.form.bv', function(e) {
             e.preventDefault();
+            self.state_pay = true;
             if($("#payment_type_id option:selected").attr("data-key") === 'cuotas'){
+            	var data_cuota = {};
+            	data_cuota.cuotas = $("#cuotas").val();
+            	data_cuota.type = $("#cbo_type_cuotas").val();
             	self.data_payment.cuotas = self.list_cuotas;
-            	/*
-            	if($("#cuotas").val() > 0){
-            		var cuota = $("#cuotas").val();
-            		for (var i = 0; i < cuota; i++) {
-            			var fechas_cuota = {};
-            			fechas_cuota.desde = $("#cuota_desde_"+i).val();
-            			fechas_cuota.hasta = $("#cuota_hasta_"+i).val();
-            			
-            		}
-            	}
-            	*/
+            	self.data_payment.cuotas_type = data_cuota;
+            	var obj_error_pay = self.list_cuotas.find(x => x.payment == false);
+            	self.state_pay = (obj_error_pay === undefined) ? true : false;
             }
             $("#data").val(JSON.stringify(self.data_payment));
+            $("#state_pay").val(self.state_pay);
             $.ajax({
 				type: 'POST',
 				url: $("#form_save_payment").attr("action"),
 				data: $("#form_save_payment").serialize(),
 				success:function(response){
-					console.log(response);
-					return false;
-
 					var data = JSON.parse(response);
 					if(data.success){
 						$("#modal_success").modal("show");

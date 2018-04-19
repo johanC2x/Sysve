@@ -107,6 +107,7 @@
 										</select>
 										<input type="hidden" id="travels" name="travels">
 										<input type="hidden" id="data" name="data">
+										<input type="hidden" id="state_pay" name="state_pay">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -131,6 +132,27 @@
 										</select>
 									</div>
 								</div>
+								<div id="content_cuotas">
+									<div class="col-md-4 cuotas">
+										<div class="form-group">
+											<input type="number" id="cuotas" name="cuotas" class="form-control" placeholder="Cuotas" />
+										</div>
+									</div>
+									<div class="col-md-4 cuotas">
+										<div class="form-group">
+											<select id="cbo_type_cuotas" name="cbo_type_cuotas" class="form-control">
+												<option value="">Seleccionar</option>
+												<option value="1">Semanal</option>
+												<option value="2">Mensual</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4 cuotas">
+										<button id="btn_calcular_cuota" type="button" class="btn btn-primary">
+											Calcular
+										</button>
+									</div>
+								</div>
 								<div class="col-md-12">
 									<table id="table_payment_cuota" class="table table-hover table-bordered">
 										<thead>
@@ -151,24 +173,6 @@
 										</tbody>
 									</table>
 								</div>
-								<div id="content_cuotas">
-									<!--
-									<div class="col-md-4 cuotas">
-										<div class="form-group">
-											<input type="text" id="cuotas" name="cuotas" class="form-control" placeholder="Monto" />
-										</div>
-									</div>
-									<div class="col-md-4 cuotas">
-										<div class="form-group">
-											<label class="checkbox-inline"><input class="card" type="checkbox" id="ck_cuota" name="ck_cuota" value="mastercard">¿Pagado?</label>
-										</div>
-									</div>
-									<div class="col-md-4 cuotas">
-										<button class="btn btn-primary" type="button" >+</button>
-									</div>
-									-->
-								</div>
-
 								<!-- CAMPOS PARA CUOTA -->
 								<div id="content_cuota"></div>
 								<!-- /CAMPOS PARA CUOTA -->
@@ -251,6 +255,23 @@
 			}
 			payment.data_payment.type = 'card';
 			payment.data_payment.card = $(this).val();
+		});
+
+		$("#btn_calcular_cuota").click(function(){
+			var cuota = $("#cuotas").val();
+			var tcuota = $("#cbo_type_cuotas").val();
+			var total = $("#total").val();
+			var pagos = total/cuota;
+			if(cuota !== 0 && tcuota !== ''){
+				payment.list_cuotas = [];
+				for (var i = 0; i < cuota; i++) {
+					var pay = {};
+					pay.amount = pagos;
+					pay.payment = false;
+					payment.list_cuotas.push(pay);
+				}
+				payment.makeCuota();
+			}
 		});
 
 		/*
