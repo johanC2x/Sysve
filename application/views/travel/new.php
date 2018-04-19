@@ -153,7 +153,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="type_travel">Monto</label>
+						<label for="type_travel" style="display: none">Monto</label>
 						<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
 					</div>
 				</fieldset>

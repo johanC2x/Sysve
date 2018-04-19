@@ -325,7 +325,8 @@ var travel = function () {
     self.calcularComisiones = function(){
         var suma = 0.00;
         for (var i = 0; i < self.list_comision.length; i++) {
-            suma += parseFloat(self.list_comision[i].ammount);
+            valor = parseFloat(self.list_comision[i].ammount) || 0;
+            suma += valor;
         }
         $('#total_servicios').val(suma);
     };
@@ -521,7 +522,7 @@ var travel = function () {
             var idObj = parseInt($("#comision_obj_id").val());
             var current = self.list_comision[idObj];
             current.comision_code = $("#comision_code").val();
-            current.monto_detalle = $("#monto_detalle").val();
+            current.ammount = parseFloat($("#monto_detalle").val()) + parseFloat($('#fee_servicio').val());
             current.fee_servicio = $("#fee_servicio").val();
             current.porcentaje_cobro = $("#porcentaje_cobro").val();
             current.nombre_ruc = $("#nombre_ruc").val();
@@ -541,6 +542,7 @@ var travel = function () {
                 monto_tabla = parseFloat($("#monto_detalle").val()) + parseFloat($('#fee_servicio').val());
                 $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text(monto_tabla);
             }
+            self.calcularComisiones();
             $('.close').trigger('click');
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
