@@ -1,9 +1,18 @@
 var payment = function () {
 	var self = {
+		current_url : "",
 		list_payment : [],
 		data_payment : {
 			cuotas : []
-		}
+		},
+		list_cuotas : [
+			{
+				amount : 0,
+				payment : false
+			}
+		],
+		state_pay : true,
+		current : {}
 	};
 
 	self.changeTypePay = function(){
@@ -12,13 +21,62 @@ var payment = function () {
 		if(key === "cuotas"){
 			$(".cuotas").show();
 			$(".tarjeta").hide();
+			$("#table_payment_cuota").show();
 		}else if(key === "tarjeta"){
 			$(".cuotas").hide();
 			$(".tarjeta").show();
+			$("#table_payment_cuota").hide();
 		}else{
 			$(".cuotas").hide();
 			$(".tarjeta").hide();
+			$("#table_payment_cuota").hide();
 		}
+	};
+
+	self.makeCuota = function(){
+		var html = '';
+		if(self.list_cuotas.length > 0){
+			$("#table_payment_cuota tbody").empty();
+			for (var i = 0; i < self.list_cuotas.length; i++) {
+				var check = (self.list_cuotas[i].payment) ? "checked":"";
+				html += `<tr>
+	                        <td>
+	                        	<div class="form-group">
+									<input type="number" id="amount_`+i+`" name="amount_`+i+`" class="form-control" placeholder="Monto" 
+								 		onchange="payment.changeInputCuota(`+i+`);" value="`+ self.list_cuotas[i].amount +`"/>
+								</div>
+	                        </td>
+	                        <td>
+	                        	<div class="form-group">
+									<center>
+										<input class="card" type="checkbox" id="payment_`+i+`" name="payment_`+i+`" `+ check +` onchange="payment.changeInputCuota(`+i+`);">
+									</center>
+								</div>
+	                        </td>
+	                        <td>
+	                        	<center>
+									<button class="btn btn-primary" type="button" onclick="payment.addPayCuota()" >Agregar +</button>
+	                        	</center>
+	                        </td>
+	                    </tr>`;
+			}
+			$("#table_payment_cuota tbody").append(html);
+		}
+	};
+
+	self.changeInputCuota = function(obj){
+		var data = {};
+		data.amount = $("#amount_"+obj).val();
+		data.payment = $("#payment_"+obj).prop("checked");
+		self.list_cuotas[obj] = data;
+	};
+
+	self.addPayCuota = function(){
+		var data = {};
+		data.amount = 0;
+		data.payment = false;
+		self.list_cuotas.push(data);
+		self.makeCuota();
 	};
 
 	self.filterPayment = function(){
@@ -47,7 +105,21 @@ var payment = function () {
 	                html += "<td><center>"+ self.list_payment[i].name +"</center></td>";
 	                html += "<td><center>"+ self.list_payment[i].destiny_origin +"</center></td>";
 	                html += "<td><center>"+ self.list_payment[i].destiny_end +"</center></td>";
-	                html += "<td></td>";
+	                html += `<td>
+								<a href="javascript:void(0);" title="Ver" 
+								   onclick="payment.openModalPayent( `+ self.list_payment[i].id +`,`+ i +` )" >
+									<center>
+										<i class="fa fa-eye"></i>
+									</center>
+								</a>
+							</td>
+							<td>
+								<a href="javascript:void(0);" title="Anular" onclick="payment.openModalPay()">
+									<center>
+										<i class="fa fa-trash"></i>
+									</center>
+								</a>
+	                		 </td>`;
 	            html += "</tr>";
             }
 		}else{
@@ -63,13 +135,73 @@ var payment = function () {
 	};
 
 	self.addCkPay = function(idObj,index){
-		var current = self.list_payment[index];
-		current.check = $("#ck_pay_"+idObj).prop("checked");
-		self.list_payment[index] = current;
+		self.current = self.list_payment[index];		
+		if(self.current.code !== ""){
+			self.getPayment(self.current.code);
+			self.getPaymentData(self.current.code);
+		}
+		self.current.check = $("#ck_pay_"+idObj).prop("checked");
+		self.list_payment[index] = self.current;
 	};
+
+	self.getPayment = function(code){
+		 $.ajax({
+            type:"POST",
+            data:{
+                "code" : code
+            },
+            url: self.current_url + "index.php/travel/getByCode",
+            success:function(response){
+            	var data = JSON.parse(response);
+            	if(data.success){
+            		$("#payment_type_id").val(data.data.payment_type_id);
+            		$("#dscto").val(data.data.dscto);
+            		$("#dscto_type_id").val(data.data.dscto_type_id);
+            		$("#total").val(data.data.total);
+            	}
+            }
+        });
+	};
+
+	self.getPaymentData = function(code){
+		 $.ajax({
+            type:"POST",
+            data:{
+                "code" : code
+            },
+            url: self.current_url + "index.php/travel/getPayByCode",
+            success:function(response){
+            	if(response){
+            		var data = JSON.parse(response);
+            		if(Object.keys(data).length !== 0){
+            			if(data.hasOwnProperty("cuotas_type")){
+            				$(".cuotas").show();
+            				$("#cuotas").val(data.cuotas_type.cuotas);
+            				$("#cbo_type_cuotas").val(data.cuotas_type.type);
+            			}else{
+            				$(".cuotas").hide();
+            			}
+            			self.list_cuotas = [];
+            			self.list_cuotas = data.cuotas;
+            			self.makeCuota();
+            		}
+            	}
+            }
+        });
+	};
+
+
 
 	self.openModalPay = function(){
 		$("#modal_add_pay").modal("show");
+		$("#table_payment_cuota").hide();
+		self.changeTypePay();
+		self.makeTablePay();
+	};
+
+	self.openModalPayent = function(idObj,index){
+		$("#modal_add_pay").modal("show");
+		self.addCkPay(idObj,index);
 		self.makeTablePay();
 	};
 
@@ -179,18 +311,18 @@ var payment = function () {
             }
         }).on('success.form.bv', function(e) {
             e.preventDefault();
+            self.state_pay = true;
             if($("#payment_type_id option:selected").attr("data-key") === 'cuotas'){
-            	if($("#cuotas").val() > 0){
-            		var cuota = $("#cuotas").val();
-            		for (var i = 0; i < cuota; i++) {
-            			var fechas_cuota = {};
-            			fechas_cuota.desde = $("#cuota_desde_"+i).val();
-            			fechas_cuota.hasta = $("#cuota_hasta_"+i).val();
-            			self.data_payment.cuotas.push(fechas_cuota);
-            		}
-            	}
+            	var data_cuota = {};
+            	data_cuota.cuotas = $("#cuotas").val();
+            	data_cuota.type = $("#cbo_type_cuotas").val();
+            	self.data_payment.cuotas = self.list_cuotas;
+            	self.data_payment.cuotas_type = data_cuota;
+            	var obj_error_pay = self.list_cuotas.find(x => x.payment == false);
+            	self.state_pay = (obj_error_pay === undefined) ? true : false;
             }
             $("#data").val(JSON.stringify(self.data_payment));
+            $("#state_pay").val(self.state_pay);
             $.ajax({
 				type: 'POST',
 				url: $("#form_save_payment").attr("action"),

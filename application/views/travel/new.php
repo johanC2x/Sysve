@@ -9,7 +9,7 @@
 						<input type="text" class="form-control" id="code_travel_search" placeholder="Ingresar Código" name="code_travel" />
 					</div>
 					<button type="button" class="btn btn-primary" onclick="travel.getSolicitud()">Buscar Solicitud</button>
-					<a type="button" class="btn btn-primary" href="<?php echo base_url();?>/index.php/travel/payment" >Generar Cobros</a>
+					<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/travel/payment" >Generar Cobros</a>
 					
 				</fieldset>
 			<?php echo form_close(); ?>
@@ -153,7 +153,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="type_travel">Monto</label>
+						<label for="type_travel" style="display: none">Monto</label>
 						<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
 					</div>
 				</fieldset>
