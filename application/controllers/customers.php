@@ -234,7 +234,7 @@ class Customers extends Person_controller
 	*/
 	function get_form_width()
 	{			
-		return 450;
+		return 750;
 	}
 }
 ?>

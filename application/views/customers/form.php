@@ -136,4 +136,20 @@ echo form_close();
         });
         return childrens;
     }
+
+    function generarTablaDatos(){
+        var tabla = '';
+        inputs = ['razon_social', 'direccion', 'nro_doc'];
+        tabla += '<table style="width:500px">';
+        tabla += '<tr>';
+        for (var i = 0; i < inputs.length; i++) {
+            tabla += '<td><input class="'+inputs[i]+'"></td>';
+        }
+        tabla += '</tr>';
+        tabla += '<table>';
+        console.log(tabla);
+        $('#datos_empresa').append(tabla);
+    }
+
+
 </script>

@@ -72,6 +72,20 @@
 </div>
 
 <div class="field_row clearfix">	
+	<fieldset>
+		<legend>Datos de empresa</legend><button style="float:right" onclick="generarTablaDatos();">agregar datos</button>
+		<table style="width: 500px">
+			<tr>
+				<td>razon social</td>
+				<td>direccion</td>
+				<td>nro doc</td>
+			</tr>
+		</table>
+		<div id="datos_empresa" name="datos_empresa">
+	</fieldset>
+</div>
+
+<div class="field_row clearfix">	
 <?php echo form_label($this->lang->line('date_passport').':', 'date_passport',array('class'=>'wide')); ?>
 	<div class='form-group'>
 	<input type="date" id="date_passport" name="date_passport" class="date form-control" />
