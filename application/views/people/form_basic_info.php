@@ -74,7 +74,7 @@
 <div class="field_row clearfix">	
 	<fieldset>
 		<legend>Datos de empresa</legend><button style="float:right" onclick="generarTablaDatos();">agregar datos</button>
-		<table style="width: 500px">
+		<table style="width: 500px" id="tbl_empresas">
 			<tr>
 				<td>razon social</td>
 				<td>direccion</td>

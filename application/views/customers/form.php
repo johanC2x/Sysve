@@ -145,10 +145,14 @@ echo form_close();
         for (var i = 0; i < inputs.length; i++) {
             tabla += '<td><input class="'+inputs[i]+'"></td>';
         }
-        tabla += '</tr>';
+        tabla += '<td><button class="borrar">borrar</button></td></tr>';
         tabla += '<table>';
         console.log(tabla);
         $('#datos_empresa').append(tabla);
+            $('.borrar').click(function(){
+                fila = $(this).parent().parent();
+                fila.remove();
+            })
     }
 
 
