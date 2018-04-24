@@ -80,10 +80,6 @@
 							<label for="name_travel">Vuelo:</label>
                 			<input type="text" name="name_travel" id="name_travel" class="form-control" />
 						</div>
-						<div class="form-group">
-		                    <label>Total:</label>
-		                    <input type="text" id="total_servicios" name="total_servicios" class="form-control" disabled="true" />
-		                </div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
@@ -130,69 +126,91 @@
 					</div>
 				</div>
 			</fieldset>
-			<div class="alert alert-info" style="display: none" id="info">
-		    	
-		  	</div>
+			<div class="alert alert-info" style="display: none" id="info"></div>
 			<?php echo form_close(); ?>
 		</div>
 	</div>
 </div>
 <div class="row">
+	<div class="col-md-8">
+		<?php echo form_open('travel/saveComision',array('id'=>'form_travel_comision_save','class' => 'form-inline')); ?>
+			<fieldset>
+				<legend>Registro de Servicios</legend>
+				  <div class="form-group mx-sm-3 mb-2">
+				    <select id="cbo_comision_payment" name="cbo_comision_payment" class="form-control">
+						<option value="">Seleccionar Tipo de Servicio</option>
+						<?php foreach ($property as $key => $value) {?>
+							<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
+						<?php } ?>
+					</select>
+				  </div>
+				<div class="form-group">
+					<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
+				</div>
+				<div class="form-group">
+                    <input type="text" id="total_servicios" name="total_servicios" class="form-control" disabled="true" />
+                </div>
+
+				  <button id="btn_save_com" type="button" class="btn btn-primary">Agregar Comisión</button>
+				  <button type="button" class="btn btn-primary btn_save_travel">Guardar Viaje</button>
+			</fieldset>
+			<div class="alert alert-danger alert-dismissible error_comision"></div>
+		<?php echo form_close(); ?>
+	</div>
+	<!--
+	<div class="col-md-4">
+		<?php //echo form_open('travel/saveComision',array('id'=>'form_travel_comision_save','class' => 'form-inline')); ?>
+			<fieldset>
+				<legend>Registro de Servicios</legend>
+				<div class="form-group">
+					
+				</div>
+				<div class="form-group">
+					<label for="type_travel" style="display: none">Monto</label>
+					<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
+				</div>
+				
+			</fieldset>
+			<div class="alert alert-danger alert-dismissible error_comision">
+			</div>
+		<?php //echo form_close(); ?>
+	</div>
+	-->
+	<div class="col-md-12">
+		<br/>
+		<form>
+			<table id="table_customer_travel" class="table table-hover table-bordered" >
+				<thead>
+					<tr>
+						<th class="col-md-1"><center>Nro.</center></th>
+						<th class="col-md-4"><center>Servicios</center></th>
+						<th class="col-md-2"><center>Monto</center></th>
+						<th colspan="3" class="col-md-1"><center>Acción</center></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="5">
+							<center>
+								No se registraron datos.
+							</center>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!--
+			<button type="button" class="btn btn-primary" >Nuevo Viaje</button>
+			-->
+		</form>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-12">
 		<div class="col-md-4">
-			<?php echo form_open('travel/saveComision',array('id'=>'form_travel_comision_save')); ?>
-				<fieldset>
-					<legend>Registro de Comisiones</legend>
-					<div class="form-group">
-						<label for="type_travel">Tipo de Comisión</label>
-						<select id="cbo_comision_payment" name="cbo_comision_payment" class="form-control">
-							<option value="">Seleccionar</option>
-							<?php foreach ($property as $key => $value) {?>
-								<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
-							<?php } ?>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="type_travel" style="display: none">Monto</label>
-						<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
-					</div>
-				</fieldset>
-				<div class="alert alert-danger alert-dismissible error_comision">
-				</div>
-				<button id="btn_save_com" type="button" class="btn btn-primary" >Agregar Comisión</button>
-			<?php echo form_close(); ?>
+			
 		</div>
 		<div class="col-md-8">
-			<form>
-				<fieldset>
-					<legend>Total de Servicios</legend>
-					<table id="table_customer_travel" class="table table-hover table-bordered" >
-						<thead>
-							<tr>
-								<th class="col-md-1"><center>Nro.</center></th>
-								<th class="col-md-4"><center>Servicios</center></th>
-								<th class="col-md-2"><center>Monto</center></th>
-								<th colspan="3" class="col-md-1"><center>Acción</center></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="5">
-									<center>
-										No se registraron datos.
-									</center>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<button type="button" class="btn btn-primary btn_save_travel">
-						Guardar Viaje
-					</button>
-					<!--
-					<button type="button" class="btn btn-primary" >Nuevo Viaje</button>
-					-->
-				</fieldset>
-			</form>
+			
 			<br>
 			<br>
 			<button class="btn btn-primary" id="showLastTravel" onclick="travel.showLastTravel();">mostrar ultimo viaje</button>
@@ -220,66 +238,74 @@
     	<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<!--
 				<h3 class="modal-title messages_modal">Detalles de Servicio</h3>
+				-->
 			</div>
 			<div class="modal-body">
 				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
+					<!--
 					<div class="row">
+					-->
+						<fieldset>
+							<legend>Información del Cliente</legend>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="dni_ruc">DNI/RUC</label>
+									<input type="text" id="dni_ruc" name="dni_ruc" class="form-control"> 
+								</div>		
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="nombre_ruc">Nombre/Razón Social</label>
+									<input type="text" id="nombre_ruc" name="nombre_ruc" class="form-control"> 
+								</div>		
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="direccion_fiscal">Direccion</label>
+									<input type="text" id="direccion_fiscal" name="direccion_fiscal" class="form-control">
+								</div>
+							</div>
+						</fieldset>
 						<fieldset>
 							<legend>Información de Facturación y Tarjeta</legend>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="monto_detalle">Monto de Servicio</label>
-								<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
-							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="fee_servicio">Fee del servicio</label>
-								<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="tipo_doc">Tipo documento</label>
+									<select id="tipo_doc" name="tipo_doc" class="form-control">
+										<option value="">Seleccionar</option>
+										<option value="FACTURA">FACTURA</option>
+										<option value="BOLETA ">BOLETA </option>
+										<option value="TICKET">TICKET</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="porcentaje_cobro">Porcentaje del cobro</label>
-								<input type="text" id="porcentaje_cobro" name="porcentaje_cobro" class="form-control" onkeyup="travel.calcularPorcentaje();"> 
-							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="cobro_total">Cobro Total</label>
-								<input type="text" id="cobro_total" name="cobro_total" class="form-control" readonly=""> 
-							</div>		
-						</div>
-						
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="nombre_ruc">Nombre/Razón Social</label>
-								<input type="text" id="nombre_ruc" name="nombre_ruc" class="form-control"> 
-							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="dni_ruc">DNI/RUC</label>
-								<input type="text" id="dni_ruc" name="dni_ruc" class="form-control"> 
-							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="direccion_fiscal">Direccion</label>
-								<input type="text" id="direccion_fiscal" name="direccion_fiscal" class="form-control">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="monto_detalle">Monto de Servicio</label>
+									<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
+								</div>		
 							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="tipo_doc">Tipo documento</label>
-								<select id="tipo_doc" name="tipo_doc" class="form-control">
-									<option value="FACTURA">FACTURA</option>
-									<option value="BOLETA ">BOLETA </option>
-									<option value="TICKET">TICKET</option>
-								</select>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="porcentaje_cobro">Porcentaje del cobro</label>
+									<input type="text" id="porcentaje_cobro" name="porcentaje_cobro" class="form-control" 
+										    onkeyup="travel.calcularPorcentaje();"> 
+								</div>		
 							</div>
-						</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fee_servicio">Fee del servicio</label>
+									<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="cobro_total">Cobro Total</label>
+									<input type="text" id="cobro_total" name="cobro_total" class="form-control" readonly=""> 
+								</div>		
+							</div>
 						</fieldset>
 						<fieldset>
 							<legend>Información de Fee y Comisión</legend>
@@ -312,6 +338,7 @@
 							<div class="form-group">
 								<label for="tipo_tarjeta_milla">Tipo Tarjeta</label>
 								<select id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control">
+									<option value="">Seleccionar</option>
 									<option value="VISA">VISA</option>
 									<option value="MASTERCARD">MASTERCARD</option>
 									<option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
@@ -344,15 +371,19 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-								<label for="comision_incentive">Incentivos de otro operador</label>
-								<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
+							<label for="comision_incentive">Incentivos de otro operador</label>
+							<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
 						</div>
 					</fieldset>
+					<!--
 					</div>
-					<button class="btn btn-primary btn_update_comision" type="button">
-						Guardar
-					</button>
+					-->
 				<?php echo form_close(); ?>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary btn_update_comision" type="button">
+					Guardar
+				</button>
 			</div>
 		</div>
 	</div>

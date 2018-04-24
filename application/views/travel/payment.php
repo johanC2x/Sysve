@@ -19,7 +19,9 @@
 						<input type="text" class="form-control" id="customer_travel" name="customer_travel" placeholder="Ingresar Cliente" size="40" />
 					</div>
 					<button type="button" class="btn btn-primary" onclick="payment.filterPayment()">Buscar</button>
+					<!--
 					<button type="button" class="btn btn-primary" onclick="payment.openModalPay()">Agregar Pago</button>
+					-->
 				</fieldset>
 			<?php echo form_close(); ?>	
 		    </div>
