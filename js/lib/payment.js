@@ -99,7 +99,7 @@ var payment = function () {
             for (var i = 0; i < self.list_payment.length; i++) {
             	var customer = self.list_payment[i].first_name + " " + self.list_payment[i].last_name;
             	html += "<tr>";
-            		html += "<td><center><input type='checkbox' id='ck_pay_"+ self.list_payment[i].id +"' onclick='payment.addCkPay("+ self.list_payment[i].id +", "+ i +");'/></center></td>";
+            		html += "<td><center><input type='checkbox' style='display:none;' id='ck_pay_"+ self.list_payment[i].id +"' onclick='payment.addCkPay("+ self.list_payment[i].id +", "+ i +");'/></center></td>";
 	                html += "<td><center>"+ self.list_payment[i].code +"</center></td>";
 	                html += "<td><center>"+ customer +"</center></td>";
 	                html += "<td><center>"+ self.list_payment[i].name +"</center></td>";
@@ -107,7 +107,7 @@ var payment = function () {
 	                html += "<td><center>"+ self.list_payment[i].destiny_end +"</center></td>";
 	                html += `<td>
 								<a href="javascript:void(0);" title="Ver" 
-								   onclick="payment.openModalPayent( `+ self.list_payment[i].id +`,`+ i +` )" >
+								   onclick="payment.addCkPaySecond( `+ self.list_payment[i].id +`, `+ i +`)" >
 									<center>
 										<i class="fa fa-eye"></i>
 									</center>
@@ -132,6 +132,21 @@ var payment = function () {
                     </tr>`;
 		}
 		$("#table_payment tbody").append(html);
+	};
+
+	self.addCkPaySecond = function(idObj,index){
+		self.current = self.list_payment[index];		
+		if(self.current.code !== ""){
+			self.getPayment(self.current.code);
+			self.getPaymentData(self.current.code);
+		}
+		$("#ck_pay_"+idObj).prop("checked",true);
+		self.current.check = $("#ck_pay_"+idObj).prop("checked");
+		self.list_payment[index] = self.current;
+		self.changeTypePay();
+		self.makeTablePay();
+		$("#modal_add_pay").modal("show");
+		$("#table_payment_cuota").hide();
 	};
 
 	self.addCkPay = function(idObj,index){
