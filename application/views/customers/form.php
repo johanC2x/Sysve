@@ -137,23 +137,42 @@ echo form_close();
         return childrens;
     }
 
-    function generarTablaDatos(){
+    function generarTablaDatos(contenedor, inputs){
         var tabla = '';
-        inputs = ['razon_social', 'direccion', 'nro_doc'];
+        // inputs = ['razon_social', 'direccion', 'nro_doc'];
         tabla += '<table style="width:500px">';
         tabla += '<tr>';
         for (var i = 0; i < inputs.length; i++) {
-            tabla += '<td><input class="'+inputs[i]+'"></td>';
+            tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
         }
-        tabla += '<td><button class="borrar">borrar</button></td></tr>';
+        tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
         tabla += '<table>';
         console.log(tabla);
-        $('#datos_empresa').append(tabla);
+        $('#'+contenedor).append(tabla);
             $('.borrar').click(function(){
                 fila = $(this).parent().parent();
                 fila.remove();
             })
     }
+
+    function generarJson(){
+        inputs = ['razon_social', 'direccion', 'nro_doc'];
+        arr = [];
+        j = 0;
+        for (var i = 0; i < inputs.length; i++) {
+            $.each('.'+inputs[i], function(){
+                arr[j][i] = $(this).val();
+                j++;
+            })
+        }
+
+        console.log(arr);
+        
+    }
+
+    generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);
+    generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc']);
+    generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia']);
 
 
 </script>

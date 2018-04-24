@@ -52,44 +52,47 @@
 	</div>
 </div>
 
-<div class="field_row clearfix">	
-<?php echo form_label($this->lang->line('has_passport').':', 'has_passport',array('class'=>'wide')); ?>
-	<div class='form-group'>
-	<input type="checkbox" name="has_passport" value="1">
-	</div>
+<div class="form-group">
+    <label class="wide" >Nro de Tarjeta de millaje</label>
+    <input type="text" id="nro_millaje" name="nro_millaje" class="date form-control" />
 </div>
 
-<div class="field_row clearfix">	
-<?php echo form_label($this->lang->line('num_passport').':', 'num_passport',array('class'=>'wide')); ?>
-	<div class='form-group'>
-	<?php echo form_input(array(
-		'name'=>'num_passport',
-		'id'=>'num_passport',
-		'class'=>'form-control',
-		'value'=>$person_info->num_passport)
-	);?>
-	</div>
+<div class="form-group">
+    <label class="wide" >Tipo de Tarjeta de Millaje</label>
+    <input type="text" id="tipo_millaje" name="tipo_millaje" class="date form-control" />
 </div>
+
 
 <div class="field_row clearfix">	
 	<fieldset>
-		<legend>Datos de empresa</legend><button style="float:right" onclick="generarTablaDatos();">agregar datos</button>
+		<legend>Datos de Pasaportes</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);"></button>
 		<table style="width: 500px" id="tbl_empresas">
 			<tr>
-				<td>razon social</td>
-				<td>direccion</td>
-				<td>nro doc</td>
+				<td style="width:200px">Pais Origen</td>
+				<td style="width:200px">Nro de Pasaporte</td>
+				<td style="width:200px">Fecha Vencimiento</td>
 			</tr>
 		</table>
-		<div id="datos_empresa" name="datos_empresa">
+		<div id="datos_pasaporte" name="datos_pasaporte">
 	</fieldset>
 </div>
 
+
+
+
 <div class="field_row clearfix">	
-<?php echo form_label($this->lang->line('date_passport').':', 'date_passport',array('class'=>'wide')); ?>
-	<div class='form-group'>
-	<input type="date" id="date_passport" name="date_passport" class="date form-control" />
-	</div>
+	<fieldset>
+		<legend>Datos de empresa</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc']);"></button>
+		<table style="width: 500px" id="tbl_empresas">
+			<tr>
+				<td style="width:200px">razon social</td>
+				<td style="width:200px">direccion</td>
+				<td style="width:200px">nro doc</td>
+			</tr>
+		</table>
+		<div id="datos_empresa" name="datos_empresa">
+		<input type="hidden" name="json_empresa">
+	</fieldset>
 </div>
 
 <div class="field_row clearfix">	
@@ -116,14 +119,18 @@
 </div>
 
 <div class="field_row clearfix">	
-<?php echo form_label($this->lang->line('common_address_1').':', 'address_1',array('class'=>'wide')); ?>
-	<div class='form-group'>
-	<?php echo form_input(array(
-		'name'=>'address_1',
-		'id'=>'address_1',
-		'class'=>'form-control',
-		'value'=>$person_info->address_1));?>
-	</div>
+	<fieldset>
+		<legend>Datos de direcciones</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia']);"></button>
+		<table style="width: 500px" id="tbl_empresas">
+			<tr>
+				<td style="width:200px">Direccion</td>
+				<td style="width:200px">Distrito</td>
+				<td style="width:200px">Referencia</td>
+			</tr>
+		</table>
+		<div id="datos_direcciones" name="datos_direcciones">
+		<input type="hidden" name="json_empresa">
+	</fieldset>
 </div>
 
 <div class="form-group">

@@ -31,7 +31,7 @@
 					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
 					</button> -->
-					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:450" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:750" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					<?php 
 						/*
 					    $controller_name = 'customers';
@@ -62,7 +62,7 @@
 				<legend>Datos del Viaje</legend>
 				<div class="col-md-12">
 					<div class="col-md-4">
-						<div class="form-group">
+						<!-- <div class="form-group">
 		                    <label>Tipo de Boleto:</label>
 		                    <select id="type_travel" name="type_travel" class="form-control" onchange="travel.showInfo();">
 								<option value="">Seleccionar</option>
@@ -71,7 +71,7 @@
 								<option value="BT o IT">BT o IT</option>
 								<option value="Re-emisión">Re-emisión</option>
 							</select>
-		                </div>
+		                </div> -->
 						<div class="form-group">
 							<label for="code_travel">Código:</label>
                 			<input type="text" name="code_travel" id="code_travel" class="form-control" />
@@ -172,6 +172,7 @@
 								<th class="col-md-1"><center>Nro.</center></th>
 								<th class="col-md-4"><center>Servicios</center></th>
 								<th class="col-md-2"><center>Monto</center></th>
+								<th class="col-md-2"><center>Tipo</center></th>
 								<th colspan="3" class="col-md-1"><center>Acción</center></th>
 							</tr>
 						</thead>
@@ -226,7 +227,7 @@
 				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
 					<div class="row">
 						<fieldset>
-							<legend>Información de Facturación y Tarjeta</legend>
+							<legend style="padding-left: 13px">Información del servicio</legend>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="monto_detalle">Monto de Servicio</label>
@@ -282,10 +283,10 @@
 						</div>
 						</fieldset>
 						<fieldset>
-							<legend>Información de Fee y Comisión</legend>
+							<legend style="padding-left: 13px">Información de Fee y Comisión</legend>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="comision_code">Ticket/Nro de reserva</label>
+								<label for="comision_code">Nro de ticket</label>
 								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
 								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
 							</div>
@@ -300,30 +301,6 @@
 							<div class="form-group">
 								<label for="comision_percentage">Monto</label>
 								<input type="text" id="comision_percentage" name="comision_percentage" class="form-control" value="0"/>
-							</div>		
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="acumula_millas">Acumula millas?</label>
-								<input type="checkbox" id="acumula_millas" name="acumula_millas" value="1">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="tipo_tarjeta_milla">Tipo Tarjeta</label>
-								<select id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control">
-									<option value="VISA">VISA</option>
-									<option value="MASTERCARD">MASTERCARD</option>
-									<option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
-									<option value="DINNERS">DINNERS</option>
-									<option value="SAFETY PAY">SAFETY PAY</option>
-								</select>
-							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="nro_tarjeta_milla">Nro de tarjeta</label>
-								<input type="text" id="nro_tarjeta_milla" name="nro_tarjeta_milla" class="form-control" value="0"/>
 							</div>		
 						</div>
 						<div class="col-md-12">
