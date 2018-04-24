@@ -51,7 +51,6 @@
 	);?>
 	</div>
 </div>
-
 <div class="form-group">
     <label class="wide" >Nro de Tarjeta de millaje</label>
     <input type="text" id="nro_millaje" name="nro_millaje" class="date form-control" />

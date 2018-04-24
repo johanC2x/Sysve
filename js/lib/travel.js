@@ -301,27 +301,25 @@ var travel = function () {
     }
 
         self.addComision = function(val = null){
-        if($("#cbo_comision_payment").val() !== ''){
-            var data = {};
-            data.key = $("#cbo_comision_payment option:selected").attr("data-key");
-            data.name = $("#cbo_comision_payment option:selected").text();
-            data.ammount = $("#amount_travel").val();
+        var data = {};
+        data.key = $("#cbo_comision_payment option:selected").attr("data-key");
+        data.name = $("#cbo_comision_payment option:selected").text();
+        data.ammount = $("#amount_travel").val();
 
-            if(val === 'fee'){
-                data.key = 'fee';
-                data.name = 'FEE';
-                data.ammount = 0;
-            }
-            // if(parseInt(data.ammount) === 0){
-            //     $(".error_comision").text("El monto no puede ser cero");
-            //     $(".error_comision").show().delay(1000).fadeOut();
-            // }else{
-                $(".error_comision").hide();
-                self.list_comision.push(data);
-                self.makeTableComision();
-                self.calcularComisiones();
-            // }
+        if(val === 'fee'){
+            data.key = 'fee';
+            data.name = 'FEE';
+            data.ammount = 0;
         }
+        // if(parseInt(data.ammount) === 0){
+        //     $(".error_comision").text("El monto no puede ser cero");
+        //     $(".error_comision").show().delay(1000).fadeOut();
+        // }else{
+            $(".error_comision").hide();
+            self.list_comision.push(data);
+            self.makeTableComision();
+            self.calcularComisiones();
+        // }
     };
 
     self.calcularComisiones = function(){
@@ -355,6 +353,8 @@ var travel = function () {
                         html += "<td style='text-align: right;'>"+ '<input type="text" name="amount" size="8">' +"</td>";    
                     }
                     
+                    html += "<td><center>"+ "" +"</center></td>";
+
                     html += `<td>
                                 <center>
                                     <a href='javascript:void(0);' title='Eliminar' onclick='travel.removeComision(`+ i +`)' >

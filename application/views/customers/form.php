@@ -169,7 +169,6 @@ echo form_close();
         console.log(arr);
         
     }
-
     generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);
     generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc']);
     generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia']);
