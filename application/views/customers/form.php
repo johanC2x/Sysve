@@ -137,10 +137,10 @@ echo form_close();
         return childrens;
     }
 
-    function generarTablaDatos(contenedor, inputs){
+    function generarTablaDatos(contenedor, inputs, width){
         var tabla = '';
         // inputs = ['razon_social', 'direccion', 'nro_doc'];
-        tabla += '<table style="width:500px">';
+        tabla += '<table style="width:'+width+'px">';
         tabla += '<tr>';
         for (var i = 0; i < inputs.length; i++) {
             tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
@@ -169,10 +169,10 @@ echo form_close();
         console.log(arr);
         
     }
-    generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);
-    generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc']);
-    generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia']);
-    generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito']);
+    generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven'], 500);
+    generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc', 'correo' ,'tlfono'], 1000)
+    generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia'], 500);
+    generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);
 
 
 </script>
