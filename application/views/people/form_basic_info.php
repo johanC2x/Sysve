@@ -61,39 +61,6 @@
     <input type="text" id="tipo_millaje" name="tipo_millaje" class="date form-control" />
 </div>
 
-
-<div class="field_row clearfix">	
-	<fieldset>
-		<legend>Datos de Pasaportes</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);"></button>
-		<table style="width: 500px" id="tbl_empresas">
-			<tr>
-				<td style="width:200px">Pais Origen</td>
-				<td style="width:200px">Nro de Pasaporte</td>
-				<td style="width:200px">Fecha Vencimiento</td>
-			</tr>
-		</table>
-		<div id="datos_pasaporte" name="datos_pasaporte">
-	</fieldset>
-</div>
-
-
-
-
-<div class="field_row clearfix">	
-	<fieldset>
-		<legend>Datos de empresa</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc']);"></button>
-		<table style="width: 500px" id="tbl_empresas">
-			<tr>
-				<td style="width:200px">razon social</td>
-				<td style="width:200px">direccion</td>
-				<td style="width:200px">nro doc</td>
-			</tr>
-		</table>
-		<div id="datos_empresa" name="datos_empresa">
-		<input type="hidden" name="json_empresa">
-	</fieldset>
-</div>
-
 <div class="field_row clearfix">	
 <?php echo form_label($this->lang->line('common_email').':', 'email',array('class'=>'wide')); ?>
 	<div class='form-group'>
@@ -128,6 +95,54 @@
 			</tr>
 		</table>
 		<div id="datos_direcciones" name="datos_direcciones">
+		<input type="hidden" name="json_empresa">
+	</fieldset>
+</div>
+
+<div class="field_row clearfix">	
+	<fieldset>
+		<legend>Datos de Pasaportes</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);"></button>
+		<table style="width: 500px" id="tbl_empresas">
+			<tr>
+				<td style="width:200px">Pais Origen</td>
+				<td style="width:200px">Nro de Pasaporte</td>
+				<td style="width:200px">Fecha Vencimiento</td>
+			</tr>
+		</table>
+		<div id="datos_pasaporte" name="datos_pasaporte">
+	</fieldset>
+</div>
+
+<div class="field_row clearfix">	
+	<fieldset>
+		<legend>Datos de Tarjetas</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito']);"></button>
+		<table style="width: 500px" id="tbl_empresas">
+			<tr>
+				<td style="width:200px">Tipo Tarjeta</td>
+				<td style="width:200px">Nro de Tarjeta</td>
+				<td style="width:200px">Débito o Crédito</td>
+			</tr>
+		</table>
+		<div id="datos_tarjetas" name="datos_tarjetas">
+		<input type="hidden" name="json_empresa">
+	</fieldset>
+</div>
+
+
+
+<div class="field_row clearfix">	
+	<fieldset>
+		<legend>Datos de empresa</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc', 'correo' ,'tlfono']);"></button>
+		<table style="width: 500px" id="tbl_empresas">
+			<tr>
+				<td style="width:200px">razon social</td>
+				<td style="width:200px">direccion</td>
+				<td style="width:200px">nro doc</td>
+				<td style="width:200px">Correo</td>
+				<td style="width:200px">Telefono</td>
+			</tr>
+		</table>
+		<div id="datos_empresa" name="datos_empresa">
 		<input type="hidden" name="json_empresa">
 	</fieldset>
 </div>

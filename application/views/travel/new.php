@@ -80,6 +80,11 @@
 							<label for="name_travel">Vuelo:</label>
                 			<input type="text" name="name_travel" id="name_travel" class="form-control" />
 						</div>
+						<div class="form-group">
+							<label for="total_servicios">Total Servicios:</label>
+							<input type="text" id="total_servicios" name="total_servicios" class="form-control" disabled="true" />
+						</div>
+
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
@@ -132,7 +137,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-12">
 		<?php echo form_open('travel/saveComision',array('id'=>'form_travel_comision_save','class' => 'form-inline')); ?>
 			<fieldset>
 				<legend>Registro de Servicios</legend>
@@ -147,12 +152,8 @@
 				<div class="form-group">
 					<input type="number" id="amount_travel" name="amount_travel" class="form-control" value="0" style="display: none"/>
 				</div>
-				<div class="form-group">
-                    <input type="text" id="total_servicios" name="total_servicios" class="form-control" disabled="true" />
-                </div>
-
-				  <button id="btn_save_com" type="button" class="btn btn-primary">Agregar Comisión</button>
-				  <button type="button" class="btn btn-primary btn_save_travel">Guardar Viaje</button>
+				  <button id="btn_save_com" type="button" class="btn btn-primary">Agregar Servicio</button>
+				  <button style="float: right" type="button" class="btn btn-primary btn_save_travel">Guardar Viaje</button>
 			</fieldset>
 			<div class="alert alert-danger alert-dismissible error_comision"></div>
 		<?php echo form_close(); ?>
@@ -202,53 +203,6 @@
 			<button type="button" class="btn btn-primary" >Nuevo Viaje</button>
 			-->
 		</form>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<div class="col-md-4">
-			
-		</div>
-		<div class="col-md-8">
-<<<<<<< HEAD
-			<form>
-				<fieldset>
-					<legend>Total de Servicios</legend>
-					<table id="table_customer_travel" class="table table-hover table-bordered" >
-						<thead>
-							<tr>
-								<th class="col-md-1"><center>Nro.</center></th>
-								<th class="col-md-4"><center>Servicios</center></th>
-								<th class="col-md-2"><center>Monto</center></th>
-								<th class="col-md-2"><center>Tipo</center></th>
-								<th colspan="3" class="col-md-1"><center>Acción</center></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="5">
-									<center>
-										No se registraron datos.
-									</center>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<button type="button" class="btn btn-primary btn_save_travel">
-						Guardar Viaje
-					</button>
-					<!--
-					<button type="button" class="btn btn-primary" >Nuevo Viaje</button>
-					-->
-				</fieldset>
-			</form>
-=======
-			
->>>>>>> 857a976f65233c9a018127fc351bee8fb21a55a4
-			<br>
-			<br>
-			<button class="btn btn-primary" id="showLastTravel" onclick="travel.showLastTravel();">mostrar ultimo viaje</button>
-		</div>
 	</div>
 </div>
 <!-- MODAL DE CONFIRMACIÓN -->
@@ -303,7 +257,7 @@
 							</div>
 						</fieldset>
 						<fieldset>
-<<<<<<< HEAD
+
 							<legend style="padding-left: 13px">Información del servicio</legend>
 						<div class="col-md-12">
 							<div class="form-group">
@@ -311,11 +265,11 @@
 								<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
 							</div>		
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label for="fee_servicio">Fee del servicio</label>
 								<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
-=======
+
 							<legend>Información de Facturación y Tarjeta</legend>
 							<div class="col-md-12">
 								<div class="form-group">
@@ -327,7 +281,6 @@
 										<option value="TICKET">TICKET</option>
 									</select>
 								</div>
->>>>>>> 857a976f65233c9a018127fc351bee8fb21a55a4
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
@@ -365,7 +318,7 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group" style="padding-top: 20px">
 								<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
   								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
 							</div>		
@@ -378,34 +331,6 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-<<<<<<< HEAD
-=======
-								<label for="acumula_millas">Acumula millas?</label>
-								<input type="checkbox" id="acumula_millas" name="acumula_millas" value="1">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="tipo_tarjeta_milla">Tipo Tarjeta</label>
-								<select id="tipo_tarjeta_milla" name="tipo_tarjeta_milla" class="form-control">
-									<option value="">Seleccionar</option>
-									<option value="VISA">VISA</option>
-									<option value="MASTERCARD">MASTERCARD</option>
-									<option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
-									<option value="DINNERS">DINNERS</option>
-									<option value="SAFETY PAY">SAFETY PAY</option>
-								</select>
-							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="nro_tarjeta_milla">Nro de tarjeta</label>
-								<input type="text" id="nro_tarjeta_milla" name="nro_tarjeta_milla" class="form-control" value="0"/>
-							</div>		
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
->>>>>>> 857a976f65233c9a018127fc351bee8fb21a55a4
 								<label for="comision_type_operator">Tipo de Operador</label>
 								<select id="comision_type_operator" name="comision_type_operator" class="form-control">
 									<option value="">Seleccionar</option>
@@ -424,6 +349,10 @@
 						<div class="col-md-6">
 							<label for="comision_incentive">Incentivos de otro operador</label>
 							<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
+						</div>
+						<div class="col-md-12">
+							<label for="comentarios">Comentarios</label>
+							<textarea id="comentarios" class="form-control"></textarea>
 						</div>
 					</fieldset>
 					<!--

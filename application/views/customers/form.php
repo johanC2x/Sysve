@@ -11,28 +11,28 @@ echo form_open('customers/save/'.$person_info->person_id,array('id'=>'customer_f
 
 <input type="hidden" id="data" name="data" value="">
 
-<div class="field_row clearfix" style="display: none;">	
+<div class="field_row clearfix" style="display: none;"> 
 <?php echo form_label($this->lang->line('customers_account_number').':', 'account_number'); ?>
-	<div class='form_field'>
-	<?php echo form_input(array(
-		'name'=>'account_number',
-		'id'=>'account_number',
-		'value'=>$person_info->account_number)
-	);?>
-	</div>
+    <div class='form_field'>
+    <?php echo form_input(array(
+        'name'=>'account_number',
+        'id'=>'account_number',
+        'value'=>$person_info->account_number)
+    );?>
+    </div>
 </div>
-<div class="field_row clearfix">	
+<div class="field_row clearfix">    
 <?php echo form_label($this->lang->line('customers_taxable').':', 'taxable'); ?>
-	<div class='form_field'>
-	<?php echo form_checkbox('taxable', '1', $person_info->taxable == '' ? TRUE : (boolean)$person_info->taxable);?>
-	</div>
+    <div class='form_field'>
+    <?php echo form_checkbox('taxable', '1', $person_info->taxable == '' ? TRUE : (boolean)$person_info->taxable);?>
+    </div>
 </div>
 <?php
 echo form_submit(array(
-	'name'=>'submit',
-	'id'=>'submit',
-	'value'=>$this->lang->line('common_submit'),
-	'class'=>'submit_button float_right')
+    'name'=>'submit',
+    'id'=>'submit',
+    'value'=>$this->lang->line('common_submit'),
+    'class'=>'submit_button float_right')
 );
 ?>
 <div class='form-group'>
@@ -90,15 +90,15 @@ echo form_close();
                     var kit = JSON.parse(msg);
                     if(kit.success){
                         msg = getMessageSuccess('Operación realizada con exito...');
-                        $("#messages").html(msg);	
-                        location.reload();			
+                        $("#messages").html(msg);   
+                        location.reload();          
                     }else{
                         msg = getMessageError(kit.message);
-                        $("#messages").html(msg);					
+                        $("#messages").html(msg);                   
                     }
                 }
             });
-	   });
+       });
     });
 
     <?php if(!empty($person_info->data)){ ?>
@@ -172,6 +172,7 @@ echo form_close();
     generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven']);
     generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc']);
     generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia']);
+    generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito']);
 
 
 </script>
