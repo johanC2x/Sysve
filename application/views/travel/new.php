@@ -328,10 +328,18 @@
 						<fieldset>
 							<legend style="padding-left: 13px">Información de Fee y Comisión</legend>
 						<div class="col-md-12">
-							<div class="form-group" style="padding-top: 20px">
-								<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
-  								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
-							</div>		
+							<div class="col-md-6">
+								<div class="form-group" style="padding-top: 20px">
+									<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
+	  								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
+								</div>		
+							</div>
+							<div class="col-md-6">
+								<div class="form-group" style="padding-top: 20px">
+									<label for="monto_comision">Monto de Fee/Comisión</label>
+									<input type="number" id="monto_comision" name="monto_comision" class="form-control" value="0"/>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
