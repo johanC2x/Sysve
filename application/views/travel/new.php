@@ -222,7 +222,7 @@
 </div>
 
 <div id="modal_detail_comision" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-  	<div class="modal-dialog">
+  	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -237,18 +237,25 @@
 					-->
 						<fieldset>
 							<legend>Información del Cliente</legend>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label for="dni_ruc">DNI/RUC</label>
 									<input type="text" id="dni_ruc" name="dni_ruc" class="form-control"> 
 								</div>		
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group">
-									<label for="nombre_ruc">Nombre/Razón Social</label>
-									<input type="text" id="nombre_ruc" name="nombre_ruc" class="form-control"> 
+									<label for="nombres">Nombres</label>
+									<input type="text" id="nombres" name="nombres" class="form-control"> 
 								</div>		
 							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="apellidos">Apellidos</label>
+									<input type="text" id="apellidos" name="apellidos" class="form-control">
+								</div>
+							</div>
+
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="direccion_fiscal">Direccion</label>
@@ -257,21 +264,8 @@
 							</div>
 						</fieldset>
 						<fieldset>
-
-							<legend style="padding-left: 13px">Información del servicio</legend>
+						<legend style="padding-left: 13px">Información del servicio</legend>
 						<div class="col-md-12">
-							<div class="form-group">
-								<label for="monto_detalle">Monto de Servicio</label>
-								<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
-							</div>		
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="fee_servicio">Fee del servicio</label>
-								<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
-
-							<legend>Información de Facturación y Tarjeta</legend>
-							<div class="col-md-12">
 								<div class="form-group">
 									<label for="tipo_doc">Tipo documento</label>
 									<select id="tipo_doc" name="tipo_doc" class="form-control">
@@ -280,15 +274,38 @@
 										<option value="BOLETA ">BOLETA </option>
 										<option value="TICKET">TICKET</option>
 									</select>
-								</div>
 							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="comision_type_operator">Tipo de Operador</label>
+								<select id="comision_type_operator" name="comision_type_operator" class="form-control">
+									<option value="">Seleccionar</option>
+									<?php foreach ($operator as $key => $value) {?>
+										<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="monto_detalle">Monto de Servicio</label>
 									<input type="text" id="monto_detalle" name="monto_detalle" class="form-control"> 
-								</div>		
+								</div>
 							</div>
 							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fee_servicio">Fee del servicio</label>
+									<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="comision_code">Nro de ticket</label>
+								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
+								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
+							</div>
+							</div>
+							<!-- <div class="col-md-6">
 								<div class="form-group">
 									<label for="porcentaje_cobro">Porcentaje del cobro</label>
 									<input type="text" id="porcentaje_cobro" name="porcentaje_cobro" class="form-control" 
@@ -306,39 +323,15 @@
 									<label for="cobro_total">Cobro Total</label>
 									<input type="text" id="cobro_total" name="cobro_total" class="form-control" readonly=""> 
 								</div>		
-							</div>
+							</div> -->
 						</fieldset>
 						<fieldset>
 							<legend style="padding-left: 13px">Información de Fee y Comisión</legend>
 						<div class="col-md-12">
-							<div class="form-group">
-								<label for="comision_code">Nro de ticket</label>
-								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
-								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
-							</div>
-						</div>
-						<div class="col-md-6">
 							<div class="form-group" style="padding-top: 20px">
 								<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
   								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
 							</div>		
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="comision_percentage">Monto</label>
-								<input type="text" id="comision_percentage" name="comision_percentage" class="form-control" value="0"/>
-							</div>		
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="comision_type_operator">Tipo de Operador</label>
-								<select id="comision_type_operator" name="comision_type_operator" class="form-control">
-									<option value="">Seleccionar</option>
-									<?php foreach ($operator as $key => $value) {?>
-										<option value="<?= $value["id"]; ?>" data-key="<?= $value["key"]; ?>"><?= $value["name"]; ?></option>
-									<?php } ?>
-								</select>
-							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
@@ -359,12 +352,13 @@
 					</div>
 					-->
 				<?php echo form_close(); ?>
-			</div>
-			<div class="modal-footer">
+				<div class="modal-footer">
 				<button class="btn btn-primary btn_update_comision" type="button">
 					Guardar
 				</button>
 			</div>
+			</div>
+			
 		</div>
 	</div>
 </div>
