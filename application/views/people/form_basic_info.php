@@ -11,25 +11,81 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
+                    <label for="birthdate">Fecha de Nacimiento:</label>
+                    <input type="text" name="birthdate" id="birthdate" class="form-control" />
+                </div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+                    <label for="gender">Género:</label>
+                    <input type="text" name="gender" id="gender" class="form-control" />
+                </div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<div class="form-group">
+                    <label for="gender">Edad:</label>
+                    <input type="text" name="age" id="age" class="form-control" />
+                </div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
                     <label for="first_name">Nombres:</label>
                     <input type="text" name="first_name" id="first_name" class="form-control" />
                 </div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-                    <label for="last_name">Apellidos:</label>
+                    <label for="last_name">PeNombre:</label>
                     <input type="text" name="last_name" id="last_name" class="form-control" />
                 </div>
 			</div>
 		</div>
 		<div class="col-md-12">
-			
+			<div class="col-md-4">
+				<div class="form-group">
+                    <label for="last_name">Ap.Paterno:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control" />
+                </div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+                    <label for="last_name">Ap.Materno:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control" />
+                </div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+                    <label for="ap_casada">Ap. de Casada:</label>
+                    <input type="text" name="ap_casada" id="ap_casada" class="form-control" />
+                </div>
+			</div>
+		</div>
+	</fieldset>
+		<fieldset>
+		<div class="col-md-12">
+		<legend>Información Adicional</legend>		
+			<table style="width: 900px" id="tbl_empresas">
+					<tr>
+						<td style="width:200px">Numero</td>
+						<td style="width:200px">Fecha Emisión</td>
+						<td style="width:200px">Fecha Expiración</td>
+						<td style="width:200px">Pais Emisión</td>
+						<td style="width:200px">Nacionalidad<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasaportes', ['nro', 'fecha_emision', 'fecha_expiracion', 'pais_emision', 'nacionalidad'], 900);"></button></td>
+					</tr>
+				</table>
+				<div id="datos_pasaportes" name="datos_pasaportes"></div>
+				<input type="hidden" name="json_empresa">
+			<hr>
 			<table style="width: 900px" id="tbl_empresas">
 				<tr>
+					<td style="width:200px">Tipo</td>
 					<td style="width:200px">Direccion</td>
-					<td style="width:200px">Distrito</td>
+					<td style="width:200px">Distrito/Estado</td>
 					<td style="width:200px">Pais</td>
-					<td style="width:200px">Telefono <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_generales', ['direccion', 'distrito', 'pais', 'tlfono'], 900);"></button></td>
+					<td style="width:200px">Telefono</td>
+					<td style="width:200px">Referencia <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);"></button></td>
 				</tr>
 			</table>
 			<div id="datos_generales" name="datos_generales"></div>
@@ -43,16 +99,12 @@
 			<div id="datos_correos" name="datos_correos"></div>
 			<input type="hidden" name="json_empresa">
 			<hr>
-	</fieldset>
+		</fieldset>
+		</div>
 	<fieldset>
 		<legend>Información Personal</legend>
 		<div class="col-md-12">
-			<div class="col-md-4">
-				<div class="form-group">
-                    <label for="birthdate">Fecha de Nacimiento:</label>
-                    <input type="text" name="birthdate" id="birthdate" class="form-control" />
-                </div>
-			</div>
+			
 			<div class="col-md-4">
 				<div class="form-group">
                     <label for="nationality">Nacionalidad:</label>
