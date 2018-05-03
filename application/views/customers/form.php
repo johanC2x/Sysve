@@ -170,10 +170,17 @@ echo form_close();
         
     }
     generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven'], 500);
-    generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc', 'correo' ,'tlfono'], 1000)
     generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia'], 500);
     generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);
     
+    generarTablaDatos('datos_pasaportes', ['nro', 'fecha_emision', 'fecha_expiracion', 'pais_emision', 'nacionalidad'], 900);
+    generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);
+    generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc', 'correo' ,'tlfono'], 1000);
+    generarTablaDatos('datos_pasajeros', ['millaje', 'nro', 'usuario', 'clave', 'fin'], 400);
+
+    generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);
+    generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);
+    generarTablaDatos('datos_familiares', ['relacion', 'nombre', 'telefono'], 750);
 
 
 </script>
