@@ -66,26 +66,26 @@
 		<fieldset>
 		<div class="col-md-12">
 		<legend>Información Adicional</legend>		
-			<table style="width: 900px" id="tbl_empresas">
+			<table style="text-align: center;width: 850px" id="tbl_empresas">
 					<tr>
-						<td style="width:200px">Numero</td>
-						<td style="width:200px">Fecha Emisión</td>
-						<td style="width:200px">Fecha Expiración</td>
-						<td style="width:200px">Pais Emisión</td>
-						<td style="width:200px">Nacionalidad<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasaportes', ['nro', 'fecha_emision', 'fecha_expiracion', 'pais_emision', 'nacionalidad'], 900);"></button></td>
+						<td style="text-align: center;width:200px">Numero</td>
+						<td style="text-align: center;width:200px">Fecha Emisión</td>
+						<td style="text-align: center;width:200px">Fecha Expiración</td>
+						<td style="text-align: center;width:200px">Pais Emisión</td>
+						<td style="text-align: center;width:200px">Nacionalidad<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasaportes', ['nro', 'fecha_emision', 'fecha_expiracion', 'pais_emision', 'nacionalidad'], 900);"></button></td>
 					</tr>
 				</table>
 				<div id="datos_pasaportes" name="datos_pasaportes"></div>
 				<input type="hidden" name="json_empresa">
 			<hr>
-			<table style="width: 900px" id="tbl_empresas">
+			<table style="text-align: center;width: 880px" id="tbl_empresas">
 				<tr>
-					<td style="width:200px">Tipo</td>
-					<td style="width:200px">Direccion</td>
-					<td style="width:200px">Distrito/Estado</td>
-					<td style="width:200px">Pais</td>
-					<td style="width:200px">Telefono</td>
-					<td style="width:200px">Referencia <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);"></button></td>
+					<td style="text-align: center;width:200px">Tipo</td>
+					<td style="text-align: center;width:200px">Direccion</td>
+					<td style="text-align: center;width:200px">Distrito/Estado</td>
+					<td style="text-align: center;width:200px">Pais</td>
+					<td style="text-align: center;width:200px">Telefono</td>
+					<td style="text-align: center;width:200px">Referencia <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);"></button></td>
 				</tr>
 			</table>
 			<div id="datos_generales" name="datos_generales"></div>
@@ -116,15 +116,15 @@
 			</div>
 		</fieldset>
 		<fieldset>
-			<legend>Datos de empresa <input type="checkbox" name=""></legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'correo' ,'tlfono', 'referencia'], 1000);"></button>
-			<table style="width: 1000px" id="tbl_empresas">
+			<legend>Datos de empresa <input type="checkbox" name=""></legend>
+			<table style="text-align: center;width: 950px" id="tbl_empresas">
 				<tr>
 					<td style="text-align: center;width:225px">RUC</td>
 					<td style="text-align: center;width:225px">razon social</td>
 					<td style="text-align: center;width:225px">direccion</td>
 					<td style="text-align: center;width:225px">Correo</td>
 					<td style="text-align: center;width:225px">Telefono</td>
-					<td style="text-align: center;width:225px">Referencia</td>
+					<td style="text-align: center;width:225px">Referencia<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'correo' ,'tlfono', 'referencia'], 1000);"></button></td>
 				</tr>
 			</table>
 			<div id="datos_empresa" name="datos_empresa">
@@ -153,20 +153,20 @@
 		<legend>Teléfono y Correo</legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
-				<table style="width: 393px" id="tbl_empresas">
+				<table style="text-align: center;width: 300px" id="tbl_empresas">
 					<tr>
 						<td>Tipo de contacto</td>
-						<td style="width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
+						<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
 					</tr>
 				</table>
 				<div id="datos_celulares" name="datos_celulares"></div>
 				<input type="hidden" name="json_empresa">
 			</div>
 			<div class="col-md-6">
-				<table style="width: 393px" id="tbl_empresas">
+				<table style="text-align: center;width: 300px" id="tbl_empresas">
 						<tr>
 							<td>Tipo de email</td>
-							<td style="width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);"></button></td>
+							<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);"></button></td>
 						</tr>
 				</table>
 				<div id="datos_emails" name="datos_emails"></div>
@@ -178,13 +178,13 @@
 	<fieldset>
 		<legend>Pasajeros Frecuentes</legend>
 		<div class="col-md-6">
-				<table style="width: 750px" id="tbl_empresas">
+				<table style="text-align: center;width: 670px" id="tbl_empresas">
 					<tr>
-						<td style="width:500px">Millaje</td>
-						<td style="width:500px">Nro</td>
-						<td style="width:500px">Usuario</td>
-						<td style="width:500px">Clave</td>
-						<td style="width:500px">Fin <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasajeros', ['millaje', 'nro', 'usuario', 'clave', 'fin'], 400);"></button></td>
+						<td style="text-align: center;width:500px">Millaje</td>
+						<td style="text-align: center;width:500px">Nro</td>
+						<td style="text-align: center;width:500px">Usuario</td>
+						<td style="text-align: center;width:500px">Clave</td>
+						<td style="text-align: center;width:500px">Fin <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasajeros', ['millaje', 'nro', 'usuario', 'clave', 'fin'], 400);"></button></td>
 					</tr>
 				</table>
 				<div id="datos_pasajeros" name="datos_pasajeros"></div>
@@ -193,19 +193,44 @@
 	</fieldset>
 	<hr>
 	<fieldset>
+
 		<legend>Datos de Familiares</legend>
-		<div class="col-md-6">
-				<table style="width: 750px" id="tbl_empresas">
-					<tr>
-						<td style="width:500px">Relación</td>
-						<td style="width:500px">Nombre</td>
-						<td style="width:500px">Telefono <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_familiares', ['relacion', 'nombre', 'telefono'], 750);"></button></td>
-					</tr>
-				</table>
-				<div id="datos_familiares" name="datos_familiares"></div>
-				<input type="hidden" name="json_empresa">
+		<div class="col-md-12">
+			<div class="col-md-6">
+					<table style="text-align: center;width: 400px" id="tbl_empresas">
+						<tr>
+							<td style="text-align: center;width:100px">Relación</td>
+							<td style="text-align: center;width:100px">Nombre</td>
+							<td style="text-align: center;width:100px">Telefono <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_familiares', ['relacion', 'nombre', 'telefono'], 300);"></button></td>
+						</tr>
+					</table>
+					<div id="datos_familiares" name="datos_familiares"></div>
+					<input type="hidden" name="json_empresa">
 			</div>
+			<div class="col-md-6">
+				<div class="col-md-3">
+					<div class="form-group">
+			            <label for="pref_asiento">Preferencia de Asiento:</label>
+			            <select name="pref_asiento" class="form-control">
+			            	<option value="VENTANA">VENTANA</option>
+							<option value="PASILLO">PASILLO</option>
+							<option value="SALIDA DE EMERGENCIA">SALIDA DE EMERGENCIA</option>
+							<option value="COMPRA DE ASIENTOS">COMPRA DE ASIENTOS</option>
+							<option value="UPGRADE">UPGRADE</option>
+							<option value="SILLA DE RUEDAS">SILLA DE RUEDAS</option>
+			            </select>
+			        </div>
+		        </div>
+		        <div class="col-md-3">
+			        <div class="form-group">
+			        	<label for="coment_asiento">Indicaciones</label>
+			        	<textarea id="coment_asiento" name="coment_asiento"></textarea>
+		        	</div>
+		        </div>
+			</div>
+		</div>
 	</fieldset>
+	
 	<?php echo form_close(); ?>
 </div>
 <div class="field_row clearfix">	
