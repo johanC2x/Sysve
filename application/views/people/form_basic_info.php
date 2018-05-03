@@ -91,16 +91,45 @@
 			<div id="datos_generales" name="datos_generales"></div>
 			<input type="hidden" name="json_empresa">
 			<hr>
-			<table style="width: 400px" id="tbl_empresas">
+		</fieldset>
+		<fieldset>
+			<legend>Datos de Tarjetas</legend>
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="form-group">
+	                    <label for="tipo_tarjeta">Tipo de Tarjeta</label>
+	                    <input type="text" name="tipo_tarjeta" id="tipo_tarjeta" class="form-control" />
+	                </div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+	                    <label for="nro_tarjeta">Nro de Tarjeta:</label>
+	                    <input type="text" name="nro_tarjeta" id="nro_tarjeta" class="form-control" />
+	                </div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+	                    <label for="debito_credito">Débito o Crédito:</label>
+	                    <input type="text" name="debito_credito" id="debito_credito" class="form-control" />
+	                </div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Datos de empresa <input type="checkbox" name=""></legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'correo' ,'tlfono', 'referencia'], 1000);"></button>
+			<table style="width: 1000px" id="tbl_empresas">
 				<tr>
-					<td style="width:300px">Correo <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_correos', ['correo'], 400);"></button></td>
+					<td style="width:225px">RUC</td>
+					<td style="width:225px">razon social</td>
+					<td style="width:225px">direccion</td>
+					<td style="width:225px">Correo</td>
+					<td style="width:225px">Telefono</td>
+					<td style="width:225px">Referencia</td>
 				</tr>
 			</table>
-			<div id="datos_correos" name="datos_correos"></div>
+			<div id="datos_empresa" name="datos_empresa">
 			<input type="hidden" name="json_empresa">
-			<hr>
 		</fieldset>
-		</div>
 	<fieldset>
 		<legend>Información Personal</legend>
 		<div class="col-md-12">
@@ -120,41 +149,45 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend>Datos de Tarjetas</legend>
+		<legend>Teléfono y Correo</legend>
 		<div class="col-md-12">
-			<div class="col-md-4">
-				<div class="form-group">
-                    <label for="tipo_tarjeta">Tipo de Tarjeta</label>
-                    <input type="text" name="tipo_tarjeta" id="tipo_tarjeta" class="form-control" />
-                </div>
+			<div class="col-md-6">
+				<table style="width: 400px" id="tbl_empresas">
+					<tr>
+						<td>Tipo de contacto</td>
+						<td style="width:300px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
+					</tr>
+				</table>
+				<div id="datos_celulares" name="datos_celulares"></div>
+				<input type="hidden" name="json_empresa">
 			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-                    <label for="nro_tarjeta">Nro de Tarjeta:</label>
-                    <input type="text" name="nro_tarjeta" id="nro_tarjeta" class="form-control" />
-                </div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-                    <label for="debito_credito">Débito o Crédito:</label>
-                    <input type="text" name="debito_credito" id="debito_credito" class="form-control" />
-                </div>
+			<div class="col-md-6">
+				<table style="width: 400px" id="tbl_empresas">
+						<tr>
+							<td>Tipo de email</td>
+							<td style="width:300px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);"></button></td>
+						</tr>
+				</table>
+				<div id="datos_emails" name="datos_emails"></div>
+				<input type="hidden" name="json_empresa">
 			</div>
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend>Datos de empresa</legend><button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc', 'correo' ,'tlfono'], 1000);"></button>
-		<table style="width: 1000px" id="tbl_empresas">
-			<tr>
-				<td style="width:225px">razon social</td>
-				<td style="width:225px">direccion</td>
-				<td style="width:225px">nro doc</td>
-				<td style="width:225px">Correo</td>
-				<td style="width:225px">Telefono</td>
-			</tr>
-		</table>
-		<div id="datos_empresa" name="datos_empresa">
-		<input type="hidden" name="json_empresa">
+		<legend>Pasajeros Frecuentes</legend>
+		<div class="col-md-6">
+				<table style="width: 400px" id="tbl_empresas">
+					<tr>
+						<td>Millaje</td>
+						<td>Nro</td>
+						<td>Usuario</td>
+						<td>Clave</td>
+						<td style="width:300px">Fin <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_pasajeros', ['millaje', 'nro', 'usuario', 'clave', 'fin'], 400);"></button></td>
+					</tr>
+				</table>
+				<div id="datos_pasajeros" name="datos_pasajeros"></div>
+				<input type="hidden" name="json_empresa">
+			</div>
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>

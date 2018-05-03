@@ -173,6 +173,7 @@ echo form_close();
     generarTablaDatos('datos_empresa', ['razon_social', 'direccion', 'nro_doc', 'correo' ,'tlfono'], 1000)
     generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia'], 500);
     generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);
+    
 
 
 </script>
