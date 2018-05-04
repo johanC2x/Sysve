@@ -3,11 +3,15 @@
 	<fieldset>
 		<legend>Datos Generales</legend>
 		<div class="col-md-12">
-			<div class="col-md-4">
-				<div class="form-group">
-                    <label for="person_id">DNI:</label>
-                    <input type="text" name="person_id" id="person_id" class="form-control" />
-                </div>
+			<div class="col-md-4" style="overflow: scroll; height: 100px">
+				<table style="text-align: center;width: 200px" id="tbl_empresas">
+					<tr>
+						<td style="text-align: center;width:100px">Documento</td>
+						<td style="text-align: center;width:100px">Nro.<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_dni', ['documento', 'nro'], 200);"></button></td>
+					</tr>
+				</table>
+				<div id="datos_dni" name="datos_dni"></div>
+				<input type="hidden" name="json_empresa">
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">

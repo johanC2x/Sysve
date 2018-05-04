@@ -169,6 +169,7 @@ echo form_close();
         console.log(arr);
         
     }
+    generarTablaDatos('datos_dni', ['documento', 'nro'], 200);
     generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven'], 500);
     generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia'], 500);
     generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);

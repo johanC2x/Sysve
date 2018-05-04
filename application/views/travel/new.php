@@ -31,7 +31,7 @@
 					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
 					</button> -->
-					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:750" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					<!-- <a href="<?php echo base_url();?>/index.php/customers/view/-1/width:750" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a> -->
 					<?php 
 						/*
 					    $controller_name = 'customers';
