@@ -139,11 +139,38 @@ echo form_close();
 
     function generarTablaDatos(contenedor, inputs, width){
         var tabla = '';
+        var select = '';
         // inputs = ['razon_social', 'direccion', 'nro_doc'];
         tabla += '<table style="width:'+width+'px">';
         tabla += '<tr>';
         for (var i = 0; i < inputs.length; i++) {
-            tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
+            if(contenedor == 'datos_dni' && inputs[i] == 'documento'){
+                select += '<select>';
+                select += '<option value="DNI">DNI</option>';
+                select += '<option value="CE">CE</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_generales' && inputs[i] == 'tipo'){
+                select += '<select>';
+                select += '<option value="DOMICILIO">DOMICILIO</option>';
+                select += '<option value="ENTREGA">ENTREGA</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_celulares' && inputs[i] == 'tipo_contacto'){
+                select += '<select>';
+                select += '<option value="CELULAR PERSONAL">CELULAR PERSONAL</option>';
+                select += '<option value="CELULAR EMPRESA">CELULAR EMPRESA</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_emails' && inputs[i] == 'tipo_email'){
+                select += '<select>';
+                select += '<option value="EMPRESA">EMPRESA</option>';
+                select += '<option value="PERSONAL">PERSONAL</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else{
+                tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
+            }
         }
         tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
         tabla += '<table>';
