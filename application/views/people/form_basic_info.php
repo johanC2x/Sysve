@@ -1,5 +1,6 @@
 <div class="row">
 	<?php echo form_open('travel/save',array('id'=>'form_travel_save')); ?>
+	<input type="hidden" name="hidden_tablas" id="hidden_tablas">
 	<fieldset>
 		<legend>Datos Generales</legend>
 		<div class="col-md-12">
@@ -11,7 +12,7 @@
 					</tr>
 				</table>
 				<div id="datos_dni" name="datos_dni"></div>
-				<input type="hidden" name="json_empresa">
+				<input type="hidden" name="json_datos_dni" id="json_datos_dni">
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
@@ -95,6 +96,21 @@
 			<div id="datos_generales" name="datos_generales"></div>
 			<input type="hidden" name="json_empresa">
 			<hr>
+		</fieldset>
+		<fieldset>
+		<div class="col-md-12">
+		<legend>Visado</legend>		
+			<table style="text-align: center;width: 810px" id="tbl_empresas">
+					<tr>
+						<td style="text-align: center;width:200px">Pais de Visado</td>
+						<td style="text-align: center;width:200px">Numero</td>
+						<td style="text-align: center;width:200px">Fecha Emisión</td>
+						<td style="text-align: center;width:200px">Fecha Expiracion<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_visado', ['pais_visado', 'numero', 'fecha_emision', 'fecha_expiracion'], 850);"></button></td>
+					</tr>
+				</table>
+				<div id="datos_visado" name="datos_visado"></div>
+				<input type="hidden" name="json_empresa">
+				<hr>
 		</fieldset>
 		<fieldset>
 			<legend>Datos de Tarjetas</legend>

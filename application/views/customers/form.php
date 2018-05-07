@@ -82,6 +82,7 @@ echo form_close();
             var msg = "";
             var data = populateProperties();
             $("#data").val(JSON.stringify(data));
+            setValoresTablas();
             $.ajax({
                 type:"POST",
                 url:$("#customer_form").attr('action'),
@@ -141,8 +142,10 @@ echo form_close();
         var tabla = '';
         var select = '';
         // inputs = ['razon_social', 'direccion', 'nro_doc'];
-        tabla += '<table style="width:'+width+'px">';
+        tabla += '<table style="width:'+width+'px" class="generada" id="'+contenedor+'">';
         tabla += '<tr>';
+
+        arr = [];
         for (var i = 0; i < inputs.length; i++) {
             if(contenedor == 'datos_dni' && inputs[i] == 'documento'){
                 select += '<select>';
@@ -160,6 +163,7 @@ echo form_close();
                 select += '<select>';
                 select += '<option value="CELULAR PERSONAL">CELULAR PERSONAL</option>';
                 select += '<option value="CELULAR EMPRESA">CELULAR EMPRESA</option>';
+                select += '<option value="OTROS">OTROS</option>';
                 select += '</select>';
                 tabla += '<td style="padding: 3px">'+ select +'</td>';
             }else if(contenedor == 'datos_emails' && inputs[i] == 'tipo_email'){
@@ -168,18 +172,30 @@ echo form_close();
                 select += '<option value="PERSONAL">PERSONAL</option>';
                 select += '</select>';
                 tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_visado' && inputs[i] == 'pais_visado'){
+                select += '<select>';
+                select += '<option value="AMERICANO">AMERICANO</option>';
+                select += '<option value="ESTA">ESTA</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
             }else{
                 tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
             }
+
+            arr[i] = inputs[i];
+
+            json = $('#json_'+contenedor).val(JSON.stringify(arr));
+
+
         }
         tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
         tabla += '<table>';
-        console.log(tabla);
+        console.log(arr);
         $('#'+contenedor).append(tabla);
-            $('.borrar').click(function(){
-                fila = $(this).parent().parent();
-                fila.remove();
-            })
+        $('.borrar').click(function(){
+            fila = $(this).parent().parent();
+            fila.remove();
+        })
     }
 
     function generarJson(){
@@ -196,6 +212,45 @@ echo form_close();
         console.log(arr);
         
     }
+
+
+    function setValoresTablas(){
+        var info = [];
+        $('.generada').each(function(){
+            var arr = [];
+            id = $(this).attr('id');
+            var temp = [];
+            $('#'+id+' > tbody > tr').each(function(){
+                td = $(this).find('td');
+                var i = 0;
+                $.each(td, function(index, value) {
+                    var isLastElement = index == td.length -1;
+
+                    if (isLastElement) {
+                        arr.push(JSON.stringify(temp));
+                        temp = [];
+                    }
+                    valor = $(this).find(':input').val();
+                    if(valor != ''){
+                        temp.push(valor);
+                    }
+                });
+            });
+            info.push("["+id+":"+JSON.stringify(arr)+"]");
+            // info[id]= arr;
+            // console.log(arr);
+            // console.log(info[id]);
+        })
+        antes = JSON.stringify(info);
+        console.log('antes:')
+        console.log(antes);
+        despues = JSON.parse(antes);
+        console.log('despues:')
+        console.log(despues);
+
+        $('#hidden_tablas').val(despues);
+    }
+
     generarTablaDatos('datos_dni', ['documento', 'nro'], 200);
     generarTablaDatos('datos_pasaporte', ['pais', 'nro_pasaporte', 'fecha_ven'], 500);
     generarTablaDatos('datos_direcciones', ['direccion', 'distrito', 'referencia'], 500);
