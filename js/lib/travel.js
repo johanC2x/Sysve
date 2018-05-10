@@ -669,5 +669,65 @@ var travel = function () {
         }
     }
 
+    self.generarTablaDatos = function(contenedor, inputs, width){
+        var tabla = '';
+        var select = '';
+        // inputs = ['razon_social', 'direccion', 'nro_doc'];
+        tabla += '<table style="width:'+width+'px" class="generada" id="'+contenedor+'">';
+        tabla += '<tr>';
+
+        arr = [];
+        for (var i = 0; i < inputs.length; i++) {
+            if(contenedor == 'datos_dni' && inputs[i] == 'documento'){
+                select += '<select>';
+                select += '<option value="DNI">DNI</option>';
+                select += '<option value="CE">CE</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_generales' && inputs[i] == 'tipo'){
+                select += '<select>';
+                select += '<option value="DOMICILIO">DOMICILIO</option>';
+                select += '<option value="ENTREGA">ENTREGA</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_celulares' && inputs[i] == 'tipo_contacto'){
+                select += '<select>';
+                select += '<option value="CELULAR">CELULAR</option>';
+                select += '<option value="FIJO">FIJO</option>';
+                select += '<option value="OTROS">OTROS</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_emails' && inputs[i] == 'tipo_email'){
+                select += '<select>';
+                select += '<option value="EMPRESA">EMPRESA</option>';
+                select += '<option value="PERSONAL">PERSONAL</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_visado' && inputs[i] == 'pais_visado'){
+                select += '<select>';
+                select += '<option value="AMERICANO">AMERICANO</option>';
+                select += '<option value="ESTA">ESTA</option>';
+                select += '</select>';
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else{
+                tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
+            }
+
+            arr[i] = inputs[i];
+
+            json = $('#json_'+contenedor).val(JSON.stringify(arr));
+
+
+        }
+        tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
+        tabla += '<table>';
+        console.log(arr);
+        $('#'+contenedor).append(tabla);
+        $('.borrar').click(function(){
+            fila = $(this).parent().parent();
+            fila.remove();
+        })
+    }
+
 	return self;
 }(jQuery);

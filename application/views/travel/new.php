@@ -300,7 +300,7 @@
 									<input type="text" id="fee_servicio" name="fee_servicio" class="form-control"> 
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="col-md-12">
 								<label for="comision_code">Nro de ticket</label>
 								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
 								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
@@ -372,7 +372,7 @@
 	</div>
 </div>
 <div id="modal_cotizacion" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-  	<div class="modal-dialog">
+  	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -381,33 +381,110 @@
 			<div class="modal-body">
 				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_subdetail')); ?>
 					<div class="row">
-						<fieldset>
-							<legend style="padding-left: 13px">Información de Fee y Comisión</legend>
-							<div class="col-md-12">
-								<div class="col-md-6">
-									<div class="form-group" style="padding-top: 20px">
-										<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
-		  								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
-									</div>		
-								</div>
-								<div class="col-md-6">
-									<div class="form-group" style="padding-top: 20px">
-										<label for="monto_comision">Monto de Fee/Comisión</label>
-										<input type="number" id="monto_comision" name="monto_comision" class="form-control" value="0"/>
-									</div>
-								</div>
+						<div class="col-md-12">
+							<div class="col-md-6" style="float:right">
+								<label for="comision_incentive">N° COTIZACION</label>
+							</div>
+						</div>
+						<div class="col-md-12" >
+							<div class="col-md-6" style="overflow: scroll; height: 150px">
+								<table style="text-align: center;width: 200px" id="tbl_empresas">
+									<tr>
+										<td style="text-align: center;width:100px">Documento</td>
+										<td style="text-align: center;width:100px">Nro.<button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_dni', ['documento', 'nro'], 200);"></button></td>
+									</tr>
+								</table>
+								<div id="datos_dni" name="datos_dni"></div>
+								<input type="hidden" name="json_datos_dni" id="json_datos_dni">
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="comision_incentive">Incentivos de Turifax</label>
-									<input type="number" id="incentivos_turifax" name="comision_incentive" class="form-control" value="0"/>
+				                    <label for="last_name">Fecha de Nacimiento:</label>
+				                    <input type="text" name="fecha_nac" id="fecha_nac" class="form-control" />
+				                    <label for="last_name">Nacionalidad:</label>
+				                    <input type="text" name="Nacionalidad" id="Nacionalidad" class="form-control" />
+				                </div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="form-group">
+									 <label for="last_name">Nombre:</label>
+					                    <input type="text" name="nombre" id="nombre" class="form-control" />
 								</div>
 							</div>
-							<div class="col-md-6">
-								<label for="comision_incentive">Incentivos de otro operador</label>
-								<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
+							<div class="col-md-4">
+								<div class="form-group">
+									 <label for="last_name">Penombre:</label>
+					                    <input type="text" name="penombre" id="fecha_nac" class="form-control" />
+								</div>
 							</div>
-						</fieldset>
+							<div class="col-md-4">
+								<div class="form-group">
+									 <label for="last_name">Apellido Paterno:</label>
+					                    <input type="text" name="ap_paterno" id="ap_paterno" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="form-group">
+									 <label for="last_name">Apellido Materno:</label>
+					                    <input type="text" name="ap_materno" id="ap_materno" class="form-control" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									 <label for="last_name">Apellido de Casada:</label>
+					                    <input type="text" name="ap_casada" id="ap_casada" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<fieldset>
+								<legend>Información del Viaje</legend>
+								<table style="text-align: center;width: 400" id="tbl_empresas">
+									<tr>
+										<td style="text-align: center;width:225px">N° vuelo</td>
+										<td style="text-align: center;width:225px">Fecha</td>
+										<td style="text-align: center;width:225px">Ruta<button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_viaje', ['nro_vuelo', 'fecha', 'ruta'], 400);"></button></td>
+									</tr>
+								</table>
+								<div id="datos_viaje" name="datos_viaje"></div>
+								<input type="hidden" name="json_empresa">
+								<hr>
+							</fieldset>
+						</div>
+						<div class="col-md-12">
+							<fieldset>
+								<legend>Teléfono y Correo</legend>
+								<div class="col-md-12">
+									<div class="col-md-6">
+										<table style="text-align: center;width: 300px" id="tbl_empresas">
+											<tr>
+												<td>Tipo de contacto</td>
+												<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
+											</tr>
+										</table>
+										<div id="datos_celulares" name="datos_celulares"></div>
+										<input type="hidden" name="json_empresa">
+									</div>
+									<div class="col-md-6">
+										<table style="text-align: center;width: 300px" id="tbl_empresas">
+												<tr>
+													<td>Tipo de email</td>
+													<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);"></button></td>
+												</tr>
+										</table>
+										<div id="datos_emails" name="datos_emails"></div>
+										<input type="hidden" name="json_empresa">
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						
+					</div>
+
 					</div>
 					<button class="btn btn-primary btn_update_comision" type="button">
 						Guardar
