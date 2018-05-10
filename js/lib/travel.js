@@ -413,16 +413,10 @@ var travel = function () {
         $('#comision_type_operator').val(data.comision_type_operator);
     };
 
-    self.openComisionSubDetail = function(row){
-        document.getElementById("form_subdetail").reset();
-        $("#comision_obj_id").val(row);
-        $("#modal_subdetail").modal("show");
-        data = travel.list_comision[row];
-
-         ////rellanar campos
-        
-
-    }
+    self.modalCotizacion = function(){
+        $('#muestra_cotizacion').attr('checked', false);
+        $("#modal_cotizacion").modal("show");
+    };
 
     self.setTravelCode = function(){
         $.ajax({

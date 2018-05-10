@@ -31,7 +31,8 @@
 					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
 					</button> -->
-					<!-- <a href="<?php echo base_url();?>/index.php/customers/view/-1/width:750" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a> -->
+					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					<input type="checkbox" name="muestra_cotizacion" id="muestra_cotizacion" onclick="travel.modalCotizacion();">
 					<?php 
 						/*
 					    $controller_name = 'customers';
@@ -370,17 +371,43 @@
 		</div>
 	</div>
 </div>
-<div id="modal_subdetail" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+<div id="modal_cotizacion" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
   	<div class="modal-dialog">
     	<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title messages_modal">Detalles de Servicio</h3>
+				<h3 class="modal-title messages_modal">Plantilla de Cotización</h3>
 			</div>
 			<div class="modal-body">
 				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_subdetail')); ?>
 					<div class="row">
-						
+						<fieldset>
+							<legend style="padding-left: 13px">Información de Fee y Comisión</legend>
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<div class="form-group" style="padding-top: 20px">
+										<input type="radio" id="comision_fee" name="comision_fee" value="comision" checked> Comisión
+		  								<input type="radio" id="comision_fee" name="comision_fee" value="fee_to_pay"> Fee por Paga
+									</div>		
+								</div>
+								<div class="col-md-6">
+									<div class="form-group" style="padding-top: 20px">
+										<label for="monto_comision">Monto de Fee/Comisión</label>
+										<input type="number" id="monto_comision" name="monto_comision" class="form-control" value="0"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="comision_incentive">Incentivos de Turifax</label>
+									<input type="number" id="incentivos_turifax" name="comision_incentive" class="form-control" value="0"/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label for="comision_incentive">Incentivos de otro operador</label>
+								<input type="number" id="incentivos_otros" name="comision_incentive" class="form-control" value="0"/>
+							</div>
+						</fieldset>
 					</div>
 					<button class="btn btn-primary btn_update_comision" type="button">
 						Guardar
