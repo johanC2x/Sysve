@@ -480,7 +480,7 @@ var travel = function () {
     };
 
     self.validateFormUpdateComision = function(){
-        $('#form_travel_comision_update, #form_subdetail').bootstrapValidator({
+        $('#form_travel_comision_update').bootstrapValidator({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
@@ -542,6 +542,12 @@ var travel = function () {
             $('.close').trigger('click');
             /* HAY QUE ENVIAR AL CONTROLADOR PARA QUE PUEDA ACTUALIZAR ESTE CAMPO DATA */
        });
+    };
+
+    self.formCotizacion = function(){
+        $('#modal_cotizacion').bootstrapValidator({}).on('success.form.bv', function(e) {
+            e.preventDefault();
+        });
     };
 
     self.calcularPorcentaje = function(){
@@ -727,7 +733,40 @@ var travel = function () {
             fila = $(this).parent().parent();
             fila.remove();
         })
+    };
+
+    self.saveInfoTablas = function(){
+        var info = [];
+        $('.generada').each(function(){
+            var arr = [];
+            id = $(this).attr('id');
+            var temp = [];
+            $('#'+id+' > tbody > tr').each(function(){
+                td = $(this).find('td');
+                var i = 0;
+                $.each(td, function(index, value) {
+                    var isLastElement = index == td.length -1;
+
+                    if (isLastElement) {
+                        arr.push(JSON.stringify(temp));
+                        temp = [];
+                    }
+                    valor = $(this).find(':input').val();
+                    if(valor != ''){
+                        temp.push(valor);
+                    }
+                });
+            });
+            info.push("["+id+":"+JSON.stringify(arr)+"]");
+            // info[id]= arr;
+            // console.log(arr);
+            // console.log(info[id]);
+        })
+        data = JSON.stringify(info);
+        $('#json_cotizacion').val(data);
     }
+
+    
 
 	return self;
 }(jQuery);

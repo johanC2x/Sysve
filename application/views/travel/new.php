@@ -379,11 +379,12 @@
 				<h3 class="modal-title messages_modal">Plantilla de Cotización</h3>
 			</div>
 			<div class="modal-body">
-				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_subdetail')); ?>
+				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_cotizacion')); ?>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-6" style="float:right">
 								<label for="comision_incentive">N° COTIZACION</label>
+								<input type="hidden" name="json_cotizacion" id="json_cotizacion">
 							</div>
 						</div>
 						<div class="col-md-12" >
@@ -486,7 +487,7 @@
 					</div>
 
 					</div>
-					<button class="btn btn-primary btn_update_comision" type="button">
+					<button class="btn btn-primary btn_cotizacion" type="button">
 						Guardar
 					</button>
 				<?php echo form_close(); ?>
@@ -520,6 +521,11 @@
 			return validator.isValid();
         });
 
+		$('.btn_cotizacion').on("click", function () {
+			$("#modal_cotizacion").modal("show");
+			travel.saveInfoTablas();
+        });
+
 		$('#showLastTravel').hide();
 
 		$('form input').on('keypress', function(e) {
@@ -533,6 +539,7 @@
 		//travel.addComision('fee');
 		travel.validateFormTravel();
 		travel.validateFormUpdateComision();
+		travel.formCotizacion();
 	});
 
 </script>
