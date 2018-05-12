@@ -55,11 +55,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Detalle de Viaje</h4>
       </div>
       <div class="modal-body">
-      	<input type="text" name="id_borrar" id="id_borrar">
-        <p>¿Desea anular este viaje?.</p>
+      	<input type="hidden" name="id_borrar" id="id_borrar">
+      	<div id="contenedor"></div>
       </div>
       <div class="modal-footer">
         <button id="btn_aceptar" type="button" class="btn btn-default" data-dismiss="modal" onclick="cobrar.borrarViajes();">SI</button>

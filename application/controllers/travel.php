@@ -90,6 +90,7 @@ class Travel extends Secure_area {
 
 	function registerTravel(){
 		$data_travel["comisiones"] = $this->input->post('data');
+		$data_cotizacion = $this->input->post('data_cotizacion');
 		$travel_data = array(
 			'code'=>$this->input->post('code_travel'),
 			'name'=>$this->input->post('name_travel'),
@@ -97,7 +98,9 @@ class Travel extends Secure_area {
 			'destiny_end'=>$this->input->post('destiny_end_travel'),
 			'date_init'=>$this->input->post('date_init'),
 			'date_end'=>$this->input->post('date_end'),
-			'type_travel'=>$this->input->post('type_travel'),
+			'data_travel' => json_encode($data_travel),
+			'data_cotizacion' => json_encode($data_cotizacion),
+			// 'type_travel'=>$this->input->post('type_travel'),
 		);
 		$res_travel = $this->travelmodel->saveTravel($travel_data);
 		if($res_travel["success"]){
@@ -138,7 +141,11 @@ class Travel extends Secure_area {
 
 	function getTravelCode(){
 		$code = $this->travelmodel->getTravelCode();
-		echo 'TRAVEL'.$code->id;
+		$code = $code->id;
+		if(empty($code->id)){
+			$code = 0;
+		}
+		echo 'TRAVEL'.$code;
 	}
 
 

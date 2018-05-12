@@ -403,7 +403,7 @@
 				                    <label for="last_name">Fecha de Nacimiento:</label>
 				                    <input type="text" name="fecha_nac" id="fecha_nac" class="form-control" />
 				                    <label for="last_name">Nacionalidad:</label>
-				                    <input type="text" name="Nacionalidad" id="Nacionalidad" class="form-control" />
+				                    <input type="text" name="nacionalidad" id="nacionalidad" class="form-control" />
 				                </div>
 							</div>
 						</div>
@@ -417,7 +417,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									 <label for="last_name">Penombre:</label>
-					                    <input type="text" name="penombre" id="fecha_nac" class="form-control" />
+					                    <input type="text" name="penombre" id="penombre" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -522,7 +522,7 @@
         });
 
 		$('.btn_cotizacion').on("click", function () {
-			$("#modal_cotizacion").modal("show");
+			$("#modal_cotizacion").modal("hide");
 			travel.saveInfoTablas();
         });
 

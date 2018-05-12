@@ -8,7 +8,7 @@ class Cobrar extends Secure_area {
 		parent::__construct();
 		$this->load->model("property");
 		$this->load->model("customer");
-		$this->load->model('TravelModel');
+		$this->load->model("travelmodel");
 		$this->load->model("code");
 		$this->load->model("payment");
 		$this->load->model("payment_detail");
@@ -33,6 +33,16 @@ class Cobrar extends Secure_area {
 		$this->load->model('TravelModel');
 		$this->travelmodel->anular($viaje);
 		return '0';
+	}
+
+	function info(){
+		$this->load->model("travelmodel");
+		$id = $this->input->post('id') ;
+		$array_search = array(
+			"travel_id" => $id,
+		);
+		$response = $this->travelmodel->get_solicitud($array_search);
+		echo json_encode($response);
 	}
 }
 

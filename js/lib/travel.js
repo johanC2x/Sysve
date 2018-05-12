@@ -135,8 +135,10 @@ var travel = function () {
         date_end_travel = $("#date_end_travel").val();
         //TIPO DE VIAJE
         type_travel = $('#type_travel').val();
+        data_cotizacion = $('#json_cotizacion').val();
         data = { 
-            'data': travel.list_comision, 
+            'data': travel.list_comision,
+            'data_cotizacion': data_cotizacion,
             'customer_document': customer_document,
             'code_travel': code_travel,
             'name_travel': name_travel,
@@ -397,9 +399,12 @@ var travel = function () {
         $('#porcentaje_cobro').val(data.porcentaje_cobro);
         $('#nombre_ruc').val(nombre_ruc);
         $('#dni_ruc').val(dni_ruc);
+        $('#nombres').val(data.nombres);
+        $('#apellidos').val(data.apellidos);
         $('#direccion_fiscal').val(direccion_fiscal);
 
         $('#comision_code').val(data.comision_code);
+        $('#monto_comision').val(data.monto_comision);
         
         $('#tipo_doc').val(data.tipo_doc);
         $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
@@ -518,8 +523,11 @@ var travel = function () {
             var idObj = parseInt($("#comision_obj_id").val());
             var current = self.list_comision[idObj];
             current.comision_code = $("#comision_code").val();
+            current.nombres = $("#nombres").val();
+            current.apellidos = $("#apellidos").val();
             current.ammount = parseFloat($("#monto_detalle").val()) + parseFloat($('#fee_servicio').val());
             current.fee_servicio = $("#fee_servicio").val();
+            current.monto_comision = $("#monto_comision").val();
             current.porcentaje_cobro = $("#porcentaje_cobro").val();
             current.nombre_ruc = $("#nombre_ruc").val();
             current.dni_ruc = $("#dni_ruc").val();
@@ -757,11 +765,19 @@ var travel = function () {
                     }
                 });
             });
-            info.push("["+id+":"+JSON.stringify(arr)+"]");
+            // info.push("["+id+":"+JSON.stringify(arr)+"]");
+            info.push("{"+id+":"+arr+"}");
             // info[id]= arr;
             // console.log(arr);
             // console.log(info[id]);
-        })
+        });
+        info.push("[fecha_nacimiento: "+$('#fecha_nac').val()+"]");
+        info.push("[nacionalidad: "+$('#nacionalidad').val()+"]");
+        info.push("[nombre: "+$('#nombre').val()+"]");
+        info.push("[penombre: "+$('#penombre').val()+"]");
+        info.push("[ap_paterno: "+$('#ap_paterno').val()+"]");
+        info.push("[ap_materno: "+$('#ap_materno').val()+"]");
+        info.push("[ap_casada: "+$('#ap_casada').val()+"]");
         data = JSON.stringify(info);
         $('#json_cotizacion').val(data);
     }

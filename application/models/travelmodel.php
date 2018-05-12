@@ -46,23 +46,28 @@ class TravelModel extends CI_Model
 	}
 
 	function get_solicitud($array_search){
-		$this->db->select('travel.*,customer_travel.*,people.*');
+		$this->db->select('travel.*,customer_travel.*');
 		$this->db->where('customer_travel.type_state_travel_id',2);
 		$this->db->where('travel.status',1);
 		if(isset($array_search["code_travel"]) && !empty($array_search["code_travel"])){
 			$this->db->like('code',$array_search["code_travel"]);
 		}
-		if(isset($array_search["document_travel"]) && !empty($array_search["document_travel"])){
-			$this->db->like('customers.person_id',$array_search["document_travel"]);
+
+		if(isset($array_search["travel_id"]) && !empty($array_search["travel_id"])){
+			$this->db->where('customer_travel.id', $array_search["travel_id"]);
 		}
+
+		// if(isset($array_search["document_travel"]) && !empty($array_search["document_travel"])){
+		// 	$this->db->like('customers.person_id',$array_search["document_travel"]);
+		// }
 		if(isset($array_search["customer_travel"]) && !empty($array_search["customer_travel"])){
 			//$this->db->like('people.first_name',$array_search["customer_travel"]);
 			$this->db->like('people.last_name',$array_search["customer_travel"]);
 		}
 		$this->db->from('travel');
 		$this->db->join('customer_travel','travel.id=customer_travel.travel_id');
-		$this->db->join('customers','customer_travel.customer_id=customers.person_id');
-		$this->db->join('people','customers.person_id=people.person_id');	
+		// $this->db->join('customers','customer_travel.customer_id=customers.person_id');
+		// $this->db->join('people','customers.person_id=people.person_id');	
 		$query =  $this->db->get();
 		//echo "<pre/>";print_r($this->db->last_query());exit();
 		return $query->result_array();

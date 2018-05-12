@@ -1,4 +1,4 @@
-1525929982TS---><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+1526109664TS---><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -109,8 +109,16 @@
 			            		<a href="http://localhost/Sysve/index.php/travel" >
 			            						            			Viajes			            		</a>
 			            	</li>
+			            			            	<li>
+			            		<a href="http://localhost/Sysve/index.php/cobrar" >
+			            						            			Cobrar			            		</a>
+			            	</li>
 			            			          </ul>
 			        </li>
+										<li class="menu_item">
+						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
+						<a href="" ></a>
+					</li>
 										<li class="menu_item">
 						<!-- <a href=""><img src="" border="0" alt="Menubar Image" /></a><br /> -->
 						<a href="" ></a>

@@ -22,6 +22,75 @@ var cobrar = function () {
 
 	self.borrarRegistro = function(i){
 		$('#id_borrar').val(i);
+		$('#contenedor').html();
+		$.ajax({
+            type:"POST",
+            url: "index.php/cobrar/info",
+            type:"POST",
+            data:{
+                "id" : i
+            },
+            success:function(data){
+                data = JSON.parse(data);
+                console.log(data);
+                info = data[0];
+                cobrar.dibujarDetalle(info);
+            }
+        });
+	};
+
+	self.dibujarDetalle = function(data){
+		//info basica
+		var tabla1 = '';
+		var tabla2 = '';
+		var tabla3 = '';
+		var estado = 'Activo';
+		if(parseInt(data.status) < 1){
+			estado = 'Inactivo';
+		}
+
+		tabla1+= '<fieldset><legend>Información básica</legend>';
+		tabla1+= '<table border="1" style="width: 100%">';
+		tabla1+= '<tr><td>Cod: '+data.code+'</td><td>Creado: '+data.created_at+'</td></tr>';
+		tabla1+= '<tr><td>Origen:'+data.destiny_origin+'</td><td>Destino:'+data.destiny_end+'</td></tr>';
+		tabla1+= '<tr><td>Fecha inicio'+data.date_init+'</td><td>Fecha llegada'+data.date_end+'</td></tr>';
+		tabla1+= '</table>';
+		tabla1+= '</fieldset>';
+
+
+		//informacion de comisiones/servicios
+		tabla2+= '<fieldset><legend>Información de Servicios</legend>';
+		comisiones = JSON.parse(data.data_travel).comisiones;
+		for (var i = comisiones.length - 1; i >= 0; i--) {
+			console.log(comisiones[i]);
+			tabla2+= '<table border="1" style="width: 100%">';
+			tabla2+= '<tr><td colspan="3">'+comisiones[i].name+'</td></tr>';
+			tabla2+= '<tr><td>Apellidos:'+comisiones[i].apellidos+'</td><td>Nombres:'+comisiones[i].nombres+'</td><td>DNI/RUC:'+comisiones[i].dni_ruc+'</td></tr>';
+			tabla2+= '<tr><td>Direccion:'+comisiones[i].direccion_fiscal+'</td><td>Comision:'+comisiones[i].monto_comision+'</td><td>Fee del servicio:'+comisiones[i].fee_servicio+'</td></tr>';
+			tabla2+= '<tr><td>Comision Fee:'+comisiones[i].comision_fee+'</td><td>Incentivo otros:'+comisiones[i].comision_incentive_otros+'</td><td>Incentivo Turifax'+comisiones[i].comision_incentive_turifax+'</td></tr>';
+			tabla2+= '<tr><td></td><td></td><td></td></tr>';
+			tabla2+= '</table>';
+			tabla2+= '<hr>';
+		}
+		tabla2+= '</fieldset>';
+		hr = '<hr>';
+
+		//informacion de cotizacion
+		// cotizacion = JSON.parse(JSON.parse(data.data_cotizacion));
+		// console.log(cotizacion);
+
+		// tabla2+= '<fieldset><legend>Información de cotizacion</legend>';
+		// tabla3+= '<table border="1" style="width: 100%">';
+		// tabla3+= '<tr><td>DNI:'+cotizacion.datos_dni+'</td><td>Fecha de Nacimiento:'+cotizacion.fecha_nacimiento+'</td><td>'+cotizacion.nacionalidad+'</td></tr>';
+		// tabla3+= '<tr><td>Nombre:'+cotizacion.nombre+' '+cotizacion.ap_paterno+' '+ cotizacion.ap_materno+'</td><td>Penombre:'+cotizacion.penombre+'</td><td>Apellido casada:'+cotizacion.ap_casada+'</td></tr>';
+		// tabla3+= '<tr><td>Telefono:'+cotizacion.datos_celulares+'</td><td colspan="2">Correos:'+cotizacion.datos_emails+'</td></tr>';
+		// tabla3+= '<tr><td>Datos del viaje:'+cotizacion.datos_viaje+'</td></tr>';
+
+		
+		// tabla3+= '</fieldset';
+		// hr = '<hr>';
+
+		$('#contenedor').html(tabla1+hr+tabla2+hr+tabla3);
 	};
 
 	self.addCkPay = function(idObj,index){
