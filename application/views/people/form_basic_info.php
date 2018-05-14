@@ -100,12 +100,12 @@
 		<fieldset>
 		<div class="col-md-12">
 		<legend>Visado</legend>		
-			<table style="text-align: center;width: 810px" id="tbl_empresas">
+			<table style="text-align: center;width: 600px" id="tbl_empresas">
 					<tr>
-						<td style="text-align: center;width:200px">Pais de Visado</td>
-						<td style="text-align: center;width:200px">Numero</td>
-						<td style="text-align: center;width:200px">Fecha Emisión</td>
-						<td style="text-align: center;width:200px">Fecha Expiracion<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_visado', ['pais_visado', 'numero', 'fecha_emision', 'fecha_expiracion'], 850);"></button></td>
+						<td style="text-align: center;width:100px">Pais de Visado</td>
+						<td style="text-align: center;width:150px">Numero</td>
+						<td style="text-align: center;width:150px">Fecha Emisión</td>
+						<td style="text-align: center;width:150px">Fecha Expiracion<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_visado', ['pais_visado', 'numero', 'fecha_emision', 'fecha_expiracion'], 610);"></button></td>
 					</tr>
 				</table>
 				<div id="datos_visado" name="datos_visado"></div>
@@ -198,7 +198,7 @@
 	<fieldset>
 		<legend>Pasajeros Frecuentes</legend>
 		<div class="col-md-6">
-				<table style="text-align: center;width: 670px" id="tbl_empresas">
+				<table style="text-align: center;width: 815px" id="tbl_empresas">
 					<tr>
 						<td style="text-align: center;width:500px">Millaje</td>
 						<td style="text-align: center;width:500px">Nro</td>

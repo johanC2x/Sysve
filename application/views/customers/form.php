@@ -264,6 +264,6 @@ echo form_close();
     generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);
     generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);
     generarTablaDatos('datos_familiares', ['relacion', 'nombre', 'telefono'], 300);
-
+    generarTablaDatos('datos_visado', ['pais_visado', 'numero', 'fecha_emision', 'fecha_expiracion'], 610);
 
 </script>
