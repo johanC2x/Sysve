@@ -217,7 +217,7 @@
 		<legend>Datos de Familiares</legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
-					<table style="text-align: center;width: 400px" id="tbl_empresas">
+					<table style="text-align: center;width: 494px" id="tbl_empresas">
 						<tr>
 							<td style="text-align: center;width:100px">Relación</td>
 							<td style="text-align: center;width:100px">Nombre</td>
