@@ -183,7 +183,7 @@
 				<input type="hidden" name="json_empresa">
 			</div>
 			<div class="col-md-6">
-				<table style="width: 380px" id="tbl_empresas">
+				<table style="width: 392px" id="tbl_empresas">
 						<tr>
 							<td style="width:120px">Tipo de email</td>
 							<td style="width:111px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);"></button></td>
@@ -217,7 +217,7 @@
 		<legend>Datos de Familiares</legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
-					<table style="text-align: center;width: 494px" id="tbl_empresas">
+					<table style="text-align: center;width: 501px" id="tbl_empresas">
 						<tr>
 							<td style="text-align: center;width:100px">Relación</td>
 							<td style="text-align: center;width:100px">Nombre</td>
