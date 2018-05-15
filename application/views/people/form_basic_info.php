@@ -71,9 +71,9 @@
 		<fieldset>
 		<div class="col-md-12">
 		<legend>Información Adicional</legend>		
-			<table style="text-align: center;width: 850px" id="tbl_empresas">
+			<table style="text-align: center;width: 898px" id="tbl_empresas">
 					<tr>
-						<td style="text-align: center;width:200px">Numero</td>
+						<td style="text-align: center;width:166px">Numero</td>
 						<td style="text-align: center;width:200px">Fecha Emisión</td>
 						<td style="text-align: center;width:200px">Fecha Expiración</td>
 						<td style="text-align: center;width:200px">Pais Emisión</td>
@@ -83,9 +83,9 @@
 				<div id="datos_pasaportes" name="datos_pasaportes"></div>
 				<input type="hidden" name="json_empresa">
 			<hr>
-			<table style="text-align: center;width: 880px" id="tbl_empresas">
+			<table style="text-align: center;width: 916px" id="tbl_empresas">
 				<tr>
-					<td style="text-align: center;width:200px">Tipo</td>
+					<td style="text-align: center;width:128px">Tipo</td>
 					<td style="text-align: center;width:200px">Direccion</td>
 					<td style="text-align: center;width:200px">Distrito/Estado</td>
 					<td style="text-align: center;width:200px">Pais</td>

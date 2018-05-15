@@ -62,8 +62,8 @@
       	<div id="contenedor"></div>
       </div>
       <div class="modal-footer">
-        <button id="btn_aceptar" type="button" class="btn btn-default" data-dismiss="modal" onclick="cobrar.borrarViajes();">SI</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+       <!--  <button id="btn_aceptar" type="button" class="btn btn-default" data-dismiss="modal" onclick="cobrar.borrarViajes();">SI</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">NO</button> -->
       </div>
     </div>
 
