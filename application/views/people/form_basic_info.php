@@ -100,7 +100,7 @@
 		<fieldset>
 		<div class="col-md-12">
 		<legend>Visado</legend>		
-			<table style="text-align: center;width: 600px" id="tbl_empresas">
+			<table style="text-align: center;width: 608px" id="tbl_empresas">
 					<tr>
 						<td style="text-align: center;width:100px">Pais de Visado</td>
 						<td style="text-align: center;width:150px">Numero</td>
@@ -173,10 +173,10 @@
 		<legend>Teléfono y Correo</legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
-				<table style="text-align: center;width: 400px" id="tbl_empresas">
+				<table style="text-align: center;width: 396px" id="tbl_empresas">
 					<tr>
-						<td style="width:120px">Tipo de contacto</td>
-						<td style="width:200px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
+						<td style="width:100px">Tipo de contacto</td>
+						<td style="width:190px">Nro <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
 					</tr>
 				</table>
 				<div id="datos_celulares" name="datos_celulares"></div>
@@ -198,7 +198,7 @@
 	<fieldset>
 		<legend>Pasajeros Frecuentes</legend>
 		<div class="col-md-6">
-				<table style="width: 815px" id="tbl_empresas">
+				<table style="width: 822px" id="tbl_empresas">
 					<tr>
 						<td style="text-align: center;width:500px">Millaje</td>
 						<td style="text-align: center;width:500px">Nro</td>
