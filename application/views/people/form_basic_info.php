@@ -137,7 +137,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>Datos de empresa <input type="checkbox" name=""></legend>
-			<table style="text-align: center;width: 950px" id="tbl_empresas">
+			<table style="text-align: center;width: 999px" id="tbl_empresas">
 				<tr>
 					<td style="text-align: center;width:225px">RUC</td>
 					<td style="text-align: center;width:225px">razon social</td>
