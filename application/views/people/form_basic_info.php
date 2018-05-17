@@ -137,17 +137,32 @@
 		</fieldset>
 		<fieldset>
 			<legend>Datos de empresa <input type="checkbox" name=""></legend>
-			<table style="text-align: center;width: 999px" id="tbl_empresas">
+			<table style="text-align: center;width: 1311px" id="tbl_empresas">
 				<tr>
-					<td style="text-align: center;width:225px">RUC</td>
+					<td style="text-align: center;width:205px">RUC</td>
 					<td style="text-align: center;width:225px">razon social</td>
 					<td style="text-align: center;width:225px">direccion</td>
+					<td style="text-align: center;width:225px">distrito</td>
+					<td style="text-align: center;width:225px">estado</td>
 					<td style="text-align: center;width:225px">Correo</td>
 					<td style="text-align: center;width:225px">Telefono</td>
-					<td style="text-align: center;width:225px">Referencia<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'correo' ,'tlfono', 'referencia'], 1000);"></button></td>
+					<td style="text-align: center;width:225px">Referencia<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'distrito', 'estado', 'correo' ,'tlfono', 'referencia'], 1000);"></button></td>
 				</tr>
 			</table>
 			<div id="datos_empresa" name="datos_empresa">
+			<input type="hidden" name="json_empresa">
+		</fieldset>
+		<hr>
+		<fieldset>
+			<legend>Personas a contactar <input type="checkbox" name=""></legend>
+			<table style="text-align: center;width: 501px" id="tbl_empresas">
+				<tr>
+					<td style="text-align: center;width:155px">Nombre</td>
+					<td style="text-align: center;width:155px">Telefono</td>
+					<td style="text-align: center;width:155px">Correo<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_contactar', ['ruc', 'telefono', 'correo'], 451);"></button></td>
+				</tr>
+			</table>
+			<div id="datos_contactar" name="datos_contactar">
 			<input type="hidden" name="json_empresa">
 		</fieldset>
 		<hr>

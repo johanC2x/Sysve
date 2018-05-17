@@ -258,7 +258,8 @@ echo form_close();
     
     generarTablaDatos('datos_pasaportes', ['nro', 'fecha_emision', 'fecha_expiracion', 'pais_emision', 'nacionalidad'], 900);
     generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);
-    generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'correo' ,'tlfono', 'referencia'], 1000)
+    generarTablaDatos('datos_empresa', ['ruc', 'razon_social', 'direccion', 'distrito', 'estado', 'correo' ,'tlfono', 'referencia'], 1000)
+    generarTablaDatos('datos_contactar', ['ruc', 'telefono', 'correo'], 451);
     generarTablaDatos('datos_pasajeros', ['millaje', 'nro', 'usuario', 'clave', 'fin'], 400);
 
     generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);

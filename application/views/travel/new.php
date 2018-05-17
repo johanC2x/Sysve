@@ -444,9 +444,9 @@
 						<div class="col-md-12">
 							<fieldset>
 								<legend>Información del Viaje</legend>
-								<table style="text-align: center;width: 400" id="tbl_empresas">
+								<table style="text-align: center;width: 674px" id="tbl_empresas">
 									<tr>
-										<td style="text-align: center;width:225px">N° vuelo</td>
+										<td style="text-align: center;width:202px">N° vuelo</td>
 										<td style="text-align: center;width:225px">Fecha</td>
 										<td style="text-align: center;width:225px">Ruta<button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_viaje', ['nro_vuelo', 'fecha', 'ruta'], 400);"></button></td>
 									</tr>
