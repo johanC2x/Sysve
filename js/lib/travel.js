@@ -551,7 +551,8 @@ var travel = function () {
             self.list_comision[idObj] = current;
             if($("#monto_detalle").val() != ''){
                 monto_tabla = parseFloat($("#monto_detalle").val()) + parseFloat($('#fee_servicio').val());
-                $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text(monto_tabla);
+                $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(2)').text($("#comision_code").val());
+                $('#table_customer_travel').find('tr:eq('+(idObj+1)+')').find('td:eq(3)').text(monto_tabla);
             }
             self.calcularComisiones();
             $('.close').trigger('click');

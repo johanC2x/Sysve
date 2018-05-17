@@ -114,27 +114,17 @@
 		</fieldset>
 		<fieldset>
 			<legend>Datos de Tarjetas</legend>
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-	                    <label for="tipo_tarjeta">Tipo de Tarjeta</label>
-	                    <input type="text" name="tipo_tarjeta" id="tipo_tarjeta" class="form-control" />
-	                </div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-	                    <label for="nro_tarjeta">Nro de Tarjeta:</label>
-	                    <input type="text" name="nro_tarjeta" id="nro_tarjeta" class="form-control" />
-	                </div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-	                    <label for="debito_credito">Débito o Crédito:</label>
-	                    <input type="text" name="debito_credito" id="debito_credito" class="form-control" />
-	                </div>
-				</div>
-			</div>
+			<table style="text-align: center;width: 500px" id="tbl_empresas">
+				<tr>
+					<td style="text-align: center;width:150px">Tipo de Tarjeta</td>
+					<td style="text-align: center;width:150px">Nro. de Tarjeta</td>
+					<td style="text-align: center;width:150px">Débito o Crédito<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);"></button></td>
+				</tr>
+			</table>
+			<div id="datos_tarjetas" name="datos_tarjetas">
+			<input type="hidden" name="json_empresa">
 		</fieldset>
+		<hr>
 		<fieldset>
 			<legend>Datos de empresa <input type="checkbox" name=""></legend>
 			<table style="text-align: center;width: 1311px" id="tbl_empresas">
