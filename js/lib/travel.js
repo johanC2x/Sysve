@@ -419,8 +419,15 @@ var travel = function () {
     };
 
     self.modalCotizacion = function(){
-        $('#muestra_cotizacion').attr('checked', false);
-        $("#modal_cotizacion").modal("show");
+        // $('#muestra_cotizacion').attr('checked', false);
+        if($('#muestra_cotizacion').is(':checked')){
+            $('#btn_nuevo_cliente').hide()
+            $('#btn_nuevo_cliente2').show();
+        }else{
+            $('#btn_nuevo_cliente').show();
+            $('#btn_nuevo_cliente2').hide();
+        }
+        
     };
 
     self.setTravelCode = function(){

@@ -31,8 +31,9 @@
 					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
 					</button> -->
-					<a href="<?php echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
-					<input type="checkbox" name="muestra_cotizacion" id="muestra_cotizacion" onclick="travel.modalCotizacion();">
+					<a id="btn_nuevo_cliente" href="<?php echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					<a id="btn_nuevo_cliente2" style="display: none" class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					<input type="checkbox" style="height: 20px; width: 20px" name="muestra_cotizacion" id="muestra_cotizacion" onclick="travel.modalCotizacion();">
 					<?php 
 						/*
 					    $controller_name = 'customers';
@@ -122,7 +123,7 @@
 		                <div class="form-group">
 	                  		<br/>
 	                  		<div class="checkbox">
-							  <label><input id="pagado" type="checkbox" value="" onclick="travel.getConfiguration()">¿Pagado?</label>
+							  <label><input id="pagado" style="height: 20px; width: 20px" type="checkbox" value="" onclick="travel.getConfiguration()">¿Pagado?</label>
 							</div>
 	                  	</div>
 	                  	<div class="form-group" id="div_feepenalidad">
@@ -372,6 +373,7 @@
 	</div>
 </div>
 <div id="modal_cotizacion" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+<input type="hidden" id="url_nuevo_cliente" name="url_nuevo_cliente" value="<?php echo base_url();?>/index.php/customers/view/-1/width:1200">
   	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
 			<div class="modal-header">
@@ -444,7 +446,7 @@
 						<div class="col-md-12">
 							<fieldset>
 								<legend>Información del Viaje</legend>
-								<table style="text-align: center;width: 674px" id="tbl_empresas">
+								<table style="text-align: center;width: 574px" id="tbl_empresas">
 									<tr>
 										<td style="text-align: center;width:202px">N° vuelo</td>
 										<td style="text-align: center;width:225px">Fecha</td>
@@ -540,6 +542,11 @@
 		travel.validateFormTravel();
 		travel.validateFormUpdateComision();
 		travel.formCotizacion();
+
+		$('#btn_nuevo_cliente2').click(function(){
+			$('#modal_cotizacion').modal('show');
+		})
+
 	});
 
 </script>
