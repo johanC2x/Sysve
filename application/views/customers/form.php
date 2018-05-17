@@ -191,6 +191,8 @@ echo form_close();
         tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
         tabla += '<table>';
         console.log(arr);
+        console.log(contenedor);
+        console.log(tabla);
         $('#'+contenedor).append(tabla);
         $('.borrar').click(function(){
             fila = $(this).parent().parent();

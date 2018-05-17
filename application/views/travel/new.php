@@ -395,10 +395,10 @@
 								<table style="text-align: center;width: 200px" id="tbl_empresas">
 									<tr>
 										<td style="text-align: center;width:100px">Documento</td>
-										<td style="text-align: center;width:100px">Nro.<button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_dni', ['documento', 'nro'], 200);"></button></td>
+										<td style="text-align: center;width:100px">Nro.<button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_dni2', ['documento', 'nro'], 200);"></button></td>
 									</tr>
 								</table>
-								<div id="datos_dni" name="datos_dni"></div>
+								<div id="datos_dni2" name="datos_dni2"></div>
 								<input type="hidden" name="json_datos_dni" id="json_datos_dni">
 							</div>
 							<div class="col-md-6">
@@ -467,20 +467,20 @@
 										<table style="text-align: center;width: 300px" id="tbl_empresas">
 											<tr>
 												<td>Tipo de contacto</td>
-												<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);"></button></td>
+												<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_celulares2', ['tipo_contacto', 'nro'], 400);"></button></td>
 											</tr>
 										</table>
-										<div id="datos_celulares" name="datos_celulares"></div>
+										<div id="datos_celulares2" name="datos_celulares2"></div>
 										<input type="hidden" name="json_empresa">
 									</div>
 									<div class="col-md-6">
 										<table style="text-align: center;width: 300px" id="tbl_empresas">
 												<tr>
 													<td>Tipo de email</td>
-													<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_emails', ['tipo_email', 'email'], 400);"></button></td>
+													<td style="text-align: center;width:142px">Nro <button class="fa fa-plus" style="float:right" onclick="travel.generarTablaDatos('datos_emails2', ['tipo_email', 'email'], 400);"></button></td>
 												</tr>
 										</table>
-										<div id="datos_emails" name="datos_emails"></div>
+										<div id="datos_emails2" name="datos_emails2"></div>
 										<input type="hidden" name="json_empresa">
 									</div>
 								</div>
