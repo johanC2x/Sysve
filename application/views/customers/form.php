@@ -141,13 +141,14 @@ echo form_close();
     function generarTablaDatos(contenedor, inputs, width){
         var tabla = '';
         var select = '';
+        console.log(contenedor)
         // inputs = ['razon_social', 'direccion', 'nro_doc'];
         tabla += '<table style="width:'+width+'px" class="generada" id="'+contenedor+'">';
         tabla += '<tr>';
 
         arr = [];
         for (var i = 0; i < inputs.length; i++) {
-            if(contenedor == 'datos_dni' && inputs[i] == 'documento'){
+            if((contenedor == 'datos_dni' || contenedor == 'datos_dni2' )&& inputs[i] == 'documento'){
                 select += '<select>';
                 select += '<option value="DNI">DNI</option>';
                 select += '<option value="CE">CE</option>';
@@ -200,9 +201,6 @@ echo form_close();
         }
         tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
         tabla += '<table>';
-        console.log(arr);
-        console.log(contenedor);
-        console.log(tabla);
         $('#'+contenedor).append(tabla);
         $('.borrar').click(function(){
             fila = $(this).parent().parent();

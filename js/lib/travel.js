@@ -700,7 +700,7 @@ var travel = function () {
 
         arr = [];
         for (var i = 0; i < inputs.length; i++) {
-            if(contenedor == 'datos_dni' && inputs[i] == 'documento'){
+            if(contenedor == 'datos_dni2' && inputs[i] == 'documento'){
                 select += '<select>';
                 select += '<option value="DNI">DNI</option>';
                 select += '<option value="CE">CE</option>';
@@ -712,14 +712,14 @@ var travel = function () {
                 select += '<option value="ENTREGA">ENTREGA</option>';
                 select += '</select>';
                 tabla += '<td style="padding: 3px">'+ select +'</td>';
-            }else if(contenedor == 'datos_celulares' && inputs[i] == 'tipo_contacto'){
+            }else if(contenedor == 'datos_celulares2' && inputs[i] == 'tipo_contacto'){
                 select += '<select>';
                 select += '<option value="CELULAR">CELULAR</option>';
                 select += '<option value="FIJO">FIJO</option>';
                 select += '<option value="OTROS">OTROS</option>';
                 select += '</select>';
                 tabla += '<td style="padding: 3px">'+ select +'</td>';
-            }else if(contenedor == 'datos_emails' && inputs[i] == 'tipo_email'){
+            }else if(contenedor == 'datos_emails2' && inputs[i] == 'tipo_email'){
                 select += '<select>';
                 select += '<option value="EMPRESA">EMPRESA</option>';
                 select += '<option value="PERSONAL">PERSONAL</option>';
