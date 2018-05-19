@@ -178,6 +178,16 @@ echo form_close();
                 select += '<option value="ESTA">ESTA</option>';
                 select += '</select>';
                 tabla += '<td style="padding: 3px">'+ select +'</td>';
+            }else if(contenedor == 'datos_asiento' && inputs[i] == 'tipo_asiento'){
+                select += '<select name="pref_asiento">'
+                select += '<option value="VENTANA">VENTANA</option>'
+                select += '<option value="PASILLO">PASILLO</option>'
+                select += '<option value="SALIDA DE EMERGENCIA">SALIDA DE EMERGENCIA</option>'
+                select += '<option value="COMPRA DE ASIENTOS">COMPRA DE ASIENTOS</option>'
+                select += '<option value="UPGRADE">UPGRADE</option>'
+                select += '<option value="SILLA DE RUEDAS">SILLA DE RUEDAS</option>'
+                select += '</select>'
+                tabla += '<td style="padding: 3px">'+ select +'</td>';
             }else{
                 tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
             }
@@ -268,5 +278,6 @@ echo form_close();
     generarTablaDatos('datos_celulares', ['tipo_contacto', 'nro'], 400);
     generarTablaDatos('datos_familiares', ['relacion', 'nombre', 'telefono'], 300);
     generarTablaDatos('datos_visado', ['pais_visado', 'numero', 'fecha_emision', 'fecha_expiracion'], 610);
+    generarTablaDatos('datos_asiento', ['tipo_asiento', 'indicaciones'], 400);
 
 </script>

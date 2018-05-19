@@ -70,7 +70,7 @@
 	</fieldset>
 		<fieldset>
 		<div class="col-md-12">
-		<legend>Información Adicional</legend>		
+		<legend>Pasaporte</legend>		
 			<table style="text-align: center;width: 898px" id="tbl_empresas">
 					<tr>
 						<td style="text-align: center;width:166px">Numero</td>
@@ -82,19 +82,7 @@
 				</table>
 				<div id="datos_pasaportes" name="datos_pasaportes"></div>
 				<input type="hidden" name="json_empresa">
-			<hr>
-			<table style="text-align: center;width: 916px" id="tbl_empresas">
-				<tr>
-					<td style="text-align: center;width:128px">Tipo</td>
-					<td style="text-align: center;width:200px">Direccion</td>
-					<td style="text-align: center;width:200px">Distrito/Estado</td>
-					<td style="text-align: center;width:200px">Pais</td>
-					<td style="text-align: center;width:200px">Telefono</td>
-					<td style="text-align: center;width:200px">Referencia <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);"></button></td>
-				</tr>
-			</table>
-			<div id="datos_generales" name="datos_generales"></div>
-			<input type="hidden" name="json_empresa">
+
 			<hr>
 		</fieldset>
 		<fieldset>
@@ -113,18 +101,21 @@
 				<hr>
 		</fieldset>
 		<fieldset>
-			<legend>Datos de Tarjetas</legend>
-			<table style="text-align: center;width: 500px" id="tbl_empresas">
+			<legend>Direcciones propias y de entrega</legend>
+			<table style="text-align: center;width: 916px" id="tbl_empresas">
 				<tr>
-					<td style="text-align: center;width:150px">Tipo de Tarjeta</td>
-					<td style="text-align: center;width:150px">Nro. de Tarjeta</td>
-					<td style="text-align: center;width:150px">Débito o Crédito<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);"></button></td>
+					<td style="text-align: center;width:128px">Tipo</td>
+					<td style="text-align: center;width:200px">Direccion</td>
+					<td style="text-align: center;width:200px">Distrito/Estado</td>
+					<td style="text-align: center;width:200px">Pais</td>
+					<td style="text-align: center;width:200px">Telefono</td>
+					<td style="text-align: center;width:200px">Referencia <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_generales', ['tipo','direccion', 'distrito', 'pais', 'tlfono', 'referencia'], 900);"></button></td>
 				</tr>
 			</table>
-			<div id="datos_tarjetas" name="datos_tarjetas">
+			<div id="datos_generales" name="datos_generales"></div>
 			<input type="hidden" name="json_empresa">
+			<hr>
 		</fieldset>
-		<hr>
 		<fieldset>
 			<legend>Datos de empresa <input type="checkbox" name=""></legend>
 			<table style="text-align: center;width: 1311px" id="tbl_empresas">
@@ -142,7 +133,6 @@
 			<div id="datos_empresa" name="datos_empresa">
 			<input type="hidden" name="json_empresa">
 		</fieldset>
-		<hr>
 		<fieldset>
 			<legend>Personas a contactar <input type="checkbox" name=""></legend>
 			<table style="text-align: center;width: 501px" id="tbl_empresas">
@@ -156,6 +146,21 @@
 			<input type="hidden" name="json_empresa">
 		</fieldset>
 		<hr>
+		<fieldset>
+			<legend>Datos de Tarjetas</legend>
+			<table style="text-align: center;width: 500px" id="tbl_empresas">
+				<tr>
+					<td style="text-align: center;width:150px">Tipo de Tarjeta</td>
+					<td style="text-align: center;width:150px">Nro. de Tarjeta</td>
+					<td style="text-align: center;width:150px">Débito o Crédito<button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_tarjetas', ['tipo_tarjeta', 'nro_tarjeta', 'debito_credito'], 500);"></button></td>
+				</tr>
+			</table>
+			<div id="datos_tarjetas" name="datos_tarjetas">
+			<input type="hidden" name="json_empresa">
+		</fieldset>
+		
+		<hr>
+		
 	<fieldset>
 		<legend>Información Personal</legend>
 		<div class="col-md-12">
@@ -218,8 +223,7 @@
 	</fieldset>
 	<hr>
 	<fieldset>
-
-		<legend>Datos de Familiares</legend>
+		<legend>Datos de Familiares y Preferencia de asiento</legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
 					<table style="text-align: center;width: 501px" id="tbl_empresas">
@@ -233,25 +237,14 @@
 					<input type="hidden" name="json_empresa">
 			</div>
 			<div class="col-md-6">
-				<div class="col-md-3">
-					<div class="form-group">
-			            <label for="pref_asiento">Preferencia de Asiento:</label>
-			            <select name="pref_asiento" class="form-control">
-			            	<option value="VENTANA">VENTANA</option>
-							<option value="PASILLO">PASILLO</option>
-							<option value="SALIDA DE EMERGENCIA">SALIDA DE EMERGENCIA</option>
-							<option value="COMPRA DE ASIENTOS">COMPRA DE ASIENTOS</option>
-							<option value="UPGRADE">UPGRADE</option>
-							<option value="SILLA DE RUEDAS">SILLA DE RUEDAS</option>
-			            </select>
-			        </div>
-		        </div>
-		        <div class="col-md-3">
-			        <div class="form-group">
-			        	<label for="coment_asiento">Indicaciones</label>
-			        	<textarea id="coment_asiento" name="coment_asiento"></textarea>
-		        	</div>
-		        </div>
+				<table style="width: 397px" id="tbl_empresas">
+					<tr>
+						<td style="text-align: center;width:272px">Tipo Asiento</td>
+						<td style="text-align: center;width:500px">Indicaciones <button class="fa fa-plus" style="float:right" onclick="generarTablaDatos('datos_asiento', ['tipo_asiento', 'indicaciones'], 400);"></button></td>
+					</tr>
+				</table>
+				<div id="datos_asiento" name="datos_asiento"></div>
+				<input type="hidden" name="json_empresa">
 			</div>
 		</div>
 	</fieldset>
