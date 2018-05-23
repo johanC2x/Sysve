@@ -90,13 +90,14 @@ class Customers extends Person_controller
 			'person_id'=>$this->input->post('person_id'),
 			'type_person_id'=>$this->input->post('type_person_id'),
 			'has_passport'=>$this->input->post('has_passport'),
-			'num_passport'=>$this->input->post('num_passport')
+			'num_passport'=>$this->input->post('num_passport'),
 		);
 		$customer_data=array(
 			'account_number'=>$this->input->post('account_number')=='' ? null:$this->input->post('account_number'),
 			'taxable'=>$this->input->post('taxable')=='' ? 0:1,
 			'data'=>$this->input->post('data'),
-			'data_customer' => json_encode($data)
+			'data_customer' => json_encode($data),
+			'data_nueva'=> $this->input->post('hidden_tablas'),
 		);
 
 		$response = $this->Customer->save($person_data,$customer_data,$customer_id);
