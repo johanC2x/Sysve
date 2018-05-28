@@ -5,7 +5,11 @@ var travel = function () {
         list_customer : [],
         list_comision : [],
         last_travel : '',
-        last_list_comision: []
+        last_list_comision: [],
+        customer_address_list : [],
+        customer_passport_list : [],
+        customer_card_list : [],
+        customer_company_list : [] 
     };
 
     self.changeRow = function(idObj){
@@ -657,15 +661,16 @@ var travel = function () {
         }).on('success.form.bv', function(e) {
             e.preventDefault();
             var data = {};
-            data.passport = $("#passport").val();
-            data.date_expire = $("#date_expire").val();
+            data.address = self.customer_address_list;
+            data.passports = self.customer_passport_list;
+            data.cards = self.customer_card_list;
+            data.companies = self.customer_company_list;
             $("#data_customer").val(JSON.stringify(data));
             $.ajax({
                 type:"POST",
                 url:$("#form_customer_register").attr('action'),
                 data:$("#form_customer_register").serialize(),
                 success:function(response){
-                    console.log(response);
                     var data = JSON.parse(response);
                     if(data.success){
                         getMessages("messages",data.message,'success');
@@ -790,7 +795,227 @@ var travel = function () {
         $('#json_cotizacion').val(data);
     }
 
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER ============= */
+    self.saveCustomerAddress = function(){
+        var address = $("#address_customer_travel").val();
+        var district = $("#district_customer_travel").val();
+        var reference = $("#reference_customer_travel").val();
+        if(address !== '' && district !== '' && reference !== ''){
+            self.customer_address_list.push({
+                address : address,
+                district : district,
+                reference : reference
+            });
+            self.makeTableAddress();
+        }
+    };
+
+    self.removeCustomerAddress = function(index){
+        self.customer_address_list.splice(index,1);
+        self.makeTableAddress();
+    };
+
+    self.makeTableAddress = function(){
+        var html = '';
+        $("#table_customer_address tbody").empty();
+        if(self.customer_address_list.length > 0){
+            for(var i = 0;i < self.customer_address_list.length; i++){
+                html += `<tr>
+                            <td><center>`+ self.customer_address_list[i].address +`</center></td>
+                            <td><center>`+ self.customer_address_list[i].district +`</center></td>
+                            <td><center>`+ self.customer_address_list[i].reference +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerAddress(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            html += `<tr>
+                        <td colspan="4">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_address tbody").append(html);
+    };
+
+    /* ============================================================== */
+
+     /* ================ SET TABLE FOR REGISTER CUSTOMER PASSPORT ============= */
+     self.saveCustomerPassport = function(){
+        var passport_country = $("#passport_customer_country").val();
+        var passport_nro = $("#passport_customer_nro").val();
+        var passport_date = $("#passport_customer_date").val();
+        if(passport_country !== '' && passport_nro !== '' && passport_date !== ''){
+            self.customer_passport_list.push({
+                country : passport_country,
+                nro : passport_nro,
+                date : passport_date
+            });
+            self.makeTablePassport();
+        }
+    };
+
+    self.removeCustomerPassport = function(index){
+        self.customer_passport_list.splice(index,1);
+        self.makeTablePassport();
+    };
+
+    self.makeTablePassport = function(){
+        var html = '';
+        $("#table_customer_passport tbody").empty();
+        if(self.customer_passport_list.length > 0){
+            for(var i = 0;i < self.customer_passport_list.length; i++){
+                html += `<tr>
+                            <td><center>`+ self.customer_passport_list[i].country +`</center></td>
+                            <td><center>`+ self.customer_passport_list[i].nro +`</center></td>
+                            <td><center>`+ self.customer_passport_list[i].date +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerPassport(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            html += `<tr>
+                        <td colspan="4">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_passport").append(html);
+    };
     
+    /* =================================================================== */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER CARD ============= */
+
+    self.saveCustomerCard = function(){
+        var card_brand = $("#card_customer_brand").val();
+        var card_nro = $("#card_customer_nro").val();
+        var card_type = $("#card_customer_type").val();
+        if(card_brand !== '' && card_nro !== '' && card_type !== ''){
+            self.customer_card_list.push({
+                brand : card_brand,
+                nro : card_nro,
+                type : card_type
+            });
+            self.makeTableCard();
+        }
+    };
+
+    self.removeCustomerCard = function(index){
+        self.customer_card_list.splice(index,1);
+        self.makeTableCard();
+    };
+
+    self.makeTableCard = function(){
+        var html = '';
+        $("#table_customer_card tbody").empty();
+        if(self.customer_card_list.length > 0){
+            for(var i = 0;i < self.customer_card_list.length; i++){
+                html += `<tr>
+                            <td><center>`+ self.customer_card_list[i].brand +`</center></td>
+                            <td><center>`+ self.customer_card_list[i].nro +`</center></td>
+                            <td><center>`+ self.customer_card_list[i].type +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerCard(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            html += `<tr>
+                        <td colspan="4">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_card").append(html);
+    };
+
+    /* =================================================================== */
+
+    /* ============= SET TABLE FOR REGISTER CUSTOMER COMPANY ============= */
+
+    self.saveCustomerCompany = function(){
+        var company_ruc = $("#company_customer_ruc").val();
+        var company_name = $("#company_customer_name").val();
+        var company_mail = $("#company_customer_mail").val();
+        if(company_ruc !== '' && company_name !== '' && company_mail !== ''){
+            self.customer_company_list.push({
+                ruc : company_ruc,
+                name : company_name,
+                mail : company_mail
+            });
+            self.makeTableCompany();
+        }
+    };
+
+    self.removeCustomerCompany = function(index){
+        self.customer_company_list.splice(index,1);
+        self.makeTableCompany();
+    };
+
+    self.makeTableCompany = function(){
+        var html = '';
+        $("#table_customer_company tbody").empty();
+        if(self.customer_company_list.length > 0){
+            for(var i = 0;i < self.customer_company_list.length; i++){
+                html += `<tr>
+                            <td><center>`+ self.customer_company_list[i].ruc +`</center></td>
+                            <td><center>`+ self.customer_company_list[i].name +`</center></td>
+                            <td><center>`+ self.customer_company_list[i].mail +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerCompany(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            html += `<tr>
+                        <td colspan="4">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_company").append(html);
+    };
+
+    /* LIMPIANDO FORMULARIO DE REGISTRO DE CLIENTES */
+    self.cancelRegisterCustomer = function(){
+        document.getElementById("form_customer_register").reset();
+        self.customer_address_list = [];
+        self.makeTableAddress();
+        self.customer_passport_list = [];
+        self.makeTablePassport();
+        self.customer_card_list = [];
+        self.makeTableCard();
+        self.customer_company_list = [];
+        self.makeTableCompany();
+    };
 
 	return self;
 }(jQuery);

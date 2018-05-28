@@ -31,8 +31,13 @@
 					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
 					</button> -->
-					<a id="btn_nuevo_cliente" href="<?php echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					<!--
+					<a id="btn_nuevo_cliente" href="<?php //echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					-->
+					<!--
 					<a id="btn_nuevo_cliente2" style="display: none" class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
+					-->
+					<a href="javascript:void(0);" onclick='$("#modal_customer").modal("show");' class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					<input type="checkbox" style="height: 20px; width: 20px" name="muestra_cotizacion" id="muestra_cotizacion" onclick="travel.modalCotizacion();">
 					<?php 
 						/*
@@ -546,7 +551,39 @@
 
 		$('#btn_nuevo_cliente2').click(function(){
 			$('#modal_cotizacion').modal('show');
-		})
+		});
+
+		/* BOTON DE AGREGADO DE DIRECCIONES */
+		if(document.getElementById("btn_add_customer_travel") !== null){
+			const btn_add_customer_travel = document.getElementById("btn_add_customer_travel");
+			btn_add_customer_travel.addEventListener("click" ,() => {
+				travel.saveCustomerAddress();
+			});
+		}
+
+		/* BOTON DE AGREGADO DE PASAPORTES */
+		if(document.getElementById("btn_add_customer_passport") !== null){
+			const btn_add_customer_passport = document.getElementById("btn_add_customer_passport");
+			btn_add_customer_passport.addEventListener("click" ,() => {
+				travel.saveCustomerPassport();
+			});
+		}
+
+		/* BOTON DE AGREGADO DE PASAPORTES */
+		if(document.getElementById("btn_add_customer_card") !== null){
+			const btn_add_customer_card = document.getElementById("btn_add_customer_card");
+			btn_add_customer_card.addEventListener("click" ,() => {
+				travel.saveCustomerCard();
+			});
+		}
+
+		/* BOTON DE AGREGADO DE PASAPORTES */
+		if(document.getElementById("btn_add_customer_company") !== null){
+			const btn_add_customer_company = document.getElementById("btn_add_customer_company");
+			btn_add_customer_company.addEventListener("click" ,() => {
+				travel.saveCustomerCompany();
+			});
+		}
 
 	});
 
