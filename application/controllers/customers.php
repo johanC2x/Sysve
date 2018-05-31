@@ -75,20 +75,6 @@ class Customers extends Person_controller
 	Inserts/updates a customer
 	*/
 	function save($customer_id=-1){
-
-		$type_person_id = 0;
-		switch($this->input->post('tipo_documento')){
-			case 'DNI':
-				$type_person_id = 3;
-				break;
-			case 'CE':
-				$type_person_id = 4;
-				break;
-			case 'Pasaporte':
-				$type_person_id = 5;
-				break;
-		}
-
 		$data["customer_info"] = json_decode($this->input->post('data_customer'));
 		$person_data = array(
 			'first_name'=>$this->input->post('first_name'),
@@ -96,23 +82,22 @@ class Customers extends Person_controller
 			'email'=>$this->input->post('email'),
 			'phone_number'=>$this->input->post('phone_number'),
 			'address_1'=>$this->input->post('address_1'),
-			//'birthdate'=>$this->input->post('birthdate'),
-			//'birthplace'=>$this->input->post('birthplace'),
-			//'nationality'=>$this->input->post('nationality'),
+			'birthdate'=>$this->input->post('birthdate'),
+			'birthplace'=>$this->input->post('birthplace'),
+			'nationality'=>$this->input->post('nationality'),
 			// 'country'=>$this->input->post('country'),
 			'comments'=>$this->input->post('comments'),
 			'person_id'=>$this->input->post('person_id'),
-			'type_person_id'=>$type_person_id,
+			'type_person_id'=>$this->input->post('type_person_id'),
 			'has_passport'=>$this->input->post('has_passport'),
 			'num_passport'=>$this->input->post('num_passport'),
 		);
-
 		$customer_data=array(
 			'account_number'=>$this->input->post('account_number')=='' ? null:$this->input->post('account_number'),
-			//'taxable'=>$this->input->post('taxable')=='' ? 0:1,
-			//'data'=>$this->input->post('data'),
-			'data' => $this->input->post('data_customer'),
-			//'data_nueva'=> $this->input->post('hidden_tablas'),
+			'taxable'=>$this->input->post('taxable')=='' ? 0:1,
+			'data'=>$this->input->post('data'),
+			'data_customer' => json_encode($data),
+			'data_nueva'=> $this->input->post('hidden_tablas'),
 		);
 
 		$response = $this->Customer->save($person_data,$customer_data,$customer_id);
