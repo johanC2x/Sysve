@@ -140,6 +140,7 @@ var travel = function () {
         //TIPO DE VIAJE
         type_travel = $('#type_travel').val();
         data_cotizacion = $('#json_cotizacion').val();
+        travel_id = $('#travel_id_hidden').val();
         data = { 
             'data': travel.list_comision,
             'data_cotizacion': data_cotizacion,
@@ -150,22 +151,42 @@ var travel = function () {
             'destiny_end_travel': destiny_end_travel,
             'date_init': date_init_travel,
             'date_end': date_end_travel,
-            'type_travel': type_travel
+            'type_travel': type_travel,
+            'travel_id': travel_id
         };
-        $.ajax({
-            url: travel.current_url + "index.php/travel/registerTravel/",
-            type: "POST",
-            data: data,
-            success: function(response){
-                var data = JSON.parse(response);
-                if(!data.success){
-                    $(".messages_modal").text("Ha ocurrido un error");
+
+        if(travel_id == ''){
+            $.ajax({
+                url: travel.current_url + "index.php/travel/registerTravel/",
+                type: "POST",
+                data: data,
+                success: function(response){
+                    var data = JSON.parse(response);
+                    if(!data.success){
+                        $(".messages_modal").text("Ha ocurrido un error");
+                    }
+                    // $("#modal_success").modal("show");
+                    travel.showLastRegisterTravel(data.travel);
+                    $('#showLastTravel').show();
                 }
-                // $("#modal_success").modal("show");
-                travel.showLastRegisterTravel(data.travel);
-                $('#showLastTravel').show();
-            }
-        })
+            })
+        }else{
+            $.ajax({
+                url: travel.current_url + "index.php/travel/registerTravel/",
+                type: "POST",
+                data: data,
+                success: function(response){
+                    var data = JSON.parse(response);
+                    if(!data.success){
+                        $(".messages_modal").text("Ha ocurrido un error");
+                    }
+                    // $("#modal_success").modal("show");
+                    travel.showLastRegisterTravel(data.travel);
+                    $('#showLastTravel').show();
+                }
+            })
+        }
+        
     };
 
     self.showLastRegisterTravel = function(travel){
@@ -1015,6 +1036,45 @@ var travel = function () {
         self.makeTableCard();
         self.customer_company_list = [];
         self.makeTableCompany();
+    };
+
+    self.getViajes = function(){
+        travelid = $('#travel_id_hidden').val() || '';
+        console.log(travelid);
+        if(travelid != ''){
+            $.ajax({
+                type: 'POST',
+                url: $("#form_travel_code_search").attr("action"),
+                data:{
+                    "travel_id" : travelid
+                },
+                success: function(response){
+                    console.log(response);
+                    ///////////////////
+                    var data = JSON.parse(response)[0];
+                    console.log(data);
+                    ////info cliente
+                    $('#customer_document').val(data.person_id);
+                    $('#customer_name').val(data.first_name + ' ' + data.last_name);
+                    $('#customer_address').val(data.customer_address);
+
+
+                    $('#code_travel').val(data.code);
+                    $('#name_travel').val(data.name);
+                    $('#destiny_origin_travel').val(data.destiny_origin);
+                    $('#destiny_end_travel').val(data.destiny_end);
+                    $('#date_init_travel').val(data.date_init.replace(' ','T').replace(':00', ''));
+                    $('#date_end_travel').val(data.date_end.replace(' ','T').replace(':00', ''));
+                    $('#type_travel').val(data.type_travel);
+                    tabla = JSON.parse(data.data_travel);
+                    console.log(tabla);
+                    self.list_comision = tabla.comisiones;
+                    self.makeTableComision();
+
+                }
+            });
+        }
+        
     };
 
 	return self;

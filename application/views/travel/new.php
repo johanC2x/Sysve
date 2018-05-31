@@ -31,7 +31,7 @@
 					<!-- <button type="button" class="btn btn-primary" onclick="travel.openModalCustomer();" >
 						Nuevo Cliente
 					</button> -->
-					
+					<input type="hidden" name="travel_id_hidden" id="travel_id_hidden" value="<?php echo $travelid; ?>">
 					<a id="btn_nuevo_cliente" href="<?php echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					
 					<!--
@@ -550,6 +550,7 @@
 		travel.validateFormTravel();
 		travel.validateFormUpdateComision();
 		travel.formCotizacion();
+		travel.getViajes();
 
 		$('#btn_nuevo_cliente2').click(function(){
 			$('#modal_cotizacion').modal('show');

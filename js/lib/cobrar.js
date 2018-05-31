@@ -137,6 +137,9 @@ var cobrar = function () {
                                     <a href='javascript:void(0);' title='Agregar Detalle' onclick='cobrar.borrarRegistro(`+ self.list_payment[i].id +`)' >
                                         <i class="far fa-calendar" data-toggle="modal" data-target="#myModal"></i>
                                     </a>
+                                    <a href='index.php/travel/`+self.list_payment[i].id+`' title='Agregar Detalle' onclick='cobrar.borrarRegistro(`+ self.list_payment[i].id +`)' >
+                                        <i class="far fa-edit" data-toggle="modal" data-target="#myModal"></i>
+                                    </a>
                                 </center>
                             </td>`;
 	            html += "</tr>";

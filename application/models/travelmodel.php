@@ -8,11 +8,21 @@ class TravelModel extends CI_Model
 	}
 
 	function saveTravel($travel_data = null){
-		if($this->db->insert('travel',$travel_data)){
-			return ["success" => true , "travel" => $this->db->insert_id()];
+		if(isset($travel_data['id']) && $travel_data['id'] != ''){
+			$this->db->where('id', $travel_data['id']);
+			if($this->db->update('travel', $travel_data)){
+				return ["success" => true];
+			}else{
+				return ["success" => false];
+			}
 		}else{
-			return ["success" => false];
+			if($this->db->insert('travel',$travel_data)){
+				return ["success" => true , "travel" => $this->db->insert_id()];
+			}else{
+				return ["success" => false];
+			}	
 		}
+		
 	}
 
 	function saveTravelCustomer($travel_data = null){
@@ -37,6 +47,7 @@ class TravelModel extends CI_Model
 		$this->db->join('customers','customer_travel.customer_id=customers.person_id');
 		$this->db->join('people','customers.person_id=people.person_id');
 		$this->db->where('travel.id', $travel_id);
+		echo $this->db->last_query();
 		$query =  $this->db->get();
 		return $query->row();
 	}
@@ -54,7 +65,8 @@ class TravelModel extends CI_Model
 		}
 
 		if(isset($array_search["travel_id"]) && !empty($array_search["travel_id"])){
-			$this->db->where('customer_travel.id', $array_search["travel_id"]);
+			$this->db->where('customer_travel.travel_id', $array_search["travel_id"]);
+			$this->db->limit(1);
 		}
 
 		// if(isset($array_search["document_travel"]) && !empty($array_search["document_travel"])){
@@ -67,7 +79,8 @@ class TravelModel extends CI_Model
 		$this->db->from('travel');
 		$this->db->join('customer_travel','travel.id=customer_travel.travel_id');
 		// $this->db->join('customers','customer_travel.customer_id=customers.person_id');
-		// $this->db->join('people','customers.person_id=people.person_id');	
+		// $this->db->join('people','customers.person_id=people.person_id');
+
 		$query =  $this->db->get();
 		//echo "<pre/>";print_r($this->db->last_query());exit();
 		return $query->result_array();

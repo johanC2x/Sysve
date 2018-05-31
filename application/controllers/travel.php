@@ -49,10 +49,12 @@ class Travel extends Secure_area {
 		$code_travel = $this->input->post('code_travel') ;
 		$document_travel = $this->input->post('document_travel');
 		$customer_travel = $this->input->post('customer_travel');
+		$travel_id = $this->input->post('travel_id');
 		$array_search = array(
 			"code_travel" => $code_travel,
 			"document_travel" => $document_travel,
-			"customer_travel" => $customer_travel
+			"customer_travel" => $customer_travel,
+			"travel_id" => $travel_id
 		);
 		$response = $this->travelmodel->get_solicitud($array_search);
 		echo json_encode($response);
@@ -97,6 +99,7 @@ class Travel extends Secure_area {
 			'destiny_origin'=>$this->input->post('destiny_origin_travel'),
 			'destiny_end'=>$this->input->post('destiny_end_travel'),
 			'date_init'=>$this->input->post('date_init'),
+			'id' => $this->input->post('travel_id'),
 			'date_end'=>$this->input->post('date_end'),
 			'data_travel' => json_encode($data_travel),
 			'data_cotizacion' => json_encode($data_cotizacion),
@@ -106,13 +109,13 @@ class Travel extends Secure_area {
 		if($res_travel["success"]){
 			$travel_customer_data = array(
 				'customer_id' => $this->input->post('customer_document'),
-				'travel_id' => $res_travel["travel"],
+				'travel_id' => $this->input->post('travel_id'),
 				'data' => json_encode($data_travel),
 				'type_state_travel_id' => 2
 			);
 			$res_cus_travel = $this->travelmodel->saveTravelCustomer($travel_customer_data);
 			if($res_cus_travel["success"]){
-				echo json_encode(["success" => true, "travel" => $res_travel["travel"]]);
+				echo json_encode(["success" => true, "travel" => $this->input->post('travel_id')]);
 			}else{
 				echo json_decode(["success" => false]);
 			}
@@ -120,6 +123,7 @@ class Travel extends Secure_area {
 			echo json_decode(["success" => false]);
 		}
 	}
+
 
 	function updateCustomer($customer_id = null){
 		$data = [];
@@ -241,6 +245,16 @@ class Travel extends Secure_area {
 		}else{
 			echo null;
 		}
+	}
+
+	function travel_edit($travelid){
+		$data["property"] = $this->property->getListPropertyModule("travel");
+		$data["property_customer"] = $this->property->getListPropertyModule("customer");
+		$data["operator"] = $this->code->listByCode("travel_operator");
+		if(!empty($travelid)){
+			$data["travelid"] = $travelid;
+		}
+		$this->load->view('travel/new',$data);
 	}
 
 }
