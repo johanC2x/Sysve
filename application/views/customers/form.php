@@ -141,67 +141,114 @@ echo form_close();
     function generarTablaDatos(contenedor, inputs, width){
         var tabla = '';
         var select = '';
-        console.log(contenedor)
+        var idObj = "";
         // inputs = ['razon_social', 'direccion', 'nro_doc'];
-        tabla += '<table style="width:'+width+'px" class="generada" id="'+contenedor+'">';
+        //tabla += '<table style="width:'+width+'px" class="generada" id="'+contenedor+'">';
         tabla += '<tr>';
-
         arr = [];
         for (var i = 0; i < inputs.length; i++) {
             if((contenedor == 'datos_dni' || contenedor == 'datos_dni2' )&& inputs[i] == 'documento'){
-                select += '<select>';
-                select += '<option value="DNI">DNI</option>';
-                select += '<option value="CE">CE</option>';
+                select += '<select class="form-control" >';
+                    select += '<option value="" disabled>Seleccionar</option>';
+                    select += '<option value="DNI">DNI</option>';
+                    select += '<option value="CE">CE</option>';
                 select += '</select>';
-                tabla += '<td style="padding: 3px">'+ select +'</td>';
+                tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_generales' && inputs[i] == 'tipo'){
-                select += '<select>';
-                select += '<option value="DOMICILIO">DOMICILIO</option>';
-                select += '<option value="ENTREGA">ENTREGA</option>';
+                select += '<select class="form-control">';
+                    select += '<option value="" disabled>Seleccionar</option>';
+                    select += '<option value="DOMICILIO">DOMICILIO</option>';
+                    select += '<option value="ENTREGA">ENTREGA</option>';
                 select += '</select>';
-                tabla += '<td style="padding: 3px">'+ select +'</td>';
+                tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_celulares' && inputs[i] == 'tipo_contacto'){
-                select += '<select>';
-                select += '<option value="CELULAR PERSONAL">CELULAR PERSONAL</option>';
-                select += '<option value="CELULAR EMPRESA">CELULAR EMPRESA</option>';
-                select += '<option value="OTROS">OTROS</option>';
+                select += '<select class="form-control">';
+                    select += '<option value="CELULAR PERSONAL">CELULAR PERSONAL</option>';
+                    select += '<option value="CELULAR EMPRESA">CELULAR EMPRESA</option>';
+                    select += '<option value="OTROS">OTROS</option>';
                 select += '</select>';
-                tabla += '<td style="padding: 3px">'+ select +'</td>';
+                tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_emails' && inputs[i] == 'tipo_email'){
-                select += '<select>';
-                select += '<option value="EMPRESA">EMPRESA</option>';
-                select += '<option value="PERSONAL">PERSONAL</option>';
+                select += '<select class="form-control">';
+                    select += '<option value="EMPRESA">EMPRESA</option>';
+                    select += '<option value="PERSONAL">PERSONAL</option>';
                 select += '</select>';
-                tabla += '<td style="padding: 3px">'+ select +'</td>';
+                tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_visado' && inputs[i] == 'pais_visado'){
-                select += '<select>';
-                select += '<option value="AMERICANO">AMERICANO</option>';
-                select += '<option value="ESTA">ESTA</option>';
+                select += '<select class="form-control">';
+                    select += '<option value="AMERICANO">AMERICANO</option>';
+                    select += '<option value="ESTA">ESTA</option>';
                 select += '</select>';
-                tabla += '<td style="padding: 3px">'+ select +'</td>';
+                tabla += '<td>'+ select +'</td>';
+            }else if(contenedor == 'datos_visado' && inputs[i] == 'fecha_emision'){
+                tabla += '<td><input class="'+inputs[i]+' form-control" type="date"></td>';
+            }else if(contenedor == 'datos_visado' && inputs[i] == 'fecha_expiracion'){  
+                tabla += '<td><input class="'+inputs[i]+' form-control" type="date"></td>';
             }else if(contenedor == 'datos_asiento' && inputs[i] == 'tipo_asiento'){
-                select += '<select name="pref_asiento">'
-                select += '<option value="VENTANA">VENTANA</option>'
-                select += '<option value="PASILLO">PASILLO</option>'
-                select += '<option value="SALIDA DE EMERGENCIA">SALIDA DE EMERGENCIA</option>'
-                select += '<option value="COMPRA DE ASIENTOS">COMPRA DE ASIENTOS</option>'
-                select += '<option value="UPGRADE">UPGRADE</option>'
-                select += '<option value="SILLA DE RUEDAS">SILLA DE RUEDAS</option>'
+                select += '<select name="pref_asiento" class="form-control">'
+                    select += '<option value="VENTANA">VENTANA</option>'
+                    select += '<option value="PASILLO">PASILLO</option>'
+                    select += '<option value="SALIDA DE EMERGENCIA">SALIDA DE EMERGENCIA</option>'
+                    select += '<option value="COMPRA DE ASIENTOS">COMPRA DE ASIENTOS</option>'
+                    select += '<option value="UPGRADE">UPGRADE</option>'
+                    select += '<option value="SILLA DE RUEDAS">SILLA DE RUEDAS</option>'
                 select += '</select>'
-                tabla += '<td style="padding: 3px">'+ select +'</td>';
+                tabla += '<td>'+ select +'</td>';
             }else{
-                tabla += '<td style="padding: 3px"><input class="'+inputs[i]+'"></td>';
+                tabla += '<td><input class="'+inputs[i]+' form-control"></td>';
             }
-
+            
             arr[i] = inputs[i];
-
             json = $('#json_'+contenedor).val(JSON.stringify(arr));
-
-
         }
-        tabla += '<td><button class="borrar fa fa-trash"></button></td></tr>';
-        tabla += '<table>';
-        $('#'+contenedor).append(tabla);
+        tabla += '<td><button type="button" class="borrar fa fa-trash"></button></td>';
+        tabla += '</tr>';
+        
+        //tabla += '<table>';
+        switch(contenedor){
+            case 'datos_dni':
+                idObj = 'tbl_empresas';
+                break;
+            case 'datos_pasaportes':
+                idObj = 'tbl_passport';
+                break;
+            case 'datos_visado':
+                idObj = 'tbl_visado';
+                break;
+            case 'datos_generales':
+                idObj = 'tbl_address';
+                break;
+            case 'datos_empresa':
+                idObj = 'tbl_company';
+                break;
+            case 'datos_contactar':
+                idObj = 'tbl_contact';
+                break;
+            case 'datos_tarjetas':
+                idObj = 'tbl_card';
+                break;
+            case 'datos_pasajeros':
+                idObj = 'tbl_pasj';
+                break;
+            case 'datos_celulares':
+                idObj = 'tbl_phone';
+                break;
+            case 'datos_emails':
+                idObj = 'tbl_emails';
+                break; 
+            case 'datos_familiares':
+                idObj = 'tbl_fam';
+                break; 
+            case 'datos_asiento':
+                idObj = 'tbl_asis';
+                break;         
+        }
+        if(idObj !== ''){
+            $('#'+idObj+' > tbody').append(tabla);
+        }else{
+            $('#'+contenedor+' > tbody').append(tabla);
+        }
+
         $('.borrar').click(function(){
             fila = $(this).parent().parent();
             fila.remove();
