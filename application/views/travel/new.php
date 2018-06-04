@@ -34,9 +34,9 @@
 					<input type="hidden" name="travel_id_hidden" id="travel_id_hidden" value="<?php if(isset($travelid)) echo $travelid; ?>">
 					<a id="btn_nuevo_cliente" href="<?php echo base_url();?>/index.php/customers/view/-1/width:1200" class="thickbox none btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					
-					<!--
+					
 					<a id="btn_nuevo_cliente2" style="display: none" class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
-					-->
+					
 					<!--
 					<a href="javascript:void(0);" onclick='$("#modal_customer").modal("show");' class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					-->
@@ -236,12 +236,10 @@
     	<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<!--
-				<h3 class="modal-title messages_modal">Detalles de Servicio</h3>
-				-->
 			</div>
+			<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
 			<div class="modal-body">
-				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_comision_update')); ?>
+				
 					<!--
 					<div class="row">
 					-->
@@ -314,6 +312,18 @@
 								<input type="text" id="comision_code" name="comision_code" class="form-control"/>
 								<input type="hidden" id="comision_obj_id" name="comision_obj_id"/>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fee_servicio">Fecha Inicio del Servicio</label>
+									<input type="date" id="fe_inicio_servicio" name="fe_inicio_servicio" class="form-control"> 
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fee_servicio">Fecha Fin del Servicio</label>
+									<input type="date" id="fe_fin_servicio" name="fe_fin_servicio" class="form-control"> 
+								</div>
+							</div>
 							</div>
 							<!-- <div class="col-md-6">
 								<div class="form-group">
@@ -377,6 +387,66 @@
 			</div>
 			</div>
 			
+		</div>
+	</div>
+</div>
+<div id="modal_operacion" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  	<div class="modal-dialog modal-lg">
+    	<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				
+				<h3 class="modal-title messages_modal"><span id="tipo_operacion"></span></h3>
+				<?php echo form_open('travel/updateDetailComision',array('id'=>'form_travel_operacion')); ?>
+				<div class="col-md-12">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="ticket_anular">Nro ticket a anular</label>
+							<input type="text" class="form-control" name="ticket_anular" id="ticket_anular">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="ticket_anular">Diferencia tarifas</label>
+							<input type="text" class="form-control" name="diferencia_tarifa" id="diferencia_tarifa">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="ticket_anular">Penalidad</label>
+							<input type="text" class="form-control" name="" id="ticket_anular">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="ticket_anular">Fee operador</label>
+							<input type="text" class="form-control" name="diferencia_tarifa" id="diferencia_tarifa">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="ticket_anular">Fee agencia</label>
+							<input type="text" class="form-control" name="" id="ticket_anular">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary btn_close_modal_operacion" type="button">
+						Guardar
+					</button>
+				</div>
+				
+			</div>
+			<div class="modal-body">
+				
+				<div class="row">
+
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

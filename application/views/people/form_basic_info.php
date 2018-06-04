@@ -274,7 +274,7 @@
 	</fieldset>
 	<hr>
 	<fieldset>
-		<legend>Datos de Familiares y Preferencia de asiento</legend>
+		<legend><span>Datos de Familiares</span> y <span style="position: relative;left: 450px">Preferencia de asiento</span></legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
 					<table class="table table-striped table-bordered" id="tbl_fam"> 

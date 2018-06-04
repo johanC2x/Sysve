@@ -408,39 +408,47 @@ var travel = function () {
     };
 
     self.openComisionDetail = function(row){
-        document.getElementById("form_travel_comision_update").reset();
         $("#comision_obj_id").val(row);
-        $("#modal_detail_comision").modal("show");
+        console.log(travel.list_comision[row].key);
         data = travel.list_comision[row];
-        
-        monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
-        monto_detalle = data.monto_detalle || monto_tabla;
-        nombre_ruc = data.nombre_ruc || $('#customer_name').val();
-        dni_ruc = data.dni_ruc || $('#customer_document').val();
-        direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
+        operaciones = ['re-emision','reembolso', 'anulacion'];
+        if(!$.inArray(travel.list_comision[row].key, operaciones)){
+            $("#modal_operacion").modal("show");
+            $('#tipo_operacion').text(travel.list_comision[row].key);
+        }else{
+            document.getElementById("form_travel_comision_update").reset();
+            $("#modal_detail_comision").modal("show");
+            monto_tabla = $('#table_customer_travel').find('tr:eq('+(row+1)+')').find('td:eq(2)').text();
+            monto_detalle = data.monto_detalle || monto_tabla;
+            nombre_ruc = data.nombre_ruc || $('#customer_name').val();
+            dni_ruc = data.dni_ruc || $('#customer_document').val();
+            direccion_fiscal = data.direccion_fiscal || $('#customer_address').text();
 
-        $('#monto_detalle').val(monto_detalle);
-        $('#fee_servicio').val(data.fee_servicio);
-        $('#porcentaje_cobro').val(data.porcentaje_cobro);
-        $('#nombre_ruc').val(nombre_ruc);
-        $('#dni_ruc').val(dni_ruc);
-        $('#nombres').val(data.nombres);
-        $('#apellidos').val(data.apellidos);
-        $('#direccion_fiscal').val(direccion_fiscal);
+            $('#monto_detalle').val(monto_detalle);
+            $('#fee_servicio').val(data.fee_servicio);
+            $('#porcentaje_cobro').val(data.porcentaje_cobro);
+            $('#nombre_ruc').val(nombre_ruc);
+            $('#dni_ruc').val(dni_ruc);
+            $('#nombres').val(data.nombres);
+            $('#apellidos').val(data.apellidos);
+            $('#direccion_fiscal').val(direccion_fiscal);
 
-        $('#comision_code').val(data.comision_code);
-        $('#monto_comision').val(data.monto_comision);
+            $('#comision_code').val(data.comision_code);
+            $('#monto_comision').val(data.monto_comision);
+            
+            $('#tipo_doc').val(data.tipo_doc);
+            $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
+            $('#comision_percentage').val(data.comision_percentage);
+            $('#acumula_millas').val(data.acumula_millas);
+            $('#tipo_tarjeta_milla').val(data.tipo_tarjeta_milla);
+            $('#nro_tarjeta_milla').val(data.nro_tarjeta_milla);
+            $('#incentivos_turifax').val(data.comision_incentive_turifax);
+            $('#incentivos_otros').val(data.comision_incentive_otros);
+            $('#comision_code').val(data.comision_code);
+            $('#comision_type_operator').val(data.comision_type_operator);
+        }
         
-        $('#tipo_doc').val(data.tipo_doc);
-        $('#comision_fee[value="'+data.comision_fee+'"]').prop('checked',true)
-        $('#comision_percentage').val(data.comision_percentage);
-        $('#acumula_millas').val(data.acumula_millas);
-        $('#tipo_tarjeta_milla').val(data.tipo_tarjeta_milla);
-        $('#nro_tarjeta_milla').val(data.nro_tarjeta_milla);
-        $('#incentivos_turifax').val(data.comision_incentive_turifax);
-        $('#incentivos_otros').val(data.comision_incentive_otros);
-        $('#comision_code').val(data.comision_code);
-        $('#comision_type_operator').val(data.comision_type_operator);
+        
     };
 
     self.modalCotizacion = function(){
