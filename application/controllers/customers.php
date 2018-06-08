@@ -68,6 +68,7 @@ class Customers extends Person_controller
 		}
 		$data['person_info']=$this->Customer->get_info($customer_id);
 		$data['propertys'] = $propertys;
+		// var_dump($data['person_info']);
 		$this->load->view("customers/form",$data);
 	}
 

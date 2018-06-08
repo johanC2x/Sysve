@@ -43,6 +43,7 @@ class Customer extends Person
 		$this->db->from('customers');	
 		$this->db->join('people', 'people.person_id = customers.person_id');
 		$this->db->where('customers.person_id',$customer_id);
+		$this->db->limit(1);
 		$query = $this->db->get();
 		
 		if($query->num_rows()==1)

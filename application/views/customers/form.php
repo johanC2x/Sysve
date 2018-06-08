@@ -103,18 +103,95 @@ echo form_close();
     });
 
     <?php if(!empty($person_info->data)){ ?>
-        setProperties(JSON.parse('<?= $person_info->data; ?>'));
+        //viejo setProperties
+        // setProperties(JSON.parse('<?= $person_info->data_nueva; ?>'));
+        setProperties('<?= $person_info->data_nueva; ?>');
     <?php } ?>
+    
+    //viejo setProperties
+
+    // function setProperties(data){
+    //     console.log('setProperties:');
+    //     console.log(data);
+    //     if(data.length > 0){
+    //         for (var i = 0; i < data.length; i++) {
+    //             console.log(data[i].id);
+    //             if(data[i].type === "text" || data[i].type === "date"){
+    //                 $("#"+data[i].id).val(data[i].value);
+    //             }
+    //         }
+    //     }
+    // }
 
     function setProperties(data){
-        if(data.length > 0){
-            for (var i = 0; i < data.length; i++) {
-                console.log(data[i].id);
-                if(data[i].type === "text" || data[i].type === "date"){
-                    $("#"+data[i].id).val(data[i].value);
-                }
+        // result = data.slice(1, -1).slice(0, -1);;
+
+        result = data.split("],[").join("]*[").split('*');
+        for (var i = result.length - 1; i >= 0; i--) {
+            dato = result[i].split(':');
+            indice = dato[0].replace('[', '');
+            valores = JSON.parse(dato[1].replace('["', '').replace('"]]', ''));
+
+            //completar arreglo de valores dependiendo del contenedor
+            cant_inputs = getCantidadInputs(indice);
+            cant_datos_actuales = valores.length;
+            faltantes = parseInt(cant_inputs) - parseInt(cant_datos_actuales);
+            for (var j = faltantes - 1; j >= 0; j--) {
+                valores.push(' ');
             }
+            console.log('cant_input:'+cant_inputs);
+            console.log('cant_datos_actuales:' + cant_datos_actuales);
+            console.log(indice);
+            console.log(valores);
+            //get onclick 
+            onclick = $('#'+indice).find('.fa-plus').attr('onclick');
+            console.log(onclick);
+            // onclick = onclick.replace(');', valores+');');
         }
+
+    }
+
+    function getCantidadInputs(contenedor){
+        var cant_inputs = 1;
+        switch(contenedor){
+            case 'tbl_empresas':
+                cant_inputs = '2';
+                break;
+            case 'tbl_passport':
+                cant_inputs = '5';
+                break;
+            case 'tbl_visado':
+                cant_inputs = '4';
+                break;
+            case 'tbl_address':
+                cant_inputs = '6';
+                break;
+            case 'tbl_company':
+                cant_inputs = '8';
+                break;
+            case 'tbl_contact':
+                cant_inputs = '3';
+                break;
+            case 'tbl_card':
+                cant_inputs = '3';
+                break;
+            case 'tbl_pasj':
+                cant_inputs = '5';
+                break;
+            case 'tbl_phone':
+                cant_inputs = '2';
+                break;
+            case 'tbl_emails':
+                cant_inputs = '2';
+                break; 
+            case 'tbl_fam':
+                cant_inputs = '3';
+                break; 
+            case 'tbl_asis':
+                cant_inputs = '2';
+                break;         
+        }
+        return cant_inputs;
     }
 
     function populateProperties(){
@@ -138,10 +215,13 @@ echo form_close();
         return childrens;
     }
 
-    function generarTablaDatos(contenedor, inputs, width){
+    function generarTablaDatos(contenedor, inputs, width, valores = null){
         var tabla = '';
         var select = '';
         var idObj = "";
+        if(typeof valores === 'undefined'){
+            valores = '';
+        }
         // inputs = ['razon_social', 'direccion', 'nro_doc'];
         //tabla += '<table style="width:'+width+'px" class="generada" id="'+contenedor+'">';
         tabla += '<tr>';
@@ -197,7 +277,7 @@ echo form_close();
             }else{
                 tabla += '<td><input class="'+inputs[i]+' form-control"></td>';
             }
-            
+
             arr[i] = inputs[i];
             json = $('#json_'+contenedor).val(JSON.stringify(arr));
         }
@@ -249,6 +329,8 @@ echo form_close();
             $('#'+contenedor+' > tbody').append(tabla);
         }
 
+
+
         $('.borrar').click(function(){
             fila = $(this).parent().parent();
             fila.remove();
@@ -273,6 +355,7 @@ echo form_close();
 
     function setValoresTablas(){
         var info = [];
+        // $('.generada').each(function(){
         $('.generada').each(function(){
             var arr = [];
             id = $(this).attr('id');

@@ -5,7 +5,7 @@
 		<legend>Datos Generales</legend>
 		<div class="col-md-12">
 			<div class="col-md-4" style="overflow: scroll; height: 100px">
-				<table class="table table-striped table-bordered" id="tbl_empresas">
+				<table class="table table-striped table-bordered generada" id="tbl_empresas">
 					<thead>
 						<th>Documento</th>
 						<th>Nro.</th>
@@ -83,7 +83,7 @@
 		<fieldset>
 		<div class="col-md-12">
 			<legend>Pasaporte</legend>		
-				<table class="table table-striped table-bordered" id="tbl_passport"> <!-- tbl_empresas -->
+				<table class="table table-striped table-bordered generada" id="tbl_passport"> <!-- tbl_empresas -->
 					<thead>
 						<th style="text-align: center;">Numero</th>
 						<th style="text-align: center;">Fecha Emisión</th>
@@ -103,7 +103,7 @@
 		<fieldset>
 		<div class="col-md-12">
 		<legend>Visado</legend>		
-			<table class="table table-striped table-bordered" id="tbl_visado"> <!-- tbl_empresas -->
+			<table class="table table-striped table-bordered generada" id="tbl_visado"> <!-- tbl_empresas -->
 				<thead>
 					<th style="text-align: center;">Pais de Visado</th>
 					<th style="text-align: center;">Numero</th>
@@ -121,7 +121,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>Direcciones propias y de entrega</legend>
-			<table class="table table-striped table-bordered" id="tbl_address"> 
+			<table class="table table-striped table-bordered generada" id="tbl_address"> 
 				<thead>
 					<th style="text-align: center;">Tipo</th>
 					<th style="text-align: center;">Direccion</th>
@@ -141,7 +141,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>Datos de empresa <input type="checkbox" name=""></legend>
-			<table class="table table-striped table-bordered" id="tbl_company"> 
+			<table class="table table-striped table-bordered generada" id="tbl_company"> 
 				<thead>
 					<th style="text-align: center;width:205px">RUC</th>
 					<th style="text-align: center;width:225px">razon social</th>
@@ -164,7 +164,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>Personas a contactar <input type="checkbox" name=""></legend>
-			<table class="table table-striped table-bordered" id="tbl_contact"> 
+			<table class="table table-striped table-bordered generada" id="tbl_contact"> 
 				<thead>
 					<th style="text-align: center;">Nombre</th>
 					<th style="text-align: center;">Telefono</th>
@@ -183,7 +183,7 @@
 		<hr>
 		<fieldset>
 			<legend>Datos de Tarjetas</legend>
-			<table class="table table-striped table-bordered" id="tbl_card"> 
+			<table class="table table-striped table-bordered generada" id="tbl_card"> 
 				<thead>
 					<th style="text-align: center;">Tipo de Tarjeta</th>
 					<th style="text-align: center;">Nro. de Tarjeta</th>
@@ -222,7 +222,7 @@
 		<legend>Teléfono y Correo</legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
-				<table class="table table-striped table-bordered" id="tbl_phone"> 
+				<table class="table table-striped table-bordered generada" id="tbl_phone"> 
 					<thead>
 						<th style="text-align: center;">Tipo de contacto</th>
 						<th style="text-align: center;">Nro</th>
@@ -255,7 +255,7 @@
 	<fieldset>
 		<legend>Pasajeros Frecuentes</legend>
 		<div class="col-md-12">
-				<table class="table table-striped table-bordered" id="tbl_pasj"> 
+				<table class="table table-striped table-bordered generada" id="tbl_pasj"> 
 					<thead>
 						<th style="text-align: center;">Millaje</th>
 						<th style="text-align: center;">Nro</th>
@@ -277,7 +277,7 @@
 		<legend><span>Datos de Familiares</span> y <span style="position: relative;left: 450px">Preferencia de asiento</span></legend>
 		<div class="col-md-12">
 			<div class="col-md-6">
-					<table class="table table-striped table-bordered" id="tbl_fam"> 
+					<table class="table table-striped table-bordered generada" id="tbl_fam"> 
 						<thead>
 							<th style="text-align: center;">Relación</th>
 							<th style="text-align: center;">Nombre</th>
@@ -292,7 +292,7 @@
 					<input type="hidden" name="json_empresa">
 			</div>
 			<div class="col-md-6">
-				<table class="table table-striped table-bordered" id="tbl_asis"> 
+				<table class="table table-striped table-bordered generada" id="tbl_asis"> 
 					<thead>
 						<th style="text-align: center;">Tipo Asiento</th>
 						<th style="text-align: center;">Indicaciones</th>

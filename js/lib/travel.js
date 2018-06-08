@@ -1085,5 +1085,14 @@ var travel = function () {
         
     };
 
+    self.setCamposFecha = function(){
+        $('input').each(function(){
+            var clase = $(this).attr('class') || '';
+            if(clase.search("fecha")){
+                $(this).attr('type', 'date');
+            }
+        })
+    };
+
 	return self;
 }(jQuery);
