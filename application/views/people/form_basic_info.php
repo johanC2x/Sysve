@@ -1,6 +1,6 @@
 <div class="row">
 	<?php echo form_open('travel/save',array('id'=>'form_travel_save')); ?>
-	<input type="hidden" name="hidden_tablas" id="hidden_tablas">
+	<input type="hidden" name="data_customer" id="data_customer">
 	<fieldset>
 		<legend>Datos Generales</legend>
 		<div class="col-md-12">
@@ -11,7 +11,7 @@
 						<th>Nro.</th>
 						<th>
 							<center>
-								<button type="button" class="fa fa-plus" onclick="generarTablaDatos('datos_dni', ['documento', 'nro'], 200);"/>
+								<button type="button" class="fa fa-plus" onclick="generarTablaDatos('datos_dni', ['documento', 'nro'], 200);customer.saveCustomerDocumentos();"/>
 							</center>
 						</th>
 					</thead>
@@ -325,3 +325,78 @@
 	?>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+    function getCantidadInputs(contenedor){
+        var cant_inputs = 1;
+        switch(contenedor){
+            case 'tbl_empresas':
+                cant_inputs = '2';
+                break;
+            case 'tbl_passport':
+                cant_inputs = '5';
+                break;
+            case 'tbl_visado':
+                cant_inputs = '4';
+                break;
+            case 'tbl_address':
+                cant_inputs = '6';
+                break;
+            case 'tbl_company':
+                cant_inputs = '8';
+                break;
+            case 'tbl_contact':
+                cant_inputs = '3';
+                break;
+            case 'tbl_card':
+                cant_inputs = '3';
+                break;
+            case 'tbl_pasj':
+                cant_inputs = '5';
+                break;
+            case 'tbl_phone':
+                cant_inputs = '2';
+                break;
+            case 'tbl_emails':
+                cant_inputs = '2';
+                break; 
+            case 'tbl_fam':
+                cant_inputs = '3';
+                break; 
+            case 'tbl_asis':
+                cant_inputs = '2';
+                break;         
+        }
+        return cant_inputs;
+    }
+    function setProperties(data){
+        // result = data.slice(1, -1).slice(0, -1);;
+
+        result = data.split("],[").join("]*[").split('*');
+        for (var i = result.length - 1; i >= 0; i--) {
+            dato = result[i].split(':');
+            indice = dato[0].replace('[', '');
+            valores = JSON.parse(dato[1].replace('["', '').replace('"]]', ''));
+
+            //completar arreglo de valores dependiendo del contenedor
+            cant_inputs = getCantidadInputs(indice);
+            cant_datos_actuales = valores.length;
+            faltantes = parseInt(cant_inputs) - parseInt(cant_datos_actuales);
+            for (var j = 0; j < faltantes; j++) {
+                valores.push(' ');
+            }
+            console.log('cant_input:'+cant_inputs);
+            console.log('cant_datos_actuales:' + cant_datos_actuales);
+            console.log(indice);
+            console.log(valores);
+            //get onclick 
+            onclick = $('#'+indice).find('.fa-plus').attr('onclick');
+            console.log('onclick:');
+            console.log(onclick);
+            // alert("$('#"+indice+"').find('.fa-plus').attr('onclick');")
+        }
+
+    }
+	
+</script>

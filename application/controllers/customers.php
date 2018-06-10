@@ -77,6 +77,7 @@ class Customers extends Person_controller
 	*/
 	function save($customer_id=-1){
 		$data["customer_info"] = json_decode($this->input->post('data_customer'));
+		var_dump($this->input);die();
 		$person_data = array(
 			'first_name'=>$this->input->post('first_name'),
 			'last_name'=>$this->input->post('last_name'),
@@ -100,6 +101,7 @@ class Customers extends Person_controller
 			'data_customer' => json_encode($data),
 			'data_nueva'=> $this->input->post('hidden_tablas'),
 		);
+
 
 		$response = $this->Customer->save($person_data,$customer_data,$customer_id);
 		if(isset($response->person_id) && !empty($response->person_id)){

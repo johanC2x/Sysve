@@ -45,7 +45,9 @@
 	<script src='<?php echo base_url();?>/js/moment.js'></script>
 	<script src='<?php echo base_url();?>/js/es_ES.min.js'></script>
 	<script src='<?php echo base_url();?>/js/lib/utils.js'></script>
-	
+	<script src='<?php echo base_url();?>/js/lib/customer.js'></script>
+
+
 	<style type="text/css">
 		html {
 			overflow: auto;

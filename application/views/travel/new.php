@@ -37,9 +37,9 @@
 					
 					<a id="btn_nuevo_cliente2" style="display: none" class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
 					
-					<!--
-					<a href="javascript:void(0);" onclick='$("#modal_customer").modal("show");' class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a>
-					-->
+					
+					<!-- <a href="javascript:void(0);" onclick='$("#modal_customer").modal("show");' class="btn btn-primary" title="Nuevo Cliente">Nuevo Cliente</a> -->
+					
 					<input type="checkbox" style="height: 20px; width: 20px" name="muestra_cotizacion" id="muestra_cotizacion" onclick="travel.modalCotizacion();">
 					<?php 
 						/*

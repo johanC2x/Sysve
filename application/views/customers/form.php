@@ -9,7 +9,7 @@ echo form_open('customers/save/'.$person_info->person_id,array('id'=>'customer_f
 <?php $this->load->view("people/form_basic_info"); ?>
 <?php $this->load->view("property/form_basic",$propertys); ?>
 
-<input type="hidden" id="data" name="data" value="">
+<input type="hidden" id="data_customer" name="data_customer" value="">
 
 <div class="field_row clearfix" style="display: none;"> 
 <?php echo form_label($this->lang->line('customers_account_number').':', 'account_number'); ?>
@@ -46,61 +46,7 @@ echo form_close();
 //validation and submit handling
     $(document).ready(function(){
 
-        $('#customer_form').bootstrapValidator({
-            container: '#messages',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                person_id: {
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('common_document_required'); ?>"}
-                    }
-                },
-                first_name: {
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('common_first_name_required'); ?>"}
-                    }
-                },
-                last_name: {
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('common_last_name_required'); ?>"}
-                    }
-                },
-                email: {
-                    validators: {
-                        notEmpty: { message: "<?php echo $this->lang->line('common_email_required'); ?>"},
-                        emailAddress: {message: '<?php echo $this->lang->line('common_email_invalid_format'); ?>'}
-                    }
-                }
-            }
-        }).on('success.form.bv', function(e) {
-            e.preventDefault();
-            $( "#submit" ).prop("disabled", false);
-            var msg = "";
-            var data = populateProperties();
-            $("#data").val(JSON.stringify(data));
-            setValoresTablas();
-            $.ajax({
-                type:"POST",
-                url:$("#customer_form").attr('action'),
-                data:$("#customer_form").serialize(),
-                success:function(msg){
-                    var kit = JSON.parse(msg);
-                    if(kit.success){
-                        msg = getMessageSuccess('Operación realizada con exito...');
-                        $("#messages").html(msg);   
-                        location.reload();          
-                    }else{
-                        msg = getMessageError(kit.message);
-                        $("#messages").html(msg);                   
-                    }
-                }
-            });
-       });
-    });
+        customer.validarInfoCustomer();
 
     <?php if(!empty($person_info->data)){ ?>
         //viejo setProperties
@@ -123,33 +69,33 @@ echo form_close();
     //     }
     // }
 
-    function setProperties(data){
-        // result = data.slice(1, -1).slice(0, -1);;
+    // function setProperties(data){
+    //     // result = data.slice(1, -1).slice(0, -1);;
 
-        result = data.split("],[").join("]*[").split('*');
-        for (var i = result.length - 1; i >= 0; i--) {
-            dato = result[i].split(':');
-            indice = dato[0].replace('[', '');
-            valores = JSON.parse(dato[1].replace('["', '').replace('"]]', ''));
+    //     result = data.split("],[").join("]*[").split('*');
+    //     for (var i = result.length - 1; i >= 0; i--) {
+    //         dato = result[i].split(':');
+    //         indice = dato[0].replace('[', '');
+    //         valores = JSON.parse(dato[1].replace('["', '').replace('"]]', ''));
 
-            //completar arreglo de valores dependiendo del contenedor
-            cant_inputs = getCantidadInputs(indice);
-            cant_datos_actuales = valores.length;
-            faltantes = parseInt(cant_inputs) - parseInt(cant_datos_actuales);
-            for (var j = faltantes - 1; j >= 0; j--) {
-                valores.push(' ');
-            }
-            console.log('cant_input:'+cant_inputs);
-            console.log('cant_datos_actuales:' + cant_datos_actuales);
-            console.log(indice);
-            console.log(valores);
-            //get onclick 
-            onclick = $('#'+indice).find('.fa-plus').attr('onclick');
-            console.log(onclick);
-            // onclick = onclick.replace(');', valores+');');
-        }
+    //         //completar arreglo de valores dependiendo del contenedor
+    //         cant_inputs = getCantidadInputs(indice);
+    //         cant_datos_actuales = valores.length;
+    //         faltantes = parseInt(cant_inputs) - parseInt(cant_datos_actuales);
+    //         for (var j = faltantes - 1; j >= 0; j--) {
+    //             valores.push(' ');
+    //         }
+    //         console.log('cant_input:'+cant_inputs);
+    //         console.log('cant_datos_actuales:' + cant_datos_actuales);
+    //         console.log(indice);
+    //         console.log(valores);
+    //         //get onclick 
+    //         onclick = $('#'+indice).find('.fa-plus').attr('onclick');
+    //         console.log("$('#"+indice+"').find('.fa-plus').attr('onclick');")
+    //         // onclick = onclick.replace(');', valores+');');
+    //     }
 
-    }
+    // }
 
     function getCantidadInputs(contenedor){
         var cant_inputs = 1;
@@ -194,26 +140,6 @@ echo form_close();
         return cant_inputs;
     }
 
-    function populateProperties(){
-        var childrens = [];
-        $("#content_properties input").each(function(){ 
-            var element = this;
-            var children = {};
-            if(element.id !== undefined){
-                var type = $("#"+element.id.toString()).attr("data-type");
-                if(type === "text" || type === "date"){
-                    children.idObj = element.id;
-                    children.id = element.id;
-                    children.value = $("#"+element.id.toString()).val();
-                    children.name = $("#"+element.id.toString()).attr("data-name");
-                    children.type = $("#"+element.id.toString()).attr("data-type");
-                    children.parent = element.id;
-                    childrens.push(children);
-                }
-            }
-        });
-        return childrens;
-    }
 
     function generarTablaDatos(contenedor, inputs, width, valores = null){
         var tabla = '';
@@ -228,34 +154,34 @@ echo form_close();
         arr = [];
         for (var i = 0; i < inputs.length; i++) {
             if((contenedor == 'datos_dni' || contenedor == 'datos_dni2' )&& inputs[i] == 'documento'){
-                select += '<select class="form-control" >';
+                select += '<select class="form-control '+inputs[i]+'">';
                     select += '<option value="" disabled>Seleccionar</option>';
                     select += '<option value="DNI">DNI</option>';
                     select += '<option value="CE">CE</option>';
                 select += '</select>';
                 tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_generales' && inputs[i] == 'tipo'){
-                select += '<select class="form-control">';
+                select += '<select class="form-control '+inputs[i]+'">';
                     select += '<option value="" disabled>Seleccionar</option>';
                     select += '<option value="DOMICILIO">DOMICILIO</option>';
                     select += '<option value="ENTREGA">ENTREGA</option>';
                 select += '</select>';
                 tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_celulares' && inputs[i] == 'tipo_contacto'){
-                select += '<select class="form-control">';
+                select += '<select class="form-control '+inputs[i]+'">';
                     select += '<option value="CELULAR PERSONAL">CELULAR PERSONAL</option>';
                     select += '<option value="CELULAR EMPRESA">CELULAR EMPRESA</option>';
                     select += '<option value="OTROS">OTROS</option>';
                 select += '</select>';
                 tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_emails' && inputs[i] == 'tipo_email'){
-                select += '<select class="form-control">';
+                select += '<select class="form-control '+inputs[i]+'">';
                     select += '<option value="EMPRESA">EMPRESA</option>';
                     select += '<option value="PERSONAL">PERSONAL</option>';
                 select += '</select>';
                 tabla += '<td>'+ select +'</td>';
             }else if(contenedor == 'datos_visado' && inputs[i] == 'pais_visado'){
-                select += '<select class="form-control">';
+                select += '<select class="form-control '+inputs[i]+'">';
                     select += '<option value="AMERICANO">AMERICANO</option>';
                     select += '<option value="ESTA">ESTA</option>';
                 select += '</select>';
@@ -288,39 +214,51 @@ echo form_close();
         switch(contenedor){
             case 'datos_dni':
                 idObj = 'tbl_empresas';
+                // customer.saveCustomerDocumentos();
                 break;
             case 'datos_pasaportes':
                 idObj = 'tbl_passport';
+                // customer.saveCustomerPasaportes();
                 break;
             case 'datos_visado':
                 idObj = 'tbl_visado';
+                // customer.self.saveCustomerVisado();
                 break;
             case 'datos_generales':
                 idObj = 'tbl_address';
+                // customer.saveCustomerDirecciones();
                 break;
             case 'datos_empresa':
                 idObj = 'tbl_company';
+                // customer.saveCustomerEmpresa();
                 break;
             case 'datos_contactar':
                 idObj = 'tbl_contact';
+                // customer.saveCustomerContactar();
                 break;
             case 'datos_tarjetas':
                 idObj = 'tbl_card';
+                // customer.saveCustomerTarjetas();
                 break;
             case 'datos_pasajeros':
                 idObj = 'tbl_pasj';
+                // customer.saveCustomerPasajeros();
                 break;
             case 'datos_celulares':
                 idObj = 'tbl_phone';
+                // customer.saveCustomerCelulares();
                 break;
             case 'datos_emails':
                 idObj = 'tbl_emails';
+                // customer.saveCustomerEmails();
                 break; 
             case 'datos_familiares':
                 idObj = 'tbl_fam';
+                // customer.saveCustomerFamiliares();
                 break; 
             case 'datos_asiento':
                 idObj = 'tbl_asis';
+                // customer.saveCustomerAsiento();
                 break;         
         }
         if(idObj !== ''){
@@ -382,13 +320,13 @@ echo form_close();
             // console.log(info[id]);
         })
         antes = JSON.stringify(info);
-        console.log('antes:')
-        console.log(antes);
         despues = JSON.parse(antes);
-        console.log('despues:')
-        console.log(despues);
 
         $('#hidden_tablas').val(despues);
+    }
+
+    function prueba(){
+        $('.generada')
     }
 
     generarTablaDatos('datos_dni', ['documento', 'nro'], 200);
@@ -407,5 +345,13 @@ echo form_close();
     generarTablaDatos('datos_familiares', ['relacion', 'nombre', 'telefono'], 300);
     generarTablaDatos('datos_visado', ['pais_visado', 'numero', 'fecha_emision', 'fecha_expiracion'], 610);
     generarTablaDatos('datos_asiento', ['tipo_asiento', 'indicaciones'], 400);
+
+    <?php if(!empty($person_info->data)){ ?>
+        //viejo setProperties
+        // setProperties(JSON.parse('<?= $person_info->data_nueva; ?>'));
+        console.log('<?= $person_info->data_nueva; ?>');  
+        setProperties('<?= $person_info->data_nueva; ?>');  
+    <?php } ?>
+});
 
 </script>
