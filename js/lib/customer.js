@@ -424,6 +424,7 @@ var customer = function () {
             data_tablas.visado = self.customer_visado_list;
             data_tablas.asiento = self.customer_asiento_list;
             console.log(data_tablas);
+            console.log(JSON.stringify(data_tablas));
             $("#data_customer").val(JSON.stringify(data_tablas));
             $.ajax({
                 type:"POST",
