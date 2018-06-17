@@ -399,6 +399,7 @@
 
     }
 
+
     function generarTablaDatos(contenedor, inputs, width, valores = null){
         var tabla = '';
         var select = '';
