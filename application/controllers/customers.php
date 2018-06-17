@@ -68,7 +68,6 @@ class Customers extends Person_controller
 		}
 		$data['person_info']=$this->Customer->get_info($customer_id);
 		$data['propertys'] = $propertys;
-		// var_dump($data['person_info']);
 		$this->load->view("customers/form",$data);
 	}
 
@@ -77,9 +76,9 @@ class Customers extends Person_controller
 	*/
 	function save($customer_id=-1){
 		$data["customer_info"] = json_decode($this->input->post('data_customer'));
-		var_dump($_REQUEST);
+		// var_dump($_REQUEST);
 		// var_dump($this->input->post('data_customer'));
-		die();
+		// die();
 		$person_data = array(
 			'first_name'=>$this->input->post('first_name'),
 			'last_name'=>$this->input->post('last_name'),

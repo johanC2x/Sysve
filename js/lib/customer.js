@@ -424,12 +424,18 @@ var customer = function () {
             data_tablas.visado = self.customer_visado_list;
             data_tablas.asiento = self.customer_asiento_list;
             console.log(data_tablas);
-            console.log(JSON.stringify(data_tablas));
-            $("#data_customer").val(JSON.stringify(data_tablas));
+            var enviar = JSON.stringify(data_tablas);
+            console.log(enviar)
+            // $("#data_customer").val(enviar);
+            
+            // $("#data_customer").val('jajajaja');
+            data_string = $("#customer_form").serialize()+'&data_customer='+enviar;
+            console.log(data_string);
             $.ajax({
                 type:"POST",
                 url:$("#customer_form").attr('action'),
-                data:$("#customer_form").serialize(),
+                data:data_string,
+                // data:$("#data_customer").val(),
                 success:function(msg){
                     var kit = JSON.parse(msg);
                     if(kit.success){

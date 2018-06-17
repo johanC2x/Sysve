@@ -9,7 +9,6 @@ echo form_open('customers/save/'.$person_info->person_id,array('id'=>'customer_f
 <?php $this->load->view("people/form_basic_info"); ?>
 <?php $this->load->view("property/form_basic",$propertys); ?>
 
-<input type="hidden" id="data_customer" name="data_customer" value="">
 
 <div class="field_row clearfix" style="display: none;"> 
 <?php echo form_label($this->lang->line('customers_account_number').':', 'account_number'); ?>

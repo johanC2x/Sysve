@@ -1,6 +1,6 @@
 <div class="row">
 	<?php echo form_open('travel/save',array('id'=>'form_travel_save')); ?>
-	<input type="hidden" name="data_customer" id="data_customer">
+	<input type="hidden" name="data_customer" id="data_customer" value='{"documentos":[{"documento":"DNI","nro":"132"},{},{}],"pasaportes":[{},{},{}],"direcciones":[{}],"tarjetas":[{}],"generales":[{}],"empresa":[{}],"contactar":[{}],"pasajeros":[{}],"emails":[{}],"celulares":[{"tipo_contacto":"CELULAR PERSONAL"},{}],"familiares":[{}],"visado":[{}],"asiento":[{}]}'>
 	<fieldset>
 		<legend>Datos Generales</legend>
 		<div class="col-md-12">
