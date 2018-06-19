@@ -9,7 +9,12 @@ var travel = function () {
         customer_address_list : [],
         customer_passport_list : [],
         customer_card_list : [],
-        customer_company_list : [] 
+        customer_company_list : [],
+        customer_visado_list : [],
+        customer_contact_list : [],
+        customer_documents_list : [],
+        customer_phones_list : [],
+        customer_emails_list : []
     };
 
     self.changeRow = function(idObj){
@@ -829,12 +834,20 @@ var travel = function () {
     self.saveCustomerAddress = function(){
         var address = $("#address_customer_travel").val();
         var district = $("#district_customer_travel").val();
+        var country = $("#country_customer_travel").val();
         var reference = $("#reference_customer_travel").val();
-        if(address !== '' && district !== '' && reference !== ''){
+        var type_address = $("#type_address_customer_travel").val();
+        var phone = $("#phone_customer_travel").val();        
+
+        if(address !== '' && district !== '' && reference !== '' &&
+            country !== '' && type_address !== '' && phone !== ''){
             self.customer_address_list.push({
                 address : address,
                 district : district,
-                reference : reference
+                reference : reference,
+                country : country,
+                type_address : type_address,
+                phone : phone
             });
             self.makeTableAddress();
         }
@@ -851,8 +864,11 @@ var travel = function () {
         if(self.customer_address_list.length > 0){
             for(var i = 0;i < self.customer_address_list.length; i++){
                 html += `<tr>
+                            <td><center>`+ self.customer_address_list[i].type_address +`</center></td>
                             <td><center>`+ self.customer_address_list[i].address +`</center></td>
                             <td><center>`+ self.customer_address_list[i].district +`</center></td>
+                            <td><center>`+ self.customer_address_list[i].country +`</center></td>
+                            <td><center>`+ self.customer_address_list[i].phone +`</center></td>
                             <td><center>`+ self.customer_address_list[i].reference +`</center></td>
                             <td>
                                 <a href="javascript:void(0);" onclick="travel.removeCustomerAddress(`+i+`);">
@@ -865,7 +881,7 @@ var travel = function () {
             }
         }else{
             html += `<tr>
-                        <td colspan="4">
+                        <td colspan="7">
                             <center>
                                 No se registraron datos.
                             </center>
@@ -877,18 +893,283 @@ var travel = function () {
 
     /* ============================================================== */
 
-     /* ================ SET TABLE FOR REGISTER CUSTOMER PASSPORT ============= */
+    /* ================ SET TABLE FOR REGISTER CUSTOMER VISADO ============= */
+    self.saveCustomerVisado = function(){
+        var visado_country = $("#visado_customer_country").val();
+        var visado_nro = $("#visado_customer_nro").val();
+        var visado_init_date = $("#visado_customer_init_date").val();
+        var visado_end_date = $("#visado_customer_end_date").val();
+        if(visado_country !== '' && visado_nro !== '' && visado_init_date !== '' && visado_end_date !== ''){
+            self.customer_visado_list.push({
+                country : visado_country,
+                nro : visado_nro,
+                date_init : visado_init_date,
+                date_end : visado_end_date
+            });
+            self.makeTableVisado();
+        }
+    };
+
+    self.makeTableVisado = function(){
+        var tbody = '';
+        $("#table_customer_visado tbody").empty();
+        if(self.customer_visado_list.length > 0){
+            for(var i = 0;i < self.customer_visado_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_visado_list[i].country +`</center></td>
+                            <td><center>`+ self.customer_visado_list[i].nro +`</center></td>                            
+                            <td><center>`+ self.customer_visado_list[i].date_init +`</center></td>
+                            <td><center>`+ self.customer_visado_list[i].date_end +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerVisado(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="5">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_visado tbody").append(tbody);
+    };
+
+    self.removeCustomerVisado = function(index){
+        self.customer_visado_list.splice(index,1);
+        self.makeTableVisado();
+    };
+    /* ============================================================== */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER CONTACTS ============= */
+
+    self.saveCustomerContacts = function(){
+        var contact_ruc = $("#contact_customer_ruc").val();
+        var contact_name = $("#contact_customer_name").val();
+        var contact_address = $("#contact_customer_address").val();
+
+        if(contact_ruc !== '' && contact_name !== '' && contact_address !== ''){
+            self.customer_contact_list.push({
+                ruc : contact_ruc,
+                name : contact_name,
+                address : contact_address
+            });
+            self.makeTableContact();
+        }
+    };
+
+    self.makeTableContact = function(){
+        var tbody = '';
+        $("#table_customer_contacts tbody").empty();
+        if(self.customer_contact_list.length > 0){
+            for(var i = 0;i < self.customer_contact_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_contact_list[i].ruc +`</center></td>
+                            <td><center>`+ self.customer_contact_list[i].name +`</center></td>                            
+                            <td><center>`+ self.customer_contact_list[i].address +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerContact(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="4">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_contacts tbody").append(tbody);
+    };
+
+    self.removeCustomerContact = function(key){
+        self.customer_contact_list.splice(key,1);
+        self.makeTableContact();
+    };
+
+    /* ======================================================================= */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER DOCUMENTS ============= */
+
+    self.saveCustomerDocuments = function(){
+        var tipo_documento = $("#type_customer_doc").val();
+        var nro_doc = $("#nro_customer_doc").val();
+        if(tipo_documento !== '' && nro_doc !== ''){
+            self.customer_documents_list.push({
+                type_document : tipo_documento,
+                nro_doc : nro_doc
+            });
+            self.makeTableDocuments();
+        }
+    };
+
+    self.makeTableDocuments = function(){
+        var tbody = '';
+        $("#table_customer_doc tbody").empty();
+        if(self.customer_documents_list.length > 0){
+            for(var i = 0;i < self.customer_documents_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_documents_list[i].type_document +`</center></td>
+                            <td><center>`+ self.customer_documents_list[i].nro_doc +`</center></td>                            
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerDocument(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="3">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_doc tbody").append(tbody);
+    };
+    
+    self.removeCustomerDocument = function(key){
+        self.customer_documents_list.splice(key,1);
+        self.makeTableDocuments();
+    };
+
+    /* ======================================================================== */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER PHONES ================ */
+
+    self.saveCustomerPhones = function(){
+        var type_phone = $("#type_customer_phone").val();
+        var nro_phone = $("#customer_phone").val();
+        if(type_phone !== '' && nro_phone !== ''){
+            self.customer_phones_list.push({
+                type_phone : type_phone,
+                nro_phone : nro_phone
+            });
+            self.makeTablePhones();
+        }
+    };
+
+    self.makeTablePhones = function(){
+        var tbody = '';
+        $("#table_customer_phones tbody").empty();
+        if(self.customer_phones_list.length > 0){
+            for(var i = 0;i < self.customer_phones_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_phones_list[i].type_phone +`</center></td>
+                            <td><center>`+ self.customer_phones_list[i].nro_phone +`</center></td>                            
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerPhones(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="3">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_phones tbody").append(tbody);
+    };
+
+    self.removeCustomerPhones = function(key){
+        self.customer_phones_list.splice(key,1);
+        self.makeTablePhones();
+    };
+
+    /* ======================================================================== */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER EMAILS ================ */
+
+    self.saveCustomerEmails = function(){
+        var type_email = $("#type_customer_email").val();
+        var email = $("#customer_email").val();
+        if(type_email !== '' && email !== ''){
+            self.customer_emails_list.push({
+                type_email : type_email,
+                email : email
+            });
+            self.makeTableEmails();
+        }
+    };
+
+    self.makeTableEmails = function(){
+        var tbody = '';
+        $("#table_customer_emails tbody").empty();
+        if(self.customer_emails_list.length > 0){
+            for(var i = 0;i < self.customer_emails_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_emails_list[i].type_email +`</center></td>
+                            <td><center>`+ self.customer_emails_list[i].email +`</center></td>                            
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerEmails(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="3">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_emails tbody").append(tbody);
+    };
+
+    self.removeCustomerEmails = function(key){
+        self.customer_emails_list.splice(key,1);
+        self.makeTableEmails();
+    };
+
+    /* ======================================================================== */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER PASSPORT ============= */
      self.saveCustomerPassport = function(){
         var passport_country = $("#passport_customer_country").val();
         var passport_nro = $("#passport_customer_nro").val();
         var passport_date = $("#passport_customer_date").val();
-        if(passport_country !== '' && passport_nro !== '' && passport_date !== ''){
+        var passport_init_date = $("#passport_customer_init_date").val();
+        var passport_nationality = $("#passport_customer_nationality").val();
+
+        if(passport_country !== '' && passport_nro !== '' && passport_date !== '' && passport_init_date !== '' && passport_nationality !== ''){
             self.customer_passport_list.push({
                 country : passport_country,
                 nro : passport_nro,
-                date : passport_date
+                date : passport_date,
+                date_init : passport_init_date,
+                nationality : passport_nationality
             });
             self.makeTablePassport();
+        }else{
+            console.log("errores");
         }
     };
 
@@ -903,9 +1184,11 @@ var travel = function () {
         if(self.customer_passport_list.length > 0){
             for(var i = 0;i < self.customer_passport_list.length; i++){
                 html += `<tr>
-                            <td><center>`+ self.customer_passport_list[i].country +`</center></td>
                             <td><center>`+ self.customer_passport_list[i].nro +`</center></td>
+                            <td><center>`+ self.customer_passport_list[i].country +`</center></td>
+                            <td><center>`+ self.customer_passport_list[i].date_init +`</center></td>
                             <td><center>`+ self.customer_passport_list[i].date +`</center></td>
+                            <td><center>`+ self.customer_passport_list[i].nationality +`</center></td>
                             <td>
                                 <a href="javascript:void(0);" onclick="travel.removeCustomerPassport(`+i+`);">
                                     <center>
@@ -988,11 +1271,21 @@ var travel = function () {
         var company_ruc = $("#company_customer_ruc").val();
         var company_name = $("#company_customer_name").val();
         var company_mail = $("#company_customer_mail").val();
+
+        var company_address = $("#company_customer_address").val();
+        var company_district = $("#company_customer_district").val();
+        var company_phone = $("#company_customer_phone").val();
+        var company_reference = $("#company_customer_reference").val();
+
         if(company_ruc !== '' && company_name !== '' && company_mail !== ''){
             self.customer_company_list.push({
                 ruc : company_ruc,
                 name : company_name,
-                mail : company_mail
+                mail : company_mail,
+                reference :company_reference,
+                phone : company_phone,
+                district : company_district,
+                address : company_address
             });
             self.makeTableCompany();
         }
@@ -1012,6 +1305,10 @@ var travel = function () {
                             <td><center>`+ self.customer_company_list[i].ruc +`</center></td>
                             <td><center>`+ self.customer_company_list[i].name +`</center></td>
                             <td><center>`+ self.customer_company_list[i].mail +`</center></td>
+                            <td><center>`+ self.customer_company_list[i].address +`</center></td>
+                            <td><center>`+ self.customer_company_list[i].district +`</center></td>
+                            <td><center>`+ self.customer_company_list[i].phone +`</center></td>
+                            <td><center>`+ self.customer_company_list[i].reference +`</center></td>
                             <td>
                                 <a href="javascript:void(0);" onclick="travel.removeCustomerCompany(`+i+`);">
                                     <center>
@@ -1023,7 +1320,7 @@ var travel = function () {
             }
         }else{
             html += `<tr>
-                        <td colspan="4">
+                        <td colspan="8">
                             <center>
                                 No se registraron datos.
                             </center>

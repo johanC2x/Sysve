@@ -9,6 +9,46 @@
         <?php echo form_open('customers/save',array('id'=>'form_customer_register')); ?>
           <div class="row">
             <div class="col-md-6">
+              <fieldset>
+                <legend>Documentos</legend>
+                <!-- =========== FORM ADDRESS ============ -->
+                  <div class="form-group" >
+                    <select id="type_customer_doc" class="form-control">
+                      <option value>Seleccionar Tipo de Documento</option>
+                      <option value="visa">Dni</option>
+                      <option value="carnet_extranjeria">Carnet de Extranjeria</option>
+                    </select>
+                  </div>
+                  <div class="form-group" >
+                    <input type="text" id="nro_customer_doc" name="nro_customer_doc" class="form-control" placeholder="Nro. Documento">
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button id="btn_add_customer_doc" type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                  </div>
+                <!-- ===================================== -->
+                <table id="table_customer_doc" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"><center>Tipo Documento</center></th>
+                      <th class="col-md-4"><center>Nro. de Documento </center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <div class="col-md-6" style="display:none;">
               <div class="form-group">
                 <label for="tipo_documento">Tipo de Documento:</label>
                 <select id="tipo_documento" name="tipo_documento" class="form-control">
@@ -19,7 +59,8 @@
                 </select>
               </div> 
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-6" style="display:none;">
               <div class="form-group">
                 <label for="person_id">Nro. Documento:</label>
                 <input type="text" id="person_id" name="person_id" class="form-control" maxlength="8" />
@@ -27,23 +68,37 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="first_name">Nombres:</label>
+                <label for="first_name">Nombre:</label>
                 <input type="text" id="first_name" name="first_name" class="form-control"/>
+              </div>    
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="midle_name">Pre-Nombre:</label>
+                <input type="text" id="midle_name" name="midle_name" class="form-control"/>
               </div>    
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="last_name">Apellidos:</label>
+                <label for="last_name">Apellidos Paterno:</label>
                 <input type="text" id="last_name" name="last_name" class="form-control"/>
               </div>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="last_name">Apellidos Materno:</label>
+                <input type="text" id="last_name_mothers" name="last_name_mothers" class="form-control"/>
+              </div>
+            </div>
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" class="form-control"/>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="phone_number">Teléfono:</label>
                 <input type="text" id="phone_number" name="phone_number" class="form-control"/>
@@ -65,49 +120,278 @@
               <label for="address_1">Dirección:</label>
               <input type="text" id="address_1" name="address_1" class="form-control"/>
             </div>
-            <br/>
+
+            <!-- =========== FORM ADDRESS ============ -->
             <div class="col-md-12">
               <fieldset>
-                <legend>Direcciones</legend>
+                <legend>Pasaportes</legend>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="passport_customer_nro">Nro. Pasaporte:</label>
+                    <input type="text" id="passport_customer_nro" name="passport_customer_nro" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="passport_customer_date">Fecha de Emisión:</label>
+                    <input type="date" id="passport_customer_date" name="passport_customer_date" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="passport_customer_init_date">Fecha de Vencimiento:</label>
+                    <input type="date" id="passport_customer_init_date" name="passport_customer_init_date" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="passport_customer_country">País de Emisión:</label>
+                    <input type="text" id="passport_customer_country" name="passport_customer_country" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="passport_customer_nationality">Nacionalidad:</label>
+                    <input type="text" id="passport_customer_nationality" name="passport_customer_nationality" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <br/>
+                  <div class="form-group">
+                    <button id="btn_add_customer_passport" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+                <table id="table_customer_passport" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-4"><center>Nro de Pasaporte </center></th>
+                      <th class="col-md-3"><center>Pais Origen</center></th>
+                      <th class="col-md-2"><center>Fec. Emisión</center></th> 
+                      <th class="col-md-2"><center>Fec. Vencimiento</center></th>
+                      <th class="col-md-2"><center>Nacionalidad</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="6">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
 
-                <!-- =========== FORM ADDRESS ============ -->
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="address_customer_travel">Dirección:</label>
-                      <input type="text" id="address_customer_travel" name="address_customer_travel" class="form-control">
-                    </div>
+            <!-- =========== FORM VISADO ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Visado</legend>
+                <div class="col-md-6">
+                  <div class="form-group" >
+                    <label for="visado_customer_country">País de Visado:</label>
+                    <select name="visado_customer_country" id="visado_customer_country" class="form-control">
+                      <option value="americano">Americano</option>
+                      <option value="peruano">Peruano</option>
+                    </select>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="district_customer_travel">Distrito:</label>
-                      <input type="text" id="district_customer_travel" name="district_customer_travel" class="form-control">
-                    </div>  
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" >
+                    <label for="visado_customer_nro">Número:</label>
+                    <input type="text" id="visado_customer_nro" name="visado_customer_nro" class="form-control">
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="reference_customer_travel">Referencia:</label>
-                      <input type="text" id="reference_customer_travel" name="reference_customer_travel" class="form-control">
-                    </div>  
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" >
+                    <label for="visado_customer_init_date">Fecha de Emisión:</label>
+                    <input type="date" id="visado_customer_init_date" name="visado_customer_init_date" class="form-control">
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <button id="btn_add_customer_travel" type="button" class="btn btn-primary">Agregar</button>
-                    </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" >
+                    <label for="visado_customer_end_date">Fecha de Vencimiento:</label>
+                    <input type="date" id="visado_customer_end_date" name="visado_customer_end_date" class="form-control">
                   </div>
-                <!-- ===================================== -->
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button id="btn_add_customer_visado" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+                <table id="table_customer_visado" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-4"><center>País Visado</center></th>
+                      <th class="col-md-3"><center>Número</center></th>
+                      <th class="col-md-2"><center>Fec. Emisión</center></th> 
+                      <th class="col-md-2"><center>Fec. Vencimiento</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="5">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+              </div>
+            <!-- ===================================== -->
 
+            <!-- =========== FORM VISADO ============ -->
+
+            <div class="col-md-6">
+              <fieldset>
+                <legend>Teléfonos</legend>
+                <div class="form-group">
+                  <label for="type_customer_phone">Tipo de Contacto:</label>
+                  <select name="type_customer_phone" id="type_customer_phone" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="celular_personal">Celular Personal</option>
+                    <option value="celular_empresa">Celular Empresa</option>
+                    <option value="otros">Otros</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="customer_phone">Telefono:</label>
+                  <input type="text" id="customer_phone" name="customer_phone" class="form-control">
+                </div>
+                <button id="btn_add_customer_phones" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_customer_phones" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-2"><center>T. Contacto</center></th>
+                      <th class="col-md-4"><center>Teléfono</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="3">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <div class="col-md-6">
+            <fieldset>
+                <legend>Correos</legend>
+                <div class="form-group">
+                  <label for="type_customer_email">Tipo de Email:</label>
+                  <select name="type_customer_email" id="type_customer_email" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="personal">Personal</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="customer_email">Telefono:</label>
+                  <input type="text" id="customer_email" name="customer_email" class="form-control">
+                </div>
+                <button id="btn_add_customer_emails" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_customer_emails" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-2"><center>T. Email</center></th>
+                      <th class="col-md-4"><center>Email</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="3">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+
+            <!-- ===================================== -->
+
+            <!-- ===== FORM CLIENTES FRECUENTES ====== -->
+            
+            <!-- ===================================== -->
+
+            <!-- =========== FORM ADDRESS ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Direcciones Propias y de Entrega</legend>
+                <div class="col-md-4">
+                  <label for="type_address_customer_travel">Tipo</label>
+                  <select name="type_address_customer_travel" id="type_address_customer_travel" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="domicilio">Domicilio</option>
+                    <option value="entrega">Entrega</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="address_customer_travel">Dirección:</label>
+                    <input type="text" id="address_customer_travel" name="address_customer_travel" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="district_customer_travel">Distrito/Estado:</label>
+                    <input type="text" id="district_customer_travel" name="district_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="country_customer_travel">País:</label>
+                    <input type="text" id="country_customer_travel" name="country_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="phone_customer_travel">Teléfono:</label>
+                    <input type="text" id="phone_customer_travel" name="phone_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="reference_customer_travel">Referencia:</label>
+                    <input type="text" id="reference_customer_travel" name="reference_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button id="btn_add_customer_travel" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
                 <table id="table_customer_address" class="table table-hover table-bordered" >
                   <thead>
                     <tr>
+                      <th class="col-md-1"><center>Tipo</center></th>
                       <th class="col-md-1"><center>Dirección</center></th>
                       <th class="col-md-4"><center>Distrito</center></th>
+                      <th class="col-md-4"><center>País</center></th>
+                      <th class="col-md-4"><center>Teléfono</center></th>
                       <th class="col-md-2"><center>Referencia</center></th> 
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td colspan="4">
+                      <td colspan="7">
                         <center>
                           No se registraron datos.
                         </center>
@@ -117,134 +401,34 @@
                 </table>
               </fieldset>
             </div>
-            <br/>
+            <!-- ===================================== -->
+            
+            <!-- =========== FORM COMPANY ============ -->
             <div class="col-md-12">
               <fieldset>
-                <legend>Pasaportes</legend>
-
-                <!-- =========== FORM ADDRESS ============ -->
-                <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="passport_customer_country">País:</label>
-                      <input type="text" id="passport_customer_country" name="passport_customer_country" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="passport_customer_nro">Nro. Pasaporte:</label>
-                      <input type="text" id="passport_customer_nro" name="passport_customer_nro" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="passport_customer_date">Fecha de Vencimiento:</label>
-                      <input type="text" id="passport_customer_date" name="passport_customer_date" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <button id="btn_add_customer_passport" type="button" class="btn btn-primary">Agregar</button>
-                    </div>
-                  </div>
-                <!-- ===================================== -->
-
-                <table id="table_customer_passport" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-1"><center>Pais Origen</center></th>
-                      <th class="col-md-4"><center>Nro de Pasaporte </center></th>
-                      <th class="col-md-2"><center>Fecha Vencimiento</center></th> 
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="4">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <br/>
-            <div class="col-md-12">
-              <fieldset>
-                <legend>Tarjetas</legend>
-
-                <!-- =========== FORM ADDRESS ============ -->
-                <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="card_customer_brand">Marca:</label>
-                      <select id="card_customer_brand" class="form-control">
-                        <option value>Seleccionar</option>
-                        <option value="visa">Visa</option>
-                        <option value="master_card">Master Card</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="card_customer_nro">Nro. de Tarjeta:</label>
-                      <input type="text" id="card_customer_nro" name="card_customer_nro" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="card_customer_type">Tipo:</label>
-                      <select id="card_customer_type" class="form-control">
-                        <option value>Seleccionar</option>
-                        <option value="debito">Débito</option>
-                        <option value="credito">Crédito</option>
-                      </select>
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <button id="btn_add_customer_card" type="button" class="btn btn-primary">Agregar</button>
-                    </div>
-                  </div>
-                <!-- ===================================== -->
-
-                <table id="table_customer_card" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-1"><center>Tipo Tarjeta</center></th>
-                      <th class="col-md-4"><center>Nro. de Tarjeta </center></th>
-                      <th class="col-md-2"><center>Débito o Crédito</center></th> 
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="4">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <br/>
-            <div class="col-md-12">
-              <fieldset>
-                <legend>Empresas</legend>
-
-                <!-- =========== FORM ADDRESS ============ -->
-                <div class="col-md-4">
+                <legend>Datos de Empresas</legend>
+                <div class="col-md-6">
                     <div class="form-group" >
                       <label for="company_customer_ruc">Ruc:</label>
                       <input type="text" id="company_customer_ruc" name="company_customer_ruc" class="form-control">
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <div class="form-group" >
                       <label for="company_customer_name">Razón Social:</label>
                       <input type="text" id="company_customer_name" name="company_customer_name" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group" >
+                      <label for="company_customer_address">Dirección:</label>
+                      <input type="text" id="company_customer_address" name="company_customer_address" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_district">Distrito:</label>
+                      <input type="text" id="company_customer_district" name="company_customer_district" class="form-control">
                     </div>  
                   </div>
                   <div class="col-md-4">
@@ -254,18 +438,82 @@
                     </div>  
                   </div>
                   <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_phone">Teléfono:</label>
+                      <input type="text" id="company_customer_phone" name="company_customer_phone" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_reference">Referencia:</label>
+                      <input type="text" id="company_customer_reference" name="company_customer_reference" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-4">
                     <div class="form-group">
                       <button id="btn_add_customer_company" type="button" class="btn btn-primary">Agregar</button>
                     </div>
                   </div>
-                <!-- ===================================== -->
-
                 <table id="table_customer_company" class="table table-hover table-bordered" >
                   <thead>
                     <tr>
                       <th class="col-md-1"><center>Ruc</center></th>
                       <th class="col-md-4"><center>Razon Social</center></th>
                       <th class="col-md-2"><center>Correo</center></th> 
+                      <th class="col-md-2"><center>Dirección</center></th>
+                      <th class="col-md-3"><center>Distrito</center></th> 
+                      <th class="col-md-2"><center>Correo</center></th> 
+                      <th class="col-md-2"><center>Teléfono</center></th> 
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="8">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
+
+            <!-- =========== FORM CONTACTS ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Personas a Contactar de la Empresa</legend>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_customer_ruc">Nombre:</label>
+                    <input type="text" id="contact_customer_ruc" name="contact_customer_ruc" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_customer_name">Teléfono:</label>
+                    <input type="text" id="contact_customer_name" name="contact_customer_name" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_customer_address">Correo:</label>
+                    <input type="text" id="contact_customer_address" name="contact_customer_address" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button id="btn_add_customer_contacts" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+                <table id="table_customer_contacts" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"><center>Nombre</center></th>
+                      <th class="col-md-4"><center>Teléfono</center></th>
+                      <th class="col-md-2"><center>Correo</center></th>
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
                   </thead>
@@ -281,7 +529,8 @@
                 </table>
               </fieldset>
             </div>
-            <input type="hidden" id="data_customer" name="data_customer">
+            <!-- ===================================== -->
+
             <div id="messages" class="col-md-12"></div>
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>

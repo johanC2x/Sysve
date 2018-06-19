@@ -10,7 +10,7 @@ class Customers extends Person_controller
 	
 	function index() 
 	{
-		$this->output->cache(5);
+		//$this->output->cache(5);
 		$config['base_url'] = site_url('/customers/index');
 		$config['total_rows'] = $this->Customer->count_all();
 		$config['per_page'] = '20';
