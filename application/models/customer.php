@@ -279,7 +279,12 @@ class Customer extends Person
 		$this->db->where_in('person_id',$customer_id);
 		return $this->db->update('customers', array('data_customer' => $data_customer));
  	}
- 	
+	 
+	 function insertClient($data_customer){
+		$success = $this->db->insert('clients',$client_data);
+
+		//$this->db->trans_complete();			
+	 }
 
 }
 ?>

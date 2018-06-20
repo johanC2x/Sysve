@@ -327,7 +327,64 @@
             <!-- ===================================== -->
 
             <!-- ===== FORM CLIENTES FRECUENTES ====== -->
-            
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Pasajeros Frecuentes</legend>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="millaje_customer_frec">Millaje:</label>
+                    <input type="text" id="millaje_customer_frec" name="millaje_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nro_customer_frec">Nro:</label>
+                    <input type="text" id="nro_customer_frec" name="nro_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="user_customer_frec">Usuario:</label>
+                    <input type="text" id="user_customer_frec" name="user_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="pass_customer_frec">Clave:</label>
+                    <input type="password" id="pass_customer_frec" name="pass_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="end_customer_frec">Fin:</label>
+                    <input type="text" id="end_customer_frec" name="end_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <button id="btn_add_customer_frec" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_customer_frec" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-3"><center>Millaje</center></th>
+                      <th class="col-md-3"><center>Nro</center></th>
+                      <th class="col-md-3"><center>Usuario</center></th>
+                      <th class="col-md-3"><center>Clave</center></th>
+                      <th class="col-md-3"><center>Fin</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="6">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
             <!-- ===================================== -->
 
             <!-- =========== FORM ADDRESS ============ -->
@@ -552,7 +609,7 @@
         <h4 class="modal-title">REGISTRAR VIAJE</h4>
       </div>
       <div class="modal-body">
-        <?php echo form_open('travel/registerTravel',array('id'=>'form_travel_register'));?>
+        <?php echo form_open('travel/insert_client',array('id'=>'form_travel_register'));?>
             <div class="row">
               <div class="col-md-12">
                 <div class="col-md-6">
@@ -672,7 +729,7 @@
                 </div>
               </div>
             </div>
-          <button type="submit" class="btn btn-primary" >Guardar</button>
+          <button id="btn_save_customer" type="submit" class="btn btn-primary" >Guardar</button>
         <?php echo form_close();?>
       </div>
       <div class="modal-footer">

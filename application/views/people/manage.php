@@ -82,6 +82,22 @@ $(document).ready(function() {
 		});
 	}
 
+	if(document.getElementById("btn_add_customer_frec") !== null){
+		const btn_add_customer_frec = document.getElementById("btn_add_customer_frec");
+		btn_add_customer_frec.addEventListener("click", () => {
+			travel.saveCustomerFrec();
+		});
+	}
+
+	if(document.getElementById("btn_add_customer_frec") !== null){
+		const btn_save_customer = document.getElementById("btn_save_customer");
+		btn_save_customer.addEventListener("click", () => {
+			var validator = $('#form_customer_register').data('bootstrapValidator');
+			validator.validate();
+			return validator.isValid();
+		});
+	}
+
 }); 
 
 function init_table_sorting()

@@ -14,7 +14,8 @@ var travel = function () {
         customer_contact_list : [],
         customer_documents_list : [],
         customer_phones_list : [],
-        customer_emails_list : []
+        customer_emails_list : [],
+        customer_frec_list : []
     };
 
     self.changeRow = function(idObj){
@@ -1097,6 +1098,66 @@ var travel = function () {
     self.removeCustomerPhones = function(key){
         self.customer_phones_list.splice(key,1);
         self.makeTablePhones();
+    };
+
+    /* ======================================================================== */
+
+    /* ================ SET TABLE FOR REGISTER CUSTOMER FRECUENTES ============ */
+
+    self.saveCustomerFrec = function(){
+        var millaje_frec = $("#millaje_customer_frec").val();
+        var nro_frec = $("#nro_customer_frec").val();
+        var user_frec = $("#user_customer_frec").val();
+        var pass_frec = $("#pass_customer_frec").val();
+        var end_frec = $("#end_customer_frec").val();
+
+        if(millaje_frec !== '' && nro_frec !== '' && user_frec !== '' && pass_frec !== '' && end_frec !== ''){
+            self.customer_frec_list.push({
+                millaje_frec : millaje_frec,
+                nro_frec : nro_frec,
+                user_frec : user_frec,
+                pass_frec : pass_frec,
+                end_frec : end_frec
+            });
+            self.makeTableFrec();
+        }
+    };
+
+    self.makeTableFrec = function(){
+        var tbody = '';
+        $("#table_customer_frec tbody").empty();
+        if(self.customer_frec_list.length > 0){
+            for(var i = 0;i < self.customer_frec_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_frec_list[i].millaje_frec +`</center></td>
+                            <td><center>`+ self.customer_frec_list[i].nro_frec +`</center></td>                            
+                            <td><center>`+ self.customer_frec_list[i].user_frec +`</center></td>
+                            <td><center>`+ self.customer_frec_list[i].pass_frec +`</center></td>
+                            <td><center>`+ self.customer_frec_list[i].end_frec +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeCustomerFrec(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="6">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_customer_frec tbody").append(tbody);
+    };
+
+    self.removeCustomerFrec = function(key){
+        self.customer_frec_list.splice(key,1);
+        self.makeTableFrec();
     };
 
     /* ======================================================================== */
