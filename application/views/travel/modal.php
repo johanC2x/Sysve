@@ -15,7 +15,7 @@
                   <div class="form-group" >
                     <select id="type_customer_doc" class="form-control">
                       <option value>Seleccionar Tipo de Documento</option>
-                      <option value="visa">Dni</option>
+                      <option value="dni">Dni</option>
                       <option value="carnet_extranjeria">Carnet de Extranjeria</option>
                     </select>
                   </div>
@@ -245,6 +245,145 @@
               </fieldset>
               </div>
             <!-- ===================================== -->
+
+            <!-- =========== FORM TELEFONOS Y CORREOS ============ -->
+
+            <div class="col-md-6">
+              <fieldset>
+                <legend>Teléfonos</legend>
+                <div class="form-group">
+                  <label for="type_customer_phone">Tipo de Contacto:</label>
+                  <select name="type_customer_phone" id="type_customer_phone" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="celular_personal">Celular Personal</option>
+                    <option value="celular_empresa">Celular Empresa</option>
+                    <option value="otros">Otros</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="customer_phone">Telefono:</label>
+                  <input type="text" id="customer_phone" name="customer_phone" class="form-control">
+                </div>
+                <button id="btn_add_customer_phones" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_customer_phones" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-2"><center>T. Contacto</center></th>
+                      <th class="col-md-4"><center>Teléfono</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="3">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <div class="col-md-6">
+            <fieldset>
+                <legend>Correos</legend>
+                <div class="form-group">
+                  <label for="type_customer_email">Tipo de Email:</label>
+                  <select name="type_customer_email" id="type_customer_email" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="personal">Personal</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="customer_email">Telefono:</label>
+                  <input type="text" id="customer_email" name="customer_email" class="form-control">
+                </div>
+                <button id="btn_add_customer_emails" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_customer_emails" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-2"><center>T. Email</center></th>
+                      <th class="col-md-4"><center>Email</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="3">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
+            <!-- ===== FORM CLIENTES FRECUENTES ====== -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Pasajeros Frecuentes</legend>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="millaje_customer_frec">Millaje:</label>
+                    <input type="text" id="millaje_customer_frec" name="millaje_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nro_customer_frec">Nro:</label>
+                    <input type="text" id="nro_customer_frec" name="nro_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="user_customer_frec">Usuario:</label>
+                    <input type="text" id="user_customer_frec" name="user_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="pass_customer_frec">Clave:</label>
+                    <input type="password" id="pass_customer_frec" name="pass_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="end_customer_frec">Fin:</label>
+                    <input type="text" id="end_customer_frec" name="end_customer_frec" class="form-control">
+                  </div>
+                </div>
+                <button id="btn_add_customer_frec" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_customer_frec" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-3"><center>Millaje</center></th>
+                      <th class="col-md-3"><center>Nro</center></th>
+                      <th class="col-md-3"><center>Usuario</center></th>
+                      <th class="col-md-3"><center>Clave</center></th>
+                      <th class="col-md-3"><center>Fin</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="6">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
             <!-- =========== FORM ADDRESS ============ -->
             <div class="col-md-12">
               <fieldset>
@@ -434,147 +573,6 @@
                   <tbody>
                     <tr>
                       <td colspan="4">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <!-- ===================================== -->
-
-            <!-- =========== FORM TELEFONOS Y CORREOS ============ -->
-
-            <div class="col-md-6">
-              <fieldset>
-                <legend>Teléfonos</legend>
-                <div class="form-group">
-                  <label for="type_customer_phone">Tipo de Contacto:</label>
-                  <select name="type_customer_phone" id="type_customer_phone" class="form-control">
-                    <option value="">Seleccionar</option>
-                    <option value="celular_personal">Celular Personal</option>
-                    <option value="celular_empresa">Celular Empresa</option>
-                    <option value="otros">Otros</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="customer_phone">Telefono:</label>
-                  <input type="text" id="customer_phone" name="customer_phone" class="form-control">
-                </div>
-                <button id="btn_add_customer_phones" type="button" class="btn btn-primary">Agregar</button>
-                <br/>
-                <table id="table_customer_phones" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-2"><center>T. Contacto</center></th>
-                      <th class="col-md-4"><center>Teléfono</center></th>
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="3">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <div class="col-md-6">
-            <fieldset>
-                <legend>Correos</legend>
-                <div class="form-group">
-                  <label for="type_customer_email">Tipo de Email:</label>
-                  <select name="type_customer_email" id="type_customer_email" class="form-control">
-                    <option value="">Seleccionar</option>
-                    <option value="empresa">Empresa</option>
-                    <option value="personal">Personal</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="customer_email">Telefono:</label>
-                  <input type="text" id="customer_email" name="customer_email" class="form-control">
-                </div>
-                <button id="btn_add_customer_emails" type="button" class="btn btn-primary">Agregar</button>
-                <br/>
-                <table id="table_customer_emails" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-2"><center>T. Email</center></th>
-                      <th class="col-md-4"><center>Email</center></th>
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="3">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-
-            <!-- ===================================== -->
-
-            <!-- ===== FORM CLIENTES FRECUENTES ====== -->
-            <div class="col-md-12">
-              <fieldset>
-                <legend>Pasajeros Frecuentes</legend>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="millaje_customer_frec">Millaje:</label>
-                    <input type="text" id="millaje_customer_frec" name="millaje_customer_frec" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="nro_customer_frec">Nro:</label>
-                    <input type="text" id="nro_customer_frec" name="nro_customer_frec" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="user_customer_frec">Usuario:</label>
-                    <input type="text" id="user_customer_frec" name="user_customer_frec" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="pass_customer_frec">Clave:</label>
-                    <input type="password" id="pass_customer_frec" name="pass_customer_frec" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="end_customer_frec">Fin:</label>
-                    <input type="text" id="end_customer_frec" name="end_customer_frec" class="form-control">
-                  </div>
-                </div>
-                <button id="btn_add_customer_frec" type="button" class="btn btn-primary">Agregar</button>
-                <br/>
-                <table id="table_customer_frec" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-3"><center>Millaje</center></th>
-                      <th class="col-md-3"><center>Nro</center></th>
-                      <th class="col-md-3"><center>Usuario</center></th>
-                      <th class="col-md-3"><center>Clave</center></th>
-                      <th class="col-md-3"><center>Fin</center></th>
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="6">
                         <center>
                           No se registraron datos.
                         </center>
