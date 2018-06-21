@@ -354,7 +354,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="end_customer_frec">Fin:</label>
+                    <label for="end_customer_frec">Pin:</label>
                     <input type="text" id="end_customer_frec" name="end_customer_frec" class="form-control">
                   </div>
                 </div>
@@ -367,7 +367,7 @@
                       <th class="col-md-3"><center>Nro</center></th>
                       <th class="col-md-3"><center>Usuario</center></th>
                       <th class="col-md-3"><center>Clave</center></th>
-                      <th class="col-md-3"><center>Fin</center></th>
+                      <th class="col-md-3"><center>Pin</center></th>
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
                   </thead>
