@@ -100,8 +100,11 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="phone_number">Teléfono:</label>
-                <input type="text" id="phone_number" name="phone_number" class="form-control"/>
+                <label for="phone_number">Género:</label>
+                <select class="form-control" id="phone_number">
+                  <option value="MASCULINO">MASCULINO</option>
+                  <option value="FEMENINO">FEMENINO</option>
+                </select>
               </div>
             </div>
             <div class="col-md-3">
@@ -583,11 +586,59 @@
               </fieldset>
             </div>
             <!-- ===================================== -->
-
-             <!-- =========== FORM DATOS FAMILIARES ============ -->
+            <!-- =========== FORM DATOS TARJETAS ============ -->
             <div class="col-md-12">
               <fieldset>
-                <legend>Datos de Familiars</legend>
+                <legend>Datos de Tarjetas</legend>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_familiar_relacion">Relacion:</label>
+                    <input type="text" id="contact_familiar_relacion" name="contact_familiar_relacion" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_familiar_nombre">Nombre:</label>
+                    <input type="text" id="contact_familiar_nombre" name="contact_familiar_nombre" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_familiar_telefono">Teléfono:</label>
+                    <input type="text" id="contact_familiar_telefono" name="contact_familiar_telefono" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button id="btn_add_familiares" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+                <table id="table_familiares" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"><center>Relacion</center></th>
+                      <th class="col-md-4"><center>Nombre</center></th>
+                      <th class="col-md-2"><center>Teléfono</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
+            <!-- =========== FORM DATOS FAMILIARES ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Datos de Familiares</legend>
                 <div class="col-md-4">
                   <div class="form-group" >
                     <label for="contact_familiar_relacion">Relacion:</label>

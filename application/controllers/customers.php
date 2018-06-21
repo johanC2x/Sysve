@@ -85,7 +85,6 @@ class Customers extends Person_controller
 			'email'=>$this->input->post('email'),
 			'phone_number'=>$this->input->post('phone_number'),
 			'address_1'=>$this->input->post('address_1'),
-			'birthdate'=>$this->input->post('birthdate'),
 			'birthplace'=>$this->input->post('birthplace'),
 			'nationality'=>$this->input->post('nationality'),
 			// 'country'=>$this->input->post('country'),
