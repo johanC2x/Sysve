@@ -423,6 +423,7 @@ var customer = function () {
             data_tablas.familiares = self.customer_familiares_list;
             data_tablas.visado = self.customer_visado_list;
             data_tablas.asiento = self.customer_asiento_list;
+            data_tablas.familares = self.customer_familiares_list;
             console.log(data_tablas);
             var enviar = JSON.stringify(data_tablas);
             console.log(enviar)
