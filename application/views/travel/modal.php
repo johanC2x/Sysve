@@ -94,8 +94,8 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" class="form-control"/>
+                <label for="last_name">Apellido de Casado:</label>
+                <input type="text" id="last_name_casada" name="last_name_casada" class="form-control"/>
               </div>
             </div>
             <div class="col-md-6">
