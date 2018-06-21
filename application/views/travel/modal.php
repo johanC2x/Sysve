@@ -245,8 +245,207 @@
               </fieldset>
               </div>
             <!-- ===================================== -->
+            <!-- =========== FORM ADDRESS ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Direcciones Propias y de Entrega</legend>
+                <div class="col-md-4">
+                  <label for="type_address_customer_travel">Tipo</label>
+                  <select name="type_address_customer_travel" id="type_address_customer_travel" class="form-control">
+                    <option value="">Seleccionar</option>
+                    <option value="domicilio">Domicilio</option>
+                    <option value="entrega">Entrega</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="address_customer_travel">Dirección:</label>
+                    <input type="text" id="address_customer_travel" name="address_customer_travel" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="district_customer_travel">Distrito/Estado:</label>
+                    <input type="text" id="district_customer_travel" name="district_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="country_customer_travel">País:</label>
+                    <input type="text" id="country_customer_travel" name="country_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="phone_customer_travel">Teléfono:</label>
+                    <input type="text" id="phone_customer_travel" name="phone_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="reference_customer_travel">Referencia:</label>
+                    <input type="text" id="reference_customer_travel" name="reference_customer_travel" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button id="btn_add_customer_travel" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+                <table id="table_customer_address" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"><center>Tipo</center></th>
+                      <th class="col-md-1"><center>Dirección</center></th>
+                      <th class="col-md-4"><center>Distrito</center></th>
+                      <th class="col-md-4"><center>País</center></th>
+                      <th class="col-md-4"><center>Teléfono</center></th>
+                      <th class="col-md-2"><center>Referencia</center></th> 
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="7">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
+            <!-- =========== FORM COMPANY ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Datos de Empresas</legend>
+                <div class="col-md-6">
+                    <div class="form-group" >
+                      <label for="company_customer_ruc">Ruc:</label>
+                      <input type="text" id="company_customer_ruc" name="company_customer_ruc" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" >
+                      <label for="company_customer_name">Razón Social:</label>
+                      <input type="text" id="company_customer_name" name="company_customer_name" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group" >
+                      <label for="company_customer_address">Dirección:</label>
+                      <input type="text" id="company_customer_address" name="company_customer_address" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_district">Distrito:</label>
+                      <input type="text" id="company_customer_district" name="company_customer_district" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_mail">Correo:</label>
+                      <input type="text" id="company_customer_mail" name="company_customer_mail" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_phone">Teléfono:</label>
+                      <input type="text" id="company_customer_phone" name="company_customer_phone" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" >
+                      <label for="company_customer_reference">Referencia:</label>
+                      <input type="text" id="company_customer_reference" name="company_customer_reference" class="form-control">
+                    </div>  
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button id="btn_add_customer_company" type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                  </div>
+                <table id="table_customer_company" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"><center>Ruc</center></th>
+                      <th class="col-md-4"><center>Razon Social</center></th>
+                      <th class="col-md-2"><center>Correo</center></th> 
+                      <th class="col-md-2"><center>Dirección</center></th>
+                      <th class="col-md-3"><center>Distrito</center></th> 
+                      <th class="col-md-2"><center>Correo</center></th> 
+                      <th class="col-md-2"><center>Teléfono</center></th> 
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="8">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
 
-            <!-- =========== FORM VISADO ============ -->
+             <!-- =========== FORM CONTACTS ============ -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Personas a Contactar de la Empresa</legend>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_customer_ruc">Nombre:</label>
+                    <input type="text" id="contact_customer_ruc" name="contact_customer_ruc" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_customer_name">Teléfono:</label>
+                    <input type="text" id="contact_customer_name" name="contact_customer_name" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group" >
+                    <label for="contact_customer_address">Correo:</label>
+                    <input type="text" id="contact_customer_address" name="contact_customer_address" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button id="btn_add_customer_contacts" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+                <table id="table_customer_contacts" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-1"><center>Nombre</center></th>
+                      <th class="col-md-4"><center>Teléfono</center></th>
+                      <th class="col-md-2"><center>Correo</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
+
+            <!-- =========== FORM TELEFONOS Y CORREOS ============ -->
 
             <div class="col-md-6">
               <fieldset>
@@ -387,190 +586,39 @@
             </div>
             <!-- ===================================== -->
 
-            <!-- =========== FORM ADDRESS ============ -->
+             <!-- =========== FORM DATOS FAMILIARES ============ -->
             <div class="col-md-12">
               <fieldset>
-                <legend>Direcciones Propias y de Entrega</legend>
-                <div class="col-md-4">
-                  <label for="type_address_customer_travel">Tipo</label>
-                  <select name="type_address_customer_travel" id="type_address_customer_travel" class="form-control">
-                    <option value="">Seleccionar</option>
-                    <option value="domicilio">Domicilio</option>
-                    <option value="entrega">Entrega</option>
-                  </select>
-                </div>
+                <legend>Datos de Familiars</legend>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="address_customer_travel">Dirección:</label>
-                    <input type="text" id="address_customer_travel" name="address_customer_travel" class="form-control">
+                    <label for="contact_familiar_relacion">Relacion:</label>
+                    <input type="text" id="contact_familiar_relacion" name="contact_familiar_relacion" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="district_customer_travel">Distrito/Estado:</label>
-                    <input type="text" id="district_customer_travel" name="district_customer_travel" class="form-control">
+                    <label for="contact_familiar_nombre">Nombre:</label>
+                    <input type="text" id="contact_familiar_nombre" name="contact_familiar_nombre" class="form-control">
                   </div>  
                 </div>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="country_customer_travel">País:</label>
-                    <input type="text" id="country_customer_travel" name="country_customer_travel" class="form-control">
-                  </div>  
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group" >
-                    <label for="phone_customer_travel">Teléfono:</label>
-                    <input type="text" id="phone_customer_travel" name="phone_customer_travel" class="form-control">
-                  </div>  
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group" >
-                    <label for="reference_customer_travel">Referencia:</label>
-                    <input type="text" id="reference_customer_travel" name="reference_customer_travel" class="form-control">
+                    <label for="contact_familiar_telefono">Teléfono:</label>
+                    <input type="text" id="contact_familiar_telefono" name="contact_familiar_telefono" class="form-control">
                   </div>  
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <button id="btn_add_customer_travel" type="button" class="btn btn-primary">Agregar</button>
+                    <button id="btn_add_familiares" type="button" class="btn btn-primary">Agregar</button>
                   </div>
                 </div>
-                <table id="table_customer_address" class="table table-hover table-bordered" >
+                <table id="table_familiares" class="table table-hover table-bordered" >
                   <thead>
                     <tr>
-                      <th class="col-md-1"><center>Tipo</center></th>
-                      <th class="col-md-1"><center>Dirección</center></th>
-                      <th class="col-md-4"><center>Distrito</center></th>
-                      <th class="col-md-4"><center>País</center></th>
-                      <th class="col-md-4"><center>Teléfono</center></th>
-                      <th class="col-md-2"><center>Referencia</center></th> 
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="7">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <!-- ===================================== -->
-            
-            <!-- =========== FORM COMPANY ============ -->
-            <div class="col-md-12">
-              <fieldset>
-                <legend>Datos de Empresas</legend>
-                <div class="col-md-6">
-                    <div class="form-group" >
-                      <label for="company_customer_ruc">Ruc:</label>
-                      <input type="text" id="company_customer_ruc" name="company_customer_ruc" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group" >
-                      <label for="company_customer_name">Razón Social:</label>
-                      <input type="text" id="company_customer_name" name="company_customer_name" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-8">
-                    <div class="form-group" >
-                      <label for="company_customer_address">Dirección:</label>
-                      <input type="text" id="company_customer_address" name="company_customer_address" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="company_customer_district">Distrito:</label>
-                      <input type="text" id="company_customer_district" name="company_customer_district" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="company_customer_mail">Correo:</label>
-                      <input type="text" id="company_customer_mail" name="company_customer_mail" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="company_customer_phone">Teléfono:</label>
-                      <input type="text" id="company_customer_phone" name="company_customer_phone" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group" >
-                      <label for="company_customer_reference">Referencia:</label>
-                      <input type="text" id="company_customer_reference" name="company_customer_reference" class="form-control">
-                    </div>  
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <button id="btn_add_customer_company" type="button" class="btn btn-primary">Agregar</button>
-                    </div>
-                  </div>
-                <table id="table_customer_company" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-1"><center>Ruc</center></th>
-                      <th class="col-md-4"><center>Razon Social</center></th>
-                      <th class="col-md-2"><center>Correo</center></th> 
-                      <th class="col-md-2"><center>Dirección</center></th>
-                      <th class="col-md-3"><center>Distrito</center></th> 
-                      <th class="col-md-2"><center>Correo</center></th> 
-                      <th class="col-md-2"><center>Teléfono</center></th> 
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="8">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <!-- ===================================== -->
-
-            <!-- =========== FORM CONTACTS ============ -->
-            <div class="col-md-12">
-              <fieldset>
-                <legend>Personas a Contactar de la Empresa</legend>
-                <div class="col-md-4">
-                  <div class="form-group" >
-                    <label for="contact_customer_ruc">Nombre:</label>
-                    <input type="text" id="contact_customer_ruc" name="contact_customer_ruc" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group" >
-                    <label for="contact_customer_name">Teléfono:</label>
-                    <input type="text" id="contact_customer_name" name="contact_customer_name" class="form-control">
-                  </div>  
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group" >
-                    <label for="contact_customer_address">Correo:</label>
-                    <input type="text" id="contact_customer_address" name="contact_customer_address" class="form-control">
-                  </div>  
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <button id="btn_add_customer_contacts" type="button" class="btn btn-primary">Agregar</button>
-                  </div>
-                </div>
-                <table id="table_customer_contacts" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-1"><center>Nombre</center></th>
-                      <th class="col-md-4"><center>Teléfono</center></th>
-                      <th class="col-md-2"><center>Correo</center></th>
+                      <th class="col-md-1"><center>Relacion</center></th>
+                      <th class="col-md-4"><center>Nombre</center></th>
+                      <th class="col-md-2"><center>Teléfono</center></th>
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
                   </thead>
@@ -587,7 +635,6 @@
               </fieldset>
             </div>
             <!-- ===================================== -->
-
             <div id="messages" class="col-md-12"></div>
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>

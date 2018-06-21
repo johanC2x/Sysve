@@ -44,6 +44,14 @@ $(document).ready(function() {
 		});
 	}
 
+	/* BOTON DE AGREGADO DE FAMILIARES */
+	if(document.getElementById("btn_add_familiares") !== null){
+		const btn_add_familiares = document.getElementById("btn_add_familiares");
+		btn_add_familiares.addEventListener("click" ,() => {
+			travel.saveFamiliar();
+		});
+	}
+
 	/* BOTON DE AGREGADO DE VISADO */
 	if(document.getElementById("btn_add_customer_visado") !== null){
 		const btn_add_customer_visado = document.getElementById("btn_add_customer_visado");

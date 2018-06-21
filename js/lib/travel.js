@@ -15,7 +15,8 @@ var travel = function () {
         customer_documents_list : [],
         customer_phones_list : [],
         customer_emails_list : [],
-        customer_frec_list : []
+        customer_frec_list : [],
+        customer_familiares_list: []
     };
 
     self.changeRow = function(idObj){
@@ -1390,6 +1391,56 @@ var travel = function () {
         }
         $("#table_customer_company").append(html);
     };
+
+    self.saveFamiliar = function(){
+        var relacion = $("#contact_familiar_relacion").val();
+        var nombre = $("#contact_familiar_nombre").val();
+        var telefono = $("#contact_familiar_telefono").val();
+
+        if(relacion !== '' && nombre !== '' && telefono !== ''){
+            self.customer_familiares_list.push({
+                relacion : relacion,
+                nombre : nombre,
+                telefono : telefono,
+            });
+            self.makeTableDatosFamilares();
+        }
+    };
+
+    self.removeFamiliar = function(index){
+        self.customer_familiares_list.splice(index,1);
+        self.makeTableDatosFamilares();
+    };
+
+    self.makeTableDatosFamilares = function(){
+        var tbody = '';
+        $("#table_familiares tbody").empty();
+        if(self.customer_familiares_list.length > 0){
+            for(var i = 0;i < self.customer_familiares_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_familiares_list[i].relacion +`</center></td>
+                            <td><center>`+ self.customer_familiares_list[i].nombre +`</center></td>                            
+                            <td><center>`+ self.customer_familiares_list[i].telefono +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeFamiliar(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="4">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_familiares tbody").append(tbody);
+    }
 
     /* LIMPIANDO FORMULARIO DE REGISTRO DE CLIENTES */
     self.cancelRegisterCustomer = function(){
