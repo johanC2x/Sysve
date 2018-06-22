@@ -87,7 +87,7 @@ class Customer extends Person
 		$success = false;
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
-		$customer_obj =  $this->get_info($person_data['person_id']);
+		// $customer_obj =  $this->get_info($person_data['person_id']);
 		if($customer_id){
 			if(parent::save($person_data,$customer_id)){
 				if (!$customer_id or !$this->exists($customer_id)){

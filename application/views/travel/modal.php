@@ -119,10 +119,10 @@
                 <input type="date" id="date_expire" name="date_expire" class="form-control"/>
               </div>
             </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
               <label for="address_1">Dirección:</label>
               <input type="text" id="address_1" name="address_1" class="form-control"/>
-            </div>
+            </div> -->
 
             <!-- =========== FORM ADDRESS ============ -->
             <div class="col-md-12">
