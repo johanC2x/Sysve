@@ -301,7 +301,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="customer_email">Telefono:</label>
+                  <label for="customer_email">Email:</label>
                   <input type="text" id="customer_email" name="customer_email" class="form-control">
                 </div>
                 <button id="btn_add_customer_emails" type="button" class="btn btn-primary">Agregar</button>
