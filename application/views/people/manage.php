@@ -52,6 +52,22 @@ $(document).ready(function() {
 		});
 	}
 
+	/* BOTON DE AGREGADO DE PREFERENCIAS DE ASIENTO */
+	if(document.getElementById("btn_add_indicaciones") !== null){
+		const btn_add_indicaciones = document.getElementById("btn_add_indicaciones");
+		btn_add_indicaciones.addEventListener("click" ,() => {
+			travel.savePreferenciasAsiento();
+		});
+	}
+
+	/* BOTON DE AGREGADO DE INFO DE TARJETAS */
+	if(document.getElementById("btn_add_tarjetas") !== null){
+		const btn_add_tarjetas = document.getElementById("btn_add_tarjetas");
+		btn_add_tarjetas.addEventListener("click" ,() => {
+			travel.saveTarjetas();
+		});
+	}
+
 	/* BOTON DE AGREGADO DE VISADO */
 	if(document.getElementById("btn_add_customer_visado") !== null){
 		const btn_add_customer_visado = document.getElementById("btn_add_customer_visado");

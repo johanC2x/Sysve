@@ -16,7 +16,10 @@ var travel = function () {
         customer_phones_list : [],
         customer_emails_list : [],
         customer_frec_list : [],
-        customer_familiares_list: []
+        customer_familiares_list: [],
+        preferencia_asiento_list: [],
+        customer_tarjtas_list: []
+
     };
 
     self.changeRow = function(idObj){
@@ -1159,6 +1162,116 @@ var travel = function () {
     self.removeCustomerFrec = function(key){
         self.customer_frec_list.splice(key,1);
         self.makeTableFrec();
+    };
+
+    /* ======================================================================== */
+
+    /* ================ SET TABLE FOR PREFERENCIAS DE ASIENTO ============ */
+
+    self.savePreferenciasAsiento = function(){
+        var tipo_asiento = $("#preferencia_tipo_asiento").val();
+        var indicaciones = $("#preferencia_indicaciones").val();
+
+        if(tipo_asiento !== '' && indicaciones !== ''){
+            self.preferencia_asiento_list.push({
+                tipo_asiento : tipo_asiento,
+                indicaciones : indicaciones,
+            });
+            self.makeTablePref();
+        }
+    };
+
+    self.makeTablePref = function(){
+        var tbody = '';
+        $("#table_indicaciones tbody").empty();
+        if(self.preferencia_asiento_list.length > 0){
+            for(var i = 0;i < self.preferencia_asiento_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.preferencia_asiento_list[i].millaje_frec +`</center></td>
+                            <td><center>`+ self.preferencia_asiento_list[i].nro_frec +`</center></td>                            
+                            <td><center>`+ self.preferencia_asiento_list[i].user_frec +`</center></td>
+                            <td><center>`+ self.preferencia_asiento_list[i].pass_frec +`</center></td>
+                            <td><center>`+ self.preferencia_asiento_list[i].end_frec +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removePrefAsiento(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="6">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_indicaciones tbody").append(tbody);
+    };
+
+    self.removePrefAsiento = function(key){
+        self.preferencia_asiento_list.splice(key,1);
+        self.makeTablePref();
+    };
+
+    /* ======================================================================== */
+
+    /* ================ SET TABLE FOR PREFERENCIAS DE ASIENTO ============ */
+
+    self.saveTarjetas = function(){
+        var tipo_tarjeta = $("#tipo_tarjeta").val();
+        var nro_tarjeta = $("#nro_tarjeta").val();
+        var debito_credito = $("#debito_credito").val();
+
+        if(tipo_tarjeta !== '' && nro_tarjeta !== '' && debito_credito !== ''){
+            self.customer_tarjtas_list.push({
+                tipo_tarjeta : tipo_tarjeta,
+                nro_tarjeta : nro_tarjeta,
+                debito_credito : debito_credito,
+            });
+            self.makeTableTarjetas();
+        }
+    };
+
+    self.makeTableTarjetas = function(){
+        var tbody = '';
+        $("#table_tarjetas tbody").empty();
+        if(self.customer_tarjtas_list.length > 0){
+            for(var i = 0;i < self.customer_tarjtas_list.length; i++){
+                tbody = `<tr>
+                            <td><center>`+ self.customer_tarjtas_list[i].millaje_frec +`</center></td>
+                            <td><center>`+ self.customer_tarjtas_list[i].nro_frec +`</center></td>                            
+                            <td><center>`+ self.customer_tarjtas_list[i].user_frec +`</center></td>
+                            <td><center>`+ self.customer_tarjtas_list[i].pass_frec +`</center></td>
+                            <td><center>`+ self.customer_tarjtas_list[i].end_frec +`</center></td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="travel.removeTarjeta(`+i+`);">
+                                    <center>
+                                        <i class="fa fa-trash"></i>
+                                    </center>
+                                </a>
+                            </td>
+                        </tr>`;
+            }
+        }else{
+            tbody += `<tr>
+                        <td colspan="6">
+                            <center>
+                                No se registraron datos.
+                            </center>
+                        </td>
+                    </tr>`;
+        }
+        $("#table_tarjetas tbody").append(tbody);
+    };
+
+    self.removeTarjeta = function(key){
+        self.customer_tarjtas_list.splice(key,1);
+        self.makeTableTarjetas();
     };
 
     /* ======================================================================== */

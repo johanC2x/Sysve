@@ -387,6 +387,45 @@
               </fieldset>
             </div>
             <!-- ===================================== -->
+            <!-- ===== FORM PREFERENCIAS DE ASIENTOS ====== -->
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Preferencias de Asiento</legend>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="preferencia_tipo_asiento">Tipo de Asiento:</label>
+                    <input type="text" id="preferencia_tipo_asiento" name="preferencia_tipo_asiento" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="preferencia_indicaciones">Indicaciones:</label>
+                    <input type="text" id="preferencia_indicaciones" name="preferencia_indicaciones" class="form-control">
+                  </div>
+                </div>
+                <button id="btn_add_indicaciones" type="button" class="btn btn-primary">Agregar</button>
+                <br/>
+                <table id="table_indicaciones" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-3"><center>Tipo de Asiento</center></th>
+                      <th class="col-md-3"><center>Indicaciones</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="6">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
             <!-- =========== FORM ADDRESS ============ -->
             <div class="col-md-12">
               <fieldset>
@@ -592,33 +631,33 @@
                 <legend>Datos de Tarjetas</legend>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="contact_familiar_relacion">Relacion:</label>
-                    <input type="text" id="contact_familiar_relacion" name="contact_familiar_relacion" class="form-control">
+                    <label for="contact_familiar_relacion">Tipo de Tarjeta:</label>
+                    <input type="text" id="tipo_tarjeta" name="tipo_tarjeta" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="contact_familiar_nombre">Nombre:</label>
-                    <input type="text" id="contact_familiar_nombre" name="contact_familiar_nombre" class="form-control">
+                    <label for="nro_tarjeta">Nro de tarjeta:</label>
+                    <input type="text" id="nro_tarjeta" name="nro_tarjeta" class="form-control">
                   </div>  
                 </div>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="contact_familiar_telefono">Teléfono:</label>
-                    <input type="text" id="contact_familiar_telefono" name="contact_familiar_telefono" class="form-control">
+                    <label for="debito_credito">Débito o Crédito:</label>
+                    <input type="text" id="debito_credito" name="debito_credito" class="form-control">
                   </div>  
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <button id="btn_add_familiares" type="button" class="btn btn-primary">Agregar</button>
+                    <button id="btn_add_tarjetas" type="button" class="btn btn-primary">Agregar</button>
                   </div>
                 </div>
-                <table id="table_familiares" class="table table-hover table-bordered" >
+                <table id="table_tarjetas" class="table table-hover table-bordered" >
                   <thead>
                     <tr>
-                      <th class="col-md-1"><center>Relacion</center></th>
-                      <th class="col-md-4"><center>Nombre</center></th>
-                      <th class="col-md-2"><center>Teléfono</center></th>
+                      <th class="col-md-1"><center>Tipo de Tarjeta</center></th>
+                      <th class="col-md-4"><center>Nro de Tarjeta</center></th>
+                      <th class="col-md-2"><center>Débito o Crédito</center></th>
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
                   </thead>
