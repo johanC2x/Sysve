@@ -1187,11 +1187,8 @@ var travel = function () {
         if(self.preferencia_asiento_list.length > 0){
             for(var i = 0;i < self.preferencia_asiento_list.length; i++){
                 tbody = `<tr>
-                            <td><center>`+ self.preferencia_asiento_list[i].millaje_frec +`</center></td>
-                            <td><center>`+ self.preferencia_asiento_list[i].nro_frec +`</center></td>                            
-                            <td><center>`+ self.preferencia_asiento_list[i].user_frec +`</center></td>
-                            <td><center>`+ self.preferencia_asiento_list[i].pass_frec +`</center></td>
-                            <td><center>`+ self.preferencia_asiento_list[i].end_frec +`</center></td>
+                            <td><center>`+ self.preferencia_asiento_list[i].tipo_asiento +`</center></td>
+                            <td><center>`+ self.preferencia_asiento_list[i].indicaciones +`</center></td>                            
                             <td>
                                 <a href="javascript:void(0);" onclick="travel.removePrefAsiento(`+i+`);">
                                     <center>
@@ -1220,7 +1217,7 @@ var travel = function () {
 
     /* ======================================================================== */
 
-    /* ================ SET TABLE FOR PREFERENCIAS DE ASIENTO ============ */
+    /* ================ SET TABLE FOR TARJETAS ============ */
 
     self.saveTarjetas = function(){
         var tipo_tarjeta = $("#tipo_tarjeta").val();
@@ -1243,11 +1240,9 @@ var travel = function () {
         if(self.customer_tarjtas_list.length > 0){
             for(var i = 0;i < self.customer_tarjtas_list.length; i++){
                 tbody = `<tr>
-                            <td><center>`+ self.customer_tarjtas_list[i].millaje_frec +`</center></td>
-                            <td><center>`+ self.customer_tarjtas_list[i].nro_frec +`</center></td>                            
-                            <td><center>`+ self.customer_tarjtas_list[i].user_frec +`</center></td>
-                            <td><center>`+ self.customer_tarjtas_list[i].pass_frec +`</center></td>
-                            <td><center>`+ self.customer_tarjtas_list[i].end_frec +`</center></td>
+                            <td><center>`+ self.customer_tarjtas_list[i].tipo_tarjeta +`</center></td>
+                            <td><center>`+ self.customer_tarjtas_list[i].nro_tarjeta +`</center></td>                            
+                            <td><center>`+ self.customer_tarjtas_list[i].debito_credito +`</center></td>
                             <td>
                                 <a href="javascript:void(0);" onclick="travel.removeTarjeta(`+i+`);">
                                     <center>
