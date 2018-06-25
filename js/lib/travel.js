@@ -855,6 +855,12 @@ var travel = function () {
                 type_address : type_address,
                 phone : phone
             });
+            $("#address_customer_travel").val("");
+            $("#district_customer_travel").val("");
+            $("#country_customer_travel").val("");
+            $("#reference_customer_travel").val("");
+            $("#type_address_customer_travel").val("");
+            $("#phone_customer_travel").val("");        
             self.makeTableAddress();
         }
     };
@@ -912,6 +918,12 @@ var travel = function () {
                 date_init : visado_init_date,
                 date_end : visado_end_date
             });
+
+            $("#visado_customer_country").val("");
+            $("#visado_customer_nro").val("");
+            $("#visado_customer_init_date").val("");
+            $("#visado_customer_end_date").val("");
+
             self.makeTableVisado();
         }
     };
@@ -966,6 +978,11 @@ var travel = function () {
                 name : contact_name,
                 address : contact_address
             });
+
+            $("#contact_customer_ruc").val("");
+            $("#contact_customer_name").val("");
+            $("#contact_customer_address").val("");
+
             self.makeTableContact();
         }
     };
@@ -1017,6 +1034,10 @@ var travel = function () {
                 type_document : tipo_documento,
                 nro_doc : nro_doc
             });
+
+            $("#type_customer_doc").val("");
+            $("#nro_customer_doc").val("");
+
             self.makeTableDocuments();
         }
     };
@@ -1067,6 +1088,10 @@ var travel = function () {
                 type_phone : type_phone,
                 nro_phone : nro_phone
             });
+
+            $("#type_customer_phone").val("");
+            $("#customer_phone").val("");
+
             self.makeTablePhones();
         }
     };
@@ -1124,6 +1149,13 @@ var travel = function () {
                 pass_frec : pass_frec,
                 end_frec : end_frec
             });
+
+            $("#millaje_customer_frec").val("");
+            $("#nro_customer_frec").val("");
+            $("#user_customer_frec").val("");
+            $("#pass_customer_frec").val("");
+            $("#end_customer_frec").val("");
+
             self.makeTableFrec();
         }
     };
@@ -1178,6 +1210,10 @@ var travel = function () {
                 tipo_asiento : tipo_asiento,
                 indicaciones : indicaciones,
             });
+
+            $("#preferencia_tipo_asiento").val("");
+            $("#preferencia_indicaciones").val("");
+
             self.makeTablePref();
         }
     };
@@ -1231,6 +1267,11 @@ var travel = function () {
                 nro_tarjeta : nro_tarjeta,
                 debito_credito : debito_credito,
             });
+
+            $("#tipo_tarjeta").val("");
+            $("#nro_tarjeta").val("");
+            $("#debito_credito").val("");
+
             self.makeTableTarjetas();
         }
     };
@@ -1282,6 +1323,10 @@ var travel = function () {
                 type_email : type_email,
                 email : email
             });
+
+            $("#type_customer_email").val("");
+            $("#customer_email").val("");
+
             self.makeTableEmails();
         }
     };
@@ -1338,6 +1383,13 @@ var travel = function () {
                 date_init : passport_init_date,
                 nationality : passport_nationality
             });
+
+            $("#passport_customer_country").val("");
+            $("#passport_customer_nro").val("");
+            $("#passport_customer_date").val("");
+            $("#passport_customer_init_date").val("");
+            $("#passport_customer_nationality").val("");
+
             self.makeTablePassport();
         }else{
             console.log("errores");
@@ -1395,6 +1447,11 @@ var travel = function () {
                 nro : card_nro,
                 type : card_type
             });
+
+            $("#card_customer_brand").val("");
+            $("#card_customer_nro").val("");
+            $("#card_customer_type").val("");
+
             self.makeTableCard();
         }
     };
@@ -1458,6 +1515,15 @@ var travel = function () {
                 district : company_district,
                 address : company_address
             });
+
+            $("#company_customer_ruc").val("");
+            $("#company_customer_name").val("");
+            $("#company_customer_mail").val("");
+            $("#company_customer_address").val("");
+            $("#company_customer_district").val("");
+            $("#company_customer_phone").val("");
+            $("#company_customer_reference").val("");
+
             self.makeTableCompany();
         }
     };
@@ -1512,6 +1578,11 @@ var travel = function () {
                 nombre : nombre,
                 telefono : telefono,
             });
+
+            $("#contact_familiar_relacion").val("");
+            $("#contact_familiar_nombre").val("");
+            $("#contact_familiar_telefono").val("");
+
             self.makeTableDatosFamilares();
         }
     };
