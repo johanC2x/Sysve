@@ -1026,7 +1026,7 @@ var travel = function () {
         $("#table_customer_doc tbody").empty();
         if(self.customer_documents_list.length > 0){
             for(var i = 0;i < self.customer_documents_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.customer_documents_list[i].type_document +`</center></td>
                             <td><center>`+ self.customer_documents_list[i].nro_doc +`</center></td>                            
                             <td>
@@ -1076,7 +1076,7 @@ var travel = function () {
         $("#table_customer_phones tbody").empty();
         if(self.customer_phones_list.length > 0){
             for(var i = 0;i < self.customer_phones_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.customer_phones_list[i].type_phone +`</center></td>
                             <td><center>`+ self.customer_phones_list[i].nro_phone +`</center></td>                            
                             <td>
@@ -1133,7 +1133,7 @@ var travel = function () {
         $("#table_customer_frec tbody").empty();
         if(self.customer_frec_list.length > 0){
             for(var i = 0;i < self.customer_frec_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.customer_frec_list[i].millaje_frec +`</center></td>
                             <td><center>`+ self.customer_frec_list[i].nro_frec +`</center></td>                            
                             <td><center>`+ self.customer_frec_list[i].user_frec +`</center></td>
@@ -1187,7 +1187,7 @@ var travel = function () {
         $("#table_indicaciones tbody").empty();
         if(self.preferencia_asiento_list.length > 0){
             for(var i = 0;i < self.preferencia_asiento_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.preferencia_asiento_list[i].tipo_asiento +`</center></td>
                             <td><center>`+ self.preferencia_asiento_list[i].indicaciones +`</center></td>                            
                             <td>
@@ -1240,7 +1240,7 @@ var travel = function () {
         $("#table_tarjetas tbody").empty();
         if(self.customer_tarjtas_list.length > 0){
             for(var i = 0;i < self.customer_tarjtas_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.customer_tarjtas_list[i].tipo_tarjeta +`</center></td>
                             <td><center>`+ self.customer_tarjtas_list[i].nro_tarjeta +`</center></td>                            
                             <td><center>`+ self.customer_tarjtas_list[i].debito_credito +`</center></td>
@@ -1291,7 +1291,7 @@ var travel = function () {
         $("#table_customer_emails tbody").empty();
         if(self.customer_emails_list.length > 0){
             for(var i = 0;i < self.customer_emails_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.customer_emails_list[i].type_email +`</center></td>
                             <td><center>`+ self.customer_emails_list[i].email +`</center></td>                            
                             <td>
