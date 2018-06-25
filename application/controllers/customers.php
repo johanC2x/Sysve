@@ -240,5 +240,103 @@ class Customers extends Person_controller
 	{			
 		return 1250;
 	}
+
+	/* METODOS PARA CLIENTES */
+
+	function render(){
+		$this->load->view('customers/render');
+	}
+
+	function listClients(){
+		$response = $this->Customer->listClients();
+		if(!empty($response)){
+			echo json_encode(array('success'=>true,'data'=>$response));
+		}else{
+			echo json_encode(array('success'=>false,'data'=>[]));
+		}
+	}
+
+	function getClient(){
+		$response = [];
+		if($this->input->post()){
+			$client_id = $this->input->post("id");
+			$result = $this->Customer->getClient($client_id);
+			if(!empty($result)){
+				$response = array('success'=>true,'data'=>$result);
+			}else{
+				$response = array('success'=>false);
+			}
+		}else{
+			$response = array('success'=>false);
+		}
+		echo json_encode($response);
+	}
+
+	function saveClient(){
+		if($this->input->post()){
+			$date = date('Y-m-d', strtotime(str_replace('-','/', $this->input->post('date_expire'))));
+			$client_data = array(
+				'firstname'=>$this->input->post('first_name'),
+				'middlename'=>$this->input->post('midle_name'),
+				'lastname'=>$this->input->post('last_name'),
+				'mother_lastname'=>$this->input->post('last_name_mothers'),
+				'last_name_casada'=>$this->input->post('last_name_casada'),
+				'age'=>$this->input->post('age'),
+				'gender'=>$this->input->post('gender'),
+				'fec_nac'=>$date,
+				'data'=>$this->input->post('client_data')
+			);
+			$response = $this->Customer->insertClient($client_data);
+			if(!empty($response) && (int)$response === 1){
+				echo json_encode(array('success'=>true,'message'=>"Operación correcta"));
+			}else{
+				echo json_encode(array('success'=>false,'message'=>"Ha ocurrido un error interno"));
+			}
+		}else{
+			echo json_encode(array('success'=>false,'message'=>"No se ha enviado ningún registro"));
+		}
+	}
+
+	function updateClient(){
+		if($this->input->post()){
+			$date = date('Y-m-d', strtotime(str_replace('-','/', $this->input->post('date_expire'))));
+			$client_id = $this->input->post('client_id');
+			$client_data = array(
+				'firstname'=>$this->input->post('first_name'),
+				'middlename'=>$this->input->post('midle_name'),
+				'lastname'=>$this->input->post('last_name'),
+				'mother_lastname'=>$this->input->post('last_name_mothers'),
+				'last_name_casada'=>$this->input->post('last_name_casada'),
+				'age'=>$this->input->post('age'),
+				'gender'=>$this->input->post('gender'),
+				'fec_nac'=>$date,
+				'data'=>$this->input->post('client_data')
+			);
+			$response = $this->Customer->updateClient($client_data,$client_id);
+			if(!empty($response) && (int)$response === 1){
+				echo json_encode(array('success'=>true,'message'=>"Operación correcta"));
+			}else{
+				echo json_encode(array('success'=>false,'message'=>"Ha ocurrido un error interno"));
+			}
+		}else{
+			echo json_encode(array('success'=>false,'message'=>"No se ha enviado ningún registro"));
+		}
+	}
+
+	function deleteClient(){
+		if($this->input->post()){
+			$client_id = $this->input->post('client_id');
+			$client_data = array('deleted'=>1);
+			$response = $this->Customer->deleteClient($client_data,$client_id);
+			if(!empty($response) && (int)$response === 1){
+				echo json_encode(array('success'=>true,'message'=>"Operación correcta"));
+			}else{
+				echo json_encode(array('success'=>false));
+			}
+		}else{
+			echo json_encode(array('success'=>false));
+		}
+	}
+
 }
 ?>

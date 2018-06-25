@@ -6,7 +6,7 @@
         <h4 class="modal-title">REGISTRO DE CLIENTES</h4>
       </div>
       <div class="modal-body">
-        <?php echo form_open('customers/save',array('id'=>'form_customer_register')); ?>
+        <?php echo form_open('customers/saveClient',array('id'=>'form_customer_register')); ?>
           <div class="row">
             <div class="col-md-6">
               <fieldset>
@@ -14,7 +14,7 @@
                 <!-- =========== FORM ADDRESS ============ -->
                   <div class="form-group" >
                     <select id="type_customer_doc" class="form-control">
-                      <option value>Seleccionar Tipo de Documento</option>
+                      <option value="">Seleccionar Tipo de Documento</option>
                       <option value="dni">Dni</option>
                       <option value="carnet_extranjeria">Carnet de Extranjeria</option>
                     </select>
@@ -57,9 +57,8 @@
                   <option value="CE">CE</option>
                   <option value="Pasaporte">Pasaporte</option>
                 </select>
-              </div> 
+              </div>
             </div>
-
             <div class="col-md-6" style="display:none;">
               <div class="form-group">
                 <label for="person_id">Nro. Documento:</label>
@@ -70,9 +69,10 @@
               <div class="form-group">
                 <label for="first_name">Nombre:</label>
                 <input type="text" id="first_name" name="first_name" class="form-control"/>
+                <input type="hidden" id="client_id" name="client_id"/>
+                <input type="hidden" id="client_data" name="client_data"/>
               </div>    
             </div>
-
             <div class="col-md-6">
               <div class="form-group">
                 <label for="midle_name">Pre-Nombre:</label>
@@ -85,7 +85,6 @@
                 <input type="text" id="last_name" name="last_name" class="form-control"/>
               </div>
             </div>
-
             <div class="col-md-6">
               <div class="form-group">
                 <label for="last_name">Apellidos Materno:</label>
@@ -98,22 +97,23 @@
                 <input type="text" id="last_name_casada" name="last_name_casada" class="form-control"/>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="form-group">
-                <label for="phone_number">Género:</label>
-                <select class="form-control" id="phone_number">
-                  <option value="MASCULINO">MASCULINO</option>
-                  <option value="FEMENINO">FEMENINO</option>
+                <label for="gender">Género:</label>
+                <select class="form-control" id="gender" name="gender">
+                  <option value="">SELECCIONAR</option>
+                  <option value="M">MASCULINO</option>
+                  <option value="F">FEMENINO</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="form-group">
-                <label for="date_expire">Edad:</label>
+                <label for="age">Edad:</label>
                 <input type="number" id="age" name="age" class="form-control"/>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="form-group">
                 <label for="date_expire">Fecha de Nacimiento:</label>
                 <input type="date" id="date_expire" name="date_expire" class="form-control"/>
@@ -123,7 +123,11 @@
               <label for="address_1">Dirección:</label>
               <input type="text" id="address_1" name="address_1" class="form-control"/>
             </div> -->
-
+            <div class="col-md-12">
+              <center>
+                <div id="messages" class="form-group"></div>
+              </center>
+            </div>
             <!-- =========== FORM ADDRESS ============ -->
             <div class="col-md-12">
               <fieldset>
@@ -631,7 +635,7 @@
                 <legend>Datos de Tarjetas</legend>
                 <div class="col-md-4">
                   <div class="form-group" >
-                    <label for="contact_familiar_relacion">Tipo de Tarjeta:</label>
+                    <label for="tipo_tarjeta">Tipo de Tarjeta:</label>
                     <input type="text" id="tipo_tarjeta" name="tipo_tarjeta" class="form-control">
                   </div>
                 </div>
@@ -864,7 +868,7 @@
                 </div>
               </div>
             </div>
-          <button id="btn_save_customer" type="submit" class="btn btn-primary" >Guardar</button>
+            <button id="btn_save_customer" type="submit" class="btn btn-primary" >Guardar</button>
         <?php echo form_close();?>
       </div>
       <div class="modal-footer">

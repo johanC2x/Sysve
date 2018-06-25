@@ -258,11 +258,6 @@ class Travel extends Secure_area {
 		$this->load->view('travel/new',$data);
 	}
 
-	function insert_client(){
-		echo 1;
-		
-	}
-
 }
 
 ?>

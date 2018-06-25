@@ -122,6 +122,93 @@ $(document).ready(function() {
 		});
 	}
 
+	$("#form_customer_register").bootstrapValidator({
+		container: '#messages',
+		feedbackIcons: {
+	      valid: 'glyphicon glyphicon-ok',
+	      invalid: 'glyphicon glyphicon-remove',
+	      validating: 'glyphicon glyphicon-refresh'
+	    },
+	    fields: {
+			type_customer_doc:{
+				validators: {
+	    			notEmpty: { message: "El campo tipo de documento es requerido"}
+	    		}
+			},
+			nro_customer_doc:{
+				validators: {
+	    			notEmpty: { message: "El campo número de documento es requerido"}
+	    		}
+			},
+			first_name: {
+	    		validators: {
+	    			notEmpty: { message: "El campo nombre es requerido"}
+	    		}
+			},
+			midle_name: {
+	    		validators: {
+	    			notEmpty: { message: "El campo pre-nombre es requerido"}
+	    		}
+			},
+			last_name:{
+				validators: {
+	    			notEmpty: { message: "El campo apellidos paterno es requerido"}
+	    		}
+			},
+			last_name_mothers:{
+				validators: {
+	    			notEmpty: { message: "El campo apellidos materno es requerido"}
+	    		}
+			},
+			last_name_casada:{
+				validators: {
+	    			notEmpty: { message: "El campo apellido de casada es requerido"}
+	    		}
+			},
+			gender:{
+				validators: {
+	    			notEmpty: { message: "El campo género es requerido"}
+	    		}
+			},
+			age:{
+				validators: {
+	    			notEmpty: { message: "El campo edad es requerido"}
+	    		}
+			},
+			date_expire:{
+				validators: {
+					notEmpty: { message: "El campo fecha de nacimiento es requerido"}
+	    		}
+			}
+		}
+	}).on('success.form.bv', function(e) {
+		e.preventDefault();
+		$("#btn_save_customer").prop("disabled", false);
+		var data = {};
+		data.address = travel.customer_address_list;
+		data.passport = travel.customer_passport_list;
+		data.card = travel.customer_card_list;
+		data.company = travel.customer_company_list;
+		data.visado = travel.customer_visado_list;
+		data.contact = travel.customer_contact_list;
+		data.documents = travel.customer_documents_list;
+		data.phones = travel.customer_phones_list;
+		data.emails = travel.customer_emails_list;
+		data.frec = travel.customer_frec_list;
+		data.familiares = travel.customer_familiares_list;
+		data.asiento = travel.preferencia_asiento_list;
+		data.tarjtas = travel.customer_tarjtas_list;
+		$("#client_data").val(JSON.stringify(data));
+		$.ajax({
+            type:"POST",
+            url:$("#form_customer_register").attr('action'),
+            data:$("#form_customer_register").serialize(),
+            success:function(msg){
+                console.log(msg);
+            }
+		});
+	});
+
 }); 
 
 function init_table_sorting()

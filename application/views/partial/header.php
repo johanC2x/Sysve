@@ -44,6 +44,7 @@
 	<script src='<?php echo base_url();?>/js/bootstrapValidator.min.js'></script>
 	<script src='<?php echo base_url();?>/js/moment.js'></script>
 	<script src='<?php echo base_url();?>/js/es_ES.min.js'></script>
+	<script src="<?php echo base_url();?>js/lib/ysumma.js"></script>
 	<script src='<?php echo base_url();?>/js/lib/utils.js'></script>
 	<script src="<?php echo base_url();?>js/lib/travel.js"></script>
 

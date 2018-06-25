@@ -18,8 +18,9 @@ var travel = function () {
         customer_frec_list : [],
         customer_familiares_list: [],
         preferencia_asiento_list: [],
-        customer_tarjtas_list: []
-
+        customer_tarjtas_list: [],
+        action_form: "",
+        current_id: 0
     };
 
     self.changeRow = function(idObj){
@@ -1609,6 +1610,205 @@ var travel = function () {
                 $(this).attr('type', 'date');
             }
         })
+    };
+
+    self.listClients = function(){
+        $.ajax({
+            type:'POST',
+            data:{},
+            url:self.current_url+"index.php/customers/listClients",
+            success:function(response){
+                var res = JSON.parse(response);
+                if(res.success){
+                    var tbody = "";
+                    var data = res.data;
+                    $("#table_clients tbody").empty();
+                    if(data.length > 0){
+                        for(var i = 0;i < data.length;i++){
+                            var id = data[i].id;
+                            var nombres = data[i].firstname + ' ' + data[i].middlename;
+                            var apellidos = data[i].lastname + ' ' + data[i].mother_lastname;
+                            var genero = (data[i].gender === 'M') ? 'MASCULINO' : 'FEMENINO';
+                            tbody += `<tr>
+                                        <td>`+nombres+`</td>
+                                        <td>`+apellidos+`</td>
+                                        <td>`+data[i].age+`</td>
+                                        <td>`+genero+`</td>
+                                        <td>`+data[i].fec_nac+`</td>
+                                        <td>
+                                            <center>
+                                                <a href="javascript:void(0);" onclick="travel.getClient(`+id+`);">
+                                                    Editar
+                                                </a>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <a href="javascript:void(0);" onclick="travel.deleteClient(`+id+`,false);">
+                                                    Eliminar
+                                                </a>
+                                            </center>
+                                        </td>
+                                    </tr>`;
+                        }
+                    }else{
+                        tbody = `<tr>
+                                    <td colspan="6">
+                                        <center>
+                                            NO SE ENCONTRARON RESULTADOS
+                                        </center>
+                                    </td>
+                                </tr>`;
+                    }
+                    $("#table_clients tbody").append(tbody);
+                }
+            }
+        });
+    };
+
+    self.openModal = function(){
+        self.cleanForm();
+        self.action_form = self.current_url+"index.php/customers/saveClient";
+        $("#modal_customer").modal("show");
+    };
+
+    self.getClient = function(id){
+        $.ajax({
+            type:'POST',
+            data:{
+                id : id
+            },
+            url:self.current_url+"index.php/customers/getClient",
+            success:function(res){
+                var response = JSON.parse(res);
+                if(response.success){
+                    self.action_form = self.current_url+"index.php/customers/updateClient";
+                    var data = response.data;
+                    var data_client = JSON.parse(data.data);
+                    $("#client_id").val(id);
+                    $("#first_name").val(data.firstname);
+                    $("#midle_name").val(data.middlename);
+                    $("#last_name").val(data.lastname);
+                    $("#last_name_mothers").val(data.mother_lastname);
+                    $("#last_name_casada").val(data.last_name_casada);
+                    $("#gender").val(data.gender);
+                    $("#age").val(data.age);
+                    $("#date_expire").val(data.fec_nac);
+                    //MAKE TABLE DOCUMENTS
+                    self.customer_documents_list = data_client.documents;
+                    self.makeTableDocuments();
+                    //MAKE TABLE PASSPORT
+                    self.customer_passport_list = data_client.passport;
+                    self.makeTablePassport();
+                    //MAKE TABLE VISADO
+                    self.customer_visado_list = data_client.visado;
+                    self.makeTableVisado();
+                    //MAKE TABLE PHONES
+                    self.customer_phones_list = data_client.phones;
+                    self.makeTablePhones();
+                    //MAKE TABLE EMAILS
+                    self.customer_emails_list = data_client.emails;
+                    self.makeTableEmails();
+                    //MAKE TABLE CLIENTES FRECUENTES
+                    self.customer_frec_list = data_client.frec;
+                    self.makeTableFrec();
+                    //MAKE TABLE ASIENTOS
+                    self.preferencia_asiento_list = data_client.asiento;
+                    self.makeTablePref();
+                    //MAKE TABLE ADDRESS
+                    self.customer_address_list = data_client.address;
+                    self.makeTableAddress();
+                    //MAKE TABLE COMPANY
+                    self.customer_company_list = data_client.company;
+                    self.makeTableCompany();
+                    //MAKE TABLE CONTACT
+                    self.customer_contact_list = data_client.contact;
+                    self.makeTableContact();
+                    //MAKE TABLE CARDS
+                    self.customer_tarjtas_list = data_client.tarjtas;
+                    self.makeTableTarjetas();
+                    //MAKE TABLE FAMILIARES
+                    self.customer_familiares_list = data_client.familiares;
+                    self.makeTableDatosFamilares();
+                    $("#modal_customer").modal("show");
+                }
+            }
+        });
+    };
+
+    self.cleanForm = function(){
+        var now = new Date().toISOString().slice(0,10);
+        $("#first_name").val("");
+        $("#midle_name").val("");
+        $("#last_name").val("");
+        $("#last_name_mothers").val("");
+        $("#last_name_casada").val("");
+        $("#gender").val("");
+        $("#age").val("");
+        $("#date_expire").val(now);
+        //MAKE TABLE DOCUMENTS
+        self.customer_documents_list = [];
+        self.makeTableDocuments();
+        //MAKE TABLE PASSPORT
+        self.customer_passport_list = [];
+        self.makeTablePassport();
+        //MAKE TABLE VISADO
+        self.customer_visado_list = [];
+        self.makeTableVisado();
+        //MAKE TABLE PHONES
+        self.customer_phones_list = [];
+        self.makeTablePhones();
+        //MAKE TABLE EMAILS
+        self.customer_emails_list = [];
+        self.makeTableEmails();
+        //MAKE TABLE CLIENTES FRECUENTES
+        self.customer_frec_list = [];
+        self.makeTableFrec();
+        //MAKE TABLE ASIENTOS
+        self.preferencia_asiento_list = [];
+        self.makeTablePref();
+        //MAKE TABLE ADDRESS
+        self.customer_address_list = [];
+        self.makeTableAddress();
+        //MAKE TABLE COMPANY
+        self.customer_company_list = [];
+        self.makeTableCompany();
+        //MAKE TABLE CONTACT
+        self.customer_contact_list = [];
+        self.makeTableContact();
+        //MAKE TABLE CARDS
+        self.customer_tarjtas_list = [];
+        self.makeTableTarjetas();
+        //MAKE TABLE FAMILIARES
+        self.customer_familiares_list = [];
+        self.makeTableDatosFamilares();
+    };
+
+    self.deleteClient = function(client_id,is_delete){
+        if(!is_delete){
+            self.current_id = client_id;
+            $("#modal_delete_client").modal("show");
+        }else{
+            self.action_form = self.current_url+"index.php/customers/deleteClient";
+            $.ajax({
+                type:"POST",
+                url:travel.action_form,
+                data:{
+                    client_id:client_id
+                },
+                success:function(res){
+                    var response = JSON.parse(res);
+                    console.log(response);
+                    $("#modal_delete_client").modal("hide");
+                    if(response.success){
+                        travel.listClients();
+                        $("#modal_success").modal("show");
+                    }else{
+                        $("#modal_error").modal("show");
+                    }
+                }
+            });
+        }
     };
 
 	return self;

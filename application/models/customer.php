@@ -279,12 +279,50 @@ class Customer extends Person
 		$this->db->where_in('person_id',$customer_id);
 		return $this->db->update('customers', array('data_customer' => $data_customer));
  	}
-	 
-	 function insertClient($data_customer){
-		$success = $this->db->insert('clients',$client_data);
+	
+	/* METODOS DE CLIENTES */
 
-		//$this->db->trans_complete();			
+	 function getClient($client_id){
+		$response = null;
+		$this->db->from('clients');
+		$this->db->where('id',$client_id);
+		$this->db->where('deleted',0);
+		$client = $this->db->get();
+		if($client->num_rows()==1){
+			$response = $client->row();
+		}
+		return $response;
 	 }
+
+	function listClients(){
+		$response = [];
+		$this->db->from('clients');
+		$this->db->where('deleted',0);
+		$this->db->order_by("id", "desc");
+		$clients = $this->db->get();
+		foreach($clients->result() as $row){
+			$response[] = $row;
+		}
+		return $response;
+
+	}
+
+	function insertClient($client_data){
+		$success = $this->db->insert('clients',$client_data);
+		return ($this->db->affected_rows() !== 1) ? false : true;
+	}
+
+	function updateClient($client_data,$client_id){
+		$this->db->where('id', $client_id);
+		$success = $this->db->update('clients',$client_data);
+		return ($this->db->affected_rows() !== 1) ? false : true;
+	}
+
+	function deleteClient($client_data,$client_id){
+		$this->db->where('id', $client_id);
+		$success = $this->db->update('clients',$client_data);
+		return ($this->db->affected_rows() !== 1) ? false : true;
+	}
 
 }
 ?>
