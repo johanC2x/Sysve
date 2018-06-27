@@ -93,7 +93,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="last_name">Apellido de Casado:</label>
+                <label for="last_name">Apellido de Casada:</label>
                 <input type="text" id="last_name_casada" name="last_name_casada" class="form-control"/>
               </div>
             </div>
