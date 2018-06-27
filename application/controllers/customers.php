@@ -85,7 +85,7 @@ class Customers extends Person_controller
 			'email'=>$this->input->post('email'),
 			'phone_number'=>$this->input->post('phone_number'),
 			'address_1'=>$this->input->post('address_1'),
-			'birthplace'=>$this->input->post('birthplace'),
+			'fec_nac'=>$this->input->post('fec_nac'),
 			'nationality'=>$this->input->post('nationality'),
 			// 'country'=>$this->input->post('country'),
 			'comments'=>$this->input->post('comments'),
@@ -283,7 +283,7 @@ class Customers extends Person_controller
 				'last_name_casada'=>$this->input->post('last_name_casada'),
 				'age'=>$this->input->post('age'),
 				'gender'=>$this->input->post('gender'),
-				'fec_nac'=>$date,
+				'fec_nac'=>$this->input->post('user_date'),
 				'data'=>$this->input->post('client_data')
 			);
 			$response = $this->Customer->insertClient($client_data);
@@ -309,7 +309,7 @@ class Customers extends Person_controller
 				'last_name_casada'=>$this->input->post('last_name_casada'),
 				'age'=>$this->input->post('age'),
 				'gender'=>$this->input->post('gender'),
-				'fec_nac'=>$date,
+				'fec_nac'=>$this->input->post('user_date'),
 				'data'=>$this->input->post('client_data')
 			);
 			$response = $this->Customer->updateClient($client_data,$client_id);
