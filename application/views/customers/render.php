@@ -198,17 +198,17 @@
                         notEmpty: { message: "El campo nombre es requerido"}
                     }
                 },
-                midle_name: {
+ /*               midle_name: {
                     validators: {
                         notEmpty: { message: "El campo pre-nombre es requerido"}
                     }
                 },
-                last_name:{
+ */               last_name:{
                     validators: {
                         notEmpty: { message: "El campo apellidos paterno es requerido"}
                     }
                 },
-                last_name_mothers:{
+/*                last_name_mothers:{
                     validators: {
                         notEmpty: { message: "El campo apellidos materno es requerido"}
                     }
@@ -218,7 +218,7 @@
                         notEmpty: { message: "El campo apellido de casada es requerido"}
                     }
                 },
-                gender:{
+*/                gender:{
                     validators: {
                         notEmpty: { message: "El campo género es requerido"}
                     }
@@ -270,5 +270,6 @@
         });
     });
 </script>
+
 <?php $this->load->view("travel/modal"); ?>
 <?php $this->load->view("partial/footer"); ?>
