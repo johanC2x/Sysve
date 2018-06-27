@@ -338,5 +338,10 @@ class Customers extends Person_controller
 		}
 	}
 
+	function customers_edit($customer_id){
+		$data['person_info']=$this->Customer->get_info($customer_id);
+		$this->load->view('customers/mantenimiento', $data);
+	}
+
 }
 ?>
