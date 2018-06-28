@@ -95,14 +95,14 @@
 						</div>
 
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group">
 		                    <label for="">Desde:</label>
-		                    <input type="text" name="destiny_origin_travel" id="destiny_origin_travel" class="form-control" />
+		                    <input type="date" name="destiny_origin_travel" id="destiny_origin_travel" class="form-control" />
 		                </div>
 		                <div class="form-group">
 		                    <label for="">Hasta:</label>
-		                    <input type="text" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
+		                    <input type="date" name="destiny_end_travel" id="destiny_end_travel" class="form-control" />
 		                </div>
 		                <div class="form-group">
 							<label for="type_travel">Ubicación</label>
@@ -118,7 +118,7 @@
 		                    <input type="text" name="penalidad" id="penalidad" class="form-control"/>
 		                </div>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-4">
 		                <div class="form-group">
 		                    <label>Salida:</label>
 		                    <input type="datetime-local" id="date_init_travel" name="date_init_travel" class="form-control"/>
