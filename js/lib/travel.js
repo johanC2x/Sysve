@@ -17,7 +17,6 @@ var travel = function () {
         customer_emails_list : [],
         customer_frec_list : [],
         customer_familiares_list: [],
-        preferencia_asiento_list: [],
         customer_tarjtas_list: [],
         action_form: "",
         current_id: 0
@@ -1199,60 +1198,6 @@ var travel = function () {
 
     /* ======================================================================== */
 
-    /* ================ SET TABLE FOR PREFERENCIAS DE ASIENTO ============ */
-
-    self.savePreferenciasAsiento = function(){
-        var tipo_asiento = $("#preferencia_tipo_asiento").val();
-        var indicaciones = $("#preferencia_indicaciones").val();
-
-        if(tipo_asiento !== '' && indicaciones !== ''){
-            self.preferencia_asiento_list.push({
-                tipo_asiento : tipo_asiento,
-                indicaciones : indicaciones,
-            });
-
-            $("#preferencia_tipo_asiento").val("");
-            $("#preferencia_indicaciones").val("");
-
-            self.makeTablePref();
-        }
-    };
-
-    self.makeTablePref = function(){
-        var tbody = '';
-        $("#table_indicaciones tbody").empty();
-        if(self.preferencia_asiento_list.length > 0){
-            for(var i = 0;i < self.preferencia_asiento_list.length; i++){
-                tbody += `<tr>
-                            <td><center>`+ self.preferencia_asiento_list[i].tipo_asiento +`</center></td>
-                            <td><center>`+ self.preferencia_asiento_list[i].indicaciones +`</center></td>                            
-                            <td>
-                                <a href="javascript:void(0);" onclick="travel.removePrefAsiento(`+i+`);">
-                                    <center>
-                                        <i class="fa fa-trash"></i>
-                                    </center>
-                                </a>
-                            </td>
-                        </tr>`;
-            }
-        }else{
-            tbody += `<tr>
-                        <td colspan="6">
-                            <center>
-                                No se registraron datos.
-                            </center>
-                        </td>
-                    </tr>`;
-        }
-        $("#table_indicaciones tbody").append(tbody);
-    };
-
-    self.removePrefAsiento = function(key){
-        self.preferencia_asiento_list.splice(key,1);
-        self.makeTablePref();
-    };
-
-    /* ======================================================================== */
 
     /* ================ SET TABLE FOR TARJETAS ============ */
 
@@ -1571,17 +1516,23 @@ var travel = function () {
         var relacion = $("#contact_familiar_relacion").val();
         var nombre = $("#contact_familiar_nombre").val();
         var telefono = $("#contact_familiar_telefono").val();
+        var preferencia_asiento = $("#contact_familiar_prefasiento").val();
+        var indicaciones = $("#contact_familiar_indicaciones").val() || '';
 
-        if(relacion !== '' && nombre !== '' && telefono !== ''){
+        if(relacion !== '' && nombre !== '' && telefono !== '' && preferencia_asiento != ''){
             self.customer_familiares_list.push({
                 relacion : relacion,
                 nombre : nombre,
                 telefono : telefono,
+                preferencia_asiento : preferencia_asiento,
+                indicaciones : indicaciones,
             });
 
             $("#contact_familiar_relacion").val("");
             $("#contact_familiar_nombre").val("");
             $("#contact_familiar_telefono").val("");
+            $("#contact_familiar_prefasiento").val("");
+            $("#contact_familiar_indicaciones").val("");
 
             self.makeTableDatosFamilares();
         }
@@ -1601,6 +1552,8 @@ var travel = function () {
                             <td><center>`+ self.customer_familiares_list[i].relacion +`</center></td>
                             <td><center>`+ self.customer_familiares_list[i].nombre +`</center></td>                            
                             <td><center>`+ self.customer_familiares_list[i].telefono +`</center></td>
+                            <td><center>`+ self.customer_familiares_list[i].preferencia_asiento +`</center></td>
+                            <td><center>`+ self.customer_familiares_list[i].indicaciones +`</center></td>
                             <td>
                                 <a href="javascript:void(0);" onclick="travel.removeFamiliar(`+i+`);">
                                     <center>
@@ -1783,9 +1736,6 @@ var travel = function () {
                     //MAKE TABLE CLIENTES FRECUENTES
                     self.customer_frec_list = data_client.frec;
                     self.makeTableFrec();
-                    //MAKE TABLE ASIENTOS
-                    self.preferencia_asiento_list = data_client.asiento;
-                    self.makeTablePref();
                     //MAKE TABLE ADDRESS
                     self.customer_address_list = data_client.address;
                     self.makeTableAddress();
@@ -1835,9 +1785,6 @@ var travel = function () {
         //MAKE TABLE CLIENTES FRECUENTES
         self.customer_frec_list = [];
         self.makeTableFrec();
-        //MAKE TABLE ASIENTOS
-        self.preferencia_asiento_list = [];
-        self.makeTablePref();
         //MAKE TABLE ADDRESS
         self.customer_address_list = [];
         self.makeTableAddress();

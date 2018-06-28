@@ -1,5 +1,6 @@
 <?php $this->load->view("partial/header"); ?>
 <?php echo form_open('customers/saveClient',array('id'=>'form_customer_register')); ?>
+<?php var_dump($person_info);?>
 <div class="row">
   <div class="col-md-6">
     <fieldset>

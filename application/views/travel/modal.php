@@ -411,45 +411,6 @@
               </fieldset>
             </div>
             <!-- ===================================== -->
-            <!-- ===== FORM PREFERENCIAS DE ASIENTOS ====== -->
-            <div class="col-md-12">
-              <fieldset>
-                <legend>Preferencias de Asiento</legend>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="preferencia_tipo_asiento">Tipo de Asiento:</label>
-                    <input type="text" id="preferencia_tipo_asiento" name="preferencia_tipo_asiento" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="preferencia_indicaciones">Indicaciones:</label>
-                    <input type="text" id="preferencia_indicaciones" name="preferencia_indicaciones" class="form-control">
-                  </div>
-                </div>
-                <button id="btn_add_indicaciones" type="button" class="btn btn-primary">Agregar</button>
-                <br/>
-                <table id="table_indicaciones" class="table table-hover table-bordered" >
-                  <thead>
-                    <tr>
-                      <th class="col-md-3"><center>Tipo de Asiento</center></th>
-                      <th class="col-md-3"><center>Indicaciones</center></th>
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="6">
-                        <center>
-                          No se registraron datos.
-                        </center>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-            <!-- ===================================== -->
             <!-- =========== FORM ADDRESS ============ -->
             <div class="col-md-12">
               <fieldset>
@@ -703,25 +664,44 @@
             <div class="col-md-12">
               <fieldset>
                 <legend>Datos de Familiares</legend>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <div class="form-group" >
                     <label for="contact_familiar_relacion">Relacion:</label>
                     <input type="text" id="contact_familiar_relacion" name="contact_familiar_relacion" class="form-control">
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <div class="form-group" >
                     <label for="contact_familiar_nombre">Nombre:</label>
                     <input type="text" id="contact_familiar_nombre" name="contact_familiar_nombre" class="form-control">
                   </div>  
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <div class="form-group" >
                     <label for="contact_familiar_telefono">Teléfono:</label>
                     <input type="text" id="contact_familiar_telefono" name="contact_familiar_telefono" class="form-control">
                   </div>  
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
+                  <div class="form-group" >
+                    <label for="contact_familiar_prefasiento">Pref Asiento:</label>
+                    <select id="contact_familiar_prefasiento" name="contact_familiar_prefasiento" class="form-control">
+                      <option value="VENTANA">VENTANA</option>
+                      <option value="PASILLO">PASILLO</option>
+                      <option value="SALIDA DE EMERGENCIA">SALIDA DE EMERGENCIA</option>
+                      <option value="COMPRA DE ASIENTOS">COMPRA DE ASIENTOS</option>
+                      <option value="UPGRADE">UPGRADE</option>
+                      <option value="SILLA DE RUEDAS">SILLA DE RUEDAS</option>
+                    </select>
+                  </div>  
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group" >
+                    <label for="contact_familiar_indicaciones">Indicaciones:</label>
+                    <input type="text" id="contact_familiar_indicaciones" name="contact_familiar_indicaciones" class="form-control">
+                  </div>  
+                </div>
+                <div class="col-md-2">
                   <div class="form-group">
                     <button id="btn_add_familiares" type="button" class="btn btn-primary">Agregar</button>
                   </div>
@@ -729,15 +709,17 @@
                 <table id="table_familiares" class="table table-hover table-bordered" >
                   <thead>
                     <tr>
-                      <th class="col-md-1"><center>Relacion</center></th>
-                      <th class="col-md-4"><center>Nombre</center></th>
+                      <th class="col-md-2"><center>Relacion</center></th>
+                      <th class="col-md-2"><center>Nombre</center></th>
                       <th class="col-md-2"><center>Teléfono</center></th>
-                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                      <th class="col-md-2"><center>Preferencia de Asiento</center></th>
+                      <th class="col-md-2"><center>Indicaciones</center></th>
+                      <th class="col-md-2"><center>Acción</center></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td colspan="4">
+                      <td colspan="12">
                         <center>
                           No se registraron datos.
                         </center>
