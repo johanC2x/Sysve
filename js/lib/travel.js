@@ -1548,7 +1548,7 @@ var travel = function () {
         $("#table_familiares tbody").empty();
         if(self.customer_familiares_list.length > 0){
             for(var i = 0;i < self.customer_familiares_list.length; i++){
-                tbody = `<tr>
+                tbody += `<tr>
                             <td><center>`+ self.customer_familiares_list[i].relacion +`</center></td>
                             <td><center>`+ self.customer_familiares_list[i].nombre +`</center></td>                            
                             <td><center>`+ self.customer_familiares_list[i].telefono +`</center></td>
