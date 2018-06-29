@@ -118,10 +118,11 @@
                 <label for="age">Edad:</label>
           <table width="100%">
             <td align="lefth">
-       <input type="button" class="btn btn-warning" required value="Edad" onclick="javascript:calcularEdad();" />        
+       <input type="button" class="btn btn-warning" value="Edad" onclick="javascript:calcularEdad();" />
+
             </td>
             <td>
-          <div id="result"></div>        
+          <div id="result"><input type="text" id="age" name="age" class="form-control"/></div>  
             </td>
           </table>
               </div>
@@ -180,8 +181,8 @@
                     <tr>
                       <th class="col-md-4"><center>Nro de Pasaporte </center></th>
                       <th class="col-md-3"><center>Pais Origen</center></th>
-                      <th class="col-md-2"><center>Fec. Emisión</center></th> 
                       <th class="col-md-2"><center>Fec. Vencimiento</center></th>
+                      <th class="col-md-2"><center>Fec. Emisión</center></th> 
                       <th class="col-md-2"><center>Nacionalidad</center></th>
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
@@ -543,8 +544,8 @@
                       <th class="col-md-2"><center>Correo</center></th> 
                       <th class="col-md-2"><center>Dirección</center></th>
                       <th class="col-md-3"><center>Distrito</center></th> 
-                      <th class="col-md-2"><center>Correo</center></th> 
                       <th class="col-md-2"><center>Teléfono</center></th> 
+                      <th class="col-md-2"><center>Referencia</center></th> 
                       <th colspan="3" class="col-md-1"><center>Acción</center></th>
                     </tr>
                   </thead>
