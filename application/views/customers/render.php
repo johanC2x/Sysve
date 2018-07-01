@@ -10,6 +10,10 @@
         </button>
     </div>
 </div>
+<div class="input-group"> <span class="input-group-addon">Buscar</span>
+
+    <input id="filter" type="text" class="form-control" placeholder="Escriba aquí...">
+</div>
 <div id="table_holder">
     <table class="table table-bordered" id="table_clients">
         <thead>
@@ -22,7 +26,7 @@
                 <th colspan="2"><center>Acciones</center></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="searchable">
             <tr>
                 <td colspan="6">
                     <center>
@@ -269,6 +273,19 @@
             });
         });
     });
+    (function ($) {
+
+        $('#filter').keyup(function () {
+
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
+
+        })
+
+    }(jQuery));
 </script>
 
 <?php $this->load->view("travel/modal"); ?>
