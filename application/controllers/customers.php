@@ -297,6 +297,38 @@ class Customers extends Person_controller
 		}
 	}
 
+	function saveClientBasico(){
+		    $cliente['datos']     = array(
+		    	'person_id'=>$this->input->post('person_id'),
+	            'firstname'       => $this->input->post('first_name'),
+	            'middlename'      => $this->input->post('midle_name'),
+	            'lastname'        => $this->input->post('last_name'),
+	            'mother_lastname' =>$this->input->post('last_name_mothers')
+        );
+
+		if($this->input->post()){
+			$date = date('Y-m-d', strtotime(str_replace('-','/', $this->input->post('date_expire'))));
+			$client_data = array(
+				'firstname'=>$this->input->post('first_name'),
+				'middlename'=>$this->input->post('midle_name'),
+				'lastname'=>$this->input->post('last_name'),
+				'mother_lastname'=>$this->input->post('last_name_mothers'),
+				'last_name_casada'=>$this->input->post('last_name_casada'),
+				'age'=>$this->input->post('age'),
+				'fec_nac'=>$this->input->post('user_date'),
+				'data'=>$this->input->post('client_data')
+			);
+			$response = $this->Customer->insertClient($client_data);
+			if(!empty($response) && (int)$response === 1){
+				$this->load->view('customers/cotizar', $cliente);
+			}else{
+				echo json_encode(array('success'=>false,'message'=>"Ha ocurrido un error interno"));
+			}
+		}else{
+			echo json_encode(array('success'=>false,'message'=>"No se ha enviado ningún registro"));
+		}
+	}
+
 	function updateClient(){
 		if($this->input->post()){
 			$date = date('Y-m-d', strtotime(str_replace('-','/', $this->input->post('date_expire'))));

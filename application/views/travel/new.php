@@ -1,12 +1,12 @@
 <?php $this->load->view("partial/header"); ?>
-<script src="<?php echo base_url();?>js/lib/travel.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
+<script src="<?php echo base_url();?>js/lib/cotizacion.js" type="text/javascript" language="javascript" charset="UTF-8"></script>
 
 <div id="title_bar">
 	<div id="title" class="float_left">
         Generar Cotización
     </div>
     <div id="new_button">
-        <button type="button" class="btn btn-primary" onclick="travel.openModal();">
+        <button type="button" class="btn btn-primary" onclick="cotizacion.openModal();">
             Nuevo Cliente
         </button>
     </div>
@@ -36,6 +36,28 @@
 </div>
 <div id="feedback_bar"></div>
 <!-- MODAL DELETE CLIENT -->
+<div id="feedback_bar"></div>
+<!-- MODAL DELETE CLIENT -->
+<div class="modal fade" id="modal_delete_client" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<h3>
+					<center>
+						¿Seguro desea eliminar el siguiente registro?
+					</center>
+				</h3>
+			</div>
+			<div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="travel.deleteClient(travel.current_id,true);">Eliminar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -121,7 +143,9 @@
 				travel.saveCustomerCompany();
 			});
 		}
-
+        travel.current_url = "<?= base_url();?>";
+        /* LISTANDO CLIENTES */
+        travel.listClients();
 	});
 
 </script>
