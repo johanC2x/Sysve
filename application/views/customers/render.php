@@ -21,14 +21,15 @@
                 <th><center>Nombres</center></th>
                 <th><center>Apellidos</center></th>
                 <th><center>Edad</center></th>
-                <th><center>Género</center></th>
-                <th><center>Fec. Nacimiento</center></th>
+                <th><center>Nro. DNI</center></th>
+                <th><center>Email</center></th>
+                <th><center>Teléfono</center></th>
                 <th colspan="2"><center>Acciones</center></th>
             </tr>
         </thead>
         <tbody class="searchable">
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     <center>
                         NO SE ENCONTRARON RESULTADOS
                     </center>

@@ -336,7 +336,7 @@ var travel = function () {
         $('.table.table-hover.table-bordered').append(row);
         $('#result').html('');
     }
-
+    
         self.addComision = function(val = null){
         var data = {};
         data.key = $("#cbo_comision_payment option:selected").attr("data-key");
@@ -1644,8 +1644,10 @@ var travel = function () {
             success:function(response){
                 var res = JSON.parse(response);
                 if(res.success){
+                    console.log(res.data[0].data.documents);
                     var tbody = "";
                     var data = res.data;
+                    //var data_client = JSON.parse(data.data);
                     $("#table_clients tbody").empty();
                     if(data.length > 0){
                         for(var i = 0;i < data.length;i++){
@@ -1653,12 +1655,25 @@ var travel = function () {
                             var nombres = data[i].firstname + ' ' + data[i].middlename;
                             var apellidos = data[i].lastname + ' ' + data[i].mother_lastname;
                             var genero = (data[i].gender === 'M') ? 'MASCULINO' : 'FEMENINO';
+
+                            //BUSCANDO VALORES EN DATA DE CLIENTES
+                            var data_client = JSON.parse(data[i].data);
+                            var document = data_client.documents.find(x => x.type_document === "dni");
+                            var email = data_client.emails.find(x => x.type_email === "personal");
+                            var phones = data_client.phones.find(x => x.type_phone === "celular_personal");
+
+                            //VALIDANDO VALORES VACIOS
+                            var val_doc = (document.nro_doc !== "") ? document.nro_doc : "";
+                            var val_email = (email.email !== "") ? email.email : "";
+                            var val_phone = (phones.nro_phone !== "") ? phones.nro_phone : "";
+
                             tbody += `<tr>
-                                        <td>`+nombres+`</td>
-                                        <td>`+apellidos+`</td>
-                                        <td>`+data[i].age+`</td>
-                                        <td>`+genero+`</td>
-                                        <td>`+data[i].fec_nac+`</td>
+                                        <td><center>`+nombres+`</center></td>
+                                        <td><center>`+apellidos+`</center></td>
+                                        <td><center>`+data[i].age+`</center></td>
+                                        <td><center>`+ val_doc +`</center></td>
+                                        <td><center>`+ val_email +`</center></td>
+                                        <td><center>`+ val_phone +`</center></td>
                                         <td>
                                             <center>
                                                 <a href="javascript:void(0);" onclick="travel.getClient(`+id+`);">
@@ -1677,6 +1692,67 @@ var travel = function () {
                         }
                     }else{
                         tbody = `<tr>
+                                    <td colspan="7">
+                                        <center>
+                                            NO SE ENCONTRARON RESULTADOS
+                                        </center>
+                                    </td>
+                                </tr>`;
+                    }
+                    $("#table_clients tbody").append(tbody);
+                }
+            }
+        });
+    };
+
+    self.listClientsCoti = function(){
+        $.ajax({
+            type:'POST',
+            data:{},
+            url:self.current_url+"index.php/customers/listClients",
+            success:function(response){
+                var res = JSON.parse(response);
+                if(res.success){
+                    console.log(res.data[0].data.documents);
+                    var tbody = "";
+                    var data = res.data;
+                    //var data_client = JSON.parse(data.data);
+                    $("#table_clients tbody").empty();
+                    if(data.length > 0){
+                        for(var i = 0;i < data.length;i++){
+                            var id = data[i].id;
+                            var nombres = data[i].firstname + ' ' + data[i].middlename;
+                            var apellidos = data[i].lastname + ' ' + data[i].mother_lastname;
+                            var genero = (data[i].gender === 'M') ? 'MASCULINO' : 'FEMENINO';
+
+                            //BUSCANDO VALORES EN DATA DE CLIENTES
+                            var data_client = JSON.parse(data[i].data);
+                            var document = data_client.documents.find(x => x.type_document === "dni");
+                            var email = data_client.emails.find(x => x.type_email === "personal");
+                            var phones = data_client.phones.find(x => x.type_phone === "celular_personal");
+
+                            //VALIDANDO VALORES VACIOS
+                            var val_doc = (document.nro_doc !== "") ? document.nro_doc : "";
+                            var val_email = (email.email !== "") ? email.email : "";
+                            var val_phone = (phones.nro_phone !== "") ? phones.nro_phone : "";
+                            tbody += `<tr>
+                                        <td><center>`+nombres+`</center></td>
+                                        <td><center>`+apellidos+`</center></td>
+                                        <td><center>`+data[i].age+`</center></td>
+                                        <td><center>`+ val_doc +`</center></td>
+                                        <td><center>`+ val_email +`</center></td>
+                                        <td><center>`+ val_phone +`</center></td>
+                                        <td>
+                                            <center>
+                                                <a href="javascript:void(0);" onclick="travel.addCoti(`+id+`);">
+                                                    Agregar Cotización
+                                                </a>
+                                            </center>
+                                        </td>
+                                    </tr>`;
+                        }
+                    }else{
+                        tbody = `<tr>
                                     <td colspan="6">
                                         <center>
                                             NO SE ENCONTRARON RESULTADOS
@@ -1688,6 +1764,10 @@ var travel = function () {
                 }
             }
         });
+    };
+
+    self.addCoti = function(id){
+        console.log(id);
     };
 
     self.openModal = function(){

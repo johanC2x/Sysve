@@ -337,7 +337,7 @@ var cotizacion = function () {
         $('#result').html('');
     }
 
-        self.addComision = function(val = null){
+        self.addComision = function(val){
         var data = {};
         data.key = $("#cbo_comision_payment option:selected").attr("data-key");
         data.name = $("#cbo_comision_payment option:selected").text();
