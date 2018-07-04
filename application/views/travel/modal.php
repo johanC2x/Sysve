@@ -236,11 +236,7 @@
                 <div class="col-md-6">
                   <div class="form-group" >
                     <label for="visado_customer_country">Pais Emisor:</label>
-                    <select name="visado_customer_country" id="visado_customer_country" class="form-control">
-                      <option value="">Seleccionar</option>
-                      <option value="EEUU">EEUU</option>
-                      <option value="Canada">Canada</option>
-                    </select>
+                    <input type="text" name="visado_customer_country" id="visado_customer_country" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -251,7 +247,7 @@
                 <table id="table_customer_visado" class="table table-hover table-bordered" >
                   <thead>
                     <tr>
-                      <th class="col-md-3"><center>Tipo Visado</center></th>
+                      <th class="col-md-3"><center>Pais Emisor</center></th>
                       <th class="col-md-2"><center>Número</center></th>
                       <th class="col-md-2"><center>Fec. Emisión</center></th> 
                       <th class="col-md-2"><center>Fec. Vencimiento</center></th>

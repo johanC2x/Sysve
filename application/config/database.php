@@ -50,8 +50,13 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
+<<<<<<< HEAD
 $db['default']['password'] = '';
 $db['default']['database'] = 'ysumma_dev';
+=======
+$db['default']['password'] = '1234';
+$db['default']['database'] = 'ysumma_test';
+>>>>>>> e7db8042f5ddbcc01714ce7c3e4518ebc41ea0a6
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = 'ospos_';
 $db['default']['pconnect'] = FALSE;

@@ -314,7 +314,7 @@ function post_person_form_submit(response)
               </div>
             </div>
 
- <!-- =======DATOOS PERSONALES=========== -->
+ <!-- =======DATOS PERSONALES=========== -->
 
 <div class="col-md-12">
   <div class="col-md-6">
@@ -353,11 +353,25 @@ function post_person_form_submit(response)
                 <input type="text" id="last_name_casada" name="last_name_casada" class="form-control"/>
               </div>
   </div>
-  <div class="col-md-6">
-                  <div class="form-group">
+  <div class="col-md-3">
+   <div class="form-group">
                 <label for="date_expire">Fecha de Nacimiento:</label>
                 <input type="date" id="user_date" name="user_date" class="form-control"/>
               </div>
+  </div>
+  <div class="col-md-3">
+   <div class="form-group">
+                <label for="age">Edad:</label>
+          <table width="100%">
+            <td align="lefth">
+       <input type="button" class="btn btn-warning" value="Edad" onclick="javascript:calcularEdad();" />
+
+            </td>
+            <td>
+          <div id="result"><input type="text" id="age" name="age" class="form-control"/></div>  
+            </td>
+          </table>
+   </div>
   </div>
 </div>
 <legend class="col-md-12" ></legend>
@@ -443,6 +457,50 @@ function post_person_form_submit(response)
               </fieldset>
             </div>
             <!-- ==============FIN DATOS DE CONTACTO============== -->
+
+            <!-- ==============FROM OBSERVACIONES============== -->
+
+            <div class="col-md-12">
+              <fieldset>
+                <legend>Observaciones</legend>
+                  <div class="col-md-10">
+                    <div class="form-group" >
+                      <label for="company_customer_ruc">Observaciones:</label>
+                      <textarea type="text" id="company_customer_ruc" name="company_customer_ruc" class="form-control"></textarea>
+                    </div>  
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                            <label for="">&nbsp;</label>
+                        <div class="form-group">
+                            <button id="btn_add_customer_company" type="button" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </div>
+                  </div>
+                <table id="table_customer_company" class="table table-hover table-bordered" >
+                  <thead>
+                    <tr>
+                      <th class="col-md-8"><center>Observaciones</center></th>
+                      <th colspan="3" class="col-md-1"><center>Acción</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="8">
+                        <center>
+                          No se registraron datos.
+                        </center>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+            <!-- ===================================== -->
+
+
+
+
             <!-- =========== FORM DATOS FAMILIARES ============ -->
             <div class="col-md-12">
               <fieldset>

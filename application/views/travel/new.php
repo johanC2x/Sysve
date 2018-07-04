@@ -11,22 +11,26 @@
         </button>
     </div>
 </div>
+<div class="input-group"> <span class="input-group-addon">Buscar</span>
+
+    <input id="filter" type="text" class="form-control" placeholder="Escriba aquí...">
+</div>
 <div id="table_holder">
     <table class="table table-bordered" id="table_clients">
         <thead>
             <tr class="well">
                 <th><center>Nombres</center></th>
                 <th><center>Apellidos</center></th>
-                <th><center>Edad</center></th>
                 <th><center>Nro. DNI</center></th>
+                <th><center>Genero</center></th>
 				<th><center>Email</center></th>
 				<th><center>Teléfono</center></th>
                 <th><center>Acción</center></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="searchable">
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     <center>
                         NO SE ENCONTRARON RESULTADOS
                     </center>
@@ -148,6 +152,19 @@
         /* LISTANDO CLIENTES */
         travel.listClientsCoti();
 	});
+	(function ($) {
+
+        $('#filter').keyup(function () {
+
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
+
+        })
+
+    }(jQuery));
 
 </script>
 <?php $this->load->view("partial/footer"); ?>

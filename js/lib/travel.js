@@ -1655,25 +1655,13 @@ var travel = function () {
                             var nombres = data[i].firstname + ' ' + data[i].middlename;
                             var apellidos = data[i].lastname + ' ' + data[i].mother_lastname;
                             var genero = (data[i].gender === 'M') ? 'MASCULINO' : 'FEMENINO';
-
-                            //BUSCANDO VALORES EN DATA DE CLIENTES
-                            var data_client = JSON.parse(data[i].data);
-                            var document = data_client.documents.find(x => x.type_document === "dni");
-                            var email = data_client.emails.find(x => x.type_email === "personal");
-                            var phones = data_client.phones.find(x => x.type_phone === "celular_personal");
-
-                            //VALIDANDO VALORES VACIOS
-                            var val_doc = (document.nro_doc !== "") ? document.nro_doc : "";
-                            var val_email = (email.email !== "") ? email.email : "";
-                            var val_phone = (phones.nro_phone !== "") ? phones.nro_phone : "";
-
                             tbody += `<tr>
-                                        <td><center>`+nombres+`</center></td>
-                                        <td><center>`+apellidos+`</center></td>
-                                        <td><center>`+data[i].age+`</center></td>
-                                        <td><center>`+ val_doc +`</center></td>
-                                        <td><center>`+ val_email +`</center></td>
-                                        <td><center>`+ val_phone +`</center></td>
+                                        <td>`+nombres+`</td>
+                                        <td>`+apellidos+`</td>
+                                        <td>`+data[i].age+`</td>
+                                        <td>`+genero+`</td>
+                                        <td>`+data[i].fec_nac+`</td>
+                                        <td>`+data[i].fec_nac+`</td>
                                         <td>
                                             <center>
                                                 <a href="javascript:void(0);" onclick="travel.getClient(`+id+`);">
@@ -1724,24 +1712,16 @@ var travel = function () {
                             var nombres = data[i].firstname + ' ' + data[i].middlename;
                             var apellidos = data[i].lastname + ' ' + data[i].mother_lastname;
                             var genero = (data[i].gender === 'M') ? 'MASCULINO' : 'FEMENINO';
-
-                            //BUSCANDO VALORES EN DATA DE CLIENTES
-                            var data_client = JSON.parse(data[i].data);
-                            var document = data_client.documents.find(x => x.type_document === "dni");
-                            var email = data_client.emails.find(x => x.type_email === "personal");
-                            var phones = data_client.phones.find(x => x.type_phone === "celular_personal");
-
-                            //VALIDANDO VALORES VACIOS
-                            var val_doc = (document.nro_doc !== "") ? document.nro_doc : "";
-                            var val_email = (email.email !== "") ? email.email : "";
-                            var val_phone = (phones.nro_phone !== "") ? phones.nro_phone : "";
                             tbody += `<tr>
-                                        <td><center>`+nombres+`</center></td>
-                                        <td><center>`+apellidos+`</center></td>
-                                        <td><center>`+data[i].age+`</center></td>
-                                        <td><center>`+ val_doc +`</center></td>
-                                        <td><center>`+ val_email +`</center></td>
-                                        <td><center>`+ val_phone +`</center></td>
+                                        <td>`+nombres+`</td>
+                                        <td>`+apellidos+`</td>
+                                        <td>`+data[i].age+`</td>
+                                        <td>`+genero+`</td>
+                                        <td>`+data[i].fec_nac+`</td>
+                                        <td>
+                                            <center>
+                                            </center>
+                                        </td>
                                         <td>
                                             <center>
                                                 <a href="javascript:void(0);" onclick="travel.addCoti(`+id+`);">
