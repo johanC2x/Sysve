@@ -20,8 +20,8 @@
             <tr class="well">
                 <th><center>Nombres</center></th>
                 <th><center>Apellidos</center></th>
-                <th><center>Edad</center></th>
                 <th><center>Nro. DNI</center></th>
+                <th><center>Genero</center></th>
                 <th><center>Email</center></th>
                 <th><center>Teléfono</center></th>
                 <th colspan="2"><center>Acciones</center></th>
