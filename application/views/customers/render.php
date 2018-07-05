@@ -263,6 +263,7 @@
                 data:$("#form_customer_register").serialize(),
                 success:function(res){
                     var response = JSON.parse(res);
+                    console.log(response);
                     $("#modal_customer").modal("hide");
                     if(response.success){
                         travel.listClients();
