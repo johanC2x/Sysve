@@ -1718,12 +1718,24 @@ var travel = function () {
                             var nombres = data[i].firstname + ' ' + data[i].middlename;
                             var apellidos = data[i].lastname + ' ' + data[i].mother_lastname;
                             var genero = (data[i].gender === 'M') ? 'MASCULINO' : 'FEMENINO';
+
+                            //BUSCANDO VALORES EN DATA DE CLIENTES
+                            var data_client = JSON.parse(data[i].data);
+                    
+                            var document = data_client.documents.find(x => x.type_document === "dni");
+                            var email = data_client.emails.find(x => x.type_email === "personal");
+                            var phones = data_client.phones.find(x => x.type_phone === "celular_personal");
+                            //VALIDANDO VALORES VACIOS
+                            var val_doc = (document !== undefined && document.nro_doc !== "") ? document.nro_doc : "SIN DOCUMENTO";
+                            var val_email = (email !== undefined && email.email !== "") ? email.email : "SIN EMAIL";
+                            var val_phone = (phones !== undefined && phones.nro_phone !== "") ? phones.nro_phone : "SIN TELÉFONO";
+                            
                             tbody += `<tr>
                                         <td>`+nombres+`</td>
                                         <td>`+apellidos+`</td>
-                                        <td>`+data[i].age+`</td>
-                                        <td>`+genero+`</td>
-                                        <td>`+data[i].fec_nac+`</td>
+                                        <td>`+val_doc+`</td>
+                                        <td>`+val_email+`</td>
+                                        <td>`+val_phone+`</td>
                                         <td>
                                             <center>
                                             </center>
