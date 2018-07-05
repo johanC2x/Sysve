@@ -65,7 +65,6 @@ var travel = function () {
             success:function(response){
                 // var data = JSON.parse(response);
                 var data = JSON.parse(response)[0];
-                console.log(data);
                 $('#destiny_origin_travel').val(data.destiny_origin);
                 $('#destiny_end_travel').val(data.destiny_end);
                 $('#name_travel').val(data.name);
@@ -218,7 +217,6 @@ var travel = function () {
                     'travel_id' : self.last_travel
                 },
                 success: function(response){
-                    console.log(response);
                     ///////////////////
                     var data = JSON.parse(response);
                     ////info cliente
@@ -285,12 +283,10 @@ var travel = function () {
                     'key' : value
                 },
                 success: function(data){
-                    console.log(data);
                     data = JSON.parse(data);
                     names = [];
                     dnis = [];
                     items = '';
-                    console.log(data.length);
 
                     for (var i = 0; i < data.length ; i++) {
                         names[i] = data[i].first_name + ' ' + data[i].last_name;
@@ -1661,7 +1657,6 @@ var travel = function () {
                             var document = data_client.documents.find(x => x.type_document === "dni");
                             var email = data_client.emails.find(x => x.type_email === "personal");
                             var phones = data_client.phones.find(x => x.type_phone === "celular_personal");
-                            console.log(email)
                             //VALIDANDO VALORES VACIOS
                             var val_doc = (document !== undefined && document.nro_doc !== "") ? document.nro_doc : "SIN DOCUMENTO";
                             var val_email = (email !== undefined && email.email !== "") ? email.email : "SIN EMAIL";
@@ -1713,7 +1708,6 @@ var travel = function () {
             success:function(response){
                 var res = JSON.parse(response);
                 if(res.success){
-                    console.log(res.data[0].data.documents);
                     var tbody = "";
                     var data = res.data;
                     //var data_client = JSON.parse(data.data);
